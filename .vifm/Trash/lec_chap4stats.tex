@@ -1,0 +1,951 @@
+\documentclass[portrait]{seminar}
+%\documentclass[portrait,article]{seminar}
+%\portraitonly
+%\articlemag{1}
+%\def\printlandscape{\special{landscape}}  
+\input{seminar.bug}
+\input{seminar.bg2}
+\RequirePackage{amssymb,amsfonts,bm} \RequirePackage{stmaryrd}
+\RequirePackage{pstricks} \RequirePackage{graphicx,epsf}
+\RequirePackage{semcolor,fancybox} \RequirePackage{slidesec}
+\RequirePackage{fancyhdr}
+%\RequirePackage{ae,latexsym}
+%\RequirePackage{pslatex}
+\setlength\slidewidth{8.5in} \setlength\slideheight{18cm}
+\fancyhf{} % Clear all fields
+\renewcommand{\headrulewidth}{0.25mm}
+\renewcommand{\footrulewidth}{0.25mm}
+\fancyhead[C]{\scriptsize \sffamily \textbf{GIST~4302:  Guofeng Cao}} %\fancyhead[L]{\vspace{0.1cm}
+%\scalebox{0.07}{\includegraphics{geogLogoGray.eps}}}
+\fancyhead[R]{\vspace{0.1cm}
+\scalebox{0.1}{\includegraphics{TTU-seal-bw.pdf}}} \fancyfoot[L]{\tiny
+\sffamily Lecture notes} \fancyfoot[C]{\tiny \sffamily \textbf{Point
+Pattern Analysis I (Descriptive)}} \fancyfoot[R]{\tiny
+\sffamily page \theslide/22}
+% To avoid that the headers be too close of the top of the page
+\renewcommand{\slidetopmargin}{1.5cm}
+% To center horizontally the headers and footers (see seminar.bug)
+\renewcommand{\headwidth}{\textwidth}
+% To adjust the frame length to the header and footer ones
+\autoslidemarginstrue
+
+\newcommand{\matS}{\boldsymbol{\Sigma}}
+\newcommand{\vecs}{\boldsymbol{\sigma}}
+\newcommand{\vecmu}{\boldsymbol{\mu}}
+\newcommand{\vecbeta}{\boldsymbol{\beta}}
+\newcommand{\matL}{\boldsymbol{\Lambda}}
+\newcommand{\vecl}{\boldsymbol{\lambda}}
+\newcommand{\vectl}{\tilde{ \boldsymbol{ \lambda } } }
+\newcommand{\mattL}{\tilde{ \boldsymbol{ \Lambda } } }
+\newcommand{\vecm}{\boldsymbol{\mu}}
+\newcommand{\slidetitle}[1]{\begin{center} \ptsize{10} \vspace*{-0.5cm} \doublebox{\textbf{#1}} \end{center}\ptsize{8}\vspace{0.4cm}}
+
+
+
+\begin{document}
+\pagestyle{fancy} \slideframe{} \sffamily
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\slidetitle{Descriptive vs Statitical Point Pattern Analysis}
+%\ptsize{10} \vspace*{-0.5cm} {\S \textbf{Descriptive vs
+%Statistical Point Pattern Analysis}}
+\end{center}
+\ptsize{8} \vspace{0.4cm}
+
+\underline{\textbf{Descriptive analysis:}}
+\begin{itemize}
+\item set of quantitative (and graphical) tools for characterizing
+spatial point patterns
+\item different tools are appropriate for investigating first- or
+second-order effects (e.g., kernel density estimation versus sample
+G function)
+\item  can shed light onto whether points are clustered or evenly
+distributed in space
+\end{itemize}
+
+\vspace{0.2cm} \underline{\textbf{Limitation:}}
+\begin{itemize}
+\item no assessment of \emph{\underline{how}} clustered or
+\emph{\underline{how}} evenly-spaced is an
+observed point pattern
+\item no yardstick against which to compare observed values (or
+graph) of results
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Statistical analysis:}}
+\begin{itemize}
+\item assessment of whether an observed point pattern
+can be regarded as one (out of many) realizations from a particular
+spatial process
+\item measures of confidence with which the above
+assessment can be made (how likely is that the observed pattern is a
+realization of a particular spatial process)
+\end{itemize}
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Some General
+Terminology}}
+\end{center}
+\ptsize{8} \vspace{0.4cm}
+
+\underline{\textbf{Null hypothesis:}}
+\begin{itemize}
+\item spatial process that is hypothesized to be the generating
+mechanism of spatial patterns
+\item in this class, we'll focus on the null hypothesis of complete
+spatial randomness (CSR)
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Samples:}}
+\begin{itemize}
+\item realizations from the above process
+\item in this lecture, the set of alternative point patterns
+that could result from the null process of CSR
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Sampling distribution of a
+statistic:}}
+\begin{itemize}
+\item \emph{sample statistic} = a summary measure, e.g., mean or
+entire CDF, characterizing (and thus computed from) a sample
+\item \emph{sampling distribution of a statistic} =
+distribution, \\ e.g., histogram, of such a summary measure computed
+from many alternative samples generated from the null process
+\end{itemize}
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{A Particular Example I}}
+\end{center}
+\ptsize{8} \vspace{0.3cm}
+
+\underline{\textbf{Null hypothesis:}}
+\begin{itemize}
+\item complete spatial randomness (CSR) as a mechanism for
+generating point patterns
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Statistic:}}
+\begin{itemize}
+\item mean event-to-nearest-event (E2NE) distance;
+\\ here the variable is the minimum distance between events (E2NE),
+and the selected summary statistic is the mean of those distances:
+\[
+\bar{d}_{min} = \frac{1}{n} \sum_{i=1}^n d_{min}({\bf s}_i)
+\]
+\begin{center}
+{\small $d_{min}({\bf s}_i)$ = distance between $i$-th event and its
+nearest neighbor event}
+\end{center}
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Sampling distribution of mean
+E2NE:}}
+\begin{enumerate}
+\item generate (simulate) one realization of a point pattern under CSR
+\item compute $\bar{d}_{min}$ from that realization
+\item repeat steps (1) and (2) many, say 1000, times
+\item histogram of 1000 $\bar{d}_{min}$ values is the sampling
+distribution of mean E2NE distance \emph{\underline{under the null
+hypothesis of CSR}}
+\end{enumerate}
+
+\vspace{0.2cm}
+\begin{center}
+\emph{sampling distribution under CSR can often be analytically
+derived, without resorting to simulation}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{A Particular Example II}}
+\end{center}
+\ptsize{8} \vspace{0.3cm}
+
+\underline{\textbf{Two realizations under CSR}} of point patterns
+with $n=50$ events:
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{FsimCSRn50A.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FsimCSRn50B.eps}}
+\end{figure}
+\end{center}
+\vspace{-0.4cm} {\small \hspace{1.6cm} $\bar{d}_{min} = 7.13$
+\hspace{2.2cm} $\bar{d}_{min} = 8.13$}
+
+\vspace{0.3cm}\underline{\textbf{Sampling distribution}} or
+histogram of $\bar{d}_{min}$ values from $500$ simulated (under CSR)
+point patterns with $n=50$ events
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.55}{\includegraphics{FsimCSRn50bardminSD.eps}}
+\end{figure}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{A Particular Example
+III}}
+\end{center}
+\ptsize{8} \vspace{0.3cm}
+
+\underline{\textbf{Two realizations under CSR}} of point patterns
+with $n=100$ events:
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{FsimCSRn100A.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FsimCSRn100B.eps}}
+\end{figure}
+\end{center}
+\vspace{-0.4cm} {\small \hspace{1.6cm} $\bar{d}_{min} = 4.88$
+\hspace{2.2cm} $\bar{d}_{min} = 5.67$}
+
+\vspace{0.3cm}\underline{\textbf{Sampling distribution}} or
+histogram of $\bar{d}_{min}$ values from $500$ simulated (under CSR)
+point patterns with $n=100$ events
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.55}{\includegraphics{FsimCSRn100bardminSD.eps}}
+\end{figure}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.7cm} \fbox{\textbf{Looking at Observed Point
+Patterns I}}
+\end{center}
+\ptsize{8} \vspace{0.1cm}
+
+\underline{\textbf{Two observed point patterns}} with $n=100$
+events:
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_randstrat.eps}}
+\hspace{0.5cm} \scalebox{0.45}{\includegraphics{points_clust.eps}}
+\end{figure}
+\end{center}
+\vspace{-0.4cm} {\small \hspace{1.6cm} $\bar{d}_{min} = 7.86$
+\hspace{2.2cm} $\bar{d}_{min} = 1.17$}
+
+\vspace{0.1cm}\underline{\textbf{Question:}} Could these two
+patterns be realizations under CSR?
+
+\vspace{-0.2cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.55}{\includegraphics{FsimCSRn100bardminSD.eps}}
+\end{figure}
+\end{center}
+
+\vspace{-0.3cm}
+\begin{center}
+\emph{Obviously \underline{no}, and this can be said with great
+confidence; \\ {\small pattern on left has much larger mean E2NE
+distance than expected under CSR, and vise versa for pattern on
+right}}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.6cm} \fbox{\textbf{Looking at Observed Point
+Patterns II}}
+\end{center}
+\ptsize{8} \vspace{0.2cm}
+
+\underline{\textbf{Observed point pattern}} with $n=100$ events:
+
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_rand.eps}}
+\end{figure}
+\end{center}
+\vspace{-0.4cm} {\small \hspace{3.6cm} $\bar{d}_{min} = 5.18$}
+
+\vspace{0.2cm}\underline{\textbf{Question:}} Is this pattern more
+clustered than a CSR-generated one?
+
+\begin{center}
+\begin{figure}
+\scalebox{0.50}{\includegraphics{FsimCSRn100bardminSDline.eps}}
+\end{figure}
+\end{center}
+
+\vspace{-0.2cm}
+\begin{center}
+\emph{Most probably \underline{no}, since observed
+$\bar{d}_{min}=5.18$ (black bar) \\ lies at the center of the
+sampling distribution under CSR}
+\end{center}
+
+\end{slide*}
+
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.6cm} \fbox{\textbf{Looking at Observed Point
+Patterns III}}
+\end{center}
+\ptsize{8} \vspace{0.2cm}
+
+\underline{\textbf{Observed point pattern}} with $n=100$ events, and
+sampling distribution of $\bar{d}_{min}$ under CSR:
+
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{FxyRandClus.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FsimCSRn100bardminSDline2.eps}}
+\end{figure}
+\end{center}
+\vspace{-0.5cm} {\small \hspace{1.45cm} $\bar{d}_{min} = 4.65$}
+
+\vspace{0.2cm}\underline{\textbf{Question:}} Is this pattern more
+clustered than a CSR-generated one?
+
+\vspace{0.2cm}\underline{\textbf{Equivalent question:}} Since small
+$\bar{d}_{min}$ values indicate clustering, is observed
+$\bar{d}_{min}$ on \underline{left} side of sampling distribution
+under CSR?
+
+\vspace{0.2cm}\underline{\textbf{Answer:}} The area under the curve
+of the sampling distribution to the \underline{left} of observed
+$\bar{d}_{min}=4.65$ is an indication of how \underline{unlikely} is
+the observed pattern to be generated by CSR: \emph{the
+\underline{smaller} that area, the \underline{more unlike} is the
+pattern to be a realization under CSR}
+
+{\small \underline{NOTE:} if we were asking whether the observed
+pattern was more \underline{even} (less clustered) than a
+CSR-generated one, we would be looking at the area under the curve
+to the \underline{right} of observed $\bar{d}_{min}=4.65$, since we
+would be interested in larger (than CSR-related) such distance
+values}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.6cm} \fbox{\textbf{P-Value of An Observed
+Sample Statistic}}
+\end{center}
+\ptsize{8} \vspace{0.1cm}
+
+\begin{center}
+\begin{figure}
+\scalebox{0.50}{\includegraphics{FsimCSRn100bardminSDline2.eps}}
+\hspace{0.3cm}
+\scalebox{0.50}{\includegraphics{FsimCSRn100bardminSDcdf2.eps}}
+\end{figure}
+\end{center}
+
+\vspace{-0.2cm}\underline{\textbf{P-value}} = Area under the curve
+of the sampling distribution to the direction of the alternative
+hypothesis from the observed statistic \\
+$\longrightarrow$ probability of observing a $\bar{d}_{min}$ value
+$\leq$ $4.65$ in this case
+
+{\small \underline{NOTE:} direction dependence in defining the
+$P$-value comes into play for \underline{one-sided} tests; when we
+are just interested in whether the null hypothesis holds or not, no
+matter the direction of the alternative hypothesis
+(\underline{two-sided test}), the final $P$-value is defined as
+\underline{twice} the above $P$-value}
+
+\vspace{0.2cm}\underline{\textbf{Interpretation:}} The $P$-value is
+an indication of how \underline{unlikely} is the observed pattern to
+be generated by the null hypothesis: \emph{the \underline{smaller}
+the $P$-value, the \underline{more unlike} is the pattern to be a
+realization under the null hypothesis, here CSR}
+
+\vspace{0.2cm}\underline{\textbf{Note:}} Any $P$-value is associated
+with a null hypothesis, since a $P$-value is computed from a
+sampling distribution which in turn is generated under a null
+hypothesis
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Sampling Distribution of
+G Function Under CSR}}
+\end{center}
+\ptsize{8}
+
+
+\vspace{0.5cm} \underline{\textbf{Sampling distribution:}} of
+$\hat{G}(d)$ under CSR computed from $500$ simulated point patterns
+within a square region of area $|A| = 100\times 100$:
+
+\begin{center}
+\begin{figure}
+\hspace{-0.3cm}
+\scalebox{0.50}{\includegraphics{FghatCSRn100SD.eps}} \hspace{0.5cm}
+\scalebox{0.50}{\includegraphics{FghatCSRn50SD.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.3cm} \underline{\textbf{Interpretation:}} Plots provide
+envelope of simulated minimum and maximum $G(d)$ values for
+assessing whether an observed point pattern (not available here) can
+be regarded a realization from a CSR null process; \\ this is done
+by: (i) comparing the observed $\hat{G}(d)$ value (not available
+here) with the expected (mean) curve, and (ii) assessing its
+relative position within the envelope
+
+\vspace{0.5cm}
+\begin{center}
+\emph{The larger $n$ is (more events in the domain), the tighter the
+envelop}
+\end{center}
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Assessing Observed Ghat
+Plots I}}
+\end{center}
+\ptsize{8}
+
+
+\vspace{0.2cm} \underline{\textbf{Two observed point patterns}} with
+$n=100$ events:
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_randstrat.eps}}
+\hspace{0.5cm} \scalebox{0.45}{\includegraphics{points_clust.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.2cm}\underline{\textbf{Question:}} Could these two
+patterns be realizations under CSR?
+
+\begin{center}
+\begin{figure}
+\hspace{-0.3cm}
+\scalebox{0.50}{\includegraphics{FghatCSRn100SDstrat.eps}}
+\hspace{0.5cm}
+\scalebox{0.50}{\includegraphics{FghatCSRn100SDclus.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.0cm}
+\begin{center}
+\emph{Most probably \underline{no}, since the observed $\hat{G}(d)$
+curve lies outside the simulation envelope}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Assessing Observed Ghat
+Plots II}}
+\end{center}
+\ptsize{8}
+
+
+\vspace{0.2cm} \underline{\textbf{Observed point patterns}} with
+$n=100$ events:
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_rand.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.1cm}\underline{\textbf{Question:}} Could this pattern be a
+realization under CSR?
+
+\begin{center}
+\begin{figure}
+\scalebox{0.50}{\includegraphics{FghatCSRn100SDrand.eps}}
+\end{figure}
+\end{center}
+
+\vspace{-0.0cm}
+\begin{center}
+\emph{Most probably \underline{yes}, since the observed $\hat{G}(d)$
+curve lies very close to the mean simulated plot and is well within
+the simulation envelope}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Analytically-Derived
+Sampling Distributions}}
+\end{center}
+\ptsize{8}
+
+
+\vspace{0.3cm} \underline{\textbf{Analytical derivations:}}
+\begin{itemize}
+\item for simple domains, e.g., rectangles, there are mathematical
+formulae that provide the expected values of sample statistics under
+CSR
+\item in other words, people have already calculated what is the
+mean of a very large number of simulated $\bar{d}_{min}$ or
+$\hat{G}(d)$ values under CSR, without ever touching a computer
+\item these formulae have been derived before the advent of powerful
+computers, and have been used for a long time in point pattern
+analysis
+\item since, no simulation runs are involved, such
+analytically-derived formulae can be easily used without the need to
+resort to computer-intensive simulation procedures
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Limitations:}}
+\begin{itemize}
+\item analytically-derived formulae need to account for the fact
+that events near the boundary of the study region do not have the
+same number of neighbors as events in the middle of that region
+\item such \underline{edge effects} can be taken care of when
+the study region has simple geometry, e.g., for rectangles
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{center}
+\emph{In general, if you have access to computer software that can
+perform simulation, do not use analytically-derived formulae...}
+\end{center}
+
+
+\end{slide*}
+
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{CSR-Expected Mean Nearest
+Neighbor Distance}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \textbf{\underline{Definition}:} average of all
+$d_{min}({\bf s}_i)$ values:
+\[
+\bar{d}_{min} = \frac{1}{n} \sum_{\alpha=1}^n d_{min}({\bf s}_i)
+\]
+\item single number does not suffice to describe point pattern
+\end{itemize}
+
+
+\vspace{0.3cm} \underline{\textbf{Checking for CSR:}}
+\begin{enumerate}
+\item compute expected value of mean nearest-neighbor
+distance, under CSR:
+\[
+E\{ \bar{d}_{min} \} = \frac{1} { 2 \sqrt{\lambda} }
+\]
+{\small $\lambda$ = overall intensity of point pattern = \\
+(\# of points within study region) / (area of region)}
+\item form ratio $R$: $\; \;$
+\fbox{ $R = \frac{ \bar{d}_{min} }{ 1 / ( 2 \sqrt{\lambda} ) } = 2
+\bar{d}_{min} \sqrt{\lambda} $} \vspace{0.3cm}
+\item \underline{interpretation:}
+$R < 1$ $\Rightarrow$ observed nearest neighbor distances shorter
+than expected $\Rightarrow$ tendency
+towards clustering \\
+$R > 1$ $\Rightarrow$ tendency towards evenly spaced events
+\end{enumerate}
+
+\vspace{0.3cm}
+\begin{center}
+\emph{Result depends heavily upon study area definition ({\small
+used to compute $\lambda$})}
+\end{center}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{CSR-Expected G and F
+Functions}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.3cm} \underline{\textbf{G function definition:}}
+\begin{itemize}
+\item proportion of event-to-nearest-neighbor distances
+$d_{min}({\bf s}_\alpha)$ no greater than given distance cutoff $d$
+\item cumulative distribution function (CDF)
+of all $n$ event-to-nearest-event distances:
+\[
+\hat{G}(d) = \frac{ \# [ d_{min}({\bf s}_i) \leq d] }{n}
+\]
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{F function definition:}}
+\begin{itemize}
+\item proportion of point-to-nearest-neighbor distances
+$\tilde{d}_{min}(\tilde{{\bf s}}_p)$ no greater than given distance
+cutoff $d$
+\item cumulative distribution function (CDF)
+of all $m$ point-to-nearest-event distances:
+\[
+\hat{F}(d) = \frac{ \# [ \tilde{d}_{min}(\tilde{{\bf s}}_p) \leq d]
+}{m}
+\]
+\end{itemize}
+
+\vspace{0.3cm} \underline{\textbf{Expected G and F function under
+CSR:}}
+\[E\{G(d)\} =
+E\{F(d)\} = 1 - e^{-\lambda \pi d^2 }\]
+
+\vspace{0.1cm} \underline{\textbf{Checking for CSR:}}
+
+compare empirical functions $\hat{G}(d)$ and $\hat{F}(d)$ with their
+theoretical counterparts $E\{ G(d) \}$ and $E\{ F(d) \}$ under CSR
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Examples of G Functions}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_rand.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{points_clust.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\hspace{-0.3cm} \scalebox{0.45}{\includegraphics{FghatRandExp.eps}}
+\hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FghatClusterExp.eps}}
+\end{figure}
+\end{center}
+
+\begin{center}
+{\small solid lines indicate expected value of $G(d)$ under CSR:
+$E\{G(d)\} = 1 - e^{-0.01 \pi d^2 }$ }
+\end{center}
+
+\vspace{0.1cm}
+\begin{itemize}
+\item for {\em clustered events}, $\hat{G}(d)$ rises sharply
+at short distances, and levels off at large $d$-values
+\end{itemize}
+
+\end{slide*}
+
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Examples of F Functions}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_rand.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{points_clust.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\hspace{-0.3cm} \scalebox{0.45}{\includegraphics{FfhatRandExp.eps}}
+\hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FfhatClusterExp.eps}}
+\end{figure}
+\end{center}
+
+\begin{center}
+{\small solid lines indicate expected value of $F(d)$ under CSR:
+$E\{F(d)\} = 1 - e^{-0.01 \pi d^2 }$ }
+\end{center}
+
+\vspace{0.1cm}
+\begin{itemize}
+\item for {\em clustered events}, $\hat{F}(d)$ rises
+slowly at short distances, and more rapidly at longer distances
+\end{itemize}
+
+\end{slide*}
+
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Example with Evenly
+Spaced Points}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_randstrat.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\hspace{-0.3cm}
+\scalebox{0.45}{\includegraphics{FghatRandStratExp.eps}}
+\hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{FfhatRandStratExp.eps}}
+\end{figure}
+\end{center}
+
+\begin{center}
+{\small solid lines indicate expected value of $G(d)$ and $F(d)$
+under CSR: $1 - e^{-0.01 \pi d^2 }$ }
+\end{center}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item for {\em evenly-spaced events}, $\hat{G}(d)$ rises slowly
+at short distances, and then increases rapidly
+\end{itemize}
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{The K Function}}
+\end{center}
+\ptsize{8}
+\begin{center}
+Looking \underline{\emph{beyond}} nearest neighbors
+\end{center}
+
+\vspace{0.2cm} \underline{\textbf{Concept:}}
+\begin{enumerate}
+\item construct set of concentric circles
+(of increasing radius $d$) around each event
+\item count number of events in each distance ``band''
+\item cumulative number of events up to radius $d$
+around {\it \underline{all}} events becomes the sample $K$ function
+$\hat{K}(d)$
+\end{enumerate}
+
+\vspace{0.0cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.30}{\includegraphics{Fkfunction.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.1cm} \underline{\textbf{Formal definition:}}
+\begin{eqnarray*}
+K(d) & = & \frac { E\{ \mbox{ {\small \# of events within distance
+$d$ of any arbitrary event} } \} }
+{ E\{ \mbox{ {\small \# of events within study area} } \} } \\
+& \simeq & \frac{1}{\lambda} \frac{1}{n} \#\{d_{ij} \leq d,
+i=1,\ldots,n, j=1,\ldots,n \} = \hat{K}(d)
+\end{eqnarray*}
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{CSR-Expected K Function}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.5cm} \underline{\textbf{Under CSR:}}
+\begin{itemize}
+\item $E\{ K(d) \} = \frac{ \lambda \pi d^2 }{\lambda} = \pi d^2$
+\item this can become a very large number (due to $d^2$),
+and consequently small differences between $\hat{K}(d)$ and $E\{
+K(d) \}$ cannot be easily resolved
+\item use $L$ function instead:
+\[
+\hat{L}(d) = \sqrt{ \frac{\hat{K}(d)}{\pi} } - d
+\]
+with $E\{ L(d) \} =0$
+\end{itemize}
+
+\vspace{0.5cm} \underline{\textbf{Interpreting the L function:}}
+\begin{itemize}
+\item for $\hat{L}(d) > 0$ $\Rightarrow$ more events
+separated by distance $d$ than expected under CSR $\Rightarrow$ {\em
+clustered events}
+\item watch out for edge effects $\ldots$
+\end{itemize}
+
+\end{slide*}
+
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Examples of L Functions}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.1cm}
+\begin{center}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{points_rand.eps}} \hspace{0.5cm}
+\scalebox{0.45}{\includegraphics{points_clust.eps}}
+\end{figure}
+\end{center}
+
+\vspace{-0.9cm}
+\begin{center}
+\hspace{-0.6cm}
+\begin{figure}
+\scalebox{0.45}{\includegraphics{FlhatRand.eps}} \hspace{0.3cm}
+\scalebox{0.45}{\includegraphics{FlhatClus.eps}}
+\end{figure}
+\end{center}
+
+\vspace{0.0cm} \underline{\textbf{Expected appearance:}}
+\begin{itemize}
+\item for $\hat{L}(d) > 0$ $\Rightarrow$ more events
+separated by distance $d$ than expected under CSR $\Rightarrow$ {\em
+clustered events}
+\item watch out for edge effects $\ldots$
+\end{itemize}
+
+
+\end{slide*}
+
+%
+% New Page
+%
+\begin{slide*}
+\begin{center}
+\ptsize{10} \vspace*{-0.5cm} \fbox{\textbf{Recap}}
+\end{center}
+\ptsize{8}
+
+\vspace{0.5cm}\underline{\textbf{Statistical analysis of spatial
+point patterns:}}
+\begin{itemize}
+\item allows to quantify departure of results obtained via
+exploratory tools, e.g., $\bar{d}_{min}$ or $\hat{G}(d)$, from
+expected such results derived under specific null hypotheses, here
+CSR hypothesis
+\item can be used to assess to what extent observed point patterns
+can be regarded as realizations from a particular spatial process
+(here CSR)
+\end{itemize}
+
+\vspace{0.5cm} \underline{\textbf{Sampling distribution of a test
+statistic:}}
+\begin{itemize}
+\item lies at the heart of any statistical hypothesis testing
+procedure, and is tied to a particular null hypothesis
+\item simulation and analytical derivations are two alternative ways
+of computing such sampling distributions (the latter being
+increasingly replaced by the former)
+\end{itemize}
+
+\vspace{0.5cm}
+\begin{center}
+Watch out for \emph{\underline{edge effects}...}
+\end{center}
+
+
+
+\end{slide*}
+
+\end{document}
