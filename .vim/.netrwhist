@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/guofeng/Dropbox/shape/Sebastian/JingyongUpdated'
+let g:netrw_dirhist_2='/home/guofeng/.vifm'
+let g:netrw_dirhist_3='/home/guofeng/.vimperator'
+let g:netrw_dirhist_4='/home/guofeng/workspace/Telenav/gps_data/Since_Jul16th/1279323240.txt'
+let g:netrw_dirhist_5='/home/guofeng/.i3'
+let g:netrw_dirhist_6='/home/guofeng/.vimperator'
+let g:netrw_dirhist_7='/home/guofeng/Dropbox/work/ttu/grants/gss2014'

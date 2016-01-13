@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/guofeng/ws/ucsb'
+let g:netrw_dirhist_2='/home/guofeng/ws/ucsb/papers/mk/mk.tex'
+let g:netrw_dirhist_3='/home/guofeng/ws/ucsb/papers/mk'
+let g:netrw_dirhist_4='/home/guofeng/ws/ucsb/papers'
+let g:netrw_dirhist_5='/home/guofeng/ws/ucsb/papers/CVS'
+let g:netrw_dirhist_6='/home/guofeng/ws/ucsb/papers'
+let g:netrw_dirhist_7='/home/guofeng/ws/ucsb/papers/ijgis'

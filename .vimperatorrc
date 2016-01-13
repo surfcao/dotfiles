@@ -1,0 +1,18 @@
+"3.7 (created: 2013/04/03 18:20:07)
+
+nnoremap j 7j
+nnoremap k 7k
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+source! /home/guofeng/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+" Display
+"" show only the tab bar
+set gui=none
+set gui=tabs
+"" show numbers on each tab
+set tabnumbers
+"" see http://code.google.com/p/vimperator-labs/issues/detail?id=311
+set popups=tab,resized
+command! -nargs=0 -description='Mendeley Web Importor' mendeley open javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','https://www.mendeley.com/minified/bookmarklet.js');

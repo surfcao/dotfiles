@@ -1,0 +1,3 @@
+# for pianobar, otherwise it will block the audio
+driver=alsa
+dev=default

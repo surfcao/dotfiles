@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/guofeng/Dropbox/work/ucsb/papers/uncertianty/SERRA'
+let g:netrw_dirhist_2='/home/guofeng/.local/share/applications'
+let g:netrw_dirhist_3='/home/guofeng/Dropbox/work/ui/papers/data-model'
+let g:netrw_dirhist_4='/home/guofeng/Dropbox/backup/.config'
+let g:netrw_dirhist_5='/etc/vpnc'
+let g:netrw_dirhist_6='/home/guofeng/.vim'
