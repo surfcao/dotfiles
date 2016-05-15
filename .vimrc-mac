@@ -54,8 +54,8 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 nmap <Leader>q :nohlsearch<CR>
-noremap J 5j
-noremap K 5k
+"noremap J 5j
+"noremap K 5k
 
 """"solarized colorscheme
 "set background=dark "dark|light"
