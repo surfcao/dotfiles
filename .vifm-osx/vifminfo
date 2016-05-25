@@ -1,0 +1,81 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/Users/guofeng/.vifm
+	..
+0
+d/Users/guofeng
+	Dropbox
+5
+d/Users/guofeng/Dropbox
+	TTU-H1B
+10
+d/Users/guofeng/Dropbox/TTU-H1B
+	..
+0
+d/Users/guofeng/Dropbox
+	Exposome Data Dictionary
+4
+d/Users/guofeng
+	Dropbox
+5
+d/Users
+	guofeng
+3
+d/Users/guofeng
+	bi-flow.shp
+4
+d
+
+# Right window history (oldest to newest):
+D/Users/guofeng/.vifm
+	vifmrc-bk
+7
+D/Users/guofeng
+	Pictures
+14
+D
+
+# Command line history (oldest to newest):
+:quit
+:df
+:file
+:w
+:q
+
+# Search history (oldest to newest):
+/*.pdf
+/pdf
+/docxkk
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0
