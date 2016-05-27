@@ -1,3 +1,5 @@
+layout new
+layout autosave on
 focusminsize 85 25
 split -v
 focus
@@ -5,11 +7,14 @@ only
 split -v
 split -v
 focus
+layout attach
+
+
 caption string "%{= dd} "
 sorendition "="
 
-#vbell_msg "bell: window ~%" # Message for visual bell
-#vbellwait 2 # Seconds to pause the screen for visual bell
+vbell_msg "bell: window ~%" # Message for visual bell
+vbellwait 2 # Seconds to pause the screen for visual bell
 vbell off # Turns visual bell off
 startup_message off
 term screen-256color
@@ -24,4 +29,6 @@ term screen-256color
 terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color
 defbce "on" 
+
 shell -/bin/bash
+
