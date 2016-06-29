@@ -1,0 +1,34 @@
+#!/bin/bash
+##
+## gtd.sh
+##  
+## Poor man's pomodoro timer
+##  
+## Made by Guofeng
+## Login   <guofeng@guofeng>
+## 
+##
+
+folder="$HOME/Dropbox/gtd" 
+span=$((30*60))
+if [ "$#" -ge 1 ]; then
+        span=$1;
+fi
+date1=$((`date +%s` + $span)); 
+while [ "$date1" -ge `date +%s` ]; do 
+  echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S) \033[0K\r";
+  sleep 0.1
+done
+$(aplay $HOME/mytools/bike.wav &>/dev/null)
+#put the statistics in the log
+name=$(date '+%Y-%m-%d')
+file="$folder/$name.log"
+if [ -e ${file} ]; then
+    count=$(cat ${file})
+else
+     touch ${file}
+     count=0
+fi
+((count++))
+echo ${count} > ${file}
+echo "Session ${count} completed."

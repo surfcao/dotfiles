@@ -1,0 +1,28 @@
+#!/bin/sh
+##
+## cl.sh
+## 
+## Made by Guofeng
+## Login   <guofeng@guofeng>
+## 
+## Started on  Mon Nov 26 15:37:31 2007 Guofeng
+## Last update Mon Nov 26 18:07:55 2007 Guofeng
+##
+
+clear
+latexname=$1
+
+
+directory="./output"
+
+if [ ! -d "$directory" ]; then
+  mkdir ${directory}
+fi
+
+echo -e"\033[32m begin compile"${latexname}
+echo -e -n"\033[0m "
+
+pdflatex -output-directory=${directory} $latexname.tex
+
+echo -e"\033[32m successfully!"
+echo -e -n"\033[0m "
