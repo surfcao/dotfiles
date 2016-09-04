@@ -1,0 +1,15 @@
+#!/bin/bash
+##
+## stopwatch.sh
+## 
+## Made by Guofeng
+## Login   <guofeng@guofeng>
+## 
+## Started on  Mon Nov 26 15:37:31 2007 Guofeng
+## Last update Mon Nov 26 18:07:55 2007 Guofeng
+##
+date1=`date +%s`; 
+ while true; do 
+  echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+  sleep 0.1
+ done

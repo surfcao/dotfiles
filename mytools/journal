@@ -1,0 +1,15 @@
+#!/bin/sh
+#change checkout_dir to match where you’ve checked out the latest
+checkout_dir=~/geeknote
+#change notebook to whatever notebook you use as your journal
+notebook=Journal
+title=$1
+if [ -z "$1" ]
+    then
+        title=$(date +%Y-%m-%d)
+fi
+echo creating a note named $title in the $notebook notebook
+geeknote create --title $title --notebook $notebook --content " "
+geeknote edit --note $title --notebook $notebook --content "WRITE"
+
+
