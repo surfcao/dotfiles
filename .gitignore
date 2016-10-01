@@ -1,2 +1,10 @@
 .profile
 .vimperator/
+
+# Ignore all of emacs.d, which is mostly compiled/downloaded scripts.
+.emacs.d/*
+*.elc
+# But don't ignore these specific locations.
+!.emacs.d/lisp
+!.emacs.d/snippets
+!.emacs.d/init.el
