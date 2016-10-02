@@ -82,7 +82,8 @@
   :config
   (setq powerline-default-separator (if (display-graphic-p) 'arrow
                                       nil))
-  (air--powerline-default-theme))
+  (air--powerline-default-theme)
+  )
 
 (use-package powerline-evil
   :ensure t)

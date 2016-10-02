@@ -7,7 +7,6 @@
 ;;
 ;;; Code:
 
-
 ;; Leave this here, or package.el will just add it again.
 (package-initialize)
 
@@ -131,9 +130,8 @@
   :defer 1)
 (use-package dash :ensure t)
 
-;; Ido mode
-(require 'ido)
-(ido-mode t)
+;; map yes-or-no to y-or-n
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Org Mode
 (require 'init-org)
@@ -157,11 +155,11 @@
   :ensure t
   :commands rainbow-mode)
 
-(use-package css-mode
-  :ensure t
-  :config
-  (add-hook 'css-mode-hook (lambda ()
-                             (rainbow-mode))))
+;(use-package css-mode
+;  :ensure t
+;  :config
+;  (add-hook 'css-mode-hook (lambda ()
+;                             (rainbow-mode))))
 
 (use-package wgrep
   :ensure t
@@ -268,6 +266,18 @@
   (define-key markdown-mode-map (kbd "C-c 4") 'markdown-insert-header-atx-4)
   (define-key markdown-mode-map (kbd "C-c 5") 'markdown-insert-header-atx-5)
   (define-key markdown-mode-map (kbd "C-c 6") 'markdown-insert-header-atx-6))
+
+(use-package polymode
+  :ensure t
+  :config)
+
+;;; MARKDOWN
+;(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+;;; R modes
+(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+
 
 (use-package php-extras :ensure t :defer t)
 (use-package sunshine
@@ -597,6 +607,7 @@ is the buffer location at which the function was found."
   (setq ns-use-srgb-colorspace nil))
 
 ;(load-theme 'gruvbox)
+
 
 (provide 'init)
 ;;; init.el ends here

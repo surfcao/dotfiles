@@ -17,16 +17,16 @@
     "D"  'open-current-line-in-codebase-search
     "f"  'helm-imenu            ;; Jump to function in buffer
     "g"  'magit-status
-    "h"  'fontify-and-browse    ;; HTML-ize the buffer and browse the result
+    ;"h"  'fontify-and-browse    ;; HTML-ize the buffer and browse the result
     "l"  'whitespace-mode       ;; Show invisible characters
     "nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
     "nw" 'widen
-    ;;"o"  'delete-other-windows  ;; C-w o
     "o"  'other-window  ;; C-w w
-    "p"  'helm-show-kill-ring
+    "O"  'delete-other-windows  ;; C-w o
+    "k"  'helm-show-kill-ring
     "s"  'ag-project            ;; Ag search from project's root
-    "r"  'chrome-reload
-    "R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
+    ;"r"  'chrome-reload
+    ;"R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
     "S"  'delete-trailing-whitespace
     "t"  'gtags-reindex
     "T"  'gtags-find-tag
@@ -48,9 +48,6 @@
   (dolist (mode '(ag-mode
                   flycheck-error-list-mode
                   git-rebase-mode
-                  octopress-mode
-                  octopress-server-mode
-                  octopress-process-mode
                   sunshine-mode
                   term-mode))
     (add-to-list 'evil-emacs-state-modes mode))
@@ -58,7 +55,8 @@
   (delete 'term-mode evil-insert-state-modes)
 
   ;; Use insert state in these additional modes.
-  (dolist (mode '(twittering-edit-mode
+  (dolist (mode '(twittering-edit-mode 
+		  inferior-ess-mode
                   magit-log-edit-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
@@ -148,11 +146,7 @@ used, but this function ignores them."
              (org-on-heading-p))
         (not (org-mark-element))
       t))
-
-  (advice-add 'evil-visual-line :before-while #'evil-visual-line--mark-org-element-when-heading)
-
-  ;; My own Ex commands.
-  (evil-ex-define-cmd "om" 'octopress-status))
+  (advice-add 'evil-visual-line :before-while #'evil-visual-line--mark-org-element-when-heading))
 
 (defun air--apply-evil-other-package-configs ()
   "Apply evil-dependent settings specific to other packages."
@@ -169,11 +163,22 @@ used, but this function ignores them."
     (search-backward-regexp "\\(>>>>\\|====\\|<<<<\\)" (point-min) t)
     (move-beginning-of-line nil))
 
-  ;; PHP
-  (evil-define-key 'normal php-mode-map (kbd "]n") 'next-conflict-marker)
-  (evil-define-key 'normal php-mode-map (kbd "[n") 'previous-conflict-marker)
-  (evil-define-key 'visual php-mode-map (kbd "]n") 'next-conflict-marker)
-  (evil-define-key 'visual php-mode-map (kbd "[n") 'previous-conflict-marker)
+  ;; R/ESS 
+
+  (evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-line)
+  (evil-leader/set-key-for-mode 'ess-mode "n" 'ess-eval-line-and-step)
+  (evil-leader/set-key-for-mode 'ess-mode "g" 'ess-eval-line-and-go)
+  (evil-leader/set-key-for-mode 'ess-mode "r" 'ess-eval-region-or-function-or-paragraph-and-step)
+  (evil-leader/set-key-for-mode 'ess-mode "b" 'ess-eval-buffer)
+  (evil-leader/set-key-for-mode 'ess-mode "o" 'ess-switch-to-inferior-or-script-buffer)
+
+  (add-hook 'inferior-ess-mode-hook
+          (lambda ()
+            ;(define-key ess-mode-map (kbd "M-o") 'ess-switch-to-inferior-or-script-buffer )
+            ;(define-key inferior-ess-mode-map (kbd "M-o") 'ess-switch-to-inferior-or-script-buffer )
+	    (define-key inferior-ess-mode-map (kbd "C-j") 'comint-next-matching-input-from-input)
+	    (define-key inferior-ess-mode-map (kbd "C-k") 'comint-previous-matching-input-from-input)))
+
 
   ;; Dired
   (evil-define-key 'normal dired-mode-map (kbd "C-e") 'dired-toggle-read-only))
