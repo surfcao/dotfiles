@@ -1,6 +1,10 @@
 .profile
 .vimperator/
 
+# Ignore all of .vim, which is mostly compiled/downloaded scripts.
+.vim/*
+!.vim/thesaurus
+
 # Ignore all of emacs.d, which is mostly compiled/downloaded scripts.
 .emacs.d/*
 *.elc
