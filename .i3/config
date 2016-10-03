@@ -31,7 +31,8 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn -bitstream-*-*-*-*-*-18-*-*-*-*-*-*-*
 #bindsym $mod+d exec i3-dmenu-desktop --dmenu='dmenu -fn monospace:bold:size=9 -nb "#eee8d5" -nf "#073642" -sb "#dc322f" -p "> " -h 19'
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -156,8 +157,8 @@ bindsym Control+Mod1+l exec i3lock -n -d --color 000000
 bindsym Control+Mod1+e exec ~/.i3/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
-#new_window none 
-new_window 1pixel 
+new_window none 
+#new_window 1pixel 
 bindsym $mod+Shift+n border normal
 bindsym $mod+Shift+p border 1pixel
 bindsym $mod+Shift+u border none
@@ -258,7 +259,7 @@ bindsym $mod+z [class="(?i)zathura"] focus
 assign [class="(?i)firefox"] 2
 assign [class="(?i)zathura"] 3
 assign [title="(?i)libreoffice*"] 4
-assign [title="(?i)matlab"] 5
+assign [class="(?i)matlab"] 5
 
 # assign [class=Skype"] 5: msg
 # assign [class="Tomboy"] 8: tom
@@ -266,7 +267,7 @@ assign [title="(?i)matlab"] 5
 #
 # move focused container to external monitor
 
-for_window [title="(?i)matlab"] floating enable
+for_window [class="(?i)matlab"] floating enable
 for_window [class="(?i)r_x11"] floating enable
 #for_window [class="gedit"] floating enable
 #for_window [class="(?i)surf"] border pixel 3

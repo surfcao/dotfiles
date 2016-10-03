@@ -15,4 +15,10 @@ set gui=tabs
 set tabnumbers
 "" see http://code.google.com/p/vimperator-labs/issues/detail?id=311
 set popups=tab,resized
+
+hi CmdLine -append font-size:16px
+"hi CmdLine -append font-weight:bold; font-size:14px
+"hi Hint font-size:14px; font-weight:bold; color:white;background-color:red;padding:2px;
+hi Hint -append font-size:14px; 
+
 command! -nargs=0 -description='Mendeley Web Importor' mendeley open javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','https://www.mendeley.com/minified/bookmarklet.js');

@@ -18,6 +18,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
+Plugin 'christoomey/vim-tmux-navigator'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
 call vundle#end()      
@@ -119,9 +120,12 @@ let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""
 
 setlocal iskeyword+=:,-
-inoremap { {<CR>}<ESC>i
-inoremap [ [<CR>]<ESC>i
-inoremap ( (<CR>)<ESC>i
+inoremap { {}<ESC>i
+inoremap [ []<ESC>i
+inoremap ( ()<ESC>i
+
+" make going to a line number easier.
+nnoremap <CR> G
 
 """""""""""""""""""
 """    R        """
