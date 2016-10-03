@@ -95,11 +95,12 @@ let g:solarized_bold = 1 | 0
 let g:solarized_underline = 1 | 0
 "Most terminals (including screen) don't handle italics right, but urxvt
 "can. 
-let g:solarized_italic = 0 | 0 
+let g:solarized_italic = 1 | 0 
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
 colorscheme solarized
 "colorscheme gruvbox
+highlight LineNr ctermbg=NONE
 
 """""""""""""""""""
 """   Snippet   """
