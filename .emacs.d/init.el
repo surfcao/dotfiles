@@ -56,28 +56,6 @@
 (put 'narrow-to-region 'disabled nil)
 
 
-;; The OS X visible bell is buggy as hell.
-;(defvar air-bell-ringing nil
-;  "Whether my visual bell is currently being rung.
-;
-;This prevents simultaneously ringing two bells and falling into a race
-;condition where the bell visualization never clears.")
-;
-;(setq ring-bell-function (lambda ()
-;                           (if (not air-bell-ringing)
-;                               (let* ((bg (face-background 'default))
-;                                      (fg (face-foreground 'default))
-;                                      (reset `(lambda ()
-;                                                (set-face-background 'default ,bg)
-;                                                (set-face-foreground 'default ,fg)
-;                                                (setq air-bell-ringing nil))))
-;
-;                                 (set-face-background 'default "NavajoWhite4")
-;                                 ;(set-face-foreground 'default "black")
-;                                 (setq air-bell-ringing t)
-;
-;                                 (run-with-timer 0.05 nil reset)))))
-
 (defun my-minibuffer-setup-hook ()
   "Increase GC cons threshold."
   (setq gc-cons-threshold most-positive-fixnum))
@@ -94,8 +72,8 @@
 (setq make-backup-files nil)
 
 ;;; File type overrides.
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 
 ;;; My own configurations, which are bundled in my dotfiles.
 (require 'init-platform)
@@ -105,13 +83,13 @@
 (require 'init-fonts)
 (require 'init-gtags)
 (require 'init-evil)
-(require 'init-twitter)
 (require 'init-maps)
-(require 'init-w3m)
-(require 'init-php)
-(require 'init-powerline)
+;(require 'init-twitter)
+;(require 'init-w3m)
+;(require 'init-php)
+;(require 'init-powerline)
 (require 'init-flycheck)
-(require 'init-tmux)
+;(require 'init-tmux)
 
 (require 'markdown-preview-mode)
 (add-hook 'markdown-preview-mode-hook
@@ -145,15 +123,9 @@
   :ensure t
   :mode ("\\.py\\'" . elpy-mode))
 
-;(use-package groovy-mode
+;(use-package rainbow-mode
 ;  :ensure t
-;  :mode "\\.groovy\\'"
-;  :config
-;  (c-set-offset 'label 4))
-
-(use-package rainbow-mode
-  :ensure t
-  :commands rainbow-mode)
+;  :commands rainbow-mode)
 
 ;(use-package css-mode
 ;  :ensure t
@@ -193,9 +165,9 @@
   (setq ag-reuse-buffers t)
   (setq ag-reuse-window t))
 
-(use-package js2-mode
-  :ensure t
-  :mode "\\.js\\'")
+;(use-package js2-mode
+;  :ensure t
+;  :mode "\\.js\\'")
 
 (use-package exec-path-from-shell
   :ensure t
@@ -241,9 +213,9 @@
 
 (use-package dictionary :ensure t)
 
-(use-package emmet-mode
-  :ensure t
-  :commands emmet-mode)
+;(use-package emmet-mode
+;  :ensure t
+;  :commands emmet-mode)
 
 (use-package flycheck
   :ensure t
@@ -274,49 +246,39 @@
 ;;; MARKDOWN
 ;(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 ;;; R modes
+
+(require 'poly-R)
+(require 'poly-markdown)
 (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 
-(use-package php-extras :ensure t :defer t)
-(use-package sunshine
-  :ensure t
-  :commands sunshine-forecast
-  :config
-  (defun get-string-from-file (file-path)
-    "Return FILE-PATH's contents."
-    (with-temp-buffer
-      (insert-file-contents file-path)
-      (buffer-string)))
-  (setq sunshine-appid (get-string-from-file
-                        (expand-file-name "sunshine-appid" user-emacs-directory)))
-  (setq sunshine-location "Brookline, MA")
-  (setq sunshine-show-icons t))
+;(use-package php-extras :ensure t :defer t)
+;(use-package sunshine
+;  :ensure t
+;  :commands sunshine-forecast
+;  :config
+;  (defun get-string-from-file (file-path)
+;    "Return FILE-PATH's contents."
+;    (with-temp-buffer
+;      (insert-file-contents file-path)
+;      (buffer-string)))
+;  (setq sunshine-appid (get-string-from-file
+;                        (expand-file-name "sunshine-appid" user-emacs-directory)))
+;  (setq sunshine-location "Brookline, MA")
+;  (setq sunshine-show-icons t))
 
-(use-package twittering-mode
-  :ensure t
-  :commands twit
-  :config
-  (add-hook 'twittering-mode-hook
-            (lambda ()
-              (define-key twittering-mode-map (kbd ",o") 'delete-other-windows)
-              (define-key twittering-mode-map (kbd ",b") 'helm-mini)
-              (define-key twittering-mode-map (kbd "C-c r") 'twittering-retweet)))
-  (setq twittering-use-native-retweet t)
-  (setq twittering-default-show-replied-tweets 3)
-  (setq twittering-use-icon-storage t))
-
-(use-package web-mode
-  :ensure t
-  :defer t
-  :config
-  (setq web-mode-attr-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-sql-indent-offset 2))
+;(use-package web-mode
+;  :ensure t
+;  :defer t
+;  :config
+;  (setq web-mode-attr-indent-offset 2)
+;  (setq web-mode-code-indent-offset 2)
+;  (setq web-mode-css-indent-offset 2)
+;  (setq web-mode-indent-style 2)
+;  (setq web-mode-markup-indent-offset 2)
+;  (setq web-mode-sql-indent-offset 2))
 
 (use-package mmm-mode :ensure t :defer t)
 (use-package yaml-mode :ensure t :defer t)
@@ -382,7 +344,7 @@
   (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-cl)
   (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-php))
 
-(use-package sublime-themes :ensure t)
+(use-package sublime-themes :ensure t :defer t)
 (use-package zenburn-theme :ensure t :defer t)
 (use-package gruvbox-theme :ensure t :defer t)
 (use-package color-theme-sanityinc-tomorrow :ensure t)
@@ -494,34 +456,34 @@ The IGNORED argument is... Ignored."
 (add-hook 'git-commit-mode-hook 'evil-insert-state)
 
 ;;; Emmet mode:
-(add-hook 'emmet-mode-hook
-          (lambda ()
-            (evil-define-key 'insert emmet-mode-keymap (kbd "C-S-l") 'emmet-next-edit-point)
-            (evil-define-key 'insert emmet-mode-keymap (kbd "C-S-h") 'emmet-prev-edit-point)))
-
+;(add-hook 'emmet-mode-hook
+;          (lambda ()
+;            (evil-define-key 'insert emmet-mode-keymap (kbd "C-S-l") 'emmet-next-edit-point)
+;            (evil-define-key 'insert emmet-mode-keymap (kbd "C-S-h") 'emmet-prev-edit-point)))
+;
 ;;; Web mode:
-(add-hook 'web-mode-hook
-          (lambda ()
-            (setq web-mode-style-padding 2)
-            (yas-minor-mode t)
-            (emmet-mode)
-            (flycheck-add-mode 'html-tidy 'web-mode)
-            (flycheck-mode)))
-
-(setq web-mode-ac-sources-alist
-      '(("php" . (ac-source-php-extras ac-source-yasnippet ac-source-gtags ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-        ("css" . (ac-source-css-property ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))))
-
-(add-hook 'web-mode-before-auto-complete-hooks
-          '(lambda ()
-             (let ((web-mode-cur-language (web-mode-language-at-pos)))
-               (if (string= web-mode-cur-language "php")
-                   (yas-activate-extra-mode 'php-mode)
-                 (yas-deactivate-extra-mode 'php-mode))
-               (if (string= web-mode-cur-language "css")
-                   (setq emmet-use-css-transform t)
-                 (setq emmet-use-css-transform nil)))))
-
+;(add-hook 'web-mode-hook
+;          (lambda ()
+;            (setq web-mode-style-padding 2)
+;            (yas-minor-mode t)
+;            (emmet-mode)
+;            (flycheck-add-mode 'html-tidy 'web-mode)
+;            (flycheck-mode)))
+;
+;(setq web-mode-ac-sources-alist
+;      '(("php" . (ac-source-php-extras ac-source-yasnippet ac-source-gtags ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+;        ("css" . (ac-source-css-property ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))))
+;
+;(add-hook 'web-mode-before-auto-complete-hooks
+;          '(lambda ()
+;             (let ((web-mode-cur-language (web-mode-language-at-pos)))
+;               (if (string= web-mode-cur-language "php")
+;                   (yas-activate-extra-mode 'php-mode)
+;                 (yas-deactivate-extra-mode 'php-mode))
+;               (if (string= web-mode-cur-language "css")
+;                   (setq emmet-use-css-transform t)
+;                 (setq emmet-use-css-transform nil)))))
+;
 ;;; Emacs Lisp mode:
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -536,20 +498,20 @@ The IGNORED argument is... Ignored."
                           (setq sh-indentation 2)))
 
 ;;; Twittering mode:
-(setq twittering-use-master-password t)
-(add-hook 'twittering-mode-hook (lambda ()
-                                  (define-key twittering-mode-map (kbd "C-c C-a") 'twittering-favorite)
-                                  (define-key twittering-mode-map (kbd ",b") 'helm-mini)))
-
-(add-hook 'twittering-edit-mode-hook (lambda ()
-                                       (flyspell-mode)))
-
-;;; Javascript mode:
-(add-hook 'javascript-mode-hook (lambda ()
-                                  (set-fill-column 120)
-                                  (turn-on-auto-fill)
-                                  (setq js-indent-level 2)))
-
+;(setq twittering-use-master-password t)
+;(add-hook 'twittering-mode-hook (lambda ()
+;                                  (define-key twittering-mode-map (kbd "C-c C-a") 'twittering-favorite)
+;                                  (define-key twittering-mode-map (kbd ",b") 'helm-mini)))
+;
+;(add-hook 'twittering-edit-mode-hook (lambda ()
+;                                       (flyspell-mode)))
+;
+;;;; Javascript mode:
+;(add-hook 'javascript-mode-hook (lambda ()
+;                                  (set-fill-column 120)
+;                                  (turn-on-auto-fill)
+;                                  (setq js-indent-level 2)))
+;
 ;;; Markdown mode:
 (add-hook 'markdown-mode-hook (lambda ()
                                 (set-fill-column 80)
@@ -557,31 +519,31 @@ The IGNORED argument is... Ignored."
                                 (flyspell-mode)))
 
 ;;; HTML mode:
-(add-hook 'html-mode-hook (lambda ()
-                            (setq sgml-basic-offset 2)
-                            (setq indent-tabs-mode nil)))
+;(add-hook 'html-mode-hook (lambda ()
+;                            (setq sgml-basic-offset 2)
+;                            (setq indent-tabs-mode nil)))
 
-(defun find-php-functions-in-current-buffer ()
-  "Find lines that appear to be PHP functions in the buffer.
-
-This function performs a regexp forward search from the top
-\(point-min) of the buffer to the end, looking for lines that
-appear to be PHP function declarations.
-
-The return value of this function is a list of cons in which
-the car of each cons is the bare function name and the cdr
-is the buffer location at which the function was found."
-  (save-excursion
-    (goto-char (point-min))
-    (let (res)
-      (save-match-data
-        (while (re-search-forward  "^ *\\(public \\|private \\|protected \\|static \\)*?function \\([^{]+\\)" nil t)
-          (let* ((fn-name (save-match-data (match-string-no-properties 2)))
-                 (fn-location (save-match-data (match-beginning 0))))
-            (setq res
-                  (append res
-                          (list `(,fn-name . ,fn-location)))))))
-      res)))
+;(defun find-php-functions-in-current-buffer ()
+;  "Find lines that appear to be PHP functions in the buffer.
+;
+;This function performs a regexp forward search from the top
+;\(point-min) of the buffer to the end, looking for lines that
+;appear to be PHP function declarations.
+;
+;The return value of this function is a list of cons in which
+;the car of each cons is the bare function name and the cdr
+;is the buffer location at which the function was found."
+;  (save-excursion
+;    (goto-char (point-min))
+;    (let (res)
+;      (save-match-data
+;        (while (re-search-forward  "^ *\\(public \\|private \\|protected \\|static \\)*?function \\([^{]+\\)" nil t)
+;          (let* ((fn-name (save-match-data (match-string-no-properties 2)))
+;                 (fn-location (save-match-data (match-beginning 0))))
+;            (setq res
+;                  (append res
+;                          (list `(,fn-name . ,fn-location)))))))
+;      res)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
