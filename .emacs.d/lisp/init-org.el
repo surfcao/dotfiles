@@ -377,7 +377,7 @@ TAG is chosen interactively from the global tags completion table."
            :jump-to-captured t)
 
           ("w" "Nine Minutes on Monday weekly agenda." entry
-           (id "9A6DDE04-90B8-49ED-90B9-A55A0D1E7B28")
+           ;(id "9A6DDE04-90B8-49ED-90B9-A55A0D1E7B28")
            (function air-org-nmom-capture-template))))
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
   (setq org-directory "~/Dropbox/org")

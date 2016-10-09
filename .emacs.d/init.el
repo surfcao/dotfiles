@@ -81,9 +81,10 @@
 
 (require 'diminish)
 (require 'init-fonts)
-(require 'init-gtags)
+;(require 'init-gtags)
 (require 'init-evil)
 (require 'init-maps)
+(require 'init-ess)
 ;(require 'init-twitter)
 ;(require 'init-w3m)
 ;(require 'init-php)
@@ -239,6 +240,7 @@
   (define-key markdown-mode-map (kbd "C-c 5") 'markdown-insert-header-atx-5)
   (define-key markdown-mode-map (kbd "C-c 6") 'markdown-insert-header-atx-6))
 
+
 (use-package polymode
   :ensure t
   :config)
@@ -280,7 +282,7 @@
 ;  (setq web-mode-markup-indent-offset 2)
 ;  (setq web-mode-sql-indent-offset 2))
 
-(use-package mmm-mode :ensure t :defer t)
+;(use-package mmm-mode :ensure t :defer t)
 (use-package yaml-mode :ensure t :defer t)
 
 (use-package yasnippet
@@ -325,28 +327,29 @@
   (setq magit-last-seen-setup-instructions "1.4.0")
   (magit-define-popup-switch 'magit-log-popup ?f "first parent" "--first-parent"))
 
-(use-package mmm-mode
-  :ensure t
-  :defer t
-  :config
-  (setq mmm-global-mode 'maybe)
-  (mmm-add-classes
-   '((markdown-cl
-      :submode emacs-lisp-mode
-      :face mmm-declaration-submode-face
-      :front "^~~~cl[\n\r]+"
-      :back "^~~~$")
-     (markdown-php
-      :submode php-mode
-      :face mmm-declaration-submode-face
-      :front "^```php[\n\r]+"
-      :back "^```$")))
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-cl)
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-php))
+;(use-package mmm-mode
+;  :ensure t
+;  :defer t
+;  :config
+;  (setq mmm-global-mode 'maybe)
+;  (mmm-add-classes
+;   '((markdown-cl
+;      :submode emacs-lisp-mode
+;      :face mmm-declaration-submode-face
+;      :front "^~~~cl[\n\r]+"
+;      :back "^~~~$")
+;     (markdown-php
+;      :submode php-mode
+;      :face mmm-declaration-submode-face
+;      :front "^```php[\n\r]+"
+;      :back "^```$")))
+;  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-cl)
+;  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-php))
 
 (use-package sublime-themes :ensure t :defer t)
 (use-package zenburn-theme :ensure t :defer t)
 (use-package gruvbox-theme :ensure t :defer t)
+(use-package solarized-theme :ensure t :defer t)
 (use-package color-theme-sanityinc-tomorrow :ensure t)
 
 (use-package undo-tree
@@ -558,7 +561,7 @@ The IGNORED argument is... Ignored."
  '(markdown-preview-custom-template "/Users/guofeng/.emacs.d/markdown-preview-template.html")
  '(package-selected-packages
    (quote
-    (ess tiny-menu helm-ag esup counsel-projectile restclient ox-reveal org-tree-slide epresent color-moccur xterm-color nlinum-relative company-shell pandoc-mode virtualenvwrapper counsel helm-swoop groovy-mode octopress zenburn-theme yaml-mode which-key wgrep-ag web-mode w3m use-package twittering-mode sunshine sublime-themes rainbow-mode powerline-evil org-bullets mmm-mode markdown-mode magit highlight-symbol helm-projectile gtags fullframe flycheck-package exec-path-from-shell evil-surround evil-leader evil-jumper evil-indent-textobject emmet-mode elpy dictionary color-theme-sanityinc-tomorrow bpr auto-complete ag)))
+    (buffer-move visual-fill-column ess tiny-menu helm-ag esup counsel-projectile restclient ox-reveal org-tree-slide epresent color-moccur xterm-color nlinum-relative company-shell pandoc-mode virtualenvwrapper counsel helm-swoop groovy-mode octopress zenburn-theme yaml-mode which-key wgrep-ag web-mode w3m use-package twittering-mode sunshine sublime-themes rainbow-mode powerline-evil org-bullets mmm-mode markdown-mode magit highlight-symbol helm-projectile gtags fullframe flycheck-package exec-path-from-shell evil-surround evil-leader evil-jumper evil-indent-textobject emmet-mode elpy dictionary color-theme-sanityinc-tomorrow bpr auto-complete ag)))
  '(safe-local-variable-values (quote ((css-indent-offset . 2) (no-byte-compile t)))))
 
 (put 'narrow-to-region 'disabled nil)
@@ -568,7 +571,14 @@ The IGNORED argument is... Ignored."
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
 
-;(load-theme 'gruvbox)
+;(load-theme 'solarized-light)
+
+;; moving around windows
+(require 'buffer-move)
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 
 (provide 'init)
@@ -578,9 +588,8 @@ The IGNORED argument is... Ignored."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;'(default ((t (:background nil))))
+ '(default ((t (:background nil))))
  '(powerline-evil-normal-face ((t (:inherit powerline-evil-base-face :background "chartreuse3"))))
- ;'(term ((t (:foreground "ivory1"))))
  '(term-color-black ((t (:foreground "gray80"))))
  '(term-color-cyan ((t (:foreground "cyan2"))))
  '(term-color-green ((t (:foreground "OliveDrab3"))))

@@ -8,14 +8,14 @@
 (add-hook 'window-setup-hook
           (lambda ()
             (when (memq window-system '(mac ns))
-              (add-to-list 'default-frame-alist '(font . "Hack"))
-              (set-face-attribute 'default nil :font "Hack")
+              (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
+              (set-face-attribute 'default nil :font "Inconsolata LGC")
               (sanityinc/set-frame-font-size 14)
               (define-key global-map (kbd "<s-return>") 'toggle-frame-fullscreen))
 
             (when (memq window-system '(x))
-              (add-to-list 'default-frame-alist '(font . "Hack"))
-              (set-face-attribute 'default nil :font "Hack")
+              (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
+              (set-face-attribute 'default nil :font "Inconsolata LGC")
               (sanityinc/set-frame-font-size 16))
 
             (when (fboundp 'powerline-reset)
