@@ -11,7 +11,7 @@
               (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
               (set-face-attribute 'default nil :font "Inconsolata LGC")
               (sanityinc/set-frame-font-size 14)
-              (define-key global-map (kbd "<s-return>") 'toggle-frame-fullscreen))
+              (define-key global-map (kbd "S-<return>") 'toggle-frame-fullscreen))
 
             (when (memq window-system '(x))
               (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))

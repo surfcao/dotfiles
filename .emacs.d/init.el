@@ -40,8 +40,8 @@
 (setq inhibit-splash-screen t
       inhibit-startup-message t
       inhibit-startup-echo-area-message t)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+;(menu-bar-mode -1)
+;(tool-bar-mode -1)
 (when (boundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 (show-paren-mode 1)
@@ -51,7 +51,11 @@
 (eval-after-load "vc" '(setq vc-handled-backends nil))
 (setq vc-follow-symlinks t)
 (setq large-file-warning-threshold nil)
-(setq split-width-threshold nil)
+;(setq split-width-threshold nil)
+; prefer split vertically
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+;(setq split-window-preferred-function nil)
 (setq custom-safe-themes t)
 (put 'narrow-to-region 'disabled nil)
 
@@ -377,7 +381,7 @@
 ;;; Lisp interaction mode & Emacs Lisp mode:
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
-            (define-key lisp-interaction-mode-map (kbd "<C-return>") 'eval-last-sexp)))
+            (define-key lisp-interaction-mode-map (kbd "M-<return>") 'eval-last-sexp)))
 
 (use-package nlinum-relative
   :ensure t
@@ -493,7 +497,7 @@ The IGNORED argument is... Ignored."
             (yas-minor-mode t)
             (eldoc-mode)
             (highlight-symbol-mode)
-            (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
+            (define-key emacs-lisp-mode-map (kbd "M-<return>") 'eval-last-sexp)))
 
 ;;; SH mode:
 (add-hook 'sh-mode-hook (lambda ()
@@ -562,7 +566,8 @@ The IGNORED argument is... Ignored."
  '(package-selected-packages
    (quote
     (buffer-move visual-fill-column ess tiny-menu helm-ag esup counsel-projectile restclient ox-reveal org-tree-slide epresent color-moccur xterm-color nlinum-relative company-shell pandoc-mode virtualenvwrapper counsel helm-swoop groovy-mode octopress zenburn-theme yaml-mode which-key wgrep-ag web-mode w3m use-package twittering-mode sunshine sublime-themes rainbow-mode powerline-evil org-bullets mmm-mode markdown-mode magit highlight-symbol helm-projectile gtags fullframe flycheck-package exec-path-from-shell evil-surround evil-leader evil-jumper evil-indent-textobject emmet-mode elpy dictionary color-theme-sanityinc-tomorrow bpr auto-complete ag)))
- '(safe-local-variable-values (quote ((css-indent-offset . 2) (no-byte-compile t)))))
+ '(safe-local-variable-values (quote ((css-indent-offset . 2) (no-byte-compile t))))
+ '(show-paren-mode t))
 
 (put 'narrow-to-region 'disabled nil)
 
@@ -573,24 +578,17 @@ The IGNORED argument is... Ignored."
 
 ;(load-theme 'solarized-light)
 
-;; moving around windows
-(require 'buffer-move)
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
-
 
 (provide 'init)
 ;;; init.el ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background nil))))
- '(powerline-evil-normal-face ((t (:inherit powerline-evil-base-face :background "chartreuse3"))))
- '(term-color-black ((t (:foreground "gray80"))))
- '(term-color-cyan ((t (:foreground "cyan2"))))
- '(term-color-green ((t (:foreground "OliveDrab3"))))
- '(term-color-yellow ((t (:foreground "gold1")))))
+;(custom-set-faces
+; ;; custom-set-faces was added by Custom.
+; ;; If you edit it by hand, you could mess it up, so be careful.
+; ;; Your init file should contain only one such instance.
+; ;; If there is more than one, they won't work right.
+; '(default ((t (:background nil :family "Inconsolata LGC" :foundry "nil" :slant normal :weight normal :height 140 :width normal))))
+; '(powerline-evil-normal-face ((t (:inherit powerline-evil-base-face :background "chartreuse3"))))
+; '(term-color-black ((t (:foreground "gray80"))))
+; '(term-color-cyan ((t (:foreground "cyan2"))))
+; '(term-color-green ((t (:foreground "OliveDrab3"))))
+; '(term-color-yellow ((t (:foreground "gold1")))))

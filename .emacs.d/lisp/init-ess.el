@@ -24,10 +24,6 @@
 ;(setq inferior-ess-same-window nil)
 ;(setq inferior-ess-same-window t)
 ;(setq inferior-ess-own-frame nil)
-; prefer split vertically
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
-;(setq split-window-preferred-function nil)
 
 
 (setq ess-use-tracebug t) ; permanent activation

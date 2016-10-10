@@ -11,5 +11,12 @@
 (define-key global-map (kbd "C-}")     'air-cycle-theme)
 (evil-define-key 'insert global-map (kbd "C-v") 'yank)
 
+;; moving around windows
+(require 'buffer-move)
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
 (provide 'init-maps)
 ;;; init-maps.el ends here
