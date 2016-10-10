@@ -578,7 +578,6 @@ The IGNORED argument is... Ignored."
 
 ;(load-theme 'solarized-light)
 
-
 (provide 'init)
 ;;; init.el ends here
 ;(custom-set-faces
