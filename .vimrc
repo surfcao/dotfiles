@@ -14,7 +14,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/Solarized'
-Plugin 'morhetz/gruvbox'
+"Plugin 'morhetz/gruvbox'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
@@ -118,8 +118,10 @@ let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""
 """    Latex    """
 """""""""""""""""""
+let g:tex_flavor = "latex"
 
-setlocal iskeyword+=:,-
+autocmd FileType tex setlocal iskeyword+=:,-
+
 inoremap { {}<ESC>i
 inoremap [ []<ESC>i
 inoremap ( ()<ESC>i

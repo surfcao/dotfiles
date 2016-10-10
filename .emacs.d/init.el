@@ -40,8 +40,8 @@
 (setq inhibit-splash-screen t
       inhibit-startup-message t
       inhibit-startup-echo-area-message t)
-;(menu-bar-mode -1)
-;(tool-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 (when (boundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 (show-paren-mode 1)
@@ -354,7 +354,7 @@
 (use-package zenburn-theme :ensure t :defer t)
 (use-package gruvbox-theme :ensure t :defer t)
 (use-package solarized-theme :ensure t :defer t)
-(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package color-theme-sanityinc-tomorrow :ensure t :defer t)
 
 (use-package undo-tree
   :ensure t
@@ -557,11 +557,11 @@ The IGNORED argument is... Ignored."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#d6d6d6"))
- '(fci-rule-color "#d6d6d6")
+ ;'(ansi-color-faces-vector
+ ;  [default bold shadow italic underline bold bold-italic bold])
+ ;'(ansi-color-names-vector
+ ;  (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#d6d6d6"))
+ ;'(fci-rule-color "#d6d6d6")
  '(markdown-preview-custom-template "/Users/guofeng/.emacs.d/markdown-preview-template.html")
  '(package-selected-packages
    (quote
@@ -575,6 +575,15 @@ The IGNORED argument is... Ignored."
 ;;; used in OS X. Disable sRGB before setting up Powerline.
 (when (memq window-system '(mac ns))
   (setq ns-use-srgb-colorspace nil))
+
+;; move around windows
+(use-package buffer-move
+  :ensure t
+  :init 
+  (bind-key (kbd "<C-S-up>") 'buf-move-up)
+  (bind-key (kbd "<C-S-down>") 'buf-move-down)
+  (bind-key (kbd "<C-S-left>") 'buf-move-left)
+  (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
 ;(load-theme 'solarized-light)
 
