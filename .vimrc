@@ -76,10 +76,25 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Automatically jump to end of text you pasted:
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+" Quickly select text you just pasted:
+noremap gV `[v`]
+
 nmap <Leader>q :nohlsearch<CR>
 
 map j gj
 map k gk
+
+" completion
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.aux,*.log,*.out,*.blg,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*.png,*.jpg,*.gif
 
 """"solarized colorscheme
 "set background=dark 
@@ -96,7 +111,7 @@ let g:solarized_bold = 1 | 0
 let g:solarized_underline = 1 | 0
 "Most terminals (including screen) don't handle italics right, but urxvt
 "can. 
-let g:solarized_italic = 1 | 0 
+let g:solarized_italic = 0 | 0 
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
 colorscheme solarized
@@ -122,9 +137,9 @@ let g:tex_flavor = "latex"
 
 autocmd FileType tex setlocal iskeyword+=:,-
 
-inoremap { {}<ESC>i
-inoremap [ []<ESC>i
-inoremap ( ()<ESC>i
+"inoremap { {}<ESC>i
+"inoremap [ []<ESC>i
+"inoremap ( ()<ESC>i
 
 " make going to a line number easier.
 nnoremap <CR> G
