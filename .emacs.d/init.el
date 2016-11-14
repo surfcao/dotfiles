@@ -40,7 +40,7 @@
 (setq inhibit-splash-screen t
       inhibit-startup-message t
       inhibit-startup-echo-area-message t)
-(menu-bar-mode -1)
+;(menu-bar-mode -1)
 (tool-bar-mode -1)
 (when (boundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
@@ -85,10 +85,11 @@
 
 (require 'diminish)
 (require 'init-fonts)
-;(require 'init-gtags)
+(require 'init-gtags)
 (require 'init-evil)
 (require 'init-maps)
 (require 'init-ess)
+(require 'init-matlab)
 ;(require 'init-twitter)
 ;(require 'init-w3m)
 ;(require 'init-php)
@@ -228,7 +229,15 @@
 
 (use-package helm-projectile
   :commands (helm-projectile helm-projectile-switch-project)
-  :ensure t)
+  :ensure t
+  :init
+  (helm-projectile-on)
+    (setq projectile-switch-project-action 'helm-projectile)
+      (defvar helm-source-file-not-found
+	    (helm-build-dummy-source
+	              "Create file"
+		            :action 'find-file))
+        (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t))
 
 (use-package markdown-mode
   :ensure t
@@ -557,12 +566,10 @@ The IGNORED argument is... Ignored."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;'(ansi-color-faces-vector
- ;  [default bold shadow italic underline bold bold-italic bold])
- ;'(ansi-color-names-vector
- ;  (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#d6d6d6"))
- ;'(fci-rule-color "#d6d6d6")
  '(markdown-preview-custom-template "/Users/guofeng/.emacs.d/markdown-preview-template.html")
+ '(mlint-programs
+   (quote
+    ("/Applications/MATLAB_R2014b.app/bin/maci64/mlint")))
  '(package-selected-packages
    (quote
     (buffer-move visual-fill-column ess tiny-menu helm-ag esup counsel-projectile restclient ox-reveal org-tree-slide epresent color-moccur xterm-color nlinum-relative company-shell pandoc-mode virtualenvwrapper counsel helm-swoop groovy-mode octopress zenburn-theme yaml-mode which-key wgrep-ag web-mode w3m use-package twittering-mode sunshine sublime-themes rainbow-mode powerline-evil org-bullets mmm-mode markdown-mode magit highlight-symbol helm-projectile gtags fullframe flycheck-package exec-path-from-shell evil-surround evil-leader evil-jumper evil-indent-textobject emmet-mode elpy dictionary color-theme-sanityinc-tomorrow bpr auto-complete ag)))
@@ -600,3 +607,9 @@ The IGNORED argument is... Ignored."
 ; '(term-color-cyan ((t (:foreground "cyan2"))))
 ; '(term-color-green ((t (:foreground "OliveDrab3"))))
 ; '(term-color-yellow ((t (:foreground "gold1")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
