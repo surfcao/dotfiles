@@ -4,7 +4,6 @@
 (require 'popup)
 ;(require 'ess-R-object-popup)
 
-
 (add-hook 'ess-mode-hook
           (lambda ()
             (setq ess-use-auto-complete t)

@@ -28,8 +28,8 @@
     ;"r"  'chrome-reload
     ;"R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
     "S"  'delete-trailing-whitespace
-    "t"  'gtags-reindex
-    "T"  'gtags-find-tag
+    "t"  'ggtags-find-tag-dwim ;'gtags-reindex
+    "T"  'ggtags-create-tags ;'gtags-find-tag
     "w"  'save-buffer
     "x"  'helm-M-x
     "y"  'yank-to-x-clipboard)
@@ -85,7 +85,7 @@
 
   (evil-define-key 'normal global-map (kbd "C-p")   'helm-projectile)
   (evil-define-key 'normal global-map (kbd "C-S-p") 'helm-projectile-switch-project)
-  (evil-define-key 'insert global-map (kbd "s-d")   'eval-last-sexp)
+  (evil-define-key 'insert global-map (kbd "s-d")   ''other-windoweval-last-sexp)
   (evil-define-key 'normal global-map (kbd "s-d")   'eval-defun)
 
   (evil-define-key 'normal global-map (kbd "z d")   'dictionary-lookup-definition)
