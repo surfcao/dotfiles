@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'reedes/vim-pencil'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/Solarized'
@@ -19,6 +20,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'lervag/vimtex'
+Plugin 'vim-scripts/LanguageTool'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
 call vundle#end()      
@@ -68,6 +71,7 @@ set number
 set nonumber " No line numbering
 " some shortcuts
 let mapleader = "\<Space>"
+let maplocalleader = ","
 nmap <Leader>q :nohlsearch<CR>
 nnoremap <Leader>w :w<CR>
 vmap <Leader>y "+y
@@ -76,30 +80,28 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-" Automatically jump to end of text you pasted:
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-
-" Quickly select text you just pasted:
-noremap gV `[v`]
-
 nmap <Leader>q :nohlsearch<CR>
+" buffer switch
+nnoremap <LocalLeader>b :ls<CR>
+nnoremap <LocalLeader>p :bp<CR>
+nnoremap <LocalLeader>n :bn<CR>
+nnoremap <LocalLeader>g :e#<CR>
+
+" Window 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <LocalLeader>o <C-w>o
+
 
 map j gj
 map k gk
 
-" completion
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.aux,*.log,*.out,*.blg,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*.png,*.jpg,*.gif
-
 """"solarized colorscheme
 "set background=dark 
 set background=light 
-"set t_Co=16 
+set t_Co=256
 " option name default optional
 let g:solarized_termcolors= 256
 if &t_Co<256 && !has('gui_running')
@@ -111,7 +113,7 @@ let g:solarized_bold = 1 | 0
 let g:solarized_underline = 1 | 0
 "Most terminals (including screen) don't handle italics right, but urxvt
 "can. 
-let g:solarized_italic = 0 | 0 
+let g:solarized_italic = 0 | 1 
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
 colorscheme solarized
@@ -142,14 +144,14 @@ autocmd FileType tex setlocal iskeyword+=:,-
 "inoremap ( ()<ESC>i
 
 " make going to a line number easier.
-nnoremap <CR> G
+"nnoremap <CR> G
 
 """""""""""""""""""
 """    R        """
 """""""""""""""""""
 
 " R script settings
-let maplocalleader = ","
+"let maplocalleader = ","
 "vmap r <Plug>RDSendSelection
 "nmap r <Plug>RDSendLine
 let R_in_buffer = 0
@@ -161,3 +163,8 @@ let R_vsplit=1
 "let vimrplugin_applescript=0
 "let vimrplugin_vsplit=1
 "let vimrplugin_assign = 0
+"
+""""""""""""""""""""""
+""""Language Check"""
+""""""""""""""""""""""
+let g:languagetool_jar='$HOME/mytools/LanguageTool-3.6/languagetool-commandline.jar'
