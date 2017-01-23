@@ -10,5 +10,6 @@
 *.elc
 # But don't ignore these specific locations.
 !.emacs.d/lisp
+!.emacs.d/matlab-emacs
 !.emacs.d/snippets
 !.emacs.d/init.el
