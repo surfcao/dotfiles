@@ -21,6 +21,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'lervag/vimtex'
+let g:vimtex_latexmk_continuous=0
 Plugin 'vim-scripts/LanguageTool'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
