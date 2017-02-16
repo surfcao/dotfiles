@@ -106,6 +106,7 @@
           ("org-files"    ("Org Files"
                            ((?t "TODO"  (lambda () (air-pop-to-org-todo nil)))
                             (?n "Notes" (lambda () (air-pop-to-org-notes nil)))
+                            (?e "Excerpt" (lambda () (air-pop-to-org-excerpt nil)))
                             (?v "Vault" (lambda () (air-pop-to-org-vault nil))))))
           ("org-captures" ("Org Captures"
                            ((?c "TODO"  air-org-task-capture)

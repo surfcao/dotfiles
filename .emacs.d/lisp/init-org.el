@@ -262,6 +262,11 @@ If VANILLA is non-nil, run the standard `org-capture'."
   (interactive "P")
   (air--pop-to-file "~/Dropbox/org/notes.org" split))
 
+(defun air-pop-to-org-excerpt (split)
+  "Visit my main exertion file, in the current window or a SPLIT."
+  (interactive "P")
+  (air--pop-to-file "~/Dropbox/org/excerpt.org" split))
+
 (defun air-pop-to-org-vault (split)
   "Visit my encrypted vault file, in the current window or a SPLIT."
   (interactive "P")
@@ -351,6 +356,7 @@ TAG is chosen interactively from the global tags completion table."
   :bind (("C-c c" .   air-org-task-capture)
          ("C-c l" .   org-store-link)
          ("C-c t n" . air-pop-to-org-notes)
+         ("C-c t e" . air-pop-to-org-excerpt)
          ("C-c t t" . air-pop-to-org-todo)
          ("C-c t v" . air-pop-to-org-vault)
          ("C-c t a" . air-pop-to-org-agenda)
