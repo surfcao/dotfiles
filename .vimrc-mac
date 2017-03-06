@@ -19,12 +19,18 @@ Plugin 'vim-scripts/Solarized'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabCrMapping = 0
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'lervag/vimtex'
 let g:vimtex_latexmk_continuous=0
+let g:vimtex_latexmk_build_dir='./output'
+Plugin 'vim-pandoc/vim-pandoc'
+let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#command#latex_engine = 'latex'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
 Plugin 'vim-scripts/LanguageTool'
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabCrMapping = 0
 call vundle#end()      
 filetype plugin indent on
 
@@ -35,6 +41,7 @@ set hlsearch
 set lbr
 set tabstop=8
 set shiftwidth=8
+"set keywordprg=dict
 
 set tw=75
 set formatoptions+=nt
@@ -86,6 +93,7 @@ nmap <Leader>q :nohlsearch<CR>
 nnoremap <LocalLeader>b :ls<CR>
 nnoremap <LocalLeader>p :bp<CR>
 nnoremap <LocalLeader>n :bn<CR>
+nnoremap <LocalLeader>d :bd<CR>
 nnoremap <LocalLeader>g :e#<CR>
 
 " Window 
