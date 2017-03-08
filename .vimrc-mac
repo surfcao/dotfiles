@@ -24,6 +24,8 @@ Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
 Plug 'vim-scripts/LanguageTool'
+Plug 'panozzaj/vim-autocorrect'
+
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
 Plug 'honza/vim-snippets', {'for': ['r','tex']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}

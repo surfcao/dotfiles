@@ -1,39 +1,81 @@
-"pathogen
-"execute pathogen#infect()
-"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Plug
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim-plug if we don't already have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+    "" Ensure all needed directories exist  (Thanks @kapadiamush)
+    silent execute "!mkdir -p ~/.vim/plugged"
+    silent execute "!mkdir -p ~/.vim/autoload"
+    " Download the actual plugin manager
+    execute "!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim"
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'reedes/vim-pencil'
-Plugin 'jalvesaq/Nvim-R'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/Solarized'
-"Plugin 'morhetz/gruvbox'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'ervandew/supertab'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'lervag/vimtex'
-Plugin 'vim-scripts/LanguageTool'
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'reedes/vim-pencil'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-scripts/Solarized'
+"Plug 'morhetz/gruvbox'
+Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
-call vundle#end()      
-filetype plugin indent on
+Plug 'vim-scripts/LanguageTool'
+Plug 'panozzaj/vim-autocorrect'
+
+Plug 'SirVer/ultisnips', {'for': ['r','tex']}
+Plug 'honza/vim-snippets', {'for': ['r','tex']}
+Plug 'jalvesaq/Nvim-R', {'for': 'r'}
+Plug 'lervag/vimtex', {'for': 'tex'}
+let g:vimtex_latexmk_continuous=0
+let g:vimtex_latexmk_build_dir='./output'
+Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#command#latex_engine = 'latex'
+let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
+
+filetype plugin indent on                   " required!
+call plug#end()
 
 syntax on
+" Auto detect filetype
+autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
 
-set ic
+" path to search files
+set path+=$HOME/Dropbox/work/ttu/gr/**
+set path+=$HOME/Git/lab/papers/**
+set wildignore+=**/.git/**,*.aux,*.blg,*.dvi,*.log,*.out,*.fls,*.fdb_latexmk
+set wildmenu
+set showcmd
+
+" put the backup, swp and undo file into the same place
+set backupdir=$HOME/.vim/.backup//,/tmp
+set directory=$HOME/.vim/.swp//,/tmp
+if exists('+undodir')
+    set undodir=$HOME/.vim/undo//,/tmp
+    set undofile
+endif
+
+" Tweaks for browsing using netrw
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=2  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_winsize = 25     " 25 percent of width
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+set ignorecase
+set smartcase
 set hlsearch
 set lbr
 set tabstop=8
 set shiftwidth=8
+set keywordprg=:help
 
 set tw=75
 set formatoptions+=nt
@@ -69,6 +111,12 @@ set hidden
 set noruler "hide the status line
 set number
 set nonumber " No line numbering
+" write a file with root 
+cmap w!! w !sudo tee % >/dev/null
+
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R .
+
 " some shortcuts
 let mapleader = "\<Space>"
 let maplocalleader = ","
@@ -85,6 +133,7 @@ nmap <Leader>q :nohlsearch<CR>
 nnoremap <LocalLeader>b :ls<CR>
 nnoremap <LocalLeader>p :bp<CR>
 nnoremap <LocalLeader>n :bn<CR>
+nnoremap <LocalLeader>d :bd<CR>
 nnoremap <LocalLeader>g :e#<CR>
 
 " Window 
@@ -94,9 +143,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <LocalLeader>o <C-w>o
 
-
 map j gj
 map k gk
+" Make Y consistent with D
+nnoremap Y y$
 
 """"solarized colorscheme
 "set background=dark 
