@@ -13,7 +13,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'reedes/vim-pencil'
 Plugin 'jalvesaq/Nvim-R'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/Solarized'
 "Plugin 'morhetz/gruvbox'
 Plugin 'SirVer/ultisnips'
@@ -21,27 +21,48 @@ Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
-Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'lervag/vimtex'
 let g:vimtex_latexmk_continuous=0
 let g:vimtex_latexmk_build_dir='./output'
 Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'latex'
+let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 Plugin 'vim-scripts/LanguageTool'
 call vundle#end()      
 filetype plugin indent on
-
 syntax on
 
-set ic
+" path to search files
+set path+=$HOME/Dropbox/work/ttu/grants/**
+set path+=$HOME/Git/lab/papers/**
+set wildignore+=**/.git/**,*.aux,*.blg,*.dvi,*.log,*.out,*.fls,*.fdb_latexmk
+set wildmenu
+
+" put the backup, swp and undo file into the same place
+set undodir=$HOME/.vim/.undo//,/tmp
+set backupdir=$HOME/.vim/.backup//,/tmp
+set directory=$HOME/.vim/.swp//,/tmp
+
+" Tweaks for browsing using netrw
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=2  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_winsize = 25     " 25 percent of width
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+set ignorecase
+set smartcase
 set hlsearch
 set lbr
 set tabstop=8
 set shiftwidth=8
-"set keywordprg=dict
+set keywordprg=:help
 
 set tw=75
 set formatoptions+=nt
@@ -77,6 +98,12 @@ set hidden
 set noruler "hide the status line
 set number
 set nonumber " No line numbering
+" write a file with root 
+cmap w!! w !sudo tee % >/dev/null
+
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R .
+
 " some shortcuts
 let mapleader = "\<Space>"
 let maplocalleader = ","
