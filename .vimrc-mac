@@ -143,10 +143,13 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <LocalLeader>o <C-w>o
 
+" Hardwrap, softwrap
 map j gj
 map k gk
 " Make Y consistent with D
 nnoremap Y y$
+" Visually select the text that are recently edited
+nmap gV `[v`]
 
 """"solarized colorscheme
 "set background=dark 
