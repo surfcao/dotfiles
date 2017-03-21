@@ -23,27 +23,28 @@ Plug 'vim-scripts/Solarized'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
-Plug 'vim-scripts/LanguageTool'
-Plug 'panozzaj/vim-autocorrect'
 
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
 Plug 'honza/vim-snippets', {'for': ['r','tex']}
+Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'txt']}
+"Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'txt']}
+Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'txt']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 let g:vimtex_latexmk_continuous=0
-let g:vimtex_latexmk_build_dir='./output'
+let g:vimtex_latexmk_build_dir='output'
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
 let g:pandoc#modules#disabled = ["folding"]
-let g:pandoc#command#latex_engine = 'latex'
+let g:pandoc#command#latex_engine = 'pdflatex'
 let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
+"let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
-
-filetype plugin indent on                   " required!
 call plug#end()
+filetype plugin indent on                   " required!
 
 syntax on
 " Auto detect filetype
-autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
+autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown.pandoc
 
 " path to search files
 set path+=$HOME/Dropbox/work/ttu/gr/**
@@ -143,10 +144,13 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <LocalLeader>o <C-w>o
 
+" Hardwrap, softwrap
 map j gj
 map k gk
 " Make Y consistent with D
 nnoremap Y y$
+" Visually select the text that are recently edited
+nmap gV `[v`]
 
 """"solarized colorscheme
 "set background=dark 

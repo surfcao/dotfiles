@@ -23,15 +23,16 @@ Plug 'vim-scripts/Solarized'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
-Plug 'vim-scripts/LanguageTool'
-Plug 'panozzaj/vim-autocorrect'
 
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
 Plug 'honza/vim-snippets', {'for': ['r','tex']}
+Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'txt']}
+"Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'txt']}
+Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'txt']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 let g:vimtex_latexmk_continuous=0
-let g:vimtex_latexmk_build_dir='./output'
+let g:vimtex_latexmk_build_dir='output'
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'pdflatex'
