@@ -157,8 +157,9 @@ bindsym Control+Mod1+l exec i3lock -n -d --color 000000
 bindsym Control+Mod1+e exec ~/.i3/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
-new_window none 
-#new_window 1pixel 
+new_float 1pixel 
+#new_window none 
+new_window 1pixel 
 bindsym $mod+Shift+n border normal
 bindsym $mod+Shift+p border 1pixel
 bindsym $mod+Shift+u border none
@@ -168,6 +169,7 @@ client.focused #859900 #859900 #fdf6e3 #2e9ef4
 client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
 client.unfocused #333333 #93a1a1 #fdf6e3 #292d2e
 
+hide_edge_borders smart
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
