@@ -26,13 +26,43 @@ let g:SuperTabCrMapping = 0
 
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
 Plug 'honza/vim-snippets', {'for': ['r','tex']}
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"Plug 'Valloric/YouCompleteMe'
+""" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"if !exists('g:ycm_semantic_triggers')
+"    let g:ycm_semantic_triggers = {}
+"endif
+"let g:ycm_semantic_triggers.tex = [
+"        \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+"        \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+"        \ 're!\\hyperref\[[^]]*',
+"        \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+"        \ 're!\\(include(only)?|input){[^}]*',
+"        \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+"        \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+"        \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+"        \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
+"        \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+"\ ]
+
 Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'txt']}
 "Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'txt']}
 Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'txt']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
-let g:vimtex_latexmk_continuous=0
+let g:vimtex_latexmk_continuous=1
 let g:vimtex_latexmk_build_dir='output'
+if has('unix')
+	let g:vimtex_view_method='zathura' 
+endif 
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'pdflatex'
@@ -41,10 +71,11 @@ let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 call plug#end()
 filetype plugin indent on                   " required!
-
 syntax on
-" Auto detect filetype
-autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown.pandoc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   General settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " path to search files
 set path+=$HOME/Dropbox/work/ttu/gr/**
@@ -54,21 +85,12 @@ set wildmenu
 set showcmd
 
 " put the backup, swp and undo file into the same place
-set backupdir=$HOME/.vim/.backup//,/tmp
-set directory=$HOME/.vim/.swp//,/tmp
+set backupdir=$HOME/Dropbox/.vim/.backup//,/tmp
+set directory=$HOME/Dropbox/.vim/.swp//,/tmp
 if exists('+undodir')
-    set undodir=$HOME/.vim/undo//,/tmp
+    set undodir=$HOME/Dropbox/.vim/.undo//,/tmp
     set undofile
 endif
-
-" Tweaks for browsing using netrw
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=2  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_winsize = 25     " 25 percent of width
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 set ignorecase
 set smartcase
@@ -93,14 +115,14 @@ set linebreak
 set backspace=indent,eol,start
 
 set spell spelllang=en_us
-set spellfile=$HOME/Dropbox/backup/spell/en.utf-8.add
+set spellfile=$HOME/Dropbox/.vim/spell/en.utf-8.add
 hi SpellBad ctermbg=22
 set spell
 " Under latex, this is a workaround only works for non-comments
 syntax spell toplevel
 set dictionary+=/usr/share/dict/words
 set complete+=k
-set thesaurus+=/Users/guofeng/.vim/thesaurus/mthesaur.txt
+set thesaurus+=$HOME/Dropbox/.vim/thesaurus/mthesaur.txt
 
 set autowriteall
 
@@ -112,12 +134,10 @@ set hidden
 set noruler "hide the status line
 set number
 set nonumber " No line numbering
-" write a file with root 
-cmap w!! w !sudo tee % >/dev/null
 
-" Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Key Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " some shortcuts
 let mapleader = "\<Space>"
 let maplocalleader = ","
@@ -152,7 +172,9 @@ nnoremap Y y$
 " Visually select the text that are recently edited
 nmap gV `[v`]
 
-""""solarized colorscheme
+"""""""""""""""""""""""""""""""
+"""  Solarized color theme  
+"""""""""""""""""""""""""""""""
 "set background=dark 
 set background=light 
 set t_Co=256
@@ -175,19 +197,14 @@ colorscheme solarized
 highlight LineNr ctermbg=NONE
 
 """""""""""""""""""
-"""   Snippet   """
+"""   Markdown  
 """""""""""""""""""
+
+" Auto detect filetype
+autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown.pandoc
  
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 """""""""""""""""""
-"""    Latex    """
+"""    Latex    
 """""""""""""""""""
 let g:tex_flavor = "latex"
 
@@ -201,9 +218,8 @@ autocmd FileType tex setlocal iskeyword+=:,-
 "nnoremap <CR> G
 
 """""""""""""""""""
-"""    R        """
+"""    R       
 """""""""""""""""""
-
 " R script settings
 "let maplocalleader = ","
 "vmap r <Plug>RDSendSelection
@@ -219,6 +235,27 @@ let R_vsplit=1
 "let vimrplugin_assign = 0
 "
 """"""""""""""""""""""
-""""Language Check"""
+"""" Language Check 
 """"""""""""""""""""""
 let g:languagetool_jar='$HOME/mytools/LanguageTool-3.6/languagetool-commandline.jar'
+
+""""""""""""""""""""""
+"""" netrw 
+""""""""""""""""""""""
+
+" Tweaks for browsing using netrw
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=2  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_winsize = 25     " 25 percent of width
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+""""""""""""""""""""""""""
+"""   My commands 
+""""""""""""""""""""""""""
+" write a file with root 
+cmap w!! w !sudo tee % >/dev/null
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R .
