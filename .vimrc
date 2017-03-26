@@ -60,7 +60,7 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 let g:vimtex_latexmk_continuous=1
 let g:vimtex_latexmk_build_dir='output'
-if has('unix')
+if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 endif 
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
