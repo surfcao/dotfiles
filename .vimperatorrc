@@ -1,9 +1,9 @@
 "3.7 (created: 2013/04/03 18:20:07)
 
-nnoremap j 7j
-nnoremap k 7k
+nnoremap j 8j
+nnoremap k 8k
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
-source! /home/guofeng/.vimperatorrc.local
+"source! /home/guofeng/.vimperatorrc.local
 
 " vim: set ft=vimperator:
 
@@ -15,10 +15,30 @@ set gui=tabs
 set tabnumbers
 "" see http://code.google.com/p/vimperator-labs/issues/detail?id=311
 set popups=tab,resized
+"" default as visible status line 
+set statuslinevisibility=visible
 
-hi CmdLine -append font-size:16px
+ hi CmdLine -append font-size:12px
 "hi CmdLine -append font-weight:bold; font-size:14px
-"hi Hint font-size:14px; font-weight:bold; color:white;background-color:red;padding:2px;
-hi Hint -append font-size:14px; 
+"hi Hint font-size:14px; font-weight:bold; color:white;background-color:red;padding: 2px; 
+hi Hint -append font-size:12px;
 
-command! -nargs=0 -description='Mendeley Web Importor' mendeley open javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','https://www.mendeley.com/minified/bookmarklet.js');
+command! -nargs=0 -description='Mendeley Web Importor' mendeley open javascript: document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','https://www.mendeley.com/minified/bookmarklet.js'); 
+
+
+" search in google scholar
+nmap s :scholar<SPACE>
+nmap S :Scholar<SPACE> 
+
+"command! scholar -nargs=2 -description "Search using Scholar" :js scholar("<args>");
+command! scholar -nargs=* -description "Search using Scholar" :js scholar("<args>");
+command! Scholar -nargs=* -description "Search using Scholar" :js scholar(window.content.getSelection().toString());
+    
+:js <<EOF
+function scholar(args) {
+    args="https://scholar.google.com/scholar?q="+encodeURIComponent(args)
+    liberator.open(args, liberator.NEW_TAB)
+}
+EOF
+
+
