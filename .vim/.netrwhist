@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/guofeng/Git/hub/thestarlab.github.io/styles'
-let g:netrw_dirhist_2='/Users/guofeng/Git/hub/thestarlab.github.io/_includes'
-let g:netrw_dirhist_3='/Users/guofeng/Dropbox/work/ttu/visiting/Qiu'
-let g:netrw_dirhist_4='/Users/guofeng/Dropbox/work/ttu/grants/dibbs2015'
-let g:netrw_dirhist_5='/Users/guofeng/Dropbox/PR/letters/rey'
-let g:netrw_dirhist_6='/Users/guofeng/test'
-let g:netrw_dirhist_7='/Users/guofeng/.vimperator'
