@@ -4,7 +4,6 @@
 ;; Basic Org Mode configuration, assuming presence of Evil & Evil Leader.
 
 ;; Helper functions
-
 (defun air-org-bulk-copy-headlines (&optional strip-tags)
   "Copy the headline text of the marked headlines in an agenda view.
 
@@ -262,10 +261,15 @@ If VANILLA is non-nil, run the standard `org-capture'."
   (interactive "P")
   (air--pop-to-file "~/Dropbox/org/notes.org" split))
 
-(defun air-pop-to-org-excerpt (split)
+(defun air-pop-to-org-ideas (split)
+  "Visit my main notes file, in the current window or a SPLIT."
+  (interactive "P")
+  (air--pop-to-file "~/Dropbox/org/ideas.org" split))
+
+(defun air-pop-to-org-meetings (split)
   "Visit my main exertion file, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/excerpt.org" split))
+  (air--pop-to-file "~/Dropbox/org/meetings.org" split))
 
 (defun air-pop-to-org-vault (split)
   "Visit my encrypted vault file, in the current window or a SPLIT."
@@ -356,7 +360,8 @@ TAG is chosen interactively from the global tags completion table."
   :bind (("C-c c" .   air-org-task-capture)
          ("C-c l" .   org-store-link)
          ("C-c t n" . air-pop-to-org-notes)
-         ("C-c t e" . air-pop-to-org-excerpt)
+         ("C-c t i" . air-pop-to-org-ideas)
+         ("C-c t m" . air-pop-to-org-meetings)
          ("C-c t t" . air-pop-to-org-todo)
          ("C-c t v" . air-pop-to-org-vault)
          ("C-c t a" . air-pop-to-org-agenda)
@@ -404,6 +409,10 @@ TAG is chosen interactively from the global tags completion table."
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
   (setq org-agenda-files '("~/Dropbox/org/"))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+  (setq org-outline-path-complete-in-steps nil)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-custom-commands
         '(("d" "Daily agenda and all TODOs"
