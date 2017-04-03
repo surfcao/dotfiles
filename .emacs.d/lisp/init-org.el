@@ -186,10 +186,10 @@ Skips the current entry unless SUBTREE is not nil."
                                                  (air-calendar-next-day-of-week 5)))
          (deadline (format "DEADLINE: %s\n\n" deadline-timestamp)))
     (concat (format "* Week %02d\n\n" (org-days-to-iso-week (org-today)))
-            (concat "** ☛ TODO Care: \n" deadline
-                    "** ☛ TODO Mastery: \n" deadline
-                    "** ☛ TODO Recognition: \n" deadline
-                    "** ☛ TODO Purpose: \n" deadline))))
+            (concat "** TODO Care: \n" deadline
+                    "** TODO Mastery: \n" deadline
+                    "** TODO Recognition: \n" deadline
+                    "** TODO Purpose: \n" deadline))))
 
 (defun air-org-set-category-property (value)
   "Set the category property of the current item to VALUE."
@@ -374,27 +374,33 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-modules
         '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))
   (setq org-todo-keywords
-        '((sequence "☛ TODO" "○ IN-PROGRESS" "⚑ WAITING" "|" "✓ DONE" "✗ CANCELED")))
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED")))
   (setq org-blank-before-new-entry '((heading . t)
                                      (plain-list-item . t)))
   (setq org-capture-templates
         '(("a" "My TODO task format." entry
            (file "todo.org")
-           "* ☛ TODO %?")
+           "* TODO %?")
 
           ("n" "A (work-related) note." entry
-           (file+headline "notes.org" "Work")
+           (file "notes.org")
            "* %?\n%u\n\n"
            :jump-to-captured t)
 
           ("m" "A meeting note." entry
-           (file+headline "meetings.org" "Meeting")
-           "* %?\n%u\n\n"
+           (file "meetings.org")
+           "* Meeting with %? :meetings:\n%u"
            :jump-to-captured t)
 
-          ("w" "Nine Minutes on Monday weekly agenda." entry
-           ;(id "9A6DDE04-90B8-49ED-90B9-A55A0D1E7B28")
-           (function air-org-nmom-capture-template))))
+          ("i" "An idea entry." entry
+           (file "ideas.org")
+           "* %? :Ideas:\n%u"
+           :jump-to-captured t)
+
+         ; ("w" "Nine Minutes on Monday weekly agenda." entry
+         ;  ;(id "9A6DDE04-90B8-49ED-90B9-A55A0D1E7B28")
+         ;  (function air-org-nmom-capture-template))
+	  ))
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
   (setq org-directory "~/Dropbox/org")
   (setq org-enforce-todo-dependencies t)
