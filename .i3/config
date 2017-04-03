@@ -299,8 +299,8 @@ exec xrdb ~/.Xresources
 
 #control of pianobar
 bindsym $mod+F11 exec ~/.config/pianobar/control-pianobar.sh p
+bindsym $mod+Shift+F11 exec ~/.config/pianobar/control-pianobar.sh ss
 bindsym $mod+F12 exec ~/.config/pianobar/control-pianobar.sh next
-bindsym $mod+Shift+F12 exec ~/.config/pianobar/control-pianobar.sh nextstation
 bindsym $mod+Shift+Delete exec ~/.config/pianobar/control-pianobar.sh quit
 
 #volume control
