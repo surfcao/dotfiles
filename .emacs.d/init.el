@@ -109,6 +109,7 @@
           ("org-captures" ("Org Captures"
                            ((?c "TODO"  air-org-task-capture)
                             (?n "Note"  (lambda () (interactive) (org-capture nil "n")))
+                            (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
                             (?w "NMOM"  (lambda () (interactive) (org-capture nil "w")))))))))
 
 (require 'diminish)
