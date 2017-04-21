@@ -101,11 +101,12 @@ set shiftwidth=8
 set keywordprg=:help
 
 set tw=75
-set formatoptions+=nt
+"set formatoptions+=nt
+"default formatoptions=tcq
+set formatoptions+=an
 set wrapmargin=0
 
-"map fm {v}!par -w75<CR>
-"vmap fm !par -w75<CR>
+"map fm {v}!par -w75<CR> vmap fm !par -w75<CR>
 set formatprg=par\ -w75
 set incsearch
 set wrap
