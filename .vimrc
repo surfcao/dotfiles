@@ -103,7 +103,8 @@ set keywordprg=:help
 set tw=75
 "set formatoptions+=nt
 "default formatoptions=tcq
-set formatoptions+=an
+set formatoptions+=n
+autocmd FileType tex, markdown set formatoptions+=a
 set wrapmargin=0
 
 "map fm {v}!par -w75<CR> vmap fm !par -w75<CR>
