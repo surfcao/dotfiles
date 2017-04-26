@@ -85,10 +85,10 @@ set wildmenu
 set showcmd
 
 " put the backup, swp and undo file into the same place
-set backupdir=$HOME/Dropbox/.vim/.backup//,/tmp
-set directory=$HOME/Dropbox/.vim/.swp//,/tmp
+set backupdir=$HOME/.vim/.backup//,/tmp
+set directory=$HOME/.vim/.swp//,/tmp
 if exists('+undodir')
-    set undodir=$HOME/Dropbox/.vim/.undo//,/tmp
+    set undodir=$HOME/.vim/.undo//,/tmp
     set undofile
 endif
 
