@@ -24,6 +24,7 @@ Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
 
+Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
 Plug 'honza/vim-snippets', {'for': ['r','tex']}
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -104,7 +105,7 @@ set tw=75
 "set formatoptions+=nt
 "default formatoptions=tcq
 set formatoptions+=n
-autocmd FileType tex,markdown set formatoptions+=a
+"autocmd FileType tex,markdown set formatoptions+=a
 set wrapmargin=0
 
 "map fm {v}!par -w75<CR> vmap fm !par -w75<CR>
@@ -229,13 +230,8 @@ autocmd FileType tex setlocal iskeyword+=:,-
 let R_in_buffer = 0
 let R_applescript = 0
 let R_tmux_split = 1
-let R_vsplit=1
-"let R_applescript=0
-"
-"let vimrplugin_applescript=0
-"let vimrplugin_vsplit=1
-"let vimrplugin_assign = 0
-"
+"let R_vsplit=1
+
 """"""""""""""""""""""
 """" Language Check 
 """"""""""""""""""""""
@@ -260,4 +256,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " write a file with root 
 cmap w!! w !sudo tee % >/dev/null
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .
+command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags *.bib &&popd
+
+" add the tags to the path
+set tags+=$HOME/Dropbox/bib/tags
