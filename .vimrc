@@ -60,6 +60,7 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 let g:vimtex_latexmk_continuous=1
 let g:vimtex_latexmk_build_dir='output'
+let g:vimtex_format_enabled=1
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 endif 
@@ -81,7 +82,12 @@ syntax on
 set path+=$HOME/Dropbox/work/ttu/gr/**
 set path+=$HOME/Git/lab/papers/**
 set wildignore+=**/.git/**,*.aux,*.blg,*.dvi,*.log,*.out,*.fls,*.fdb_latexmk
+set wildignore+=*.swp,*.bak
+set wildignore+=*.tar.*
+set wildignorecase
 set wildmenu
+"set wildmode=list:full
+set wildmode=list:longest,list:full
 set showcmd
 
 " put the backup, swp and undo file into the same place
@@ -104,7 +110,7 @@ set tw=75
 "set formatoptions+=nt
 "default formatoptions=tcq
 set formatoptions+=n
-autocmd FileType tex,markdown set formatoptions+=a
+"autocmd FileType tex,markdown set formatoptions+=a
 set wrapmargin=0
 
 "map fm {v}!par -w75<CR> vmap fm !par -w75<CR>
@@ -116,12 +122,14 @@ set linebreak
 "for macvim
 set backspace=indent,eol,start
 
+
 set spell spelllang=en_us
 set spellfile=$HOME/Dropbox/.vim/spell/en.utf-8.add
 hi SpellBad ctermbg=22
 set spell
 " Under latex, this is a workaround only works for non-comments
-syntax spell toplevel
+autocmd FileType tex syntax spell toplevel
+" syntax spell toplevel
 set dictionary+=/usr/share/dict/words
 set complete+=k
 set thesaurus+=$HOME/Dropbox/.vim/thesaurus/mthesaur.txt
