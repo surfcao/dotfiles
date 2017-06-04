@@ -69,7 +69,7 @@ Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'pdflatex'
 let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
-"let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+"let g:pandoc#filetypes#handled = ['pandoc', 'markdown']
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 call plug#end()
 filetype plugin indent on                   " required!
