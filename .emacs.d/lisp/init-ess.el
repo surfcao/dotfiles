@@ -74,7 +74,7 @@
 ;(evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-line)
 ;(evil-leader/set-key-for-mode 'ess-mode "n" 'ess-eval-region-or-line-and-step)
 ;(evil-leader/set-key-for-mode 'ess-mode "g" 'ess-eval-line-and-go)
-;(evil-leader/set-key-for-mode 'ess-mode "r" 'ess-eval-region-or-function-or-paragraph-and-step)
+(evil-leader/set-key-for-mode 'ess-mode "r" 'ess-eval-region-or-function-or-paragraph-and-step)
 (evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-region-or-line-and-step)
 ;(define-key ess-mode-map [(control return)] nil)
 ;(define-key ess-mode-map (kbd "<s-return>") 'ess-eval-region-or-line-and-step)
@@ -148,7 +148,24 @@ Run R-FUN for object at point, and display results in a popup."
   (asb-ess-R-object-popup r-func))
 
 (evil-leader/set-key-for-mode 'ess-mode "i" 'asb-ess-R-object-popup-str)
-(evil-leader/set-key-for-mode 'ess-mode "I"
-'asb-ess-R-object-popup-interactive)
+(evil-leader/set-key-for-mode 'ess-mode "I" 'asb-ess-R-object-popup-interactive)
+
+
+;; debug mode doesn't have a hook, stick them straight in the appropriate map  
+;;(define-key ess-debug-minor-mode-map (kbd "<f5>")  'ess-debug-command-next)
+;;(define-key ess-debug-minor-mode-map (kbd "<f5>")  'ess-debug-command-next)
+;;(define-key ess-debug-minor-mode-map (kbd "<f6>")  'ess-debug-command-next-multi)
+;;(define-key ess-debug-minor-mode-map (kbd "<f7>")  'ess-debug-command-up)
+;;(define-key ess-debug-minor-mode-map (kbd "<f8>") 'ess-debug-command-continue)
+
+;; mimic RStudio shortcuts
+(define-key ess-mode-map (kbd "<f4>") 'ess-debug-flag-for-debugging)
+(define-key ess-mode-map (kbd "S-<f4>") 'ess-debug-unflag-for-debugging)
+(define-key ess-mode-map (kbd "<f5>") 'ess-debug-command-continue)
+(define-key ess-mode-map (kbd "<f9>") 'ess-bp-set)
+(define-key ess-mode-map (kbd "S-<f9>") 'ess-bp-kill)
+(define-key ess-mode-map (kbd "<f10>")  'ess-debug-command-next)
+(define-key ess-mode-map (kbd "<f11>")  'ess-debug-command-next-multi)
+
 
 (provide 'init-ess)
