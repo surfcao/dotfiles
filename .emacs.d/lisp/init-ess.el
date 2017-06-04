@@ -1,6 +1,8 @@
 ;;; Character sets
 
-(require 'ess-site)
+;(require 'ess-site)
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
+(load 'ess-site)
 (require 'popup)
 ;(require 'ess-R-object-popup)
 
