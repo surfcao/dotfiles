@@ -64,6 +64,8 @@ let g:vimtex_latexmk_build_dir='output'
 let g:vimtex_format_enabled=1
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
+else
+	let g:vimtex_view_method='skim' 
 endif 
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
 let g:pandoc#modules#disabled = ["folding"]
