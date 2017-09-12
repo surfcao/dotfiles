@@ -15,8 +15,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
-Plug 'reedes/vim-pencil'
+"Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
 "Plug 'morhetz/gruvbox'
@@ -54,14 +55,19 @@ let g:UltiSnipsEditSplit="vertical"
 "        \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
 "\ ]
 
-Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'txt']}
-"Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'txt']}
-Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'txt']}
+Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'text']}
+"Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'text']}
+Plug 'vim-syntastic/syntastic', {'for': ['tex', 'markdown', 'text']}
+let g:syntastic_mode_map = { 'mode': 'passive'}
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+
+Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 let g:vimtex_latexmk_continuous=1
-let g:vimtex_latexmk_build_dir='output'
 let g:vimtex_format_enabled=1
+let g:vimtex_compiler_latexmk = {'build_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 else
@@ -112,7 +118,7 @@ set keywordprg=:help
 set tw=75
 "set formatoptions+=nt
 "default formatoptions=tcq
-set formatoptions+=n
+" set formatoptions+=n
 "autocmd FileType tex,markdown set formatoptions+=a
 set wrapmargin=0
 
@@ -134,7 +140,7 @@ set spell
 autocmd FileType tex syntax spell toplevel
 " syntax spell toplevel
 set dictionary+=/usr/share/dict/words
-set complete+=k
+set complete+=kspell
 set thesaurus+=$HOME/Dropbox/.vim/thesaurus/mthesaur.txt
 
 set autowriteall
@@ -156,13 +162,13 @@ let mapleader = "\<Space>"
 let maplocalleader = ","
 nmap <Leader>q :nohlsearch<CR>
 nnoremap <Leader>w :w<CR>
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-nmap <Leader>q :nohlsearch<CR>
+vmap <Leader>y "*y
+vmap <Leader>d "*d
+nmap <Leader>p "*p
+nmap <Leader>P "*P
+vmap <Leader>p "*p
+vmap <Leader>P "*P
+"nmap <Leader>q :nohlsearch<CR>
 " buffer switch
 nnoremap <LocalLeader>b :ls<CR>
 nnoremap <LocalLeader>p :bp<CR>
@@ -185,6 +191,10 @@ nnoremap Y y$
 " Visually select the text that are recently edited
 nmap gV `[v`]
 
+" Use Q for formatting the current paragraph (or selection)
+vnoremap Q gw
+nnoremap Q gwap
+
 """""""""""""""""""""""""""""""
 """  Solarized color theme  
 """""""""""""""""""""""""""""""
@@ -192,10 +202,10 @@ nmap gV `[v`]
 set background=light 
 set t_Co=256
 " option name default optional
-let g:solarized_termcolors= 256
-if &t_Co<256 && !has('gui_running')
-	let g:solarized_termcolors= 16
-endif
+"let g:solarized_termcolors= 256
+"if &t_Co<256 && !has('gui_running')
+"	let g:solarized_termcolors= 16
+"endif
 let g:solarized_termtrans = 1 | 0
 let g:solarized_degrade = 0 | 0
 let g:solarized_bold = 1 | 0 
@@ -215,13 +225,14 @@ highlight LineNr ctermbg=NONE
 
 " Auto detect filetype
 autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown.pandoc
+autocmd BufRead,BufNewFile *.txt,*.text setfiletype=text
  
 """""""""""""""""""
 """    Latex    
 """""""""""""""""""
 let g:tex_flavor = "latex"
 
-autocmd FileType tex setlocal iskeyword+=:,-
+"autocmd FileType tex setlocal iskeyword+=:,-
 
 "inoremap { {}<ESC>i
 "inoremap [ []<ESC>i
@@ -245,7 +256,7 @@ let R_tmux_split = 1
 """"""""""""""""""""""
 """" Language Check 
 """"""""""""""""""""""
-let g:languagetool_jar='$HOME/mytools/LanguageTool-3.6/languagetool-commandline.jar'
+let g:languagetool_jar='$HOME/mytools/LanguageTool-3.7/languagetool-commandline.jar'
 
 """"""""""""""""""""""
 """" netrw 
