@@ -324,5 +324,9 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 #		active_workspace #cb4b16 #cb4b16 #eee8d5
 #		inactive_workspace #b58900 #b58900 #eee8d5
 #	 }
-#
+#	status_command		i3status -c ~/.i3/i3status.conf
+#	position		top
+#	workspace_buttons	yes
+#	binding_mode_indicator	yes
+#	tray_padding		1
 #}
