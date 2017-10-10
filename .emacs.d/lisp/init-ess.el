@@ -1,8 +1,6 @@
 ;;; Character sets
 
-;(require 'ess-site)
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
-(load 'ess-site)
+(require 'ess-site)
 (require 'popup)
 ;(require 'ess-R-object-popup)
 
@@ -145,11 +143,21 @@ Run R-FUN for object at point, and display results in a popup."
   (interactive)
   (asb-ess-R-object-popup "str"))
 
+(defun asb-ess-R-object-popup-names ()
+  (interactive)
+  (asb-ess-R-object-popup "names"))
+
+(defun asb-ess-R-object-popup-nrow ()
+  (interactive)
+  (asb-ess-R-object-popup "nrow"))
+
 (defun asb-ess-R-object-popup-interactive (r-func)
   (interactive "sR function to execute: ")
   (asb-ess-R-object-popup r-func))
 
 (evil-leader/set-key-for-mode 'ess-mode "i" 'asb-ess-R-object-popup-str)
+(evil-leader/set-key-for-mode 'ess-mode "n" 'asb-ess-R-object-popup-names)
+(evil-leader/set-key-for-mode 'ess-mode "N" 'asb-ess-R-object-popup-nrow)
 (evil-leader/set-key-for-mode 'ess-mode "I" 'asb-ess-R-object-popup-interactive)
 
 
