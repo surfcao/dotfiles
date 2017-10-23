@@ -26,6 +26,11 @@
 
 (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
 (add-to-list 'exec-path "/usr/local/bin")
+
+;; Don't litter my init file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror)
+
 (require 'init-utils)
 (require 'init-elpa)
 
@@ -621,25 +626,6 @@ The IGNORED argument is... Ignored."
 ;                          (list `(,fn-name . ,fn-location)))))))
 ;      res)))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(markdown-preview-custom-template "/Users/guofeng/.emacs.d/markdown-preview-template.html")
- '(mlint-programs
-   (quote
-    ("/Applications/MATLAB_R2014b.app/bin/maci64/mlint")))
- '(package-selected-packages
-   (quote
-    (company-quickhelp company-jedi nil auctex ssh darkroom buffer-move visual-fill-column ess tiny-menu helm-ag esup counsel-projectile restclient ox-reveal org-tree-slide epresent color-moccur xterm-color nlinum-relative company-shell pandoc-mode virtualenvwrapper counsel helm-swoop groovy-mode octopress zenburn-theme yaml-mode which-key wgrep-ag web-mode w3m use-package twittering-mode sunshine sublime-themes rainbow-mode powerline-evil org-bullets mmm-mode markdown-mode magit highlight-symbol helm-projectile gtags fullframe flycheck-package exec-path-from-shell evil-surround evil-leader evil-jumper evil-indent-textobject emmet-mode dictionary color-theme-sanityinc-tomorrow bpr auto-complete ag)))
- '(safe-local-variable-values (quote ((css-indent-offset . 2) (no-byte-compile t))))
- '(show-paren-mode t)
- '(writeroom-extra-line-spacing 0.4)
- '(writeroom-global-effects
-   (quote
-    (writeroom-set-fullscreen writeroom-set-alpha writeroom-set-menu-bar-lines writeroom-set-tool-bar-lines writeroom-set-vertical-scroll-bars writeroom-set-internal-border-width))))
-
 (put 'narrow-to-region 'disabled nil)
 
 ;;; sRGB doesn't blend with Powerline's pixmap colors, but is only
@@ -660,20 +646,3 @@ The IGNORED argument is... Ignored."
 
 (provide 'init)
 ;;; init.el ends here
-;(custom-set-faces
-; ;; custom-set-faces was added by Custom.
-; ;; If you edit it by hand, you could mess it up, so be careful.
-; ;; Your init file should contain only one such instance.
-; ;; If there is more than one, they won't work right.
-; '(default ((t (:background nil :family "Inconsolata LGC" :foundry "nil" :slant normal :weight normal :height 140 :width normal))))
-; '(powerline-evil-normal-face ((t (:inherit powerline-evil-base-face :background "chartreuse3"))))
-; '(term-color-black ((t (:foreground "gray80"))))
-; '(term-color-cyan ((t (:foreground "cyan2"))))
-; '(term-color-green ((t (:foreground "OliveDrab3"))))
-; '(term-color-yellow ((t (:foreground "gold1")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
