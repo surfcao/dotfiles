@@ -5,7 +5,7 @@
   "Configure evil leader mode."
   (evil-leader/set-leader ",")
   (evil-leader/set-key
-    ","  (lambda () (interactive) (ansi-term (getenv "SHELL")))
+    ","  'other-window
     "."  'mode-line-other-buffer
     ":"  'eval-expression
     "aa" 'align-regexp
@@ -46,6 +46,8 @@
 
   ;; Use Emacs state in these additional modes.
   (dolist (mode '(ag-mode
+		  dired-mode
+		  eshell-mode
                   flycheck-error-list-mode
                   git-rebase-mode
                   octopress-mode
@@ -56,6 +58,7 @@
     (add-to-list 'evil-emacs-state-modes mode))
 
   (delete 'term-mode evil-insert-state-modes)
+  (delete 'eshell-mode evil-insert-state-modes) 
 
   ;; Use insert state in these additional modes.
   (dolist (mode '(twittering-edit-mode
@@ -77,6 +80,12 @@
   (define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "-")       'helm-find-files)
+  (evil-define-key 'normal global-map (kbd "C--")     (lambda ()
+                                                        (interactive)
+                                                        (dired (file-name-directory (buffer-file-name)))))
+  (evil-define-key 'normal global-map (kbd "C-`")     (lambda ()
+                                                        (interactive)
+                                                        (dired (expand-file-name "~"))))
   (define-key evil-normal-state-map (kbd "C-]")     'gtags-find-tag-from-here)
   (define-key evil-normal-state-map (kbd "g/")      'occur-last-search)
   (define-key evil-normal-state-map (kbd "[i")      'show-first-occurrence)
@@ -87,6 +96,7 @@
   (evil-define-key 'normal global-map (kbd "C-S-p") 'helm-projectile-switch-project)
   (evil-define-key 'insert global-map (kbd "s-d")   ''other-windoweval-last-sexp)
   (evil-define-key 'normal global-map (kbd "s-d")   'eval-defun)
+  (evil-define-key 'normal global-map (kbd "C-t")   'air-open-eshell)
 
   (evil-define-key 'normal global-map (kbd "z d")   'dictionary-lookup-definition)
 
