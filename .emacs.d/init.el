@@ -124,13 +124,13 @@
 (require 'init-flycheck)
 ;(require 'init-tmux)
 
-(require 'markdown-preview-mode)
-(add-hook 'markdown-preview-mode-hook
-          (lambda ()
-            (setq markdown-preview-template
-                  (expand-file-name "~/.emacs.d/markdown-preview.html" user-emacs-directory))
-            (setq markdown-preview-style
-                  "http://aaronbieber.com/assets/styles/github-markdown.css")))
+;(require 'markdown-preview-mode)
+;(add-hook 'markdown-preview-mode-hook
+;          (lambda ()
+;            (setq markdown-preview-template
+;                  (expand-file-name "~/.emacs.d/markdown-preview.html" user-emacs-directory))
+;            (setq markdown-preview-style
+;                  "http://aaronbieber.com/assets/styles/github-markdown.css")))
 
 ;(add-to-list 'load-path (expand-file-name "fence-edit" user-emacs-directory))
 ;(require 'fence-edit)
@@ -143,6 +143,8 @@
 
 ;; map yes-or-no to y-or-n
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(use-package visual-fill-column :ensure t) 
 
 ;; Org Mode
 (require 'init-org)
@@ -232,9 +234,12 @@
   ;(setq company-tooltip-selection ((t (:background "yellow2"))))
   (setq company-idle-delay 0.2)
   (setq company-selection-wrap-around t)
+  (define-key company-active-map (kbd "ESC") 'company-abort)
   (define-key company-active-map [tab] 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
+
+;(use-package counsel :ensure t)
 
 (use-package swiper
   :ensure t
@@ -281,6 +286,12 @@
   (define-key markdown-mode-map (kbd "C-c 5") 'markdown-insert-header-atx-5)
   (define-key markdown-mode-map (kbd "C-c 6") 'markdown-insert-header-atx-6))
 
+;;; Markdown mode:
+(add-hook 'markdown-mode-hook (lambda ()
+				(yas-minor-mode t)
+                                (set-fill-column 80)
+                                (turn-on-auto-fill)
+                                (flyspell-mode)))
 
 (use-package polymode
   :ensure t
@@ -349,8 +360,12 @@
   :ensure t
   :defer 1
   :config
-  (projectile-global-mode)
-  (setq projectile-enable-caching t))
+  (projectile-mode)
+  (setq projectile-enable-caching t)
+  (setq projectile-mode-line
+        '(:eval
+          (format " Proj[%s]"
+                  (projectile-project-name)))))
 
 (use-package highlight-symbol
   :ensure t
@@ -420,12 +435,18 @@
           (lambda ()
             (define-key lisp-interaction-mode-map (kbd "M-<return>") 'eval-last-sexp)))
 
-(use-package nlinum-relative
-  :ensure t
-  :config
-  (nlinum-relative-setup-evil)
-  (setq nlinum-relative-redisplay-delay 0)
-  (add-hook 'prog-mode-hook #'nlinum-relative-mode))
+;;; If `display-line-numbers-mode' is available (only in Emacs 26),
+;;; use it! Otherwise, install and run nlinum-relative.
+(if (functionp 'display-line-numbers-mode)
+      (and (add-hook 'display-line-numbers-mode-hook
+       	       (lambda () (setq display-line-numbers-type 'relative)))
+           (add-hook 'prog-mode-hook #'display-line-numbers-mode))
+  (use-package nlinum-relative
+		    :ensure t
+		    :config
+		    (nlinum-relative-setup-evil)
+		    (setq nlinum-relative-redisplay-delay 0)
+		    (add-hook 'prog-mode-hook #'nlinum-relative-mode)))
 
 ;;; Python mode:
 (use-package virtualenvwrapper
@@ -556,11 +577,6 @@ The IGNORED argument is... Ignored."
 ;                                  (turn-on-auto-fill)
 ;                                  (setq js-indent-level 2)))
 ;
-;;; Markdown mode:
-(add-hook 'markdown-mode-hook (lambda ()
-                                (set-fill-column 80)
-                                (turn-on-auto-fill)
-                                (flyspell-mode)))
 
 ;;; HTML mode:
 ;(add-hook 'html-mode-hook (lambda ()
