@@ -13,7 +13,7 @@
     "b"  'helm-mini             ;; Switch to another buffer
     "B"  'magit-blame-toggle
     "c"  'comment-dwim
-    "k"  'kill-this-buffer
+    "d"  'kill-this-buffer
     "D"  'open-current-line-in-codebase-search
     "f"  'helm-imenu            ;; Jump to function in buffer
     "g"  'magit-status
