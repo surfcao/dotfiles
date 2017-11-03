@@ -19,6 +19,8 @@
 (add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 
 ;;; Pin some packages to specific repositories.
+
+(setq package-pinned-packages '((gtags . "marmalade")))
 ;(setq package-pinned-packages '((gtags . "marmalade")
 ;                                (php-extras . "marmalade")))
 

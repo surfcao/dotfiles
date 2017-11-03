@@ -68,7 +68,7 @@
 ;; http://www.emacswiki.org/emacs/ESSShiftEnter
 (setq ess-local-process-name "R")
 (setq ansi-color-for-comint-mode 'filter)
-(setq comint-prompt-read-only t)
+(setq-local comint-prompt-read-only t)
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
 (setq comint-move-point-for-output t)

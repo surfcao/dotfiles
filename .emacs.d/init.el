@@ -229,9 +229,10 @@
   (define-key helm-map (kbd "S-SPC") 'helm-toggle-visible-mark)
   (define-key helm-find-files-map (kbd "C-k") 'helm-find-files-up-one-level))
 
+;(use-package s :ensure t)
 (use-package company
   :ensure t
-  :defer t
+  ;:defer t
   :init
   (global-company-mode)
   :config
@@ -245,6 +246,7 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 ;(use-package counsel :ensure t)
+
 
 (use-package swiper
   :ensure t
