@@ -1,5 +1,6 @@
 ;; Setting up matlab-mode
 (add-to-list 'load-path "~/.emacs.d/matlab-emacs")
+(require 'ggtags)
 (load-library "matlab-load")
 ;(setq auto-mode-alist
 ;    (cons
