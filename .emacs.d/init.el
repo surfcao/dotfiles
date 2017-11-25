@@ -81,12 +81,18 @@
 (setq make-backup-files nil)
 
 ;;; File type overrides.
-;(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 
 ;;; My own configurations, which are bundled in my dotfiles.
 (require 'init-platform)
 (require 'init-global-functions)
+
+(use-package popup
+	     :ensure t)
+
+(use-package ggtags
+	     :ensure t)
 
 ;;; tiny-menu configuration
 (use-package tiny-menu
@@ -227,7 +233,9 @@
   (setq helm-autoresize-mode t)
   (setq helm-buffer-max-length 40)
   (define-key helm-map (kbd "S-SPC") 'helm-toggle-visible-mark)
-  (define-key helm-find-files-map (kbd "C-k") 'helm-find-files-up-one-level))
+  (define-key helm-find-files-map (kbd "C-k") 'helm-find-files-up-one-level)
+  (setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t))
 
 ;(use-package s :ensure t)
 (use-package company
@@ -245,9 +253,7 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-;(use-package counsel :ensure t)
-
-
+(use-package counsel :ensure t)
 (use-package swiper
   :ensure t
   :commands swiper
