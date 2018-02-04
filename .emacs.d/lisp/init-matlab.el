@@ -38,7 +38,7 @@
   '(require 'flycheck-matlab-mlint))
 
 (when (memq window-system '(mac ns))
-(setq matlab-shell-command "/Applications/MATLAB_R2017b.app/bin/matlab"))
+(setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
 (when (memq window-system '(x))
 (setq matlab-shell-command "matlab"))
 (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))

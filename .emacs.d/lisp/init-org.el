@@ -159,7 +159,7 @@ Skips the current entry unless SUBTREE is not nil."
       (let* ((val (cadr (assoc custom-id all-custom-ids)))
              (id-parts (split-string val ":"))
              (file (car id-parts))
-             (line (string-to-int (cadr id-parts))))
+             (line (string-to-number (cadr id-parts))))
         (pop-to-buffer (org-get-agenda-file-buffer file))
         (goto-char (point-min))
         (forward-line line)
@@ -177,7 +177,7 @@ Skips the current entry unless SUBTREE is not nil."
       (let* ((val (cadr (assoc custom-id all-custom-ids)))
              (id-parts (split-string val ":"))
              (file (car id-parts))
-             (line (string-to-int (cadr id-parts))))
+             (line (string-to-number (cadr id-parts))))
         (org-insert-link nil (concat file "::#" custom-id) custom-id)))))
 
 (defun air-org-nmom-capture-template ()
@@ -357,7 +357,7 @@ TAG is chosen interactively from the global tags completion table."
   :ensure t
   :defer t
   :commands (org-capture)
-  :bind (("C-c c" .   air-org-task-capture)
+  :bind (("C-c c" .   org-capture)
          ("C-c l" .   org-store-link)
          ("C-c t n" . air-pop-to-org-notes)
          ("C-c t i" . air-pop-to-org-ideas)
@@ -374,36 +374,33 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-modules
         '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))
   (setq org-todo-keywords
-        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED")))
+        '((sequence "TODO" "WAITING (!)" "SOMEDAY(!)" "|" "DONE(!)" "CANCELED(!)")
+	  (sequence "IDEA")))
   (setq org-blank-before-new-entry '((heading . t)
                                      (plain-list-item . t)))
   (setq org-capture-templates
         '(("a" "My TODO task format." entry
            (file "todo.org")
-           "* TODO %?")
+           "* TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
+	    :empty-lines 1)
 
           ("n" "A (work-related) note." entry
            (file "notes.org")
-           "* %?\n%u\n\n"
-           :jump-to-captured t)
+           "* %?\n :PROPERTIES:\n :CREATED: %u\n :END:\n\n"
+	   :empty-lines 1) 
 
           ("m" "A meeting note." entry
            (file "meetings.org")
-           "* Meeting with %? :meetings:\n%u"
-           :jump-to-captured t)
+	   "* Meeting with %?\n :PROPERTIES:\n :CREATED: %u\n :END:\n\n"
+	   :empty-lines 1)
 
           ("i" "An idea entry." entry
            (file "ideas.org")
-           "* %? :Ideas:\n%u"
-           :jump-to-captured t)
+           "* IDEA %?\n :PROPERTIES:\n :ORDERED: t\n :CREATED: %u\n :END:\n\n"
+	   :empty-lines 1)))
 
-         ; ("w" "Nine Minutes on Monday weekly agenda." entry
-         ;  ;(id "9A6DDE04-90B8-49ED-90B9-A55A0D1E7B28")
-         ;  (function air-org-nmom-capture-template))
-	  ))
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
   (setq org-directory "~/Dropbox/org")
-  (setq org-enforce-todo-dependencies t)
 
   ;; Logging of state changes
   (setq org-log-done (quote time))
@@ -411,20 +408,27 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-log-reschedule (quote time))
   (setq org-log-into-drawer t)
 
+  (setq org-pretty-entities t)
   (setq org-insert-heading-respect-content t)
   (setq org-ellipsis "...")
   (setq org-startup-with-inline-images t)
   (setq org-export-initial-scope 'subtree)
   (setq org-use-tag-inheritance nil) ;; Use the list form, which happens to be blank
+  (setq org-todo-keyword-faces
+        '(("OPEN" . org-done)
+	("PAUSED" . org-upcoming-deadline)))
 
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
   (setq org-agenda-files '("~/Dropbox/org/"))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 1)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-outline-path-complete-in-steps nil)
+  (setq org-enforce-todo-dependencies t)
+  (setq org-agenda-dim-blocked-tasks t)
   (setq org-agenda-skip-scheduled-if-done t)
+
   (setq org-agenda-custom-commands
         '(("d" "Daily agenda and all TODOs"
            ((tags "PRIORITY=\"A\""
@@ -513,7 +517,14 @@ TAG is chosen interactively from the global tags completion table."
               ;; These are set as evil keys because they conflict with
               ;; existing commands I don't use, or are superseded by
               ;; some evil function that org-mode-map is shadowed by.
+	       (defun company-complete-or-org-cycle ()
+                "Call `company-complete' then `org-cycle'."
+                (interactive)
+                (or (and (looking-back "\\w" (line-beginning-position))
+                         (company-complete))
+		(org-cycle)))
               (evil-define-key 'normal org-mode-map (kbd "TAB")   'org-cycle)
+              (evil-define-key 'insert org-mode-map (kbd "<tab>") 'company-complete-or-org-cycle)
 
               (evil-define-key 'normal org-mode-map (kbd "C-,")   'org-metaleft)
               (evil-define-key 'normal org-mode-map (kbd "C-.")   'org-metaright)
@@ -532,14 +543,25 @@ TAG is chosen interactively from the global tags completion table."
               (define-key org-mode-map (kbd "M-j") 'org-forward-heading-same-level)
               (define-key org-mode-map (kbd "M-k") 'org-backward-heading-same-level)
               (define-key org-mode-map (kbd "M-l") 'air-org-goto-first-child)
-
+	      ;; "gh" goes up a level, and is defined by org-evil-mode.
+	      ;; "gH" goes to the top level, and is defined by org-evil-mode.
+	      (evil-define-key 'normal org-mode-map (kbd "gl") 'air-org-goto-first-child)
               ;; Use fill column, but not in agenda
               (setq fill-column 100)
               (when (not (eq major-mode 'org-agenda-mode))
                 (visual-line-mode)
                 (visual-fill-column-mode))
               (flyspell-mode)
+              (org-evil-mode)
               (org-indent-mode))))
+
+(use-package org-evil
+  :ensure t
+  :config
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
+			      "@" 'org-refile)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
+			      "#" 'org-add-note))
 
 (use-package org-bullets
   :ensure t

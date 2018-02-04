@@ -116,7 +116,7 @@
                             (?i "Ideas" (lambda () (air-pop-to-org-ideas nil)))
                             (?v "Vault" (lambda () (air-pop-to-org-vault nil))))))
           ("org-captures" ("Org Captures"
-                           ((?c "TODO"  air-org-task-capture)
+                           ((?t "TODO"  air-org-task-capture)
                             (?n "Note"  (lambda () (interactive) (org-capture nil "n")))
                             (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
                             (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))))))))

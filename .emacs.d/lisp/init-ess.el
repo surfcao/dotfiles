@@ -1,8 +1,10 @@
 ;;; Character sets
 
-(when (memq window-system '(x))
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/"))
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
+;(when (memq window-system '(x))
+;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
+
+(add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/")
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
 (require 'ess-site)
 (require 'popup)
 ;(require 'ess-R-object-popup)

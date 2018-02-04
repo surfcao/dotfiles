@@ -46,6 +46,7 @@
 
   ;; Use Emacs state in these additional modes.
   (dolist (mode '(ag-mode
+		  ;MATLAB
 		  ;dired-mode
 		  eshell-mode
                   flycheck-error-list-mode
@@ -53,6 +54,7 @@
                   octopress-mode
                   octopress-server-mode
                   octopress-process-mode
+		  org-capture-mode
                   sunshine-mode
                   term-mode))
     (add-to-list 'evil-emacs-state-modes mode))
