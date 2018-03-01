@@ -24,6 +24,7 @@ Plug 'vim-scripts/Solarized'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'SirVer/ultisnips', {'for': ['r','tex']}
@@ -55,16 +56,20 @@ let g:UltiSnipsEditSplit="vertical"
 "        \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
 "\ ]
 
-Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'text']}
+"Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'text']}
 "Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'text']}
 Plug 'vim-syntastic/syntastic', {'for': ['tex', 'markdown', 'text']}
 let g:syntastic_mode_map = { 'mode': 'passive'}
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_tex_checkers = ["lacheck", "proselint", "text/language_check"]
+let g:syntastic_text_checkers = ["proselint", "language_check"]
+let g:syntastic_text_language_check_args = "--language=en-US  --disable=MORFOLOGIK_RULE_EN_US" 
 
 Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'rickhowe/diffchar.vim'
 let g:vimtex_latexmk_continuous=1
 let g:vimtex_format_enabled=1
 let g:vimtex_compiler_latexmk = {'build_dir' : 'output', 'callback' : 0}
@@ -159,7 +164,7 @@ set nonumber " No line numbering
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " some shortcuts
 let mapleader = "\<Space>"
-let maplocalleader = ","
+"let maplocalleader = ","
 nmap <Leader>q :nohlsearch<CR>
 nnoremap <Leader>w :w<CR>
 vmap <Leader>y "*y
@@ -170,18 +175,18 @@ vmap <Leader>p "*p
 vmap <Leader>P "*P
 "nmap <Leader>q :nohlsearch<CR>
 " buffer switch
-nnoremap <LocalLeader>b :ls<CR>
-nnoremap <LocalLeader>p :bp<CR>
-nnoremap <LocalLeader>n :bn<CR>
-nnoremap <LocalLeader>d :bd<CR>
-nnoremap <LocalLeader>g :e#<CR>
+nnoremap <Leader>b :ls<CR>
+nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>d :bd<CR>
+nnoremap <Leader>g :e#<CR>
 
 " Window 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <LocalLeader>o <C-w>o
+nnoremap <Leader>o <C-w>o
 
 " Hardwrap, softwrap
 map j gj
@@ -194,6 +199,11 @@ nmap gV `[v`]
 " Use Q for formatting the current paragraph (or selection)
 vnoremap Q gw
 nnoremap Q gwap
+
+" The vanilla c-u and c-w will are undoable, the following map add them to
+" the undolist, so it can be undo by 'u'
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
 """""""""""""""""""""""""""""""
 """  Solarized color theme  
@@ -226,6 +236,7 @@ highlight LineNr ctermbg=NONE
 " Auto detect filetype
 autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown.pandoc
 autocmd BufRead,BufNewFile *.txt,*.text setfiletype=text
+autocmd BufRead,BufNewFile *.tex setfiletype=tex.text
  
 """""""""""""""""""
 """    Latex    
@@ -256,7 +267,9 @@ let R_tmux_split = 1
 """"""""""""""""""""""
 """" Language Check 
 """"""""""""""""""""""
-let g:languagetool_jar='$HOME/mytools/LanguageTool-3.7/languagetool-commandline.jar'
+"let g:languagetool_jar='$HOME/mytools/LanguageTool-3.7/languagetool-commandline.jar'
+"disable the rule of 'possible spelling mistake'
+"let g:languagetool_disable_rules='MORFOLOGIK_RULE_EN_US'
 
 """"""""""""""""""""""
 """" netrw 
