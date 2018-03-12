@@ -164,7 +164,7 @@ set nonumber " No line numbering
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " some shortcuts
 let mapleader = "\<Space>"
-"let maplocalleader = ","
+let maplocalleader = ","
 nmap <Leader>q :nohlsearch<CR>
 nnoremap <Leader>w :w<CR>
 vmap <Leader>y "*y
@@ -179,7 +179,7 @@ nnoremap <Leader>b :ls<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>d :bd<CR>
-nnoremap <Leader>g :e#<CR>
+nnoremap <Leader><tab> :e#<CR>
 
 " Window 
 nnoremap <C-h> <C-w>h
