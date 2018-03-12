@@ -5,6 +5,11 @@
 .vim/*
 !.vim/thesaurus
 
+# Macs...
+.DS_Store
+
+# Emacs things
+\#*#
 # Ignore all of emacs.d, which is mostly compiled/downloaded scripts.
 .emacs.d/*
 *.elc
