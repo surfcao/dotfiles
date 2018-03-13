@@ -9,11 +9,11 @@ configs/vim/*
 
 # Emacs things
 \#*#
+# Vim things
+*.swp
 
-# Ignore all of emacs.d, which is mostly compiled/downloaded scripts.
-configs/emacs.d/*
+# Ignore all of emacs.d, which is mostly compiled/downloaded scripts
 *.elc
-
 # old emacs configuration (before spacemacs)
 configs/emacs.d.old/*
 # But don't ignore these specific locations.
