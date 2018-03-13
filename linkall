@@ -1,0 +1,113 @@
+#!/usr/bin/env zsh
+
+# Color constants
+yellow="\e[33;40m"
+red="\e[31;40m"
+green="\e[32;40m"
+reset="\e[39;49m"
+
+# Who am I?
+me=`basename $0`
+
+# Get options.
+LNOPTS=""
+if [ $# -gt 0 ]; then
+  if [[ "$1" == "-f" ]]; then
+    LNOPTS="-f"
+  else
+    echo "Unrecognized option: $1"
+    cat << EOF
+Usage: $me [OPTIONS]
+
+    Options:
+    -f    Force 'ln' to create a new link, even if one already exists with the
+          same name.
+EOF
+    exit 1
+  fi
+fi
+
+# The system name is used to link platform-specific files.
+platform=`uname`
+
+# This appears to be the "best" way to get the canonicalized path to where this
+# script is located, which is, presumably, where all of my dotfiles are.
+# Lifted from http://stackoverflow.com/a/4774063
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+SCRIPTPATH='/Users/guofeng/Git/hub/dotfiles'
+BINPATH="$SCRIPTPATH/mytools"
+SCRIPTPATH="$SCRIPTPATH/configs"
+popd > /dev/null
+
+pushd ~ > /dev/null
+
+echo "Creating symlinks for all configuration files in $SCRIPTPATH."
+echo ""
+
+for dotfile in `find $SCRIPTPATH -mindepth 1 -maxdepth 1`; do
+  if [[ "${dotfile##*/}" == "bashrc" ]]; then
+    linkfile=".bash_profile"
+  else
+    # If the dotfile starts with an underscore-braced string, only link it if
+    # that string matches our platform.
+    if [[ "${dotfile##*/}" =~ "_.*_" ]]; then
+      if [[ "${dotfile##*/}" =~ "_${platform}_" ]]; then
+        linkfile=".${dotfile##*/_${platform}_}"
+      else
+        continue
+      fi
+    else
+      # This is the common case. Link the base name.
+      linkfile=".${dotfile##*/}"
+    fi
+  fi
+
+  if [ -d "./$linkfile" ]
+
+  if [ -e "$linkfile" ]; then
+    echo -n "${yellow}Exists${reset}"
+  else
+    ln -s $LNOPTS "$dotfile" "./$linkfile" > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+      echo -n "${green}OK${reset}    "
+    else
+      echo -n "${red}Failed${reset}"
+    fi
+  fi
+  echo " $dotfile -> $linkfile... "
+done
+
+if [ ! -d "$HOME/mytools" ]; then
+  echo "Creating ~/mytools directory."
+  mkdir "$HOME/mytools"
+fi
+
+# Return to original pwd.
+popd > /dev/null
+
+# Move into bin dir.
+pushd "$HOME/mytools" > /dev/null
+
+echo ""
+echo "Creating symlinks for executable scripts in $BINPATH."
+echo ""
+
+for script in `find $BINPATH -mindepth 1 -maxdepth 1 -not -name 'Makefile'`; do
+  linkfile="${script##*/}"
+  ln -s $LNOPTS "$script" "$linkfile" > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo -n "${green}OK${reset}    "
+  else
+    if [ -f "$linkfile" ]; then
+      echo -n "${yellow}Exists${reset}"
+    else
+      echo -n "${red}Failed${reset}"
+    fi
+  fi
+  echo " $script -> $linkfile... "
+done
+
+# Return to original pwd.
+popd > /dev/null
