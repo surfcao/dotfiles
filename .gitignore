@@ -15,7 +15,7 @@ configs/emacs.d/*
 # old emacs configuration (before spacemacs)
 configs/emacs.d.old/*
 # But don't ignore these specific locations.
-configs/emacs.d.old/lisp
-configs/emacs.d.old/matlab-emacs
-configs/emacs.d.old/snippets
-configs/emacs.d.old/init.el
+!configs/emacs.d.old/lisp
+!configs/emacs.d.old/matlab-emacs
+!configs/emacs.d.old/snippets
+!configs/emacs.d.old/init.el
