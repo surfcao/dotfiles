@@ -1,9 +1,8 @@
 .profile
-.vimperator/
 
 # Ignore all of .vim, which is mostly compiled/downloaded scripts.
-.vim/*
-!.vim/thesaurus
+configs/vim/*
+!configs/vim/thesaurus
 
 # Macs...
 .DS_Store
@@ -11,10 +10,12 @@
 # Emacs things
 \#*#
 # Ignore all of emacs.d, which is mostly compiled/downloaded scripts.
-.emacs.d/*
+configs/emacs.d/*
 *.elc
+# old emacs configuration (before spacemacs)
+configs/emacs.d.old/*
 # But don't ignore these specific locations.
-!.emacs.d/lisp
-!.emacs.d/matlab-emacs
-!.emacs.d/snippets
-!.emacs.d/init.el
+configs/emacs.d.old/lisp
+configs/emacs.d.old/matlab-emacs
+configs/emacs.d.old/snippets
+configs/emacs.d.old/init.el
