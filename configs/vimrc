@@ -2,7 +2,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-""   Plug
+"""   Plug
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Install vim-plug if we don't already have it
 if empty(glob("~/.vim/autoload/plug.vim"))
@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
 "Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
@@ -122,6 +123,7 @@ set keywordprg=:help
 
 set tw=75
 "set formatoptions+=nt
+set formatoptions+=j
 "default formatoptions=tcq
 " set formatoptions+=n
 "autocmd FileType tex,markdown set formatoptions+=a
@@ -175,11 +177,11 @@ vmap <Leader>p "*p
 vmap <Leader>P "*P
 "nmap <Leader>q :nohlsearch<CR>
 " buffer switch
-nnoremap <Leader>b :ls<CR>
-nnoremap <Leader>p :bp<CR>
-nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>d :bd<CR>
-nnoremap <Leader><tab> :e#<CR>
+nnoremap <LocalLeader>b :ls<CR>
+nnoremap <LocalLeader>p :bp<CR>
+nnoremap <LocalLeader>n :bn<CR>
+nnoremap <LocalLeader>d :bd<CR>
+nnoremap <LocalLeader><tab> :e#<CR>
 
 " Window 
 nnoremap <C-h> <C-w>h
