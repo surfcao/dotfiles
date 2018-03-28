@@ -18,8 +18,8 @@ set popups=tab,resized
 "" default as visible status line 
 set statuslinevisibility=visible
 
- hi CmdLine -append font-size:14px
-"hi CmdLine -append font-weight:bold; font-size:14px
+" hi CmdLine -append font-size:14px
+hi CmdLine -append font-weight:bold; font-size:18px
 "hi Hint font-size:14px; font-weight:bold; color:white;background-color:red;padding: 2px; 
 hi Hint -append font-size:12px;
 

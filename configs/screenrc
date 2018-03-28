@@ -11,11 +11,15 @@ focus
 layout attach
 
 
-caption string "%{= dd} "
-sorendition "="
+# the following version should be used for older version of screen
+#caption string "%{= dd} "
+#sorendition "="
+caption string "%{03} "
+altscreen on
+rendition so =00
 
-vbell_msg "bell: window ~%" # Message for visual bell
-vbellwait 2 # Seconds to pause the screen for visual bell
+#vbell_msg "bell: window ~%" # Message for visual bell
+#vbellwait 2 # Seconds to pause the screen for visual bell
 vbell off # Turns visual bell off
 startup_message off
 #term screen-256color
@@ -25,12 +29,13 @@ startup_message off
  attrcolor b ".I"
 
 # tell screen how to set colors. AB = background, AF=foreground
-termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # urxvt-unicode only
 #terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color
 defbce "on" 
 term xterm-256color
+#term rxvt-unicode-256color
 
 shell -/bin/bash
 
