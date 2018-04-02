@@ -14,7 +14,7 @@ layout attach
 # the following version should be used for older version of screen
 #caption string "%{= dd} "
 #sorendition "="
-caption string "%{03} "
+caption string "%{= 03} "
 altscreen on
 rendition so =00
 
