@@ -151,7 +151,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 22
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -452,6 +452,11 @@ you should place your code here."
   ;(add-hook 'matlab-shell-mode-hook
   ;          (lambda ()
   ;            (add-to-list 'company-backends 'company-matlab-shell)))
+
+;; Enable CEDET feature support for MATLAB code. (Optional)
+(matlab-cedet-setup)
+
+;;(add-hook 'matlab-mode-hook 'auto-complete-mode)
 
 (when (memq window-system '(mac ns))
 (setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
