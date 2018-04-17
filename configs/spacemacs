@@ -31,7 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     extra-langs
+     ;;extra-langs
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -151,7 +151,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 22
+                               :size 18
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -327,11 +327,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq ispell-program-name "/usr/local/bin/aspell")
   (setq ispell-personal-dictionary "~/Dropbox/.emacs/.aspell.en.pws")
-
-  ;; Trying to configure matlab-mode
-  ;;(add-to-list 'load-path "~/.emacs.d/matlab-emacs")
-  ;;(load-library "matlab-load")
-
  )
 
 (defun dotspacemacs/user-config ()
@@ -344,6 +339,8 @@ you should place your code here."
 
   (setq-default fill-column 80)
   (setq-default line-spacing 8)
+  (setq split-height-threshold nil)
+  (setq split-width-threshold 0)
 
   (add-hook 'org-mode-hook (lambda () (set-face-attribute 'org-level-1 nil :height 1.0)))
   (add-hook 'org-mode-hook (lambda () (set-face-attribute 'org-level-2 nil :height 1.0)))
@@ -442,28 +439,37 @@ you should place your code here."
   (setq bibtex-completion-notes-symbol "✎")
 
   ;; Trying to configure matlab-mode
+  (use-package matlab-mode
+    :load-path "~/.emacs.d/matlab-mode"
+    ;;:defer t
+    :commands matlab-load
+    :mode (("\\.m\\'" . matlab-mode))
+    :interpreter "matlab"
+    :init
+    (load-library "matlab-load")
+    (add-hook 'matlab-mode-hook 'spacemacs/run-prog-mode-hooks)
+    (setq matlab-completion-technique 'increment)
+    :config
+    (add-hook 'matlab-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab)))
+    (add-hook 'matlab-shell-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab-shell)))
+    (add-hook 'matlab-mode-hook 'auto-complete-mode)
 
-  ;; Trying to configure matlab-mode
-  ;(add-to-list 'load-path "~/.emacs.d/matlab-emacs")
+    (when (memq window-system '(mac ns))
+      (setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
+    (when (memq window-system '(x))
+      (setq matlab-shell-command "matlab"))
+    (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
+    ;(add-hook 'matlab-mode-hook 'auto-complete-mode)
+    ;; Enable CEDET feature support for MATLAB code. (Optional)
+    (matlab-cedet-setup))
 
-  ;(add-hook 'matlab-mode-hook
-  ;          (lambda ()
-  ;            (add-to-list 'company-backends 'company-matlab)))
-  ;(add-hook 'matlab-shell-mode-hook
-  ;          (lambda ()
-  ;            (add-to-list 'company-backends 'company-matlab-shell)))
+  (define-key evil-normal-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
+  (define-key evil-normal-state-map (kbd ",r") 'matlab-shell-run-region)
+  (define-key evil-normal-state-map (kbd ",i") 'matlab-shell-describe-variable)
+  (define-key evil-normal-state-map (kbd ",h") 'matlab-shell-describe-command)
+  (define-key evil-normal-state-map (kbd ",c") 'matlab-shell-run-cell)
+  (define-key evil-normal-state-map (kbd ",I") 'matlab-shell-run-command)
 
-;; Enable CEDET feature support for MATLAB code. (Optional)
-(matlab-cedet-setup)
-
-;;(add-hook 'matlab-mode-hook 'auto-complete-mode)
-
-(when (memq window-system '(mac ns))
-(setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
-(when (memq window-system '(x))
-(setq matlab-shell-command "matlab"))
-(setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
-;(add-hook 'matlab-mode-hook 'auto-complete-mode)
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "ml" 'matlab-shell-run-region-or-line)
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "mr" 'matlab-shell-run-region)
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "mi" 'matlab-shell-describe-variable)
