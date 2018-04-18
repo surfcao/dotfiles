@@ -15,7 +15,7 @@ configs/vim/*
 # Ignore all of emacs.d, which is mostly compiled/downloaded scripts
 *.elc
 # old emacs configuration (before spacemacs)
-configs/emacs.d.old
+configs/emacs.d.old/*
 # But don't ignore these specific locations.
 !configs/emacs.d.old/lisp
 !configs/emacs.d.old/matlab-mode
