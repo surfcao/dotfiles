@@ -151,7 +151,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 18
+                               :size 20
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -464,11 +464,17 @@ you should place your code here."
     (matlab-cedet-setup))
 
   (define-key evil-normal-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
+  (define-key evil-visual-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
   (define-key evil-normal-state-map (kbd ",r") 'matlab-shell-run-region)
+  (define-key evil-visual-state-map (kbd ",r") 'matlab-shell-run-region)
   (define-key evil-normal-state-map (kbd ",i") 'matlab-shell-describe-variable)
+  (define-key evil-visual-state-map (kbd ",i") 'matlab-shell-describe-variable)
   (define-key evil-normal-state-map (kbd ",h") 'matlab-shell-describe-command)
+  (define-key evil-visual-state-map (kbd ",h") 'matlab-shell-describe-command)
   (define-key evil-normal-state-map (kbd ",c") 'matlab-shell-run-cell)
+  (define-key evil-visual-state-map (kbd ",c") 'matlab-shell-run-cell)
   (define-key evil-normal-state-map (kbd ",I") 'matlab-shell-run-command)
+  (define-key evil-visual-state-map (kbd ",I") 'matlab-shell-run-command)
 
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "ml" 'matlab-shell-run-region-or-line)
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "mr" 'matlab-shell-run-region)
