@@ -1,3 +1,5 @@
+--pandoc filter to add newpage in output docx
+-- ghc --make pandoc-word-pagebreak.hs for compiling.
 import Text.Pandoc.JSON
 
 pgBrkXml :: String
