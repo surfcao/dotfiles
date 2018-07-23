@@ -79,12 +79,13 @@ if has('mac') == 0
 else
 	let g:vimtex_view_method='skim' 
 endif 
-Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'pdflatex'
 let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
 "let g:pandoc#filetypes#handled = ['pandoc', 'markdown']
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc']}
+let g:pandoc#syntax#conceal#blacklist=['subscript']
 call plug#end()
 filetype plugin indent on                   " required!
 syntax on
