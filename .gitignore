@@ -21,3 +21,7 @@ configs/emacs.d.old/*
 !configs/emacs.d.old/matlab-mode
 !configs/emacs.d.old/snippets
 !configs/emacs.d.old/init.el
+
+configs/emacs.d.spacemacs/*
+!configs/emacs.d.old/matlab-mode
+!configs/emacs.d.old/matlab-emacs

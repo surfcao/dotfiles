@@ -76,6 +76,10 @@ values."
    dotspacemacs-additional-packages '(
                                       writeroom-mode
                                       writegood-mode
+                                      polymode
+                                      poly-markdown
+                                      poly-noweb
+                                      poly-R
    )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -345,6 +349,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (setq-default fill-column 75)
+  (setq-default line-spacing 8)
+  (setq split-height-threshold nil)
+  (setq split-width-threshold 0)
+
   (define-key evil-visual-state-map "Q" "gw")
   (define-key evil-normal-state-map "Q" "gwap")
 
@@ -352,12 +361,6 @@ you should place your code here."
                                                   (interactive)
                                                   (kill-line 0)))
  
-
-  (setq-default fill-column 75)
-  (setq-default line-spacing 8)
-  (setq split-height-threshold nil)
-  (setq split-width-threshold 0)
-
   (add-hook 'org-mode-hook (lambda () (set-face-attribute 'org-level-1 nil :height 1.0)))
   (add-hook 'org-mode-hook (lambda () (set-face-attribute 'org-level-2 nil :height 1.0)))
   (add-hook 'org-mode-hook (lambda () (set-face-attribute 'org-level-3 nil :height 1.0)))
@@ -454,43 +457,49 @@ you should place your code here."
   (setq bibtex-completion-pdf-symbol "⌘")
   (setq bibtex-completion-notes-symbol "✎")
 
+  ;; Trying to configure polymode
+  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+
   ;; Trying to configure matlab-mode
-  (use-package matlab-mode
-    :load-path "~/.emacs.d/matlab-mode"
-    ;;:defer t
-    :commands matlab-load
-    :mode (("\\.m\\'" . matlab-mode))
-    :interpreter "matlab"
-    :init
-    (load-library "matlab-load")
-    (add-hook 'matlab-mode-hook 'spacemacs/run-prog-mode-hooks)
-    (setq matlab-completion-technique 'increment)
-    :config
-    (add-hook 'matlab-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab)))
-    (add-hook 'matlab-shell-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab-shell)))
-    (add-hook 'matlab-mode-hook 'auto-complete-mode)
+ ;(use-package matlab-mode
+ ;  :load-path "~/.emacs.d/matlab-mode"
+ ;  ;;:defer t
+ ;  :commands matlab-load
+ ;  :mode (("\\.m\\'" . matlab-mode))
+ ;  :interpreter "matlab"
+ ;  :init
+ ;  (load-library "matlab-load")
+ ;  (add-hook 'matlab-mode-hook 'spacemacs/run-prog-mode-hooks)
+ ;  (setq matlab-completion-technique 'increment)
+ ;  :config
+ ;  (add-hook 'matlab-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab)))
+ ;  (add-hook 'matlab-shell-mode-hook (lambda () (add-to-list 'company-backends 'company-matlab-shell)))
+ ;  (add-hook 'matlab-mode-hook 'auto-complete-mode)
 
-    (when (memq window-system '(mac ns))
-      (setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
-    (when (memq window-system '(x))
-      (setq matlab-shell-command "matlab"))
-    (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
-    ;(add-hook 'matlab-mode-hook 'auto-complete-mode)
-    ;; Enable CEDET feature support for MATLAB code. (Optional)
-    (matlab-cedet-setup))
+ ;  (when (memq window-system '(mac ns))
+ ;    (setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
+ ;  (when (memq window-system '(x))
+ ;    (setq matlab-shell-command "matlab"))
+ ;  (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
+ ;  ;(add-hook 'matlab-mode-hook 'auto-complete-mode)
+ ;  ;; Enable CEDET feature support for MATLAB code. (Optional)
+ ;  (matlab-cedet-setup))
 
-  (define-key evil-normal-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
-  (define-key evil-visual-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
-  (define-key evil-normal-state-map (kbd ",r") 'matlab-shell-run-region)
-  (define-key evil-visual-state-map (kbd ",r") 'matlab-shell-run-region)
-  (define-key evil-normal-state-map (kbd ",i") 'matlab-shell-describe-variable)
-  (define-key evil-visual-state-map (kbd ",i") 'matlab-shell-describe-variable)
-  (define-key evil-normal-state-map (kbd ",h") 'matlab-shell-describe-command)
-  (define-key evil-visual-state-map (kbd ",h") 'matlab-shell-describe-command)
-  (define-key evil-normal-state-map (kbd ",c") 'matlab-shell-run-cell)
-  (define-key evil-visual-state-map (kbd ",c") 'matlab-shell-run-cell)
-  (define-key evil-normal-state-map (kbd ",I") 'matlab-shell-run-command)
-  (define-key evil-visual-state-map (kbd ",I") 'matlab-shell-run-command)
+ ;(define-key evil-normal-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
+ ;(define-key evil-visual-state-map (kbd ",l") 'matlab-shell-run-region-or-line)
+ ;(define-key evil-normal-state-map (kbd ",r") 'matlab-shell-run-region)
+ ;(define-key evil-visual-state-map (kbd ",r") 'matlab-shell-run-region)
+ ;(define-key evil-normal-state-map (kbd ",i") 'matlab-shell-describe-variable)
+ ;(define-key evil-visual-state-map (kbd ",i") 'matlab-shell-describe-variable)
+ ;(define-key evil-normal-state-map (kbd ",h") 'matlab-shell-describe-command)
+ ;(define-key evil-visual-state-map (kbd ",h") 'matlab-shell-describe-command)
+ ;(define-key evil-normal-state-map (kbd ",c") 'matlab-shell-run-cell)
+ ;(define-key evil-visual-state-map (kbd ",c") 'matlab-shell-run-cell)
+ ;(define-key evil-normal-state-map (kbd ",I") 'matlab-shell-run-command)
+ ;(define-key evil-visual-state-map (kbd ",I") 'matlab-shell-run-command)
 
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "ml" 'matlab-shell-run-region-or-line)
 ;(spacemacs/set-leader-keys-for-major-mode 'matlab-mode "mr" 'matlab-shell-run-region)
@@ -538,7 +547,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (visual-fill-column writegood-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data pandoc-mode ox-pandoc ht writeroom-mode thrift stan-mode scad-mode qml-mode matlab-mode arduino-mode ein skewer-mode request-deferred websocket deferred js2-mode simple-httpd insert-shebang fish-mode company-shell org-ref pdf-tools key-chord ivy tablist helm-bibtex parsebib biblio biblio-core flyspell-popup xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help auctex-latexmk company-auctex auctex yapfify unfill smeargle pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow live-py-mode hy-mode dash-functional htmlize helm-pydoc helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor ess-smart-equals ess-R-data-view ctable ess julia-mode diff-hl cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed ace-link ace-jump-helm-line helm helm-core popup which-key undo-tree hydra evil-unimpaired f s dash async aggressive-indent adaptive-wrap ace-window avy)))
+    (treepy graphql poly-markdown poly-noweb poly-R polymode visual-fill-column writegood-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data pandoc-mode ox-pandoc ht writeroom-mode thrift stan-mode scad-mode qml-mode matlab-mode arduino-mode ein skewer-mode request-deferred websocket deferred js2-mode simple-httpd insert-shebang fish-mode company-shell org-ref pdf-tools key-chord ivy tablist helm-bibtex parsebib biblio biblio-core flyspell-popup xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help auctex-latexmk company-auctex auctex yapfify unfill smeargle pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow live-py-mode hy-mode dash-functional htmlize helm-pydoc helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor ess-smart-equals ess-R-data-view ctable ess julia-mode diff-hl cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed ace-link ace-jump-helm-line helm helm-core popup which-key undo-tree hydra evil-unimpaired f s dash async aggressive-indent adaptive-wrap ace-window avy)))
  '(writeroom-global-effects
    (quote
     (writeroom-set-fullscreen writeroom-set-alpha writeroom-set-menu-bar-lines writeroom-set-tool-bar-lines writeroom-set-vertical-scroll-bars writeroom-set-bottom-divider-width writeroom-set-internal-border-width))))
