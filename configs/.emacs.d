@@ -1,0 +1,1 @@
+/Users/guofeng/Git/hub/dotfiles/configs/emacs.d.old
