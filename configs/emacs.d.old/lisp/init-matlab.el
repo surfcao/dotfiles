@@ -1,7 +1,9 @@
 ;; Setting up matlab-mode
+;(require 'ggtags)
+(require 'company)
 (add-to-list 'load-path "~/.emacs.d/matlab-emacs")
-(require 'ggtags)
 (load-library "matlab-load")
+
 ;(setq auto-mode-alist
 ;    (cons
 ;     '("\\.m$" . matlab-mode)
@@ -14,6 +16,7 @@
 (add-hook 'matlab-shell-mode-hook
           (lambda ()
             (add-to-list 'company-backends 'company-matlab-shell)))
+
 ;(add-hook 'matlab-mode-hook
 ;          (lambda ()
 ;            (add-to-list (make-local-variable 'company-backends) '(company-matlab))))
@@ -21,7 +24,14 @@
 ;          (lambda ()
 ;            (add-to-list (make-local-variable 'company-backends) '(company-matlab))))
 
+(add-hook 'matlab-mode
+          (lambda ()
+            (auto-complete-mode 1)
+            ))
+
 (setq matlab-indent-function t)
+(setq fill-column 76)
+(turn-on-auto-fill)
 (setq matlab-indent-function-body t)  ; if you want function bodies indented
 (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
 (matlab-cedet-setup)
@@ -38,7 +48,7 @@
   '(require 'flycheck-matlab-mlint))
 
 (when (memq window-system '(mac ns))
-(setq matlab-shell-command "/Applications/MATLAB_R2014b.app/bin/matlab"))
+(setq matlab-shell-command "/Applications/MATLAB_R2018b.app/bin/matlab"))
 (when (memq window-system '(x))
 (setq matlab-shell-command "matlab"))
 (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
