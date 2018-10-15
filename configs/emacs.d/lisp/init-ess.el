@@ -3,12 +3,25 @@
 ;(when (memq window-system '(x))
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
 
-(add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/")
-;(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
-(require 'ess-site)
+(use-package ess
+:load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"
+:mode (("\\.[rR]\\'" . R-mode)
+         ("\\.Rnw\\'" . Rnw-mode)
+         ("\\.Rmd\\'" . poly-mode))
+:init 
 (require 'popup)
 ;(require 'ess-R-object-popup)
-
+(require 'ess-site)
+;; No history, no saving!
+;(setq inferior-ess-same-window nil)
+;(setq inferior-ess-same-window t)
+;(setq inferior-ess-own-frame nil)
+(setq-default inferior-R-args "--no-restore-history --no-save ")
+(setq inferior-ess-program "R")
+(setq inferior-R-program-name "R")
+:defer t
+:commands R
+:config 
 (add-hook 'ess-mode-hook
           (lambda ()
             (setq ess-use-auto-complete t)
@@ -17,18 +30,31 @@
             (ess-disable-smart-S-assign nil)
             (ess-disable-smart-underscore nil)))
 
-;; No history, no saving!
-(setq-default inferior-R-args "--no-restore-history --no-save ")
+;;; inferior ESS execution mode
+(define-key inferior-ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
 
+;; Comint related stuff
+;(define-key inferior-ess-mode-map (kbd "C-e 0") 'comint-bol)
+;(define-key inferior-ess-mode-map (kbd "C-e j") 'comint-next-input)
+;(define-key inferior-ess-mode-map (kbd "C-e k") 'comint-previous-input)
+;(define-key inferior-ess-mode-map (kbd "C-e J") 'comint-next-prompt)
+;(define-key inferior-ess-mode-map (kbd "C-e K") 'comint-previous-prompt)
+;(define-key inferior-ess-mode-map (kbd "C-e ?") 'comint-history-isearch-backward-regexp)
+(define-key inferior-ess-mode-map (kbd "C-j") 'comint-next-matching-input-from-input)
+(define-key inferior-ess-mode-map (kbd "C-k") 'comint-previous-matching-input-from-input)
+(define-key inferior-ess-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key inferior-ess-mode-map (kbd "<down>") 'comint-next-input)
+;(define-key inferior-ess-mode-map (kbd "<up>") 'comint-next-matching-input-from-input)
+;(define-key inferior-ess-mode-map (kbd "<down>") 'comint-previous-matching-input-from-input)
 
-(setq inferior-ess-program "R")
-(setq inferior-R-program-name "R")
-
-
-;(setq inferior-ess-same-window nil)
-;(setq inferior-ess-same-window t)
-;(setq inferior-ess-own-frame nil)
-
+;; mimic RStudio shortcuts
+(define-key ess-mode-map (kbd "<f4>") 'ess-debug-flag-for-debugging)
+(define-key ess-mode-map (kbd "S-<f4>") 'ess-debug-unflag-for-debugging)
+(define-key ess-mode-map (kbd "<f5>") 'ess-debug-command-continue)
+(define-key ess-mode-map (kbd "<f9>") 'ess-bp-set)
+(define-key ess-mode-map (kbd "S-<f9>") 'ess-bp-kill)
+(define-key ess-mode-map (kbd "<f10>")  'ess-debug-command-next)
+(define-key ess-mode-map (kbd "<f11>")  'ess-debug-command-next-multi)
 
 (setq ess-use-tracebug t) ; permanent activation
 ;;; Tooltip included in ESS
@@ -73,7 +99,13 @@
 (setq-local comint-prompt-read-only t)
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
+(setq comint-move-point-for-output t))
+
+;(add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/")
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/ess/")
+;(require 'ess-site)
+;(require 'popup)
+
 
 ;;; ESS editing mode
 ;(evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-line)
@@ -99,25 +131,6 @@
 (evil-leader/set-key-for-mode 'ess-mode "T" 'ess-show-call-stack)
 (evil-leader/set-key-for-mode 'ess-mode "o" 'ess-switch-to-inferior-or-script-buffer)
 ;(define-key ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
-
-;;; inferior ESS execution mode
-(define-key inferior-ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
-
-;; Comint related stuff
-;(define-key inferior-ess-mode-map (kbd "C-e 0") 'comint-bol)
-;(define-key inferior-ess-mode-map (kbd "C-e j") 'comint-next-input)
-;(define-key inferior-ess-mode-map (kbd "C-e k") 'comint-previous-input)
-;(define-key inferior-ess-mode-map (kbd "C-e J") 'comint-next-prompt)
-;(define-key inferior-ess-mode-map (kbd "C-e K") 'comint-previous-prompt)
-;(define-key inferior-ess-mode-map (kbd "C-e ?") 'comint-history-isearch-backward-regexp)
-
-(define-key inferior-ess-mode-map (kbd "C-j") 'comint-next-matching-input-from-input)
-(define-key inferior-ess-mode-map (kbd "C-k") 'comint-previous-matching-input-from-input)
-(define-key inferior-ess-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key inferior-ess-mode-map (kbd "<down>") 'comint-next-input)
-
-;(define-key inferior-ess-mode-map (kbd "<up>") 'comint-next-matching-input-from-input)
-;(define-key inferior-ess-mode-map (kbd "<down>") 'comint-previous-matching-input-from-input)
 
 ;;; Show a popup by executing arbitrary commands on object at point.
 ;;; Inspiration:
@@ -165,22 +178,12 @@ Run R-FUN for object at point, and display results in a popup."
 (evil-leader/set-key-for-mode 'ess-mode "N" 'asb-ess-R-object-popup-nrow)
 (evil-leader/set-key-for-mode 'ess-mode "I" 'asb-ess-R-object-popup-interactive)
 
-
 ;; debug mode doesn't have a hook, stick them straight in the appropriate map  
 ;;(define-key ess-debug-minor-mode-map (kbd "<f5>")  'ess-debug-command-next)
 ;;(define-key ess-debug-minor-mode-map (kbd "<f5>")  'ess-debug-command-next)
 ;;(define-key ess-debug-minor-mode-map (kbd "<f6>")  'ess-debug-command-next-multi)
 ;;(define-key ess-debug-minor-mode-map (kbd "<f7>")  'ess-debug-command-up)
 ;;(define-key ess-debug-minor-mode-map (kbd "<f8>") 'ess-debug-command-continue)
-
-;; mimic RStudio shortcuts
-(define-key ess-mode-map (kbd "<f4>") 'ess-debug-flag-for-debugging)
-(define-key ess-mode-map (kbd "S-<f4>") 'ess-debug-unflag-for-debugging)
-(define-key ess-mode-map (kbd "<f5>") 'ess-debug-command-continue)
-(define-key ess-mode-map (kbd "<f9>") 'ess-bp-set)
-(define-key ess-mode-map (kbd "S-<f9>") 'ess-bp-kill)
-(define-key ess-mode-map (kbd "<f10>")  'ess-debug-command-next)
-(define-key ess-mode-map (kbd "<f11>")  'ess-debug-command-next-multi)
 
 
 (provide 'init-ess)

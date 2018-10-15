@@ -22,6 +22,7 @@
     "nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
     "nw" 'widen
     "o"  'other-window  ;; C-w o
+    "q"  'delete-window  ;; C-w o
     "O"  'delete-other-windows  ;; C-w o
     "p"  'helm-show-kill-ring
     "s"  'ag-project            ;; Ag search from project's root

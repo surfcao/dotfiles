@@ -92,7 +92,11 @@
 	     :ensure t)
 
 (use-package ggtags
-	     :ensure t)
+	     :ensure t
+	     :diminish ggtags-mod:e
+	     :config
+	     (add-hook 'prog-mode-hook 'ggtags-mode) 
+	     (add-hook 'matlab-mode-hook 'ggtags-mode))
 
 ;;; tiny-menu configuration
 (use-package tiny-menu
@@ -372,6 +376,7 @@
 (use-package projectile
   :ensure t
   :defer 1
+  :diminish projectile-mode
   :config
   (projectile-mode)
   (setq projectile-enable-caching t)
