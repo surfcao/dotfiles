@@ -63,7 +63,8 @@
 ;(setq split-window-preferred-function nil)
 (setq custom-safe-themes t)
 (put 'narrow-to-region 'disabled nil)
-
+; default maximize frame size
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (defun my-minibuffer-setup-hook ()
   "Increase GC cons threshold."
@@ -93,7 +94,7 @@
 
 (use-package ggtags
 	     :ensure t
-	     :diminish ggtags-mod:e
+	     :diminish ggtags-mode
 	     :config
 	     (add-hook 'prog-mode-hook 'ggtags-mode) 
 	     (add-hook 'matlab-mode-hook 'ggtags-mode))
@@ -130,6 +131,7 @@
 (require 'init-gtags)
 (require 'init-evil)
 (require 'init-maps)
+(require 'init-python)
 (require 'init-ess)
 (require 'init-matlab)
 ;(require 'init-twitter)
@@ -168,11 +170,6 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
-
-(use-package elpy
-  :ensure t
-  :config
-(elpy-enable))
 
 ;(use-package rainbow-mode
 ;  :ensure t
@@ -255,7 +252,9 @@
   (define-key company-active-map (kbd "ESC") 'company-abort)
   (define-key company-active-map [tab] 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+ ; (global-set-key (kbd "C-y") 'company-yasnippet)
+  )
 
 (use-package counsel :ensure t)
 (use-package swiper
@@ -265,7 +264,7 @@
   :config
   (require 'counsel)
   (setq counsel-grep-base-command "grep -niE \"%s\" %s")
-  (setq ivy-height 20))
+  (setq ivy-height 10))
 
 (use-package dictionary :ensure t)
 
@@ -275,7 +274,13 @@
 
 (use-package flycheck
   :ensure t
-  :commands flycheck-mode)
+  :commands flycheck-mode
+  :config
+  ;;; Flycheck mode:
+  (add-hook 'flycheck-mode-hook
+          (lambda ()
+            (evil-define-key 'normal flycheck-mode-map (kbd "]s") 'flycheck-next-error)
+            (evil-define-key 'normal flycheck-mode-map (kbd "[s") 'flycheck-previous-error))))
 
 (use-package helm-projectile
   :commands (helm-projectile helm-projectile-switch-project)
@@ -293,6 +298,12 @@
   :ensure t
   :mode "\\.md\\'"
   :config
+  ;;; Markdown mode:
+  (add-hook 'markdown-mode-hook (lambda ()
+				(yas-minor-mode t)
+                                (set-fill-column 80)
+                                (turn-on-auto-fill)
+                                (flyspell-mode)))
   (setq markdown-command "pandoc --from markdown_github-hard_line_breaks --to html")
   (define-key markdown-mode-map (kbd "C-\\")  'markdown-insert-list-item)
   (define-key markdown-mode-map (kbd "C-c '") 'fence-edit-code-at-point)
@@ -303,27 +314,21 @@
   (define-key markdown-mode-map (kbd "C-c 5") 'markdown-insert-header-atx-5)
   (define-key markdown-mode-map (kbd "C-c 6") 'markdown-insert-header-atx-6))
 
-;;; Markdown mode:
-(add-hook 'markdown-mode-hook (lambda ()
-				(yas-minor-mode t)
-                                (set-fill-column 80)
-                                (turn-on-auto-fill)
-                                (flyspell-mode)))
 
-(use-package polymode
-  :ensure t
-  :config)
+(use-package pandoc-mode
+  :hook (markdown-mode . pandoc-mode))
 
 ;;; MARKDOWN
 ;(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 ;;; R modes
 
-(require 'poly-R)
-(require 'poly-markdown)
-(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
-(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-
+(use-package polymode
+  :ensure t
+  :mode
+    ;; R modes
+    ("\\.Snw" . poly-noweb+r-mode)
+    ("\\.Rnw" . poly-noweb+r-mode)
+    ("\\.Rmd" . poly-markdown+r-mode))
 
 ;(use-package php-extras :ensure t :defer t)
 ;(use-package sunshine
@@ -376,7 +381,7 @@
 (use-package projectile
   :ensure t
   :defer 1
-  :diminish projectile-mode
+  ;:diminish projectile-mode
   :config
   (projectile-mode)
   (setq projectile-enable-caching t)
@@ -442,11 +447,6 @@
 (defvar show-paren-delay 0
   "Delay (in seconds) before matching paren is highlighted.")
 
-;;; Flycheck mode:
-(add-hook 'flycheck-mode-hook
-          (lambda ()
-            (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
-            (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error)))
 
 ;;; Lisp interaction mode & Emacs Lisp mode:
 (add-hook 'lisp-interaction-mode-hook
@@ -465,34 +465,6 @@
 		    (nlinum-relative-setup-evil)
 		    (setq nlinum-relative-redisplay-delay 0)
 		    (add-hook 'prog-mode-hook #'nlinum-relative-mode)))
-
-;;; Python mode:
-(use-package virtualenvwrapper
-  :ensure t
-  :config
-  (venv-initialize-interactive-shells)
-  (venv-initialize-eshell)
-  (setq venv-location
-        (expand-file-name "~/Projects/virtualenvs/")))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            ;; I'm rudely redefining this function to do a comparison of `point'
-            ;; to the end marker of the `comint-last-prompt' because the original
-            ;; method of using `looking-back' to match the prompt was never
-            ;; matching, which hangs the shell startup forever.
-            (defun python-shell-accept-process-output (process &optional timeout regexp)
-              "Redefined to actually work."
-              (let ((regexp (or regexp comint-prompt-regexp)))
-                (catch 'found
-                  (while t
-                    (when (not (accept-process-output process timeout))
-                      (throw 'found nil))
-                    (when (= (point) (cdr (python-util-comint-last-prompt)))
-                      (throw 'found t))))))
-
-            ;; Additional settings follow.
-            (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;;; The Emacs Shell
 (defun company-eshell-history (command &optional arg &rest ignored)
@@ -656,6 +628,34 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
 ;(load-theme 'solarized-light)
+
+;;; GDB settings
+(add-hook 'gud-mode-hook '(lambda () 
+			;;; on mouse: print value
+			    (gud-tooltip-mode t)
+			;;; buffers
+			    (setq gdb-many-windows t)
+			;;; io buffer
+			;(setq gdb-use-separate-io-buffer t)
+			;;; show mini buffer in gud
+			(setq gud-tooltip-echo-area nil)))
+
+;; Shortcuts for GDB/debugging in general, mimic VC shortcuts
+(global-set-key (kbd "<f5>") 'gud-cont)
+(global-set-key (kbd "<f9>") 'gud-break)
+(global-set-key (kbd "S-<f9>") 'gud-remove)
+(global-set-key (kbd "<f11>") 'gud-step)
+(global-set-key (kbd "S-<f11>") 'gud-up)
+(global-set-key (kbd "<f10>") 'gud-next) 
+(global-set-key (kbd "S-<f5>") 'gud-finish) 
+
+;(use-package pdf-tools
+;  :ensure t
+;  :config
+;  (custom-set-variables
+;    '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
+;  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
+;(pdf-tools-install)
 
 (provide 'init)
 ;;; init.el ends here

@@ -21,12 +21,12 @@
     ;"l"  'whitespace-mode       ;; Show invisible characters
     "nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
     "nw" 'widen
-    "o"  'other-window  ;; C-w o
-    "q"  'delete-window  ;; C-w o
-    "O"  'delete-other-windows  ;; C-w o
+    "ww"  'other-window  ;; C-w o
+    "wc"  'delete-window  ;; C-w o
+    "wo"  'delete-other-windows  ;; C-w o
     "p"  'helm-show-kill-ring
     "s"  'ag-project            ;; Ag search from project's root
-    ;"r"  'chrome-reload
+    "r"  'helm-recentf ;; recent files
     ;"R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
     "S"  'delete-trailing-whitespace
     "t"  'ggtags-find-tag-dwim ;'gtags-reindex
@@ -94,6 +94,9 @@
   (define-key evil-normal-state-map (kbd "[i")      'show-first-occurrence)
   (define-key evil-normal-state-map (kbd "S-SPC")   'air-pop-to-org-agenda)
   (define-key evil-insert-state-map (kbd "C-e")     'end-of-line) ;; I know...
+  ; kill to the left; guofeng
+  (define-key evil-insert-state-map (kbd "C-u")     (lambda () (interactive) (kill-line 0)))
+
 
   (evil-define-key 'normal global-map (kbd "C-p")   'helm-projectile)
   (evil-define-key 'normal global-map (kbd "C-S-p") 'helm-projectile-switch-project)
@@ -102,6 +105,7 @@
   (evil-define-key 'normal global-map (kbd "C-t")   'air-open-eshell)
 
   (evil-define-key 'normal global-map (kbd "z d")   'dictionary-lookup-definition)
+
 
   (evil-define-key 'normal global-map (kbd "\\ \\") 'tiny-menu)
   (evil-define-key 'normal global-map (kbd "\\ f") (tiny-menu-run-item "org-files"))
