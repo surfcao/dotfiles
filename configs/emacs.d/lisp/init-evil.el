@@ -19,14 +19,14 @@
     "g"  'magit-status
     ;"h"  'fontify-and-browse    ;; HTML-ize the buffer and browse the result
     ;"l"  'whitespace-mode       ;; Show invisible characters
-    "nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
+    ;"nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
     "nw" 'widen
-    "ww"  'other-window  ;; C-w o
-    "wc"  'delete-window  ;; C-w o
-    "wo"  'delete-other-windows  ;; C-w o
+    "o"  'other-window  ;; C-w o
+    "W"  'delete-window  ;; C-w o
+    "O"  'delete-other-windows  ;; C-w o
     "p"  'helm-show-kill-ring
     "s"  'ag-project            ;; Ag search from project's root
-    "r"  'helm-recentf ;; recent files
+    ;"r"  'helm-recentf ;; recent files
     ;"R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
     "S"  'delete-trailing-whitespace
     "t"  'ggtags-find-tag-dwim ;'gtags-reindex
@@ -96,6 +96,8 @@
   (define-key evil-insert-state-map (kbd "C-e")     'end-of-line) ;; I know...
   ; kill to the left; guofeng
   (define-key evil-insert-state-map (kbd "C-u")     (lambda () (interactive) (kill-line 0)))
+  ; period indicates the end of sentence
+  (setq sentence-end-double-space nil)
 
 
   (evil-define-key 'normal global-map (kbd "C-p")   'helm-projectile)
