@@ -374,8 +374,7 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-modules
         '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))
   (setq org-todo-keywords
-        '((sequence "TODO" "WAITING (!)" "SOMEDAY(!)" "|" "DONE(!)" "CANCELED(!)")
-	  (sequence "IDEA")))
+        '((sequence "☛ TODO" "⚑ WAITING" "SOMEDAY" "|" "✓ DONE(!)" "✗ CANCELED") (sequence "IDEA")))
   (setq org-blank-before-new-entry '((heading . t)
                                      (plain-list-item . t)))
   (setq org-capture-templates

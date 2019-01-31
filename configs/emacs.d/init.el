@@ -165,6 +165,8 @@
 
 ;; Org Mode
 (require 'init-org)
+(require 'init-org-ref)
+(require 'init-pdf)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -648,14 +650,6 @@ The IGNORED argument is... Ignored."
 (global-set-key (kbd "S-<f11>") 'gud-up)
 (global-set-key (kbd "<f10>") 'gud-next) 
 (global-set-key (kbd "S-<f5>") 'gud-finish) 
-
-;(use-package pdf-tools
-;  :ensure t
-;  :config
-;  (custom-set-variables
-;    '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
-;  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
-;(pdf-tools-install)
 
 (provide 'init)
 ;;; init.el ends here
