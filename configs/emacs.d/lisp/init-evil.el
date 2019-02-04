@@ -202,6 +202,8 @@ is not used."
 (use-package evil
   :ensure t
   :commands (evil-mode evil-define-key)
+; :init 
+; (setq evil-want-keybinding nil )
   :config
   (add-hook 'evil-mode-hook 'air--config-evil)
   (evil-mode 1)
@@ -221,6 +223,12 @@ is not used."
     :ensure t)
 
   (air--apply-evil-other-package-configs))
+
+;use-package evil-collection
+; :after evil
+; :ensure t
+; :config
+; (evil-collection-init '(pdf)))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here
