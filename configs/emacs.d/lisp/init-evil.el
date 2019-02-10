@@ -52,9 +52,9 @@
 		  eshell-mode
                   flycheck-error-list-mode
                   git-rebase-mode
-                  octopress-mode
-                  octopress-server-mode
-                  octopress-process-mode
+                  ;octopress-mode
+                  ;octopress-server-mode
+                  ;octopress-process-mode
 		  org-capture-mode
                   sunshine-mode
                   term-mode))

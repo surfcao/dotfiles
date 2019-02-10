@@ -374,6 +374,10 @@
                                yas-dropdown-prompt))
   (define-key yas-minor-mode-map (kbd "<escape>") 'yas-exit-snippet))
 
+(use-package yasnippet-snippets
+  :ensure t
+  :defer t)
+
 (use-package which-key
   :ensure t
   :diminish ""
@@ -650,6 +654,37 @@ The IGNORED argument is... Ignored."
 (global-set-key (kbd "S-<f11>") 'gud-up)
 (global-set-key (kbd "<f10>") 'gud-next) 
 (global-set-key (kbd "S-<f5>") 'gud-finish) 
+
+;; Distraction-free editing.
+(use-package writeroom-mode
+  :ensure t
+  :commands (writeroom-mode)
+  :config
+  (global-writeroom-mode 1)
+  (add-to-list 'writeroom-global-effects 'visual-line-mode)
+  (add-to-list 'writeroom-major-modes 'latex-mode)
+  (add-to-list 'writeroom-major-modes 'markdown-mode)
+
+
+  (setq writeroom-restore-window-config t
+        writeroom-width 80))
+
+(use-package writegood-mode
+  :ensure t
+  :config
+  (global-set-key "\C-cg" 'writegood-mode))
+
+(use-package smartparens
+  :ensure t
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
+
+(use-package rainbow-delimiters
+	    :ensure t )
+
+(require 'init-tex)
 
 (provide 'init)
 ;;; init.el ends here

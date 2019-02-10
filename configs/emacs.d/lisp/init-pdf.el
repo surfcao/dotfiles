@@ -2,6 +2,7 @@
 (use-package pdf-tools
  :defer t
  :mode (("\\.pdf\\'" . pdf-view-mode))
+ :bind ("C-c C-g" . pdf-sync-forward-search)
  :pin manual ;; manually update
  :config
  ;; initialise
@@ -23,12 +24,17 @@
  (define-key pdf-view-mode-map (kbd "G") 'pdf-view-last-page)
  (define-key pdf-view-mode-map (kbd "u") 'pdf-view-scroll-down-or-previous-page)
  (define-key pdf-view-mode-map (kbd "d") 'pdf-view-scroll-up-or-next-page)
+ (define-key pdf-view-mode-map (kbd "C-b") 'pdf-view-scroll-down-or-previous-page)
+ (define-key pdf-view-mode-map (kbd "C-f") 'pdf-view-scroll-up-or-next-page)
  (define-key pdf-view-mode-map (kbd "l") 'image-forward-hscroll)
  (define-key pdf-view-mode-map (kbd "h") 'image-backward-hscroll)
  (define-key pdf-view-mode-map (kbd "0") 'image-bol)
  (define-key pdf-view-mode-map (kbd "$") 'image-eol)
  (define-key pdf-view-mode-map (kbd "q") 'quit-window)
- (define-key pdf-view-mode-map (kbd "Q") 'kill-this-buffer)
+ (define-key pdf-view-mode-map (kbd "Q") 
+	     (lambda ()
+	       (kill-this-buffer)
+	       (quit-window)))
  (define-key pdf-view-mode-map (kbd "'") 'pdf-view-jump-to-register)
  (define-key pdf-view-mode-map (kbd "m") 'pdf-view-position-to-register)
  (define-key pdf-view-mode-map (kbd "r") 'revert-buffer)
@@ -42,7 +48,11 @@
 
  (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
- (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
+ (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete)
+ ; disable the blink
+ (add-hook 'pdf-view-mode-hook 
+	  (lambda ()
+	   (blink-cursor-mode -1))))
 
 ;(use-package pdf-tools
 ;  :ensure t

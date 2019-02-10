@@ -42,5 +42,7 @@
 (evil-leader/set-key-for-mode 'python-mode "f" 'elpy-format-code)
 (evil-leader/set-key-for-mode 'python-mode "q" 'elpy-shell-kill)
 (evil-leader/set-key-for-mode 'python-mode "o" 'elpy-shell-switch-to-shell)
+(evil-leader/set-key-for-mode 'python-mode "g" 'elpy-goto-definition)
+(evil-leader/set-key-for-mode 'python-mode "G" 'elpy-goto-definition-other-window)
 
 (provide 'init-python)
