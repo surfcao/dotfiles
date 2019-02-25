@@ -250,7 +250,8 @@ mode "go_to_window" {
 bindsym $mod+g mode "go_to_window"
 bindsym $mod+m mode "mark_window"
 
-bindsym $mod+w [class="(?i)firefox"] focus
+#bindsym $mod+w [class="(?i)firefox"] focus
+bindsym $mod+w [class="(?i)vivaldi"] focus
 bindsym $mod+u [class="(?i)urxvt"] focus
 bindsym $mod+v [class="(?i)urxvt" title="(?i)vim"] focus
 bindsym $mod+s [title="(?i)libreoffice*"] focus
@@ -259,6 +260,7 @@ bindsym $mod+z [class="(?i)zathura"] focus
 
 #assign [class="(?i)urxvt"] 1
 assign [class="(?i)firefox"] 2
+assign [class="(?i)vivaldi"] 2
 assign [class="(?i)zathura"] 3
 assign [title="(?i)libreoffice*"] 4
 assign [class="(?i)matlab"] 5
@@ -296,6 +298,9 @@ exec xmodmap ~/.speedswapper
 #explicitly load .Xresources file because it didn't handle #define well:
 #https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129
 exec xrdb ~/.Xresources
+#exec xrandr --output eDP-1 --mode 1920x1080
+# the following is for touchpad on thinkpad X1
+#exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 
 #control of pianobar
 bindsym $mod+F11 exec ~/.config/pianobar/control-pianobar.sh p
@@ -307,6 +312,9 @@ bindsym $mod+Shift+Delete exec ~/.config/pianobar/control-pianobar.sh quit
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master toggle
+# screen brightness control, using light: https://github.com/haikarainen/light
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 # Assignment to a named workspace
 #assign [class="^URxvt$"] → work

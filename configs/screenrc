@@ -31,7 +31,7 @@ startup_message off
 #term rxvt-unicode-256color
 term xterm-256color
 # tell screen how to set colors. AB = background, AF=foreground
-termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # urxvt-unicode only
 #terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color

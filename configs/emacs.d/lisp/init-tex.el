@@ -23,7 +23,8 @@
               (writeroom-mode)
 	      ; hide the header line to increase top margin
 	      (setq header-line-format " ")
-	      (set-face-attribute 'header-line nil :background "white")
+	      ;(set-face-attribute 'header-line nil :background "white")
+	      (set-face-attribute 'header-line nil :background (face-attribute 'default :background))
 	      (setq-default line-spacing 5)
 
 	      (flyspell-mode)
