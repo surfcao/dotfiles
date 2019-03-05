@@ -686,5 +686,15 @@ The IGNORED argument is... Ignored."
 
 (require 'init-tex)
 
+;(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+;(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
+(eval-after-load 'comint
+    '(progn      
+         (define-key comint-mode-map (kbd "<up>") 
+            #'comint-previous-matching-input-from-input)
+         (define-key comint-mode-map (kbd "<down>")
+            #'comint-next-matching-input-from-input)))
+
 (provide 'init)
 ;;; init.el ends here

@@ -19,16 +19,16 @@
             ;; to the end marker of the `comint-last-prompt' because the original
             ;; method of using `looking-back' to match the prompt was never
             ;; matching, which hangs the shell startup forever.
-            (defun python-shell-accept-process-output (process &optional timeout regexp)
-              "Redefined to actually work."
-              (let ((regexp (or regexp comint-prompt-regexp)))
-                (catch 'found
-                  (while t
-                    (when (not (accept-process-output process timeout))
-                      (throw 'found nil))
-                    (when (= (point) (cdr (python-util-comint-last-prompt)))
-                      (throw 'found t))))))
-
+;            (defun python-shell-accept-process-output (process &optional timeout regexp)
+;              "Redefined to actually work."
+;              (let ((regexp (or regexp comint-prompt-regexp)))
+;                (catch 'found
+;                  (while t
+;                    (when (not (accept-process-output process timeout))
+;                      (throw 'found nil))
+;                    (when (= (point) (cdr (python-util-comint-last-prompt)))
+;                      (throw 'found t))))))
+;
             ;; Additional settings follow.
             (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 

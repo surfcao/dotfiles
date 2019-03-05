@@ -97,7 +97,7 @@
         (lambda (fpath)
           (start-process "open" "*open*" "open" fpath)))
 
-  (setq ivy-bibtex-default-action 'bibtex-completion-insert-citation))
+  (setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation))
 
 (use-package org-ref
   :after org

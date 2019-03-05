@@ -80,8 +80,10 @@
     (kbd "C-w C-w") 'other-window)
 
   ;; Global bindings.
-  (define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
+  ;(define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "j")  'evil-next-visual-line)
+  ;(define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "k")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "-")       'helm-find-files)
   (evil-define-key 'normal global-map (kbd "C--")     (lambda ()
                                                         (interactive)
