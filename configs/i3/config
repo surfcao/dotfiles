@@ -154,6 +154,9 @@ bindsym $mod+r mode "resize"
 #assign [class="(?i)firefox"] 1
 
 bindsym Control+Mod1+l exec i3lock -n -d --color 000000
+bindsym Control+Mod1+Delete exec --no-startup-id "i3lock -c 000000 && systemctl suspend"
+bindsym Control+Mod1+End exec --no-startup-id "i3lock -c 000000 && systemctl hibernate"
+
 bindsym Control+Mod1+e exec ~/.i3/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 

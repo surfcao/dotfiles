@@ -4,7 +4,11 @@
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
 
 (use-package ess
-:load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"
+:load-path (lambda ()
+            (when (memq window-system '(mac ns))
+	      "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/")
+            (when (memq window-system '(x))
+	      "/usr/share/emacs/site-lisp/ess/"))
 :mode (("\\.[rR]\\'" . R-mode)
          ("\\.Rnw\\'" . Rnw-mode)
          ("\\.Rmd\\'" . poly-mode))
