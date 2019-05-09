@@ -33,8 +33,10 @@ c.bindings.commands = {
 #}
 
 config.unbind('<Ctrl-v>')
+
 config.bind("<Ctrl-i>", "enter-mode 'passthrough'")
 config.bind('<Ctrl-i>', 'leave-mode', mode='passthrough')
+config.bind("<Ctrl-j>", "enter-mode 'insert'", mode="passthrough")
 
 # Bindings
 config.bind("gi", "hint inputs")
