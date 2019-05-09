@@ -13,8 +13,8 @@ c.bindings.commands = {
         '<Ctrl-b>'        : 'fake-key <Left>',
         '<Ctrl-a>'        : 'fake-key <Home>',
         '<Ctrl-e>'        : 'fake-key <End>',
-        '<Ctrl-n>'        : 'fake-key <Down>',
-        '<Ctrl-p>'        : 'fake-key <Up>',
+        '<Ctrl-j>'        : 'fake-key <Down>',
+        '<Ctrl-k>'        : 'fake-key <Up>',
         #'<Alt-v>'         : 'fake-key <PgUp>',
         #'<Ctrl-v>'        : 'fake-key <PgDown>',
         '<Alt-f>'         : 'fake-key <Ctrl-Right>',
@@ -99,6 +99,7 @@ c.colors.tabs.odd.fg = c.colors.tabs.even.fg
 
 ## avoid the popup gmail confirmation everytime
 config.set('content.register_protocol_handler', True, '*://mail.google.com/*')
+config.set('content.host_blocking.whitelist', ['*://statcounter.com/*'])
 
 # The height of the completion, in px or as percentage of the window.
 c.completion.height = "20%"
