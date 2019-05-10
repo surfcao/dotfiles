@@ -79,7 +79,9 @@
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
-(setq make-backup-files nil)
+(setq auto-save-file-name-transforms `((".*", backup-dir )))
+;(setq make-backup-files nil)
+;(setq auto-save-default nil)
 
 ;;; File type overrides.
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
