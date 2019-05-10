@@ -79,7 +79,7 @@
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
-(setq auto-save-file-name-transforms `((".*", backup-dir )))
+(setq auto-save-file-name-transforms (list (list ".*" backup-dir )))
 ;(setq make-backup-files nil)
 ;(setq auto-save-default nil)
 
