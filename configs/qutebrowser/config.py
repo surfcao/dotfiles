@@ -34,8 +34,14 @@ c.bindings.commands = {
 
 config.unbind('<Ctrl-v>')
 
+#c.statusbar.hide=True
+#def bind_chained(key, *commands, mode='normal'):
+#    config.bind(key, ' ;; '.join(commands), mode)
+
 config.bind("<Ctrl-i>", "enter-mode 'passthrough'")
+#bind_chained("<Ctrl-i>", "enter-mode 'passthrough'", "set statusbar.hide False")
 config.bind('<Ctrl-i>', 'leave-mode', mode='passthrough')
+#bind_chained("<Ctrl-i>", "leave-mode", "set statusbar.hide True", mode="passthrough")
 config.bind("<Ctrl-j>", "enter-mode 'insert'", mode="passthrough")
 
 # Bindings
@@ -206,6 +212,8 @@ c.input.insert_mode.auto_leave = True
 # Automatically enter insert mode if an editable element is focused
 # after loading the page.
 c.input.insert_mode.auto_load = True
+
+c.input.insert_mode.leave_on_load = False
 
 # Show a scrollbar.
 # c.scrolling.bar = True
