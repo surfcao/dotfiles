@@ -18,7 +18,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-"Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
 "Plug 'morhetz/gruvbox'
@@ -79,12 +79,16 @@ if has('mac') == 0
 else
 	let g:vimtex_view_method='skim' 
 endif 
-Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
+" put pandoc using hard wrapping, default is soft wrapping
+let g:pandoc#formatting#mode = "h"
+let g:pandoc#formatting#textwidth=75
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#command#latex_engine = 'pdflatex'
 let g:pandoc#keyboard#enabled_submodules = ["lists", "references", "sections", "links"]
 "let g:pandoc#filetypes#handled = ['pandoc', 'markdown']
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc']}
+let g:pandoc#syntax#conceal#blacklist=['subscript']
 call plug#end()
 filetype plugin indent on                   " required!
 syntax on
@@ -160,6 +164,7 @@ set hidden
 set noruler "hide the status line
 set number
 set nonumber " No line numbering
+set display=lastline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Key Mappings
