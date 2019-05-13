@@ -16,7 +16,7 @@
             (when (memq window-system '(x))
               (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
               (set-face-attribute 'default nil :font "Inconsolata LGC")
-              (sanityinc/set-frame-font-size 16))
+              (sanityinc/set-frame-font-size 26))
 
             (when (fboundp 'powerline-reset)
               (powerline-reset))))

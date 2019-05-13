@@ -19,14 +19,14 @@
     "g"  'magit-status
     ;"h"  'fontify-and-browse    ;; HTML-ize the buffer and browse the result
     ;"l"  'whitespace-mode       ;; Show invisible characters
-    "nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
+    ;"nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
     "nw" 'widen
     "o"  'other-window  ;; C-w o
-    "q"  'delete-window  ;; C-w o
+    "W"  'delete-window  ;; C-w o
     "O"  'delete-other-windows  ;; C-w o
     "p"  'helm-show-kill-ring
     "s"  'ag-project            ;; Ag search from project's root
-    ;"r"  'chrome-reload
+    ;"r"  'helm-recentf ;; recent files
     ;"R"  (lambda () (interactive) (font-lock-fontify-buffer) (redraw-display))
     "S"  'delete-trailing-whitespace
     "t"  'ggtags-find-tag-dwim ;'gtags-reindex
@@ -52,9 +52,9 @@
 		  eshell-mode
                   flycheck-error-list-mode
                   git-rebase-mode
-                  octopress-mode
-                  octopress-server-mode
-                  octopress-process-mode
+                  ;octopress-mode
+                  ;octopress-server-mode
+                  ;octopress-process-mode
 		  org-capture-mode
                   sunshine-mode
                   term-mode))
@@ -80,8 +80,10 @@
     (kbd "C-w C-w") 'other-window)
 
   ;; Global bindings.
-  (define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
+  ;(define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "j")  'evil-next-visual-line)
+  ;(define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "k")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "-")       'helm-find-files)
   (evil-define-key 'normal global-map (kbd "C--")     (lambda ()
                                                         (interactive)
@@ -94,6 +96,11 @@
   (define-key evil-normal-state-map (kbd "[i")      'show-first-occurrence)
   (define-key evil-normal-state-map (kbd "S-SPC")   'air-pop-to-org-agenda)
   (define-key evil-insert-state-map (kbd "C-e")     'end-of-line) ;; I know...
+  ; kill to the left; guofeng
+  (define-key evil-insert-state-map (kbd "C-u")     (lambda () (interactive) (kill-line 0)))
+  ; period indicates the end of sentence
+  (setq sentence-end-double-space nil)
+
 
   (evil-define-key 'normal global-map (kbd "C-p")   'helm-projectile)
   (evil-define-key 'normal global-map (kbd "C-S-p") 'helm-projectile-switch-project)
@@ -102,6 +109,7 @@
   (evil-define-key 'normal global-map (kbd "C-t")   'air-open-eshell)
 
   (evil-define-key 'normal global-map (kbd "z d")   'dictionary-lookup-definition)
+
 
   (evil-define-key 'normal global-map (kbd "\\ \\") 'tiny-menu)
   (evil-define-key 'normal global-map (kbd "\\ f") (tiny-menu-run-item "org-files"))
@@ -196,6 +204,8 @@ is not used."
 (use-package evil
   :ensure t
   :commands (evil-mode evil-define-key)
+; :init 
+; (setq evil-want-keybinding nil )
   :config
   (add-hook 'evil-mode-hook 'air--config-evil)
   (evil-mode 1)
@@ -215,6 +225,12 @@ is not used."
     :ensure t)
 
   (air--apply-evil-other-package-configs))
+
+;use-package evil-collection
+; :after evil
+; :ensure t
+; :config
+; (evil-collection-init '(pdf)))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

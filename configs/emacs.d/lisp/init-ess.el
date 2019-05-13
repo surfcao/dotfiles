@@ -4,7 +4,11 @@
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
 
 (use-package ess
-:load-path "/home/guofeng/Downloads/ess-16.04"
+:load-path (lambda ()
+            (when (memq window-system '(mac ns))
+	      "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/")
+            (when (memq window-system '(x))
+	      "/usr/share/emacs/site-lisp/ess/"))
 :mode (("\\.[rR]\\'" . R-mode)
          ("\\.Rnw\\'" . Rnw-mode)
          ("\\.Rmd\\'" . poly-mode))
@@ -116,12 +120,12 @@
 ;(define-key ess-mode-map [(control return)] nil)
 ;(define-key ess-mode-map (kbd "<s-return>") 'ess-eval-region-or-line-and-step)
 ;(evil-leader/set-key-for-mode 'ess-mode "bb" 'ess-eval-buffer)
-(evil-leader/set-key-for-mode 'ess-mode "x" 'ess-eval-buffer-from-beg-to-here)
-(evil-leader/set-key-for-mode 'ess-mode "X" 'ess-eval-buffer-from-here-to-end)
+;(evil-leader/set-key-for-mode 'ess-mode "x" 'ess-eval-buffer-from-beg-to-here)
+;(evil-leader/set-key-for-mode 'ess-mode "X" 'ess-eval-buffer-from-here-to-end)
 
-(evil-leader/set-key-for-mode 'ess-mode "q" 'ess-quit)
+(evil-leader/set-key-for-mode 'ess-mode "Q" 'ess-quit)
 (evil-leader/set-key-for-mode 'ess-mode "f" 'ess-load-file)
-(evil-leader/set-key-for-mode 'ess-mode "d" 'ess-use-this-dir)
+(evil-leader/set-key-for-mode 'ess-mode "dd" 'ess-use-this-dir)
 (evil-leader/set-key-for-mode 'ess-mode "D" 'ess-set-working-directory)
 (evil-leader/set-key-for-mode 'ess-mode "p" 'ess-install-library)
 (evil-leader/set-key-for-mode 'ess-mode "P" 'ess-display-package-index)

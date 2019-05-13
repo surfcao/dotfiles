@@ -1,7 +1,7 @@
 !-------------------------------------------------------------------------------
 ! Xft settings
 !-------------------------------------------------------------------------------
-Xft.dpi:                    96
+Xft.dpi:                    192
 Xft.antialias:              true
 Xft.rgba:                   rgb
 Xft.hinting:                full
@@ -32,10 +32,10 @@ URxvt.allow_bold:           true
 
 !URxvt*font: xft:DejaVu Sans Mono:pixelsize=16:antialias=true:hinting=slight
 !URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=16:antialias=true:hinting=slight
-URxvt*font: xft:Inconsolata LGC:style=Regular:pixelsize=22:antialias=true:hinting=slight
-URxvt*boldFont: xft:Inconsolata LGC:style=Bold:pixelsize=22:antialias=true:hinting=slight
-URxvt*italicFont: xft:Inconsolata LGC:style=Italic:pixelsize=22:antialias=true:hinting=slight 
-URxvt*bolditalicFont: xft:Inconsolata LGC:style=BoldItalic:pixelsize=22:antialias=true:hinting=slight
+URxvt*font: xft:Inconsolata LGC:style=Regular:pixelsize=28:antialias=true:hinting=slight
+URxvt*boldFont: xft:Inconsolata LGC:style=Bold:pixelsize=28:antialias=true:hinting=slight
+URxvt*italicFont: xft:Inconsolata LGC:style=Italic:pixelsize=28:antialias=true:hinting=slight 
+URxvt*bolditalicFont: xft:Inconsolata LGC:style=BoldItalic:pixelsize=28:antialias=true:hinting=slight
 
 !URxvt*font: xft:Consolas:style=Regular:pixelsize=9:antialias=true:hinting=slight
 !URxvt*boldFont: xft:Consolas:style=bold:pixelsize=9:antialias=true:hinting=slight

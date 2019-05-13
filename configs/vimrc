@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set mouse=a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 """   Plug
@@ -187,6 +188,16 @@ nnoremap <LocalLeader>p :bp<CR>
 nnoremap <LocalLeader>n :bn<CR>
 nnoremap <LocalLeader>d :bd<CR>
 nnoremap <LocalLeader><tab> :e#<CR>
+nnoremap <LocalLeader>1 :1b<CR>
+nnoremap <LocalLeader>2 :2b<CR>
+nnoremap <LocalLeader>3 :3b<CR>
+nnoremap <LocalLeader>4 :4b<CR>
+nnoremap <LocalLeader>5 :5b<CR>
+nnoremap <LocalLeader>6 :6b<CR>
+nnoremap <LocalLeader>7 :7b<CR>
+nnoremap <LocalLeader>8 :8b<CR>
+nnoremap <LocalLeader>9 :9b<CR>
+nnoremap <LocalLeader>0 :10b<CR>
 
 " Window 
 nnoremap <C-h> <C-w>h
