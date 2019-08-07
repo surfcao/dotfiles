@@ -12,11 +12,11 @@ layout attach
 
 
 # the following version should be used for older version of screen
-#caption string "%{= dd} "
-#sorendition "="
-caption string "%{= 03} "
+caption string "%{= dd} "
+sorendition "="
+#caption string "%{= 03} "
 altscreen on
-rendition so =00
+#rendition so =00
 
 #vbell_msg "bell: window ~%" # Message for visual bell
 #vbellwait 2 # Seconds to pause the screen for visual bell
@@ -26,16 +26,15 @@ startup_message off
 
 # terminfo and termcap for nice 256 color terminal
 # allow bold colors - necessary for some reason
- attrcolor b ".I"
+#attrcolor b ".I"
 
-#term rxvt-unicode-256color
-term xterm-256color
+term rxvt-unicode-256color
+#term xterm-256color
 # tell screen how to set colors. AB = background, AF=foreground
 #termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # urxvt-unicode only
-#terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#terminfo rxvt-unicode-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color
-defbce "on" 
+#defbce "on" 
 
 shell -/bin/bash
-
