@@ -8,15 +8,20 @@
 (add-hook 'window-setup-hook
           (lambda ()
             (when (memq window-system '(mac ns))
-              (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
-              (set-face-attribute 'default nil :font "Inconsolata LGC")
-              (sanityinc/set-frame-font-size 14)
-              (define-key global-map (kbd "S-<return>") 'toggle-frame-fullscreen))
+	      (use-package exec-path-from-shell
+			   :ensure t
+			   :config
+			   (exec-path-from-shell-initialize))
 
-            (when (memq window-system '(x))
-              (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
-              (set-face-attribute 'default nil :font "Inconsolata LGC")
-              (sanityinc/set-frame-font-size 26))
+	      (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
+	      (set-face-attribute 'default nil :font "Inconsolata LGC")
+	      (sanityinc/set-frame-font-size 14)
+	      (define-key global-map (kbd "S-<return>") 'toggle-frame-fullscreen))
+
+	    (when (memq window-system '(x))
+	      (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
+	      (set-face-attribute 'default nil :font "Inconsolata LGC")
+	      (sanityinc/set-frame-font-size 26))
 
             (when (fboundp 'powerline-reset)
               (powerline-reset))))

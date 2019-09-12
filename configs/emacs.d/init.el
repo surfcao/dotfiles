@@ -170,11 +170,6 @@
 (require 'init-org-ref)
 (require 'init-pdf)
 
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
-
 ;(use-package rainbow-mode
 ;  :ensure t
 ;  :commands rainbow-mode)
