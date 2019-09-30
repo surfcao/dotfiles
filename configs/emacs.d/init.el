@@ -631,6 +631,7 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
 ;(load-theme 'solarized-light)
+;(load-theme 'nord t)
 
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 

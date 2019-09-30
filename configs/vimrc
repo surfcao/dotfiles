@@ -22,6 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
+Plug 'arcticicestudio/nord-vim'
 "Plug 'morhetz/gruvbox'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -155,6 +156,9 @@ set dictionary+=/usr/share/dict/words
 set complete+=kspell
 set thesaurus+=$HOME/Dropbox/.vim/thesaurus/mthesaur.txt
 
+" Ctrl-l automatically fix the typos
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 set autowriteall
 
 set history=1000
@@ -244,6 +248,7 @@ let g:solarized_italic = 1 | 0
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
 colorscheme solarized
+"colorscheme nord
 "colorscheme gruvbox
 highlight LineNr ctermbg=NONE
 

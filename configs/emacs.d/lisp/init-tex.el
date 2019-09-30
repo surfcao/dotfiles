@@ -10,7 +10,8 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
  ; set master for multiple files
-  (setq-default TeX-master "main")
+  ;(setq-default TeX-master "main")
+  (setq-default TeX-master nil)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
 	      (rainbow-delimiters-mode)
@@ -36,15 +37,15 @@
 	      (setq TeX-source-correlate-method 'synctex)
               (setq TeX-source-correlate-start-server t)))
 
-(add-hook 'LaTeX-mode-hook (lambda ()
-  (push
-    '("latexmk" "latexmk -outdir=./output -pdflatex='pdflatex -verbose -file-line-error -synctex=1' -pdf %s" TeX-run-TeX nil t
-      :help "Run latexmk on file")
-    TeX-command-list))) 
+;(add-hook 'LaTeX-mode-hook (lambda ()
+;  (push
+;    '("latexmk" "latexmk -outdir=./output -pdflatex='pdflatex -verbose -file-line-error -synctex=1' -pdf %s" TeX-run-TeX nil t
+;      :help "Run latexmk on file")
+;    TeX-command-list))) 
+;
+;(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-
-(require 'tex-buf)
+;(require 'tex-buf)
 (defun run-latexmk ()
   (interactive)
   (let ((TeX-save-query nil)
@@ -65,10 +66,10 @@
 (add-hook 'TeX-after-TeX-LaTeX-command-finished-hook
            #'TeX-revert-document-buffer)
 
-;; to use pdfview with auctex
+; to use pdfview with auctex
 (add-hook 'LaTeX-mode-hook 'pdf-tools-install)
 
-;; to use pdfview with auctex
+; to use pdfview with auctex
 (setq TeX-view-program-selection '((output-pdf "pdf-tools"))
        TeX-source-correlate-start-server t)
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view"))))

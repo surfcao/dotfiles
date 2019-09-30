@@ -53,11 +53,11 @@
                   flycheck-error-list-mode
                   git-rebase-mode
                   ;octopress-mode
-                  ;octopress-server-mode
-                  ;octopress-process-mode
+		  ;octopress-server-mode
+		  ;octopress-process-mode
 		  org-capture-mode
-                  sunshine-mode
-                  term-mode))
+		  sunshine-mode
+		  term-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
   (delete 'term-mode evil-insert-state-modes)
@@ -65,19 +65,19 @@
 
   ;; Use insert state in these additional modes.
   (dolist (mode '(twittering-edit-mode
-		  inferior-ess-mode
-                  magit-log-edit-mode))
+		   inferior-ess-mode
+		   magit-log-edit-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
   (add-to-list 'evil-buffer-regexps '("\\*Flycheck"))
 
   (evil-add-hjkl-bindings occur-mode-map 'emacs
-    (kbd "/")       'evil-search-forward
-    (kbd "n")       'evil-search-next
-    (kbd "N")       'evil-search-previous
-    (kbd "C-d")     'evil-scroll-down
-    (kbd "C-u")     'evil-scroll-up
-    (kbd "C-w C-w") 'other-window)
+			  (kbd "/")       'evil-search-forward
+			  (kbd "n")       'evil-search-next
+			  (kbd "N")       'evil-search-previous
+			  (kbd "C-d")     'evil-scroll-down
+			  (kbd "C-u")     'evil-scroll-up
+			  (kbd "C-w C-w") 'other-window)
 
   ;; Global bindings.
   ;(define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
@@ -86,11 +86,11 @@
   (define-key evil-normal-state-map (kbd "k")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "-")       'helm-find-files)
   (evil-define-key 'normal global-map (kbd "C--")     (lambda ()
-                                                        (interactive)
-                                                        (dired (file-name-directory (buffer-file-name)))))
+							(interactive)
+							(dired (file-name-directory (buffer-file-name)))))
   (evil-define-key 'normal global-map (kbd "C-`")     (lambda ()
-                                                        (interactive)
-                                                        (dired (expand-file-name "~"))))
+							(interactive)
+							(dired (expand-file-name "~"))))
   (define-key evil-normal-state-map (kbd "C-]")     'gtags-find-tag-from-here)
   (define-key evil-normal-state-map (kbd "g/")      'occur-last-search)
   (define-key evil-normal-state-map (kbd "[i")      'show-first-occurrence)

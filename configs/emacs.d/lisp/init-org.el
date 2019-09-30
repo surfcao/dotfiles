@@ -449,6 +449,58 @@ TAG is chosen interactively from the global tags completion table."
 
   (set-face-attribute 'org-upcoming-deadline nil :foreground "gold1")
 
+(defun air--org-element-motion (count)
+  "Return the bounds of an element; traverse upward COUNT levels."
+  (save-excursion
+    ;; get to the top of the tree
+    (org-with-limited-levels
+      (cond ((org-at-heading-p) (beginning-of-line))
+	    ((org-before-first-heading-p) (user-error "Not in a subtree"))
+	    (t (outline-previous-visible-heading 1))))
+
+    (decf count)
+    (when count (while (and (> count 0) (org-up-heading-safe)) (decf count)))
+
+    ;; extract the beginning and end of the tree
+    (let* ((element (org-element-at-point))
+	   (begin (org-element-property :begin element))
+	   (end (org-element-property :end element)))
+      (list end begin))))
+
+(evil-define-text-object evil-org-outer-element (count &optional beg end type)
+			 "One whole org element, from headline to final newline."
+			 :type line
+			 (air--org-element-motion count))
+
+(evil-define-text-object evil-org-inner-element (count &optional beg end type)
+			 "An Org subtree, minus its header and concluding line break.  Uses code from `org-mark-subtree`"
+			 :type line
+			 (let* ((outer-points (air--org-element-motion count))
+				(outer-begin (cadr outer-points))
+				(outer-end (car outer-points))
+				(begin (save-excursion
+					 (goto-char outer-begin)
+					 (next-line)
+					 (while (and (< (point) outer-end)
+						     (string-match-p "^\\s-*$"
+								     (buffer-substring (line-beginning-position)
+										       (line-end-position))))
+						(forward-line 1))
+					 (point)))
+				(end (save-excursion
+				       (goto-char outer-end)
+				       (backward-char 1)
+				       (while (and (> (point) outer-begin)
+						   (string-match-p "^\\s-*$"
+								   (buffer-substring (line-beginning-position)
+										     (line-end-position))))
+					      (forward-line -1))
+				       (goto-char (line-end-position))
+				       (point))))
+			   (list end begin)))
+
+(define-key evil-outer-text-objects-map "*" 'evil-org-outer-element)
+(define-key evil-inner-text-objects-map "*" 'evil-org-inner-element)
   (evil-leader/set-key-for-mode 'org-mode
     "$"  'org-archive-subtree
     "a"  'org-agenda
@@ -507,6 +559,8 @@ TAG is chosen interactively from the global tags completion table."
               (define-key org-mode-map (kbd "C-c ,")   'org-time-stamp-inactive)
               (define-key org-mode-map (kbd "C-|")     'air-org-insert-scheduled-heading)
               (define-key org-mode-map (kbd "C-\\")    'air-org-insert-heading)
+              (define-key org-mode-map (kbd "C-c C-\\")    (lambda()
+							(interactive) (air-org-insert-heading t)))
               (define-key org-mode-map (kbd "s-r")     'org-revert-all-org-buffers)
               (define-key org-mode-map (kbd "C-c C-l") (tiny-menu-run-item "org-links"))
 
@@ -522,7 +576,7 @@ TAG is chosen interactively from the global tags completion table."
                 (or (and (looking-back "\\w" (line-beginning-position))
                          (company-complete))
 		(org-cycle)))
-              (evil-define-key 'normal org-mode-map (kbd "TAB")   'org-cycle)
+              (evil-define-key 'normal org-mode-map (kbd "<tab>")   'org-cycle)
               (evil-define-key 'insert org-mode-map (kbd "<tab>") 'company-complete-or-org-cycle)
 
               (evil-define-key 'normal org-mode-map (kbd "C-,")   'org-metaleft)
@@ -557,7 +611,9 @@ TAG is chosen interactively from the global tags completion table."
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
 			      "@" 'org-refile)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
-			      "#" 'org-add-note))
+			      "#" 'org-add-note)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "+" 'org-shiftup)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "=" 'org-shiftdown))
 
 (use-package org-bullets
   :ensure t
