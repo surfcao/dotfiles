@@ -10,9 +10,9 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
  ; set master for multiple files
-  ;(setq-default TeX-master "main")
-  (setq-default TeX-master nil)
-  (add-hook 'LaTeX-mode-hook
+ ;(setq-default TeX-master "main")
+ (setq-default TeX-master nil)
+ (add-hook 'LaTeX-mode-hook
             (lambda ()
 	      (rainbow-delimiters-mode)
 	      (yas-minor-mode t)
@@ -39,7 +39,7 @@
 
 ;(add-hook 'LaTeX-mode-hook (lambda ()
 ;  (push
-;    '("latexmk" "latexmk -outdir=./output -pdflatex='pdflatex -verbose -file-line-error -synctex=1' -pdf %s" TeX-run-TeX nil t
+;    '("latexmk" "latexmk -outdir=./ -pdflatex='pdflatex -verbose -file-line-error -synctex=1' -pdf %s" TeX-run-TeX nil t
 ;      :help "Run latexmk on file")
 ;    TeX-command-list))) 
 ;
@@ -53,7 +53,8 @@
         (master-file (TeX-master-file)))
     (TeX-save-document "")
     (TeX-run-TeX "latexmk"
-         (TeX-command-expand "latexmk -outdir=./output -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %s" 'TeX-master-file)
+         ;(TeX-command-expand "latexmk -outdir=./output -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %s" 'TeX-master-file)
+         (TeX-command-expand "latexmk -outdir=./ -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %s" 'TeX-master-file)
          master-file)
     (if (plist-get TeX-error-report-switches (intern master-file))
         (TeX-next-error t)
@@ -67,7 +68,7 @@
            #'TeX-revert-document-buffer)
 
 ; to use pdfview with auctex
-(add-hook 'LaTeX-mode-hook 'pdf-tools-install)
+;(add-hook 'LaTeX-mode-hook 'pdf-tools-install)
 
 ; to use pdfview with auctex
 (setq TeX-view-program-selection '((output-pdf "pdf-tools"))

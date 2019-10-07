@@ -247,8 +247,8 @@ let g:solarized_underline = 1 | 0
 let g:solarized_italic = 1 | 0 
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
-colorscheme solarized
-"colorscheme nord
+"colorscheme solarized
+colorscheme nord
 "colorscheme gruvbox
 highlight LineNr ctermbg=NONE
 
