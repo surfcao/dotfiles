@@ -299,10 +299,16 @@
   :config
   ;;; Markdown mode:
   (add-hook 'markdown-mode-hook (lambda ()
-				(yas-minor-mode t)
-                                (set-fill-column 80)
-                                (turn-on-auto-fill)
-                                (flyspell-mode)))
+				  (yas-minor-mode t)
+				  (set-fill-column 80)
+				  (turn-on-auto-fill)
+				  (writeroom-mode)
+				  ; hide the header line to increase top margin
+				  (setq header-line-format " ")
+				  ;(set-face-attribute 'header-line nil :background "white")
+				  (set-face-attribute 'header-line nil :background (face-attribute 'default :background))
+				  (setq-default line-spacing 5)
+				  (flyspell-mode)))
   (setq markdown-command "pandoc --from markdown_github-hard_line_breaks --to html")
   (define-key markdown-mode-map (kbd "C-\\")  'markdown-insert-list-item)
   (define-key markdown-mode-map (kbd "C-c '") 'fence-edit-code-at-point)
