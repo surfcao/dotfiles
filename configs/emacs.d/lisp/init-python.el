@@ -2,7 +2,16 @@
 (use-package elpy
   :ensure t
   :config
+;; For elpy
+(setq elpy-rpc-python-command "python3")
+;; For interactive shell
+(setq python-shell-interpreter "python3")
 (elpy-enable))
+
+;(add-hook 'elpy-mode-hook
+;(lambda ()
+;(set (make-local-variable 'company-backends)
+;'((company-dabbrev-code company-yasnippet elpy-company-backend)))))
 
 ;;; Python mode:
 (use-package virtualenvwrapper
