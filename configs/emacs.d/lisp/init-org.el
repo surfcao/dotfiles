@@ -375,8 +375,8 @@ TAG is chosen interactively from the global tags completion table."
         '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))
   (setq org-todo-keywords
         '((sequence "☛ TODO" "⚑ WAITING" "SOMEDAY" "|" "✓ DONE(!)" "✗ CANCELED") (sequence "IDEA")))
-  (setq org-blank-before-new-entry '((heading . t)
-                                     (plain-list-item . t)))
+  (setq org-blank-before-new-entry '((heading . auto)
+                                     (plain-list-item . auto)))
   (setq org-capture-templates
         '(("a" "My TODO task format." entry
            (file "todo.org")
