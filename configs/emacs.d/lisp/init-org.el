@@ -621,5 +621,12 @@ TAG is chosen interactively from the global tags completion table."
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (setq org-bullets-bullet-list '("•")))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (R . t)
+   (matlab . t)
+   (lisp . t)))
+
 (provide 'init-org)
 ;;; init-org.el ends here
