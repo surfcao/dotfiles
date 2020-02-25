@@ -62,4 +62,14 @@
 ;  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
 ;(pdf-tools-install)
 
+(use-package org-noter
+    :after org
+    :ensure t
+    :config (setq org-noter-default-notes-file-names '("notes.org")
+                  org-noter-notes-search-path '("~/Dropbox/bib/notes")))
+
+;(add-to-list 'load-path "~/Downloads/org-pdftools/")
+;(use-package org-pdftools 
+;	     :config (setq org-pdftools-root-dir '("~/Dropbox/bib/pdfs")))
+
 (provide 'init-pdf)
