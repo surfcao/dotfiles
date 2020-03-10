@@ -370,6 +370,8 @@ TAG is chosen interactively from the global tags completion table."
          ("C-c f t" . org-tags-view)
          ("C-c f i" . air-org-goto-custom-id))
   :config
+  ; add a padding on the top
+  (setq header-line-format " ")
   (setq org-hide-emphasis-markers t)
   (setq org-modules
         '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))

@@ -69,6 +69,10 @@
 ; silent the bell
 (setq ring-bell-function 'ignore)
 
+; add a margin on top of the buffer
+;(setq header-line-format " ")
+;(set-face-attribute 'header-line nil :background (face-attribute 'default :background))
+
 (defun my-minibuffer-setup-hook ()
   "Increase GC cons threshold."
   (setq gc-cons-threshold most-positive-fixnum))
@@ -288,7 +292,11 @@
 		 latex-mode-hook
 		 org-mode-hook
 		 text-mode-hook))
-  (add-hook hook #'abbrev-mode))
+  (add-hook hook 
+	    (lambda ()
+	    (abbrev-mode)
+	    (setq header-line-format " ")
+	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
 (use-package flyspell
   :defer 1
@@ -337,9 +345,9 @@
 				  (turn-on-auto-fill)
 				  (writeroom-mode)
 				  ; hide the header line to increase top margin
-				  (setq header-line-format " ")
+				  ;(setq header-line-format " ")
 				  ;(set-face-attribute 'header-line nil :background "white")
-				  (set-face-attribute 'header-line nil :background (face-attribute 'default :background))
+				  ;(set-face-attribute 'header-line nil :background (face-attribute 'default :background))
 				  (setq-default line-spacing 5)
 				  (flyspell-mode)))
   (setq markdown-command "pandoc --from markdown_github-hard_line_breaks --to html")
@@ -701,8 +709,9 @@ The IGNORED argument is... Ignored."
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
   (add-to-list 'writeroom-major-modes 'latex-mode)
   (add-to-list 'writeroom-major-modes 'markdown-mode)
-  (setq writeroom-extra-line-spacing 5)
 
+ ; (setq header-line-format " ")
+  (setq writeroom-extra-line-spacing 5)
   (setq writeroom-restore-window-config t
         writeroom-width 80))
 
@@ -732,7 +741,6 @@ The IGNORED argument is... Ignored."
             #'comint-previous-matching-input-from-input)
          (define-key comint-mode-map (kbd "<down>")
             #'comint-next-matching-input-from-input)))
-
 
 (provide 'init)
 ;;; init.el ends here
