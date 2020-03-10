@@ -98,6 +98,8 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
+set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
 
 " path to search files
 set path+=$HOME/Dropbox/work/ttu/gr/**
@@ -313,7 +315,6 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " write a file with root 
 cmap w!! w !sudo tee % >/dev/null
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags *.bib &&popd
-
+command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags library.bib &&popd 
 " add the tags to the path
 set tags+=$HOME/Dropbox/bib/tags

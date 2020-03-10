@@ -66,6 +66,9 @@
 ; default maximize frame size
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+; silent the bell
+(setq ring-bell-function 'ignore)
+
 (defun my-minibuffer-setup-hook ()
   "Increase GC cons threshold."
   (setq gc-cons-threshold most-positive-fixnum))
@@ -270,6 +273,36 @@
 ;(use-package emmet-mode
 ;  :ensure t
 ;  :commands emmet-mode)
+
+; for writing
+(use-package abbrev
+  :defer 1
+  :ensure nil
+  :custom
+  (abbrev-file-name (expand-file-name ".abbrev_defs" user-emacs-directory))
+  :config
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file)))
+
+(dolist (hook '(markdown-mode-hook
+		 latex-mode-hook
+		 org-mode-hook
+		 text-mode-hook))
+  (add-hook hook #'abbrev-mode))
+
+(use-package flyspell
+  :defer 1
+  :custom
+  (flyspell-abbrev-p t)
+  (flyspell-issue-message-flag nil)
+  (flyspell-issue-welcome-flag nil)
+  (flyspell-mode 1))
+
+(use-package flyspell-correct-popup
+  :after flyspell
+  :bind (:map flyspell-mode-map
+        ("C-;" . flyspell-correct-wrapper))
+  :custom (flyspell-correct-interface 'flyspell-correct-popup))
 
 (use-package flycheck
   :ensure t
@@ -668,7 +701,7 @@ The IGNORED argument is... Ignored."
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
   (add-to-list 'writeroom-major-modes 'latex-mode)
   (add-to-list 'writeroom-major-modes 'markdown-mode)
-
+  (setq writeroom-extra-line-spacing 5)
 
   (setq writeroom-restore-window-config t
         writeroom-width 80))
@@ -699,6 +732,7 @@ The IGNORED argument is... Ignored."
             #'comint-previous-matching-input-from-input)
          (define-key comint-mode-map (kbd "<down>")
             #'comint-next-matching-input-from-input)))
+
 
 (provide 'init)
 ;;; init.el ends here
