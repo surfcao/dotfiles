@@ -295,6 +295,7 @@
   (add-hook hook 
 	    (lambda ()
 	    (abbrev-mode)
+	    (writeroom-mode)
 	    (setq header-line-format " ")
 	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
@@ -343,7 +344,7 @@
 				  (yas-minor-mode t)
 				  (set-fill-column 80)
 				  (turn-on-auto-fill)
-				  (writeroom-mode)
+				  ;(writeroom-mode)
 				  ; hide the header line to increase top margin
 				  ;(setq header-line-format " ")
 				  ;(set-face-attribute 'header-line nil :background "white")
@@ -713,7 +714,10 @@ The IGNORED argument is... Ignored."
  ; (setq header-line-format " ")
   (setq writeroom-extra-line-spacing 5)
   (setq writeroom-restore-window-config t
-        writeroom-width 80))
+        writeroom-width 80)
+  (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
+  (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
+  (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
 
 (use-package writegood-mode
   :ensure t

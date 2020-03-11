@@ -31,6 +31,7 @@
 (ivy-set-actions
   'ivy-bibtex
   '(("p" ivy-bibtex-open-any "Open PDF, URL, or DOI")
+    ("s" bibtex-completion-show-entry "Show entry")
     ("e" ivy-bibtex-edit-notes "Edit notes")))
 
 (setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation))

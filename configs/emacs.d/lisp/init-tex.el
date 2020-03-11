@@ -20,14 +20,6 @@
 	      (turn-on-auto-fill)
 	      (company-mode)
 	      ;(company-auctex)
-
-              (writeroom-mode)
-	      ; hide the header line to increase top margin
-	      ;(setq header-line-format " ")
-	      ;(set-face-attribute 'header-line nil :background "white")
-	      ;(set-face-attribute 'header-line nil :background (face-attribute 'default :background))
-	      ;(setq-default line-spacing 5)
-
 	      (flyspell-mode)
 	      (smartparens-mode)
               (turn-on-reftex)
@@ -59,6 +51,7 @@
     (if (plist-get TeX-error-report-switches (intern master-file))
         (TeX-next-error t)
       (minibuffer-message "latexmk done"))))
+
 (add-hook 'LaTeX-mode-hook
           (lambda () (local-set-key (kbd "C-0") #'run-latexmk)))
 
@@ -73,7 +66,13 @@
 ; to use pdfview with auctex
 (setq TeX-view-program-selection '((output-pdf "pdf-tools"))
        TeX-source-correlate-start-server t)
-(setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view"))))
+; to use skim with auctex
+;(setq TeX-view-program-selection '((output-pdf "Skim"))
+;       TeX-source-correlate-start-server t)
+)
+
+;(setq TeX-view-program-list '("Skim" ("open -a Skim.app --unique output/%o" (mode-io-correlate "#src:%n%a"))))
+(setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 (use-package reftex
   :ensure t

@@ -7,10 +7,11 @@
 ;; This must run after window setup or it seems to have no effect.
 (add-hook 'window-setup-hook
           (lambda ()
-            (when (memq window-system '(mac ns))
+            (when (memq window-system '(mac ns x))
 	      (use-package exec-path-from-shell
 			   :ensure t
 			   :config
+			   (setq exec-path-from-shell-variables '("PATH" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
 			   (exec-path-from-shell-initialize))
 
 	      (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
