@@ -17,6 +17,7 @@
     "D"  'open-current-line-in-codebase-search
     "f"  'helm-imenu            ;; Jump to function in buffer
     "g"  'magit-status
+    "m"  'helm-bookmarks
     ;"h"  'fontify-and-browse    ;; HTML-ize the buffer and browse the result
     ;"l"  'whitespace-mode       ;; Show invisible characters
     ;"nn" 'air-narrow-dwim       ;; Narrow to region and enter normal mode
@@ -61,7 +62,7 @@
     (add-to-list 'evil-emacs-state-modes mode))
 
   (delete 'term-mode evil-insert-state-modes)
-  (delete 'eshell-mode evil-insert-state-modes) 
+  (delete 'eshell-mode evil-insert-state-modes)
 
   ;; Use insert state in these additional modes.
   (dolist (mode '(twittering-edit-mode
@@ -204,7 +205,7 @@ is not used."
 (use-package evil
   :ensure t
   :commands (evil-mode evil-define-key)
-; :init 
+; :init
 ; (setq evil-want-keybinding nil )
   :config
   (add-hook 'evil-mode-hook 'air--config-evil)
