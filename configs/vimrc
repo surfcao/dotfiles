@@ -19,6 +19,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
 Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
@@ -315,6 +316,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " write a file with root 
 cmap w!! w !sudo tee % >/dev/null
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags library.bib &&popd 
+command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags library.bib &&popd
+
 " add the tags to the path
 set tags+=$HOME/Dropbox/bib/tags
