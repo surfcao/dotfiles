@@ -31,5 +31,13 @@
 (when (memq window-system '(mac))
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
 
+;; Use option as meta
+(when (memq window-system '(mac))
+(setq mac-option-key-is-meta t
+      mac-command-key-is-meta nil
+      mac-command-modifier 'super
+      mac-function-modifier 'hyper
+      mac-option-modifier 'meta))
+
 (provide 'init-platform)
 ;;; init-platform.el ends here

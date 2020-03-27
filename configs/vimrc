@@ -70,7 +70,7 @@ let g:syntastic_tex_checkers = ["lacheck", "proselint", "text/language_check"]
 let g:syntastic_text_checkers = ["proselint", "language_check"]
 let g:syntastic_text_language_check_args = "--language=en-US  --disable=MORFOLOGIK_RULE_EN_US" 
 
-Plug 'panozzaj/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
+Plug 'surfcao/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'rickhowe/diffchar.vim'
