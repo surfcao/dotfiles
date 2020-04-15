@@ -597,7 +597,7 @@ TAG is chosen interactively from the global tags completion table."
 	      ;; "gH" goes to the top level, and is defined by org-evil-mode.
 	      (evil-define-key 'normal org-mode-map (kbd "gl") 'air-org-goto-first-child)
               ;; Use fill column, but not in agenda
-              (setq fill-column 100)
+              (setq fill-column 75)
               (when (not (eq major-mode 'org-agenda-mode))
                 (visual-line-mode)
                 (visual-fill-column-mode))

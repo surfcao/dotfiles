@@ -99,6 +99,7 @@
   (define-key evil-insert-state-map (kbd "C-e")     'end-of-line) ;; I know...
   ; kill to the left; guofeng
   (define-key evil-insert-state-map (kbd "C-u")     (lambda () (interactive) (kill-line 0)))
+  (define-key evil-insert-state-map (kbd "C-h")     'backward-delete-char)
   ; period indicates the end of sentence
   (setq sentence-end-double-space nil)
 

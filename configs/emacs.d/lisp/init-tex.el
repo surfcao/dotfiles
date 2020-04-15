@@ -16,7 +16,7 @@
             (lambda ()
 	      (rainbow-delimiters-mode)
 	      (yas-minor-mode t)
-	      (set-fill-column 80)
+	      (set-fill-column 75)
 	      (turn-on-auto-fill)
 	      (company-mode)
 	      ;(company-auctex)

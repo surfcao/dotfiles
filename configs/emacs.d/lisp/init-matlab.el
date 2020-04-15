@@ -16,7 +16,7 @@
             ))
 
 (setq matlab-indent-function t)
-(setq fill-column 76)
+(setq fill-column 75)
 (turn-on-auto-fill)
 (setq matlab-indent-function-body t)  ; if you want function bodies indented
 (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save

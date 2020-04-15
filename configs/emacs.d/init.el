@@ -348,7 +348,7 @@
   ;;; Markdown mode:
   (add-hook 'markdown-mode-hook (lambda ()
 				  (yas-minor-mode t)
-				  (set-fill-column 80)
+				  (set-fill-column 75)
 				  (turn-on-auto-fill)
 				  ;(writeroom-mode)
 				  ; hide the header line to increase top margin
@@ -720,7 +720,7 @@ The IGNORED argument is... Ignored."
  ; (setq header-line-format " ")
   (setq writeroom-extra-line-spacing 5)
   (setq writeroom-restore-window-config t
-        writeroom-width 80)
+        writeroom-width 75)
   (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
   (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
   (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
