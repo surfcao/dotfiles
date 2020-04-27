@@ -9,7 +9,8 @@
   (setq bibtex-completion-library-path 
         '("~/Dropbox/bib/pdfs/"))
   ;; using bibtex path reference to pdf file
-  (setq bibtex-completion-pdf-field "file") )
+  (setq bibtex-completion-pdf-field "file") 
+  (setq bibtex-completion-cite-default-command "citep"))
 
 (use-package ivy-bibtex
   :ensure t
@@ -34,7 +35,8 @@
     ("s" bibtex-completion-show-entry "Show entry")
     ("e" ivy-bibtex-edit-notes "Edit notes")))
 
-(setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation))
+(setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation)
+(setq bibtex-completion-cite-default-command "citep"))
 
 
 (use-package org-ref
@@ -50,6 +52,7 @@
   ;(setq helm-bibtex-notes-path "~/Dropbox/bib/notes.org")
   (setq bibtex-completion-notes-path "~/Dropbox/bib/notes.org")
 
+  (setq org-ref-default-citation-link "citep")
   :config
   (key-chord-define-global "uu" 'org-ref-cite-hydra/body)
   ;; variables that control bibtex key format for auto-generation

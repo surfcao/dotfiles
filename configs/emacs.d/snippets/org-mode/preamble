@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Preamble
+# key: <pre
+# --
+#+TITLE: ${1:Best Title}
+#+AUTHOR: ${Guofeng Cao}
+#+Email: ${guofeng.cao@ttu.edu}
