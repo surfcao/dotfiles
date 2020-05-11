@@ -14,9 +14,11 @@
 			   (setq exec-path-from-shell-variables '("PATH" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
 			   (exec-path-from-shell-initialize))
 
-	      (add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
-	      (set-face-attribute 'default nil :font "Inconsolata LGC")
-	      (sanityinc/set-frame-font-size 14)
+	      ;(add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
+	      ;(set-face-attribute 'default nil :font "Inconsolata LGC")
+	      (add-to-list 'default-frame-alist '(font . "iA Writer Mono V"))
+	      (set-face-attribute 'default nil :font "iA Writer Mono V")
+	      (sanityinc/set-frame-font-size 16)
 	      (define-key global-map (kbd "S-<return>") 'toggle-frame-fullscreen))
 
 	    (when (memq window-system '(x))

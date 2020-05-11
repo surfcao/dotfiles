@@ -691,7 +691,7 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
 ;(load-theme 'solarized-light)
-;(load-theme 'nord t)
+(load-theme 'nord t)
 
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 
@@ -724,9 +724,9 @@ The IGNORED argument is... Ignored."
   (add-to-list 'writeroom-major-modes 'markdown-mode)
 
  ; (setq header-line-format " ")
-  (setq writeroom-extra-line-spacing 5)
+  (setq writeroom-extra-line-spacing 0.5)
   (setq writeroom-restore-window-config t
-        writeroom-width 75)
+        writeroom-width 80)
   (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
   (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
   (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
