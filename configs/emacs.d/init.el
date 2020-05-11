@@ -259,9 +259,10 @@
   (define-key company-active-map [tab] 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  ;(define-key company-active-map (kbd "s-f") 'company-files)
   ;(define-key company-active-map (kbd "C-y") 'company-yasnippet)
  ; (global-set-key (kbd "C-y") 'company-yasnippet)
-  )
+  (global-set-key (kbd "s-f") 'company-files))
 
 (use-package counsel :ensure t)
 (use-package swiper
