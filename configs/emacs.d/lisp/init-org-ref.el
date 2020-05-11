@@ -70,7 +70,8 @@
   (setq org-ref-get-pdf-filename-function 'org-ref-get-mendeley-filename)
 
   (setq bibtex-completion-pdf-symbol "⌘")
-  (setq bibtex-completion-notes-symbol "✎"))
+  (setq bibtex-completion-notes-symbol "✎")
+  (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-ref-link))
 
 ;; PDF links for org-mode
 (with-eval-after-load "pdf-tools"
@@ -83,6 +84,12 @@
     (add-to-list 'org-file-apps
 		 '("\\.pdf\\'" . (lambda (file link)
 				   (org-pdfview-open link))))))
+
+(defun org-export-latex-no-toc (depth)
+    (when depth
+      (format "%% Org-mode is exporting headings to %s levels.\n"
+              depth)))
+  (setq org-export-latex-format-toc-function 'org-export-latex-no-toc)
 
 (provide 'init-org-ref)
 ;;; init-org.el ends here

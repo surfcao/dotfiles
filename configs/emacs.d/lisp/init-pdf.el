@@ -9,6 +9,8 @@
  (pdf-tools-install)
  ;; open pdfs scaled to fit page
  (setq-default pdf-view-display-size 'fit-page)
+;; auto revert
+ (auto-revert-mode)
  ;; automatically annotate highlights
  (setq pdf-annot-activate-created-annotations t)
  ;; turn off cua so copy works
