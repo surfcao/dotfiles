@@ -99,8 +99,8 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
-set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
+set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.8/Python
+set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.8
 
 " path to search files
 set path+=$HOME/Dropbox/work/ttu/gr/**

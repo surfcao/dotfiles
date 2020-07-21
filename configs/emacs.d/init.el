@@ -135,7 +135,9 @@
                             (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
                             (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))))))))
 
-(require 'diminish)
+(use-package diminish
+  :ensure t)
+
 (require 'init-fonts)
 (require 'init-gtags)
 (require 'init-evil)
@@ -303,6 +305,7 @@
 
 (use-package flyspell
   :defer 1
+  :after evil-leader
   :custom
   (flyspell-abbrev-p t)
   (flyspell-issue-message-flag nil)
@@ -691,7 +694,9 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-left>") 'buf-move-left)
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
-;(load-theme 'solarized-light)
+(use-package nord-theme
+	     :ensure t)
+;(load-theme solarized-light)
 (load-theme 'nord t)
 
 ;;; GDB settings
@@ -782,5 +787,11 @@ The IGNORED argument is... Ignored."
   
   (global-set-key (kbd "C-c b i") 'my-insert-file-name)
 
+(use-package org-journal
+  :ensure t
+  :defer t
+  :config
+  (setq org-journal-dir "~/Dropbox/org/journal/"
+        org-journal-date-format "%A, %d %B %Y"))
 (provide 'init)
 ;;; init.el ends here

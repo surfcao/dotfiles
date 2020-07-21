@@ -21,5 +21,6 @@ configs/emacs.d/*
 !configs/emacs.d/matlab-emacs
 !configs/emacs.d/snippets
 !configs/emacs.d/init.el
+!configs/emacs.d/.abbrev_defs
 
 configs/emacs.d.spacemacs/*

@@ -5,6 +5,9 @@
  :bind ("C-c C-g" . pdf-sync-forward-search)
  :pin manual ;; manually update
  :config
+ (custom-set-variables
+    '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
+  ;(setq pdf-info-epdfinfo-program "~/.emacs.d/elpa/pdf-tools-1.0/epdfinfo")
  ;; initialise
  (pdf-tools-install)
  ;; open pdfs scaled to fit page

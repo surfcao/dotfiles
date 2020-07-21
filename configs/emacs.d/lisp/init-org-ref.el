@@ -1,5 +1,4 @@
 ;;; init-org-ref.el --- Set up Org-Ref
-
 (use-package helm-bibtex
   :ensure t
   :bind ("C-c h h" . helm-bibtex)
@@ -90,6 +89,12 @@
       (format "%% Org-mode is exporting headings to %s levels.\n"
               depth)))
   (setq org-export-latex-format-toc-function 'org-export-latex-no-toc)
+
+(setq org-latex-pdf-process
+  '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+
+;; prefer use latex label
+(setq org-latex-prefer-user-labels t)
 
 (provide 'init-org-ref)
 ;;; init-org.el ends here
