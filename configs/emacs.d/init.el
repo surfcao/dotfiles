@@ -303,36 +303,15 @@
 	    (setq header-line-format " ")
 	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
-(use-package flyspell
-  :defer 1
-  :after evil-leader
-  :custom
-  (flyspell-abbrev-p t)
-  (flyspell-issue-message-flag nil)
-  (flyspell-issue-welcome-flag nil)
-  (flyspell-mode 1)
-  :config
-  (add-hook 'flyspell-mode-hook
-            'flyspell-buffer
-            (lambda ()
-              (evil-define-key 'normal flyspell-mode-map (kbd "]s") 'evil-next-flyspell-error)
-              (evil-define-key 'normal flyspell-mode-map (kbd "[s") 'evil-prev-flyspell-error))))
-
-(use-package flyspell-correct-popup
-  :after flyspell
-  :bind (:map flyspell-mode-map
-        ("C-;" . flyspell-correct-wrapper))
-  :custom (flyspell-correct-interface 'flyspell-correct-popup))
-
-(use-package flycheck
-  :ensure t
-  :commands flycheck-mode
-  :config
-  ;;; Flycheck mode:
-  (add-hook 'flycheck-mode-hook
-          (lambda ()
-            (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
-            (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error))))
+;(use-package flycheck
+;  :ensure t
+;  :commands flycheck-mode
+;  :config
+;  ;;; Flycheck mode:
+;  (add-hook 'flycheck-mode-hook
+;          (lambda ()
+;            (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
+;            (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error))))
 
 (use-package helm-projectile
   :commands (helm-projectile helm-projectile-switch-project)

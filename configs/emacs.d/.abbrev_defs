@@ -1414,7 +1414,6 @@
     ("peronsla" "Prensa" nil 0)
     ("phyiscal" "physical" nil 0)
     ("phyisical" "physical" nil 0)
-    ("png" "ping" nil 42)
     ("poluation" "pollution" nil 0)
     ("postive" "positive" nil 0)
     ("potentential" "penitential" nil 0)

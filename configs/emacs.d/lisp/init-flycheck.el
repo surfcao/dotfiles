@@ -4,6 +4,28 @@
 (use-package let-alist
   :ensure t)
 
+(use-package flyspell
+  :defer 1
+  :after evil-leader
+  :custom
+  (flyspell-abbrev-p t)
+  (flyspell-issue-message-flag nil)
+  (flyspell-issue-welcome-flag nil)
+  (flyspell-mode 1)
+  :config
+  (add-hook 'flyspell-mode-hook
+            'flyspell-buffer
+            (lambda ()
+              (evil-define-key 'normal flyspell-mode-map (kbd "]s") 'evil-next-flyspell-error)
+              (evil-define-key 'normal flyspell-mode-map (kbd "[s") 'evil-prev-flyspell-error))))
+
+(use-package flyspell-correct-popup
+  :after flyspell
+  :bind (:map flyspell-mode-map
+        ("C-;" . flyspell-correct-wrapper))
+  :custom (flyspell-correct-interface 'flyspell-correct-popup))
+
+
 (use-package flycheck
   :ensure t
   :config
