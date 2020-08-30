@@ -327,9 +327,11 @@
 
 (use-package markdown-mode
   :ensure t
-  :mode "\\.md\\'"
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :config
   ;;; Markdown mode:
+  (setq markdown-enable-math t)
   (add-hook 'markdown-mode-hook (lambda ()
 				  (yas-minor-mode t)
 				  (set-fill-column 75)
@@ -353,11 +355,20 @@
 
 
 (use-package pandoc-mode
+  :ensure t
   :hook (markdown-mode . pandoc-mode))
 
 ;;; MARKDOWN
 ;(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 ;;; R modes
+
+(use-package poly-R
+  :ensure t
+  :defer t)
+
+(use-package poly-markdown
+  :ensure t
+  :defer t)
 
 (use-package polymode
   :ensure t
@@ -365,7 +376,16 @@
     ;; R modes
     ("\\.Snw" . poly-noweb+r-mode)
     ("\\.Rnw" . poly-noweb+r-mode)
-    ("\\.Rmd" . poly-markdown+r-mode))
+    ("\\.[rR]md" . Rmd-mode)
+  :init 
+   (progn
+    (defun Rmd-mode ()			
+      "ESS Markdown mode for Rmd files"
+      (interactive)
+      (require 'poly-R)
+      (require 'poly-markdown)
+      (R-mode)
+      (poly-markdown+r-mode))))
 
 ;(use-package php-extras :ensure t :defer t)
 ;(use-package sunshine
