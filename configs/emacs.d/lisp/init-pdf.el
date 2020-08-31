@@ -14,6 +14,7 @@
  (setq-default pdf-view-display-size 'fit-page)
 ;; auto revert
  (auto-revert-mode)
+ (setq auto-revert-interval 0.5) 
  ;; automatically annotate highlights
  (setq pdf-annot-activate-created-annotations t)
  ;; turn off cua so copy works
