@@ -57,7 +57,9 @@
 
 (define-abbrev-table 'anaconda-mode-view-mode-abbrev-table '())
 
-(define-abbrev-table 'awk-mode-abbrev-table '())
+(define-abbrev-table 'awk-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'biblio-selection-mode-abbrev-table '())
 
@@ -69,9 +71,13 @@
 
 (define-abbrev-table 'bsh-script-mode-abbrev-table '())
 
-(define-abbrev-table 'c++-mode-abbrev-table '())
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+   ))
 
-(define-abbrev-table 'c-mode-abbrev-table '())
+(define-abbrev-table 'c-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'calc-trail-mode-abbrev-table '())
 
@@ -118,6 +124,8 @@
 (define-abbrev-table 'edebug-eval-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
+
+(define-abbrev-table 'eieio-custom-mode-abbrev-table '())
 
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
@@ -201,6 +209,8 @@
 
 (define-abbrev-table 'gfm-mode-abbrev-table '())
 
+(define-abbrev-table 'gfm-view-mode-abbrev-table '())
+
 (define-abbrev-table 'ggtags-global-mode-abbrev-table '())
 
 (define-abbrev-table 'ggtags-view-search-history-mode-abbrev-table '())
@@ -248,7 +258,7 @@
     ("agreemnets" "agreements" nil 0)
     ("agressive" "aggressive" nil 0)
     ("ahppen" "happen" nil 0)
-    ("ahve" "have" nil 0)
+    ("ahve" "have" nil 1)
     ("allwasy" "always" nil 0)
     ("allwyas" "always" nil 0)
     ("almots" "almost" nil 0)
@@ -653,7 +663,7 @@
     ("hvae" "have" nil 0)
     ("hvaing" "having" nil 0)
     ("hwich" "which" nil 0)
-    ("i" "I" nil 137)
+    ("i" "I" nil 142)
     ("idae" "idea" nil 0)
     ("idaes" "ideas" nil 0)
     ("identifiy" "identify" nil 0)
@@ -1179,7 +1189,9 @@
 
 (define-abbrev-table 'ivy-occur-mode-abbrev-table '())
 
-(define-abbrev-table 'java-mode-abbrev-table '())
+(define-abbrev-table 'java-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'jdee-mode-abbrev-table
   '(
@@ -1243,7 +1255,25 @@
 
 (define-abbrev-table 'magit-submodule-list-mode-abbrev-table '())
 
-(define-abbrev-table 'markdown-mode-abbrev-table '())
+(define-abbrev-table 'markdown-mode-abbrev-table
+  '(
+    ("centeral" "central" nil 0)
+    ("chracteristics" "characteristics" nil 0)
+    ("corelation" "correlation" nil 0)
+    ("differet" "different" nil 0)
+    ("distibution" "distribution" nil 0)
+    ("distribued" "distributed" nil 0)
+    ("documention" "document ion" nil 0)
+    ("elemement" "element" nil 0)
+    ("fractial" "Fractal" nil 0)
+    ("frequence" "frequency" nil 0)
+    ("inforation" "information" nil 0)
+    ("proceduure" "Procedure" nil 0)
+    ("symetry" "symmetry" nil 0)
+    ("varitions" "variations" nil 0)
+   ))
+
+(define-abbrev-table 'markdown-view-mode-abbrev-table '())
 
 (define-abbrev-table 'matlab-mode-abbrev-table '())
 
@@ -1269,7 +1299,9 @@
 
 (define-abbrev-table 'notmuch-tree-mode-abbrev-table '())
 
-(define-abbrev-table 'objc-mode-abbrev-table '())
+(define-abbrev-table 'objc-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
@@ -1293,6 +1325,7 @@
 (define-abbrev-table 'org-mode-abbrev-table
   '(
     ("accessbility" "accessibility" nil 0)
+    ("accruacy" "accuracy" nil 0)
     ("acquistion" "acquisition" nil 0)
     ("adressing" "addressing" nil 0)
     ("aeras" "areas" nil 0)
@@ -1302,8 +1335,9 @@
     ("analsyis" "analysis" nil 0)
     ("appraoch" "approach" nil 0)
     ("apprently" "apparently" nil 0)
+    ("approproiate" "appropriate" nil 0)
     ("apprproriate" "appropriate" nil 0)
-    ("arbitary" "arbitrary" nil 1)
+    ("arbitary" "arbitrary" nil 2)
     ("assumptioons" "assumptions" nil 0)
     ("attendence" "attendance" nil 1)
     ("authorative" "authoritative" nil 1)
@@ -1319,6 +1353,7 @@
     ("brigheness" "brightness" nil 0)
     ("brighness" "brightness" nil 1)
     ("bueray" "Bureau" nil 0)
+    ("calcuation" "calculation" nil 0)
     ("capitalizaing" "capitalize" nil 0)
     ("certaintly" "certainly" nil 0)
     ("chacteristics" "characteristics" nil 0)
@@ -1359,6 +1394,8 @@
     ("critized" "criticized" nil 0)
     ("darkota" "Dakota" nil 0)
     ("definitiveness" "definiteness" nil 0)
+    ("delinateion" "delineation" nil 0)
+    ("delination" "delineation" nil 0)
     ("deliveables" "deliverable" nil 0)
     ("deliverables" "Deliverable" nil 9)
     ("demographyic" "demographic" nil 0)
@@ -1367,6 +1404,7 @@
     ("determistic" "deterministic" nil 0)
     ("deveices" "devices" nil 0)
     ("diaster" "duster" nil 7)
+    ("dicussions" "discussions" nil 0)
     ("dieases" "disease" nil 0)
     ("diffreent" "different" nil 0)
     ("dirctor" "Director" nil 0)
@@ -1375,7 +1413,7 @@
     ("displinary" "disciplinary" nil 0)
     ("disseminatio" "dissemination" nil 0)
     ("distrition" "distortion" nil 0)
-    ("disucssion" "Discussion" nil 0)
+    ("disucssion" "Discussion" nil 1)
     ("disussions" "discussions" nil 0)
     ("dyamics" "dynamics" nil 0)
     ("dynamcics" "dynamics" nil 1)
@@ -1474,7 +1512,6 @@
     ("peronsla" "Prensa" nil 0)
     ("phyiscal" "physical" nil 0)
     ("phyisical" "physical" nil 0)
-    ("png" "ping" nil 80)
     ("poluation" "pollution" nil 0)
     ("postive" "positive" nil 0)
     ("potentential" "penitential" nil 0)
@@ -1553,15 +1590,23 @@
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 
+(define-abbrev-table 'pandoc-@-mode-abbrev-table '())
+
 (define-abbrev-table 'pdf-annot-list-mode-abbrev-table '())
 
 (define-abbrev-table 'pdf-occur-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'pdf-outline-buffer-mode-abbrev-table '())
 
-(define-abbrev-table 'pike-mode-abbrev-table '())
+(define-abbrev-table 'pike-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'plain-tex-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-fallback-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-head-tail-mode-abbrev-table '())
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
@@ -1628,6 +1673,8 @@
 (define-abbrev-table 'woman-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'yaml-mode-abbrev-table '())
 
 (define-abbrev-table 'ycmd-fixit-mode-abbrev-table '())
 

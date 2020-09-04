@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: rmd-block
+# name: chunk
 # key: rb
+# binding: direct-keybinding
 # --
 \`\`\`{r}
 $0
