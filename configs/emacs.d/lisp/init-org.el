@@ -398,7 +398,7 @@ TAG is chosen interactively from the global tags completion table."
            "* IDEA %?\n :PROPERTIES:\n :ORDERED: t\n :CREATED: %u\n :END:\n\n"
 	   :empty-lines 1)
 
-	  ("k" "Cliplink capture task" entry (file "todo.org")
+	  ("k" "Cliplink capture task" entry (file "inbox.org")
       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
@@ -423,7 +423,7 @@ TAG is chosen interactively from the global tags completion table."
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
   (setq org-agenda-files '("~/Dropbox/org/"))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 1)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-outline-path-complete-in-steps nil)
@@ -634,11 +634,13 @@ TAG is chosen interactively from the global tags completion table."
    (lisp . t)))
 
 (use-package org-download
+   :ensure t
    :config
    (add-hook 'dired-mode-hook 'org-download-enable)
    (setq-default org-download-image-dir "./images"))
 
 (use-package org-cliplink
+     :ensure t
     :config
    (global-set-key (kbd "C-x p i") 'org-cliplink))
 

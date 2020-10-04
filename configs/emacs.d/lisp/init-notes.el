@@ -3,10 +3,9 @@
 (setq
    org_notes "~/Dropbox/org/notes/"
    zot_bib "~/Dropbox/bib/library.bib"
-   org-directory org_notes
    deft-directory org_notes
    org-roam-directory org_notes
-   org-default-notes-file (concat org_notes "/inbox.org")
+   org-default-notes-file (concat org_directory "/inbox.org")
    )
 
 (use-package  org-noter
