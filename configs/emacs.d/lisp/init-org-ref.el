@@ -115,9 +115,9 @@
 ;      (message "No PDF found for %s" key))))
 ; (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
 ;
-;  (setq bibtex-completion-pdf-symbol "⌘")
-;  (setq bibtex-completion-notes-symbol "✎")
-;  (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-ref-link))
+  (setq bibtex-completion-pdf-symbol "⌘")
+  (setq bibtex-completion-notes-symbol "✎")
+  (define-key org-mode-map (kbd "C-c i") 'org-ref-insert-ref-link))
 
 
 (defun org-export-latex-no-toc (depth)

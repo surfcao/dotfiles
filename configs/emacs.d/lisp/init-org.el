@@ -396,7 +396,10 @@ TAG is chosen interactively from the global tags completion table."
           ("i" "An idea entry." entry
            (file "ideas.org")
            "* IDEA %?\n :PROPERTIES:\n :ORDERED: t\n :CREATED: %u\n :END:\n\n"
-	   :empty-lines 1)))
+	   :empty-lines 1)
+
+	  ("k" "Cliplink capture task" entry (file "todo.org")
+      "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
   (setq org-directory "~/Dropbox/org")
@@ -629,6 +632,16 @@ TAG is chosen interactively from the global tags completion table."
    (R . t)
    (matlab . t)
    (lisp . t)))
+
+(use-package org-download
+   :config
+   (add-hook 'dired-mode-hook 'org-download-enable)
+   (setq-default org-download-image-dir "./images"))
+
+(use-package org-cliplink
+    :config
+   (global-set-key (kbd "C-x p i") 'org-cliplink))
+
 
 (provide 'init-org)
 ;;; init-org.el ends here
