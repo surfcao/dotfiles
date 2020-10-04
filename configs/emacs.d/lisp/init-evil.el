@@ -83,6 +83,8 @@
   ;; Global bindings.
   ;(define-key evil-normal-state-map (kbd "<down>")  'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "j")  'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "0")  'evil-beginning-of-visual-line)
+  (define-key evil-normal-state-map (kbd "$")  'evil-end-of-visual-line)
   ;(define-key evil-normal-state-map (kbd "<up>")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "k")    'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "-")       'helm-find-files)

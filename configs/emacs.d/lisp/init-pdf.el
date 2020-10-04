@@ -60,6 +60,18 @@
 	  (lambda ()
 	   (blink-cursor-mode -1))))
 
+;; PDF links for org-mode
+(with-eval-after-load 'pdf-tools
+  (use-package org-pdftools
+    :config
+    ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00169.html
+    ;; Before adding, remove it (to avoid clogging)
+    (delete '("\\.pdf\\'" . default) org-file-apps)
+    ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
+    (add-to-list 'org-file-apps
+		 '("\\.pdf\\'" . (lambda (file link)
+				   (org-pdftools-open link))))))
+
 ;(use-package pdf-tools
 ;  :ensure t
 ;  :config
@@ -68,11 +80,11 @@
 ;  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
 ;(pdf-tools-install)
 
-(use-package org-noter
-    :after org
-    :ensure t
-    :config (setq org-noter-default-notes-file-names '("notes.org")
-                  org-noter-notes-search-path '("~/Dropbox/bib/notes")))
+;(use-package org-noter
+;    :after org
+;    :ensure t
+;    :config (setq org-noter-default-notes-file-names '("notes.org")
+;                  org-noter-notes-search-path '("~/Dropbox/bib/notes")))
 
 ;(add-to-list 'load-path "~/Downloads/org-pdftools/")
 ;(use-package org-pdftools 

@@ -178,6 +178,7 @@
 (require 'init-org)
 (require 'init-org-ref)
 (require 'init-pdf)
+(require 'init-notes)
 
 ;(use-package rainbow-mode
 ;  :ensure t
@@ -298,10 +299,7 @@
 		 text-mode-hook))
   (add-hook hook 
 	    (lambda ()
-	    (abbrev-mode)
-	    (writeroom-mode)
-	    (setq header-line-format " ")
-	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
+	    (abbrev-mode))))
 
 ;(use-package flycheck
 ;  :ensure t
@@ -424,6 +422,7 @@
   ;; Bind `SPC' to `yas-expand' when snippet expansion available (it
   ;; will still call `self-insert-command' otherwise).
   ;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+  ;(define-key yas-minor-mode-map [tab] yas-maybe-expand)
   ;; Bind `C-c y' to `yas-expand' ONLY.
   (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"
@@ -432,6 +431,13 @@
   (setq yas-prompt-functions '(yas-completing-prompt
                                yas-ido-prompt
                                yas-dropdown-prompt))
+  ; fix tab in org-mode
+  (defun yas-org-very-safe-expand ()
+     (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
+   (add-hook 'org-mode-hook
+      (lambda ()
+        (add-to-list 'org-tab-first-hook 'yas-org-very-safe-expand)
+        (define-key yas-keymap [tab] 'yas-next-field)))
   (define-key yas-minor-mode-map (kbd "<escape>") 'yas-exit-snippet))
 
 (use-package yasnippet-snippets
@@ -727,6 +733,17 @@ The IGNORED argument is... Ignored."
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
   (add-to-list 'writeroom-major-modes 'latex-mode)
   (add-to-list 'writeroom-major-modes 'markdown-mode)
+  (add-to-list 'writeroom-major-modes 'org-mode)
+  (add-to-list 'writeroom-major-modes 'text-mode)
+  (dolist (hook '(markdown-mode-hook
+		 latex-mode-hook
+		 org-mode-hook
+		 text-mode-hook))
+  (add-hook hook 
+	    (lambda ()
+	    (writeroom-mode)
+	    (setq header-line-format " ")
+	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
  ; (setq header-line-format " ")
   (setq writeroom-extra-line-spacing 0.5)
@@ -790,7 +807,25 @@ The IGNORED argument is... Ignored."
   :ensure t
   :defer t
   :config
-  (setq org-journal-dir "~/Dropbox/org/journal/"
+  (setq org-journal-dir "~/Dropbox/org/notes/journal/"
         org-journal-date-format "%A, %d %B %Y"))
+
+(use-package deft
+  :after org
+  :bind
+  ("<f7>" . deft)
+  :init
+  (setq deft-file-naming-rules
+      '((noslash . "-")
+        (nospace . "-")
+        (case-fn . downcase)))
+  :custom
+  (deft-recursive t)
+  (deft-use-filename-as-title nil)
+  (deft-use-filter-string-for-filename t)
+  (deft-extensions '("md" "txt" "org"))
+  (deft-default-extension "org")
+  (deft-directory (expand-file-name "~/Dropbox/org/notes/")))
+
 (provide 'init)
 ;;; init.el ends here
