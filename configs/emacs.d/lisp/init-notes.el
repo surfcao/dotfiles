@@ -5,7 +5,7 @@
    zot_bib "~/Dropbox/bib/library.bib"
    deft-directory org_notes
    org-roam-directory org_notes
-   org-default-notes-file (concat org_directory "/inbox.org")
+   org-default-notes-file (concat org-directory "/inbox.org")
    )
 
 (use-package  org-noter

@@ -326,22 +326,34 @@ return nil."
           (progn (goto-char (match-beginning 0)) t)
         (goto-char pos) nil))))
 
+(defun air--org-select-tag ()
+  "Interactively select or enter a single tag."
+  (let ((org-last-tags-completion-table
+         (if (derived-mode-p 'org-mode)
+             (org-uniquify
+              (delq nil (append (org-get-buffer-tags)
+                                (org-global-tags-completion-table))))
+           (org-global-tags-completion-table))))
+    (completing-read
+     "Tag: " 'org-tags-completion-function nil nil nil
+     'org-tags-history)))
+
+(defun air-org-agenda-filter-tag-interactive ()
+  "Filter the agenda view by a tag selected interactively."
+  (interactive)
+  (if (derived-mode-p 'org-agenda-mode)
+      (let* ((tag (air--org-select-tag))
+             (org-tag-alist-for-agenda (list (cons tag ?z))))
+        (if tag
+            (org-agenda-filter-by-tag nil ?z)))
+    (error "Tag filtering only works in an agenda view")))
 
 (defun air-org-set-tags (tag)
   "Add TAG if it is not in the list of tags, remove it otherwise.
 
 TAG is chosen interactively from the global tags completion table."
-  (interactive
-   (list (let ((org-last-tags-completion-table
-                (if (derived-mode-p 'org-mode)
-                    (org-uniquify
-                     (delq nil (append (org-get-buffer-tags)
-                                       (org-global-tags-completion-table))))
-                  (org-global-tags-completion-table))))
-           (completing-read
-            "Tag: " 'org-tags-completion-function nil nil nil
-            'org-tags-history))))
-  (let* ((cur-list (org-get-tags))
+(interactive (list (air--org-select-tag)))
+  (let* ((cur-list (delq "" (org-get-tags)))
          (new-tags (mapconcat 'identity
                               (if (member tag cur-list)
                                   (delete tag cur-list)
@@ -349,7 +361,7 @@ TAG is chosen interactively from the global tags completion table."
                               ":"))
          (new (if (> (length new-tags) 1) (concat " :" new-tags ":")
                 nil)))
-    (air--org-swap-tags new)))
+    (org-set-tags new)))
 
 
 ;;; Code:
@@ -359,13 +371,7 @@ TAG is chosen interactively from the global tags completion table."
   :commands (org-capture)
   :bind (("C-c c" .   org-capture)
          ("C-c l" .   org-store-link)
-         ("C-c t n" . air-pop-to-org-notes)
-         ("C-c t i" . air-pop-to-org-ideas)
-         ("C-c t m" . air-pop-to-org-meetings)
-         ("C-c t t" . air-pop-to-org-todo)
-         ("C-c t v" . air-pop-to-org-vault)
-         ("C-c t a" . air-pop-to-org-agenda)
-         ("C-c t A" . org-agenda)
+         ("C-c t" .   org-todo)
          ("C-c f k" . org-search-view)
          ("C-c f t" . org-tags-view)
          ("C-c f i" . air-org-goto-custom-id))
@@ -612,11 +618,11 @@ TAG is chosen interactively from the global tags completion table."
 
 (use-package org-evil
   :ensure t
-  :config
-  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
-			      "@" 'org-refile)
-  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode 
-			      "#" 'org-add-note)
+  :config  
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode ":" 'org-set-tags-command)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "t" 'org-todo)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "@" 'org-refile)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "#" 'org-add-note)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "+" 'org-shiftup)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "=" 'org-shiftdown))
 
@@ -624,7 +630,7 @@ TAG is chosen interactively from the global tags completion table."
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-bullets-bullet-list '("•")))
+  (setq org-bullets-bullet-list '("⋄" "•" "◦")))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
