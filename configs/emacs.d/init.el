@@ -133,7 +133,9 @@
                            ((?t "TODO"  air-org-task-capture)
                             (?n "Note"  (lambda () (interactive) (org-capture nil "n")))
                             (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
-                            (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))))))))
+                            (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))
+                            (?j "Journal"  (lambda () (interactive) (org-capture nil "i")))
+                            (?k "Online"  (lambda () (interactive) (org-capture nil "i")))))))))
 
 (use-package diminish
   :ensure t)
@@ -808,7 +810,17 @@ The IGNORED argument is... Ignored."
   :defer t
   :config
   (setq org-journal-dir "~/Dropbox/org/notes/journal/"
-        org-journal-date-format "%A, %d %B %Y"))
+        org-journal-file-format "%Y%m%d.org"
+        org-journal-date-format "%A, %d %B %Y")
+
+  (defun org-journal-save-entry-and-exit()
+  "Simple convenience function.
+  Saves the buffer of the current day's entry and kills the window
+  Similar to org-capture like behavior"
+  (interactive)
+  (save-buffer)
+  (kill-buffer-and-window))
+  (define-key org-journal-mode-map (kbd "C-x C-s") 'org-journal-save-entry-and-exit))
 
 (use-package deft
   :after org

@@ -383,8 +383,9 @@ TAG is chosen interactively from the global tags completion table."
         '((sequence "☛ TODO" "⚑ WAITING" "SOMEDAY" "|" "✓ DONE(!)" "✗ CANCELED") (sequence "IDEA")))
   (setq org-blank-before-new-entry '((heading . auto)
                                      (plain-list-item . auto)))
+
   (setq org-capture-templates
-        '(("a" "My TODO task format." entry
+        '(("t" "My TODO task format." entry
            (file "todo.org")
            "* TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
 	    :empty-lines 1)
@@ -407,8 +408,15 @@ TAG is chosen interactively from the global tags completion table."
 	  ("k" "Cliplink capture task" entry (file "inbox.org")
       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
+
   (setq org-default-notes-file "~/Dropbox/org/todo.org")
-  (setq org-directory "~/Dropbox/org")
+  (setq org-directory "~/Dropbox/org/")
+  (setq org-journal-dir "~/Dropbox/org/notes/journal/")
+
+  (add-to-list 'org-capture-templates
+           `("j" "A journal entry" entry 
+	    (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
+                           "* %<%H:%M:%S> %? \n" :tree-type week))
 
   ;; Logging of state changes
   (setq org-log-done (quote time))

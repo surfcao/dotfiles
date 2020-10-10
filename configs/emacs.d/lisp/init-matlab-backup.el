@@ -1,8 +1,8 @@
 ;; Setting up matlab-mode
 
-(use-package matlab-mode
-  :ensure t
-  :defer t
+(use-package matlab-load
+ :load-path "~/.emacs.d/matlab-emacs"
+ :init (load-library "matlab-load")
  :config
 (add-hook 'matlab-mode-hook
           (lambda ()
@@ -20,7 +20,7 @@
 (turn-on-auto-fill)
 (setq matlab-indent-function-body t)  ; if you want function bodies indented
 (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
-;(matlab-cedet-setup)
+(matlab-cedet-setup)
 
 (setq-local comint-prompt-read-only nil)
 (when (memq window-system '(mac ns))

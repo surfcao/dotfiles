@@ -61,6 +61,7 @@
 		  term-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
+  (evil-set-initial-state 'calendar-mode 'emacs)
   (delete 'term-mode evil-insert-state-modes)
   (delete 'eshell-mode evil-insert-state-modes)
 
