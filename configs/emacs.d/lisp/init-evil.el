@@ -213,13 +213,16 @@ is not used."
 ; (setq evil-want-keybinding nil )
   :config
   (add-hook 'evil-mode-hook 'air--config-evil)
-  (evil-mode 1)
 
   (use-package evil-leader
     :ensure t
     :config
     (global-evil-leader-mode)
     (air--config-evil-leader))
+
+
+  (use-package evil-magit
+    :after (evil magit))
 
   (use-package evil-surround
     :ensure t
@@ -229,6 +232,7 @@ is not used."
   (use-package evil-indent-textobject
     :ensure t)
 
+  (evil-mode 1)
   (air--apply-evil-other-package-configs))
 
 ;use-package evil-collection

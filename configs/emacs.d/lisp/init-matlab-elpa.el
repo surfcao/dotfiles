@@ -1,9 +1,11 @@
 ;; Setting up matlab-mode
 
-(use-package matlab-load
- :load-path "~/.emacs.d/matlab-emacs"
- :init (load-library "matlab-load")
+(use-package matlab-mode
+  :ensure t
+  :defer t
  :config
+
+ (require '(company-matlab))
 (add-hook 'matlab-mode-hook
           (lambda ()
             (add-to-list 'company-backends 'company-matlab)))

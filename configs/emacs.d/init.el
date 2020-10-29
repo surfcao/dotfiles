@@ -295,13 +295,16 @@
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file)))
 
-(dolist (hook '(markdown-mode-hook
+  (dolist (hook '(markdown-mode-hook
 		 latex-mode-hook
 		 org-mode-hook
 		 text-mode-hook))
   (add-hook hook 
 	    (lambda ()
-	    (abbrev-mode))))
+	    (writeroom-mode)
+            (abbrev-mode)
+	    (setq header-line-format " ")
+	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
 ;(use-package flycheck
 ;  :ensure t
@@ -737,15 +740,6 @@ The IGNORED argument is... Ignored."
   (add-to-list 'writeroom-major-modes 'markdown-mode)
   (add-to-list 'writeroom-major-modes 'org-mode)
   (add-to-list 'writeroom-major-modes 'text-mode)
-  (dolist (hook '(markdown-mode-hook
-		 latex-mode-hook
-		 org-mode-hook
-		 text-mode-hook))
-  (add-hook hook 
-	    (lambda ()
-	    (writeroom-mode)
-	    (setq header-line-format " ")
-	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
  ; (setq header-line-format " ")
   (setq writeroom-extra-line-spacing 0.5)
@@ -754,6 +748,8 @@ The IGNORED argument is... Ignored."
   (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
   (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
   (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
+
+
 
 (use-package writegood-mode
   :ensure t

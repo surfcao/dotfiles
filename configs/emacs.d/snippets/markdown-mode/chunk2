@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: chunk
-# key: rb
+# name: chunk2
+# key: rbb
 # binding: direct-keybinding
 # --
-\`\`\`{r}
+\`\`\`{r, echo=T, size=\'scriptsize\'}
 $0
 \`\`\`
 

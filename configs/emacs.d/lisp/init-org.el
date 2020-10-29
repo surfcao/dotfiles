@@ -522,7 +522,7 @@ TAG is chosen interactively from the global tags completion table."
     "$"  'org-archive-subtree
     "a"  'org-agenda
     "c"  'air-org-set-category-property
-    "d"  'org-deadline
+    "dd"  'org-deadline
     "ns" 'org-narrow-to-subtree
     "p"  'org-set-property
     "s"  'org-schedule
