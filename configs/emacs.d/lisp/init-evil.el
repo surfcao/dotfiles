@@ -222,7 +222,7 @@ is not used."
 
 
   (use-package evil-magit
-    :after (evil magit))
+	:ensure t)
 
   (use-package evil-surround
     :ensure t

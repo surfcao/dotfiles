@@ -2,7 +2,9 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'markdown-mode
-                     '(("infobox" "{% infobox %}\n$0\n{% endinfobox %}" "The Octopress Infobox" nil nil nil "/Users/abieber/.emacs.d/snippets/markdown-mode/infobox" "direct-keybinding" nil)))
+                     '(("fig" "\\\\begin{figure}\n\\\\includegraphics{$0}\n\\\\end{figure}\n" "fig" nil nil nil "/Users/guofeng/.emacs.d/snippets/markdown-mode/fig" "direct-keybinding" nil)
+                       ("rbb" "\\`\\`\\`{r, echo=T, size=\\'scriptsize\\'}\n$0\n\\`\\`\\`\n\n\n" "chunk2" nil nil nil "/Users/guofeng/.emacs.d/snippets/markdown-mode/chunk2" "direct-keybinding" nil)
+                       ("rb" "\\`\\`\\`{r}\n$0\n\\`\\`\\`\n\n\n" "chunk" nil nil nil "/Users/guofeng/.emacs.d/snippets/markdown-mode/chunk" "direct-keybinding" nil)))
 
 
-;;; Do not edit! File generated at Fri May 27 09:19:49 2016
+;;; Do not edit! File generated at Mon Nov  2 16:08:28 2020

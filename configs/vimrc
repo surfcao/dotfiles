@@ -74,7 +74,7 @@ Plug 'surfcao/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'rickhowe/diffchar.vim'
-let g:vimtex_latexmk_continuous=1
+"let g:vimtex_latexmk_continuous=1
 let g:vimtex_format_enabled=1
 let g:vimtex_compiler_latexmk = {'build_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
@@ -99,8 +99,8 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.8/Python
-set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.8
+set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
+set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
 
 " path to search files
 set path+=$HOME/Dropbox/work/ttu/gr/**

@@ -1,7 +1,7 @@
 ;; Setting up matlab-mode
 
 (use-package matlab-load
- :load-path "~/.emacs.d/matlab-emacs2"
+ :load-path "~/.emacs.d/matlab-emacs-src"
  :init (load-library "matlab-load")
  :config
 (add-hook 'matlab-mode-hook
@@ -11,7 +11,6 @@
           (lambda ()
             (add-to-list 'company-backends 'company-matlab-shell)))
 
-
 (add-hook 'matlab-mode 'auto-complete-mode)
 
 (setq matlab-indent-function t)
@@ -20,10 +19,6 @@
 (setq matlab-indent-function-body t)  ; if you want function bodies indented
 (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
 (matlab-cedet-setup)
-(add-to-list 'semanticdb-matlab-include-paths "~/Git/lab/geostats")
-(add-to-list 'semanticdb-matlab-include-paths "~/Git/hub/COLD/")
-
-(global-font-lock-mode t)
 
 (setq-local comint-prompt-read-only nil)
 (when (memq window-system '(mac ns))

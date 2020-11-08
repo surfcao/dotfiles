@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: fig
+# key: fig
+# binding: direct-keybinding
+# --
+\\begin{figure}
+\\includegraphics{$0}
+\\end{figure}

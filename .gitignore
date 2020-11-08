@@ -19,6 +19,7 @@ configs/emacs.d/*
 # But don't ignore these specific locations.
 !configs/emacs.d/lisp
 !configs/emacs.d/matlab-emacs
+!configs/emacs.d/matlab-emacs2
 !configs/emacs.d/snippets
 !configs/emacs.d/init.el
 !configs/emacs.d/.abbrev_defs

@@ -47,7 +47,7 @@
 (require 'semanticdb-matlab)
 
 ;;; Code:
-(defvar semantic-matlab-system-paths-include '("toolbox/matlab/funfun" "toolbox/matlab/general")
+(defvar semantic-matlab-system-paths-include '("toolbox/matlab/")
   "List of include paths under `semantic-matlab-root-directory'.
 These paths will be parsed recursively by semantic.  Class and
 private directories will be omitted here.")
