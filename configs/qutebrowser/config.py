@@ -4,7 +4,7 @@
 #config.unbind("+")
 
 #config.unbind("<Ctrl-e>")
-
+c.spellcheck.languages=['en-US']
 c.bindings.commands = {
     'insert': {
         '<Ctrl-w>'        : 'fake-key <Alt-Backspace>',
