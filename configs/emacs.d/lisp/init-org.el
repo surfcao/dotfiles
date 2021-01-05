@@ -224,7 +224,7 @@ If VANILLA is non-nil, run the standard `org-capture'."
   (interactive "P")
   (if vanilla
       (org-capture)
-    (org-capture nil "a")))
+    (org-capture nil "t")))
 
 (defun air-org-agenda-capture (&optional vanilla)
   "Capture a task in agenda mode, using the date at point.
@@ -234,7 +234,7 @@ If VANILLA is non-nil, run the standard `org-capture'."
   (if vanilla
       (org-capture)
     (let ((org-overriding-default-time (org-get-cursor-date)))
-      (org-capture nil "a"))))
+      (org-capture nil "t"))))
 
 (defun air-org-agenda-toggle-date (current-line)
   "Toggle `SCHEDULED' and `DEADLINE' tag in the capture buffer."
@@ -387,7 +387,7 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-capture-templates
         '(("t" "My TODO task format." entry
            (file "todo.org")
-           "* TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
+           "* ☛ TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
 	    :empty-lines 1)
 
           ("n" "A (work-related) note." entry
@@ -627,7 +627,7 @@ TAG is chosen interactively from the global tags completion table."
 (use-package org-evil
   :ensure t
   :config  
-  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode ":" 'org-set-tags-command)
+  (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "T" 'org-set-tags-command)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "t" 'org-todo)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "@" 'org-refile)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "#" 'org-add-note)

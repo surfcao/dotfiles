@@ -13,7 +13,6 @@
 
 
 (add-hook 'matlab-mode 'auto-complete-mode)
-
 (setq matlab-indent-function t)
 (setq fill-column 75)
 (turn-on-auto-fill)

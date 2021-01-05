@@ -34,6 +34,7 @@
     "T"  'ggtags-create-tags ;'gtags-find-tag
     "w"  'save-buffer
     "x"  'helm-M-x
+    "TAB"  'evil-switch-to-windows-last-buffer
     "y"  'yank-to-x-clipboard)
 
   (defun magit-blame-toggle ()

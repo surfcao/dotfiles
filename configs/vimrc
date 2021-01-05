@@ -320,3 +320,18 @@ command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags library.bib &&
 
 " add the tags to the path
 set tags+=$HOME/Dropbox/bib/tags
+
+" change cursor types in insert mode
+"
+
+" autocmd InsertEnter,InsertLeave * set cul!
+
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Optionally reset the cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+set ttimeoutlen=0

@@ -306,6 +306,13 @@
 	    (setq header-line-format " ")
 	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
+  (dolist (hook '(matlab-mode-hook))
+  (add-hook hook 
+	    (lambda ()
+	      (nlinum-relative-mode)
+	      )))
+
+
 ;(use-package flycheck
 ;  :ensure t
 ;  :commands flycheck-mode
