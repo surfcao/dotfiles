@@ -597,8 +597,12 @@ The IGNORED argument is... Ignored."
                                             (if (not (one-window-p))
                                                 (delete-window))))
   (set (make-local-variable 'pcomplete-ignore-case) t)
-  (set (make-local-variable 'company-backends)
-       '((company-shell company-eshell-history))))
+
+;; disable company mode in remote terminal
+  (if (file-remote-p default-directory)
+       (company-mode -1)
+       (set (make-local-variable 'company-backends)
+             '((company-shell company-eshell-history)))))
 
 (add-hook 'eshell-mode-hook 'air--eshell-mode-hook)
 
