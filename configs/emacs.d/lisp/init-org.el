@@ -254,27 +254,27 @@ If VANILLA is non-nil, run the standard `org-capture'."
 (defun air-pop-to-org-todo (split)
   "Visit my main TODO list, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/todo.org" split))
+  (air--pop-to-file "~/Dropbox/org/notes/todo.org" split))
 
 (defun air-pop-to-org-notes (split)
   "Visit my main notes file, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/notes.org" split))
+  (air--pop-to-file "~/Dropbox/org/notes/notes.org" split))
 
 (defun air-pop-to-org-ideas (split)
   "Visit my main notes file, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/ideas.org" split))
+  (air--pop-to-file "~/Dropbox/org/notes/ideas.org" split))
 
 (defun air-pop-to-org-meetings (split)
   "Visit my main exertion file, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/meetings.org" split))
+  (air--pop-to-file "~/Dropbox/org/notes/meetings.org" split))
 
 (defun air-pop-to-org-vault (split)
   "Visit my encrypted vault file, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/vault.gpg" split))
+  (air--pop-to-file "~/Dropbox/org/notes/vault.gpg" split))
 
 (defun air-pop-to-org-agenda (split)
   "Visit the org agenda, in the current window or a SPLIT."
@@ -409,9 +409,9 @@ TAG is chosen interactively from the global tags completion table."
       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
 
-  (setq org-default-notes-file "~/Dropbox/org/todo.org")
+  (setq org-default-notes-file "~/Dropbox/org/notes/todo.org")
   (setq org-directory "~/Dropbox/org/")
-  (setq org-journal-dir "~/Dropbox/org/notes/journal/")
+  (setq org-journal-dir "~/Dropbox/org/journal/")
 
   (add-to-list 'org-capture-templates
            `("j" "A journal entry" entry 
@@ -436,7 +436,8 @@ TAG is chosen interactively from the global tags completion table."
 
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
-  (setq org-agenda-files '("~/Dropbox/org/"))
+  ;(setq org-agenda-files '("~/Dropbox/org/"))
+  (setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)

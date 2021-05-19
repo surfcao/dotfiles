@@ -844,7 +844,7 @@ The IGNORED argument is... Ignored."
   (deft-use-filter-string-for-filename t)
   (deft-extensions '("md" "txt" "org"))
   (deft-default-extension "org")
-  (deft-directory (expand-file-name "~/Dropbox/org/notes/")))
+  (deft-directory (expand-file-name "~/Dropbox/org/")))
 
 (provide 'init)
 ;;; init.el ends here

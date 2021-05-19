@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Preamble
-# key: <pre
+# key: pr_
 # --
 #+TITLE: ${1:Best Title}
 #+AUTHOR: ${Guofeng Cao}
