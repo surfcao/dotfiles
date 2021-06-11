@@ -652,7 +652,13 @@ TAG is chosen interactively from the global tags completion table."
    :ensure t
    :config
    (add-hook 'dired-mode-hook 'org-download-enable)
-   (setq-default org-download-image-dir "./images"))
+   ;(org-download-method 'directory)
+   ;(org-download-heading-lvl nil)
+   ;(org-image-actual-width 300)
+   (setq-default org-download-image-dir "./images")
+   ;(org-download-screenshot-method "/usr/local/bin/pngpaste %s")
+   :bind
+   ("C-M-y" . org-download-clipboard))
 
 (use-package org-cliplink
      :ensure t
