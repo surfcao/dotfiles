@@ -148,7 +148,7 @@
 (require 'init-ess)
 (require 'init-matlab)
 ;(require 'init-twitter)
-;(require 'init-w3m)
+(require 'init-w3m)
 ;(require 'init-php)
 ;(require 'init-powerline)
 (require 'init-flycheck)

@@ -436,8 +436,8 @@ TAG is chosen interactively from the global tags completion table."
 
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
-  (setq org-agenda-files '("~/Dropbox/org/"))
-  ;(setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
+  ;(setq org-agenda-files '("~/Dropbox/org/notes/"))
+  (setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
