@@ -254,7 +254,7 @@ If VANILLA is non-nil, run the standard `org-capture'."
 (defun air-pop-to-org-todo (split)
   "Visit my main TODO list, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/notes/todo.org" split))
+  (air--pop-to-file "~/Dropbox/org/todo.org" split))
 
 (defun air-pop-to-org-notes (split)
   "Visit my main notes file, in the current window or a SPLIT."
@@ -391,25 +391,24 @@ TAG is chosen interactively from the global tags completion table."
 	    :empty-lines 1)
 
           ("n" "A (work-related) note." entry
-           (file "notes.org")
+           (file "notes/notes.org")
            "* %?\n :PROPERTIES:\n :CREATED: %u\n :END:\n\n"
 	   :empty-lines 1) 
 
           ("m" "A meeting note." entry
-           (file "meetings.org")
+           (file "notes/meetings.org")
 	   "* Meeting with %?\n :PROPERTIES:\n :CREATED: %u\n :END:\n\n"
 	   :empty-lines 1)
 
           ("i" "An idea entry." entry
-           (file "ideas.org")
+           (file "notes/ideas.org")
            "* IDEA %?\n :PROPERTIES:\n :ORDERED: t\n :CREATED: %u\n :END:\n\n"
 	   :empty-lines 1)
 
 	  ("k" "Cliplink capture task" entry (file "inbox.org")
       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
-
-  (setq org-default-notes-file "~/Dropbox/org/notes/todo.org")
+  (setq org-default-notes-file "~/Dropbox/org/todo.org")
   (setq org-directory "~/Dropbox/org/")
   (setq org-journal-dir "~/Dropbox/org/journal/")
 
@@ -436,8 +435,8 @@ TAG is chosen interactively from the global tags completion table."
 
   ;; Agenda configuration
   (setq org-agenda-text-search-extra-files '(agenda-archives))
-  ;(setq org-agenda-files '("~/Dropbox/org/notes/"))
-  (setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
+  (setq org-agenda-files '("~/Dropbox/org/"))
+  ;(setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)

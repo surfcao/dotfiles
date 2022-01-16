@@ -285,7 +285,16 @@
 
 (define-abbrev-table 'magit-submodule-list-mode-abbrev-table '())
 
-(define-abbrev-table 'markdown-mode-abbrev-table '())
+(define-abbrev-table 'markdown-mode-abbrev-table
+  '(
+    ("analyis" "analysis" nil 0)
+    ("charaterize" "Characterize" nil 0)
+    ("exploraory" "Exploratory" nil 0)
+    ("presential" "Presidential" nil 0)
+    ("satellage" "satellite" nil 0)
+    ("satelliage" "satellite" nil 0)
+    ("seris" "series" nil 0)
+   ))
 
 (define-abbrev-table 'markdown-view-mode-abbrev-table '())
 
@@ -342,6 +351,7 @@
     ("avaiable" "available" nil 0)
     ("compolex" "complex" nil 1)
     ("compolexity" "complexity" nil 0)
+    ("contrled" "controlled" nil 0)
     ("curosr" "cursor" nil 0)
     ("curriclum" "curriculum" nil 0)
     ("exicise" "excise" nil 0)
@@ -349,15 +359,21 @@
     ("gardon" "Gordon" nil 0)
     ("geogrphic" "geographic" nil 0)
     ("geospaial" "Geospatial" nil 0)
+    ("gepgraphic" "geographic" nil 0)
     ("heterogenous" "heterogeneous" nil 0)
     ("heterogneity" "heterogeneity" nil 1)
     ("horizonally" "horizontally" nil 0)
     ("incompotabile" "incompatible" nil 0)
+    ("innudation" "inundation" nil 0)
     ("integerating" "integrating" nil 0)
-    ("interpretability" "interpret ability" nil 2)
+    ("interestsing" "Interesting" nil 0)
+    ("interpretable" "Interpret-able" nil 0)
     ("interprete" "interpret" nil 0)
+    ("konwledge" "knowledge" nil 0)
     ("particuarly" "particularly" nil 0)
     ("planation" "plantation" nil 0)
+    ("seqences" "sequences" nil 0)
+    ("statsistics" "statistics" nil 0)
    ))
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
@@ -388,7 +404,9 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'restclient-mode-abbrev-table '())
 
