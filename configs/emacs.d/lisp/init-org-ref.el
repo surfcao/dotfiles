@@ -1,6 +1,6 @@
 ;;; init-org-ref.el --- Set up Org-Ref
 (use-package helm-bibtex
-  :after org-ref
+  :after (org-ref helm)
   :ensure t
   :bind ("C-c h h" . helm-bibtex)
   :config
@@ -99,9 +99,10 @@
   (let ((key (helm-marked-candidates)))
     (funcall org-ref-notes-function (car key))))
 
-  (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
+  ; comment out because
+  ;(helm-delete-action-from-source "Edit notes" helm-source-bibtex)
   ;; Note that 7 is a magic number of the index where you want to insert the   command. You may need to change yours.
-  (helm-add-action-to-source "Edit notes" 'my/org-ref-notes-function helm-source-bibtex 9)
+  ;(helm-add-action-to-source "Edit notes" 'my/org-ref-notes-function helm-source-bibtex 9)
 
   ; open pdf with pdf-tools
 ;  (defun my/org-ref-open-pdf-at-point ()

@@ -179,8 +179,8 @@
 ;; Org Mode
 (require 'init-org)
 (require 'init-org-ref)
-(require 'init-pdf)
-(require 'init-notes)
+;(require 'init-pdf)
+;(require 'init-notes)
 
 ;(use-package rainbow-mode
 ;  :ensure t
@@ -228,12 +228,12 @@
 ;  :ensure t
 ;  :mode "\\.js\\'")
 
-(use-package exec-path-from-shell
-  :ensure t
-  :defer t
-  :config
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
+;(use-package exec-path-from-shell
+;  :ensure t
+;  :defer t
+;  :config
+;  (when (memq window-system '(mac ns))
+;    (exec-path-from-shell-initialize)))
 
 (use-package helm
   :ensure t

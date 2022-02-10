@@ -222,8 +222,8 @@ is not used."
     (air--config-evil-leader))
 
 
-  (use-package evil-magit
-	:ensure t)
+;  (use-package evil-magit
+;	:ensure t)
 
   (use-package evil-surround
     :ensure t
