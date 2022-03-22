@@ -13,14 +13,32 @@
 ;(set (make-local-variable 'company-backends)
 ;'((company-dabbrev-code company-yasnippet elpy-company-backend)))))
 
-;;; Python mode:
-(use-package virtualenvwrapper
-  :ensure t
-  :config
-  (venv-initialize-interactive-shells)
-  (venv-initialize-eshell)
-  (setq venv-location
-        (expand-file-name "~/Projects/virtualenvs/")))
+; ;;; Python mode: virtualenvwrapper
+; (use-package virtualenvwrapper
+;   :ensure t
+;   :config
+;   (venv-initialize-interactive-shells)
+;   (venv-initialize-eshell)
+;   (setq venv-location
+;         (expand-file-name "~/Projects/virtualenvs/")))
+
+;;; conda environment management 
+(use-package conda
+     :ensure t
+     :config
+     ;; if you want interactive shell support, include:
+     (conda-env-initialize-interactive-shells)
+     ;; if you want eshell support, include:
+     (conda-env-initialize-eshell)
+     ;; if you want auto-activation (see below for details), include:
+     ;(conda-env-autoactivate-mode t)
+     (setq 
+  	conda-env-home-directory (expand-file-name "~/opt/anaconda3/") ;; as in previous example; not required
+  	conda-env-subdirectory "envs")
+
+     ;; if you want to automatically activate a conda environment on the opening of a file:
+     ;;(add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path) (conda-env-activate-for-buffer))))
+     )
 
 (add-hook 'python-mode-hook
           (lambda ()
@@ -53,5 +71,8 @@
 (evil-leader/set-key-for-mode 'python-mode "o" 'elpy-shell-switch-to-shell)
 (evil-leader/set-key-for-mode 'python-mode "g" 'elpy-goto-definition)
 (evil-leader/set-key-for-mode 'python-mode "G" 'elpy-goto-definition-other-window)
+
+; remove the warning by Guofeng per: https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
+(setq python-shell-completion-native-enable nil)
 
 (provide 'init-python)

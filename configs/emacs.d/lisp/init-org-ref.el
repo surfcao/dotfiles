@@ -71,7 +71,7 @@
 
   (setq org-ref-default-citation-link "citep")
   :config
-  (key-chord-define-global "uu" 'org-ref-cite-hydra/body)
+  ;(key-chord-define-global "uu" 'org-ref-cite-hydra/body)
   ;; variables that control bibtex key format for auto-generation
   ;; I want firstauthor-year-title-words
   ;; this usually makes a legitimate filename to store pdfs under.

@@ -6,7 +6,7 @@
 (use-package ess
 :load-path (lambda ()
             (when (memq window-system '(mac ns))
-	      "/Applications/Emacs.app/Contents/Resources/site-lisp/ess/")
+	      "/usr/local/share/emacs/site-lisp/ess")
             (when (memq window-system '(x))
 	      "/usr/local/share/emacs/site-lisp/ess/"))
 :mode (("\\.[rR]\\'" . R-mode)
@@ -31,8 +31,10 @@
             (setq ess-use-auto-complete t)
             (setq ess-set-style 'RStudio)
             (setq ess-R-argument-suffix "=")
-            (ess-disable-smart-S-assign nil)
-            (ess-disable-smart-underscore nil)))
+           ; (ess-disable-smart-S-assign nil)
+           ; (ess-disable-smart-underscore nil)
+            (ess-toggle-S-assign nil)
+            (ess-toggle-underscore nil)))
 
 ;;; inferior ESS execution mode
 (define-key inferior-ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
