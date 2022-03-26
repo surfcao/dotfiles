@@ -3,10 +3,13 @@
 ;(when (memq window-system '(x))
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
 
+(when (memq window-system '(mac ns))
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/ess/"))
+
 (use-package ess
 :load-path (lambda ()
             (when (memq window-system '(mac ns))
-	      "/usr/local/share/emacs/site-lisp/ess")
+	      "/usr/local/share/emacs/site-lisp/ess/")
             (when (memq window-system '(x))
 	      "/usr/local/share/emacs/site-lisp/ess/"))
 :mode (("\\.[rR]\\'" . R-mode)
