@@ -5,14 +5,17 @@
   :bind ("C-c h h" . helm-bibtex)
   :config
   (setq bibtex-completion-bibliography 
-        '("~/Dropbox/bib/library.bib"))
+        ;'("~/Dropbox/bib/library.bib"))
+        '("~/Google Drive/bib/library.bib"))
   (setq bibtex-completion-library-path 
-        '("~/Dropbox/bib/pdfs/"))
+        ;'("~/Dropbox/bib/pdfs/"))
+        '("~/Google Drive/bib/library/"))
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file") 
-  (setq bibtex-completion-pdf-field "file") 
+  ;(setq bibtex-completion-pdf-field "file") 
   (setq bibtex-completion-cite-default-command "citep")
-  (setq bibtex-completion-notes-path "~/Dropbox/org/notes/readings/")
+  ;(setq bibtex-completion-notes-path "~/Dropbox/org/notes/readings/")
+  (setq bibtex-completion-notes-path "~/Google Drive/bib/notes/")
   (setq bibtex-completion-notes-template-multiple-files 
    (concat
   "#+TITLE: ${title}\n"
@@ -35,9 +38,11 @@
   :bind ("C-c b b" . ivy-bibtex)
   :config
   (setq bibtex-completion-bibliography 
-        '("~/Dropbox/bib/library.bib"))
+        ;'("~/Dropbox/bib/library.bib"))
+        '("~/Google Drive/bib/library.bib"))
   (setq bibtex-completion-library-path 
-        '("~/Dropbox/bib/pdfs/"))
+        ;'("~/Dropbox/bib/pdfs/"))
+        '("~/Google Drive/bib/library/"))
 
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file")
@@ -59,13 +64,20 @@
 (use-package org-ref
   :after org
   :init
-  (setq reftex-default-bibliography '("~/Dropbox/bib/library.bib"))
-  (setq org-ref-bibliography-notes "~/Dropbox/bib/notes.org"
-        org-ref-default-bibliography '("~/Dropbox/bib/library.bib")
-        org-ref-pdf-directory "~/Dropbox/bib/pdfs/")
+  ;(setq reftex-default-bibliography '("~/Dropbox/bib/library.bib"))
+  ;(setq org-ref-bibliography-notes "~/Dropbox/bib/notes.org"
+  ;      org-ref-default-bibliography '("~/Dropbox/bib/library.bib")
+  ;      org-ref-pdf-directory "~/Dropbox/bib/pdfs/")
+  (setq reftex-default-bibliography '("~/Google Drive/bib/library.bib"))
+  (setq org-ref-bibliography-notes "~/Google Drive/bib/notes.org"
+        org-ref-default-bibliography '("~/Google Drive/bib/library.bib")
+        org-ref-pdf-directory "~/Google Drive/bib/library/")
 
-  (setq helm-bibtex-bibliography "~/Dropbox/bib/library.bib")
-  (setq helm-bibtex-library-path "~/Dropbox/bib/pdfs/")
+  ;setq helm-bibtex-bibliography "~/Dropbox/bib/library.bib")
+  ;setq helm-bibtex-library-path "~/Dropbox/bib/pdfs/")
+
+  (setq helm-bibtex-bibliography "~/Google Drive/bib/library.bib")
+  (setq helm-bibtex-library-path "~/Google Drive/bib/library/")
   ;(setq helm-bibtex-notes-path "~/Dropbox/bib/notes.org")
   ;(setq bibtex-completion-notes-path "~/Dropbox/bib/notes.org")
 
@@ -75,19 +87,20 @@
   ;; variables that control bibtex key format for auto-generation
   ;; I want firstauthor-year-title-words
   ;; this usually makes a legitimate filename to store pdfs under.
-  (setq bibtex-autokey-year-length 4
-        bibtex-autokey-name-year-separator "-"
-        bibtex-autokey-year-title-separator "-"
-        bibtex-autokey-titleword-separator "-"
-        bibtex-autokey-titlewords 2
-        bibtex-autokey-titlewords-stretch 1
-        bibtex-autokey-titleword-length 5)
+  ;(setq bibtex-autokey-year-length 4
+  ;      bibtex-autokey-name-year-separator "-"
+  ;      bibtex-autokey-year-title-separator "-"
+  ;      bibtex-autokey-titleword-separator "-"
+  ;      bibtex-autokey-titlewords 2
+  ;      bibtex-autokey-titlewords-stretch 1
+  ;      bibtex-autokey-titleword-length 5)
 
-  
   (setq bibtex-completion-pdf-field "file")
-  (setq org-ref-get-pdf-filename-function 'org-ref-get-mendeley-filename)
+  ; for Mendeley
+  ;(setq org-ref-get-pdf-filename-function 'org-ref-get-mendeley-filename)
 
   ;; Tell org-ref to let helm-bibtex find notes for it
+
   (setq org-ref-notes-function
       (lambda (thekey)
 	(let ((bibtex-completion-bibliography (org-ref-find-bibliography)))
