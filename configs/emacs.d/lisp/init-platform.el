@@ -5,8 +5,8 @@
 (require 'init-fonts)
 
 ;; This must run after window setup or it seems to have no effect.
-;(add-hook 'window-setup-hook
-(add-hook 'emacs-setup-hook
+(add-hook 'window-setup-hook
+;(add-hook 'emacs-setup-hook
           (lambda ()
             (when (memq window-system '(mac ns x))
 	      (use-package exec-path-from-shell

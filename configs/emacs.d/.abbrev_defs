@@ -35,11 +35,20 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("apporach" "approach" nil :count 0)
-    ("appraches" "approaches" nil :count 0)
-    ("covariariance" "covariance" nil :count 0)
-    ("intersting" "interesting" nil :count 0)
-    ("statistial" "statistical" nil :count 0)
-    ("supplentary" "supplementary" nil :count 0)
+    ("assisant" "assistant" nil :count 0)
+    ("assistances" "assistance's" nil :count 1)
+    ("developping" "developing" nil :count 1)
+    ("particitation" "participation" nil :count 0)
+    ("particuarly" "particularly" nil :count 2)
+    ("prelimary" "preliminary" nil :count 0)
+    ("primiarliy" "primarily" nil :count 0)
+    ("questionairs" "questionnaires" nil :count 1)
+    ("reseach" "research" nil :count 0)
+    ("resillience" "resilience" nil :count 0)
+    ("resilliences" "resilience's" nil :count 0)
+    ("resrch" "research" nil :count 0)
+    ("sigfnicant" "significant" nil :count 0)
+    ("signifiant" "significant" nil :count 1)
+    ("undergrate" "underrate" nil :count 0)
    ))
 
