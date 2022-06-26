@@ -107,8 +107,10 @@ set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
 set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
 
 " path to search files
-set path+=$HOME/Dropbox/work/ttu/gr/**
-set path+=$HOME/Git/lab/papers/**
+"set path+=$HOME/GDrive/bib/
+"set path+=$HOME/Git/lab/papers/**
+set path+=$HOME/Git/hub/papers/**
+set path+=$HOME/Git/hub/proposals/**
 set wildignore+=**/.git/**,*.aux,*.blg,*.dvi,*.log,*.out,*.fls,*.fdb_latexmk
 set wildignore+=*.swp,*.bak
 set wildignore+=*.tar.*
@@ -320,10 +322,10 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " write a file with root 
 cmap w!! w !sudo tee % >/dev/null
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .  &&pushd $HOME/Dropbox/bib && ctags library.bib &&popd
+command! MakeTags !ctags -R . &&pushd $HOME/GDrive/bib && ctags library.bib &&popd
 
 " add the tags to the path
-set tags+=$HOME/Dropbox/bib/tags
+set tags+=$HOME/GDrive/bib/tags
 
 " change cursor types in insert mode
 "

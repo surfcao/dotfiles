@@ -55,7 +55,7 @@ local function createVimModal(vim)
 
   local pageDirection = function(direction)
     return function()
-      local lines = 10
+      local lines = 20
       local buffer = AccessibilityBuffer:new(vim)
 
       if buffer:isValid() then
@@ -301,7 +301,9 @@ local function createVimModal(vim)
       hs.eventtap.keyStroke({'cmd','shift'}, 'z', 0)
     end)
     :bind({'ctrl'}, 'd', pageDirection(Down))
+    :bind({'ctrl'}, 'f', pageDirection(Down))
     :bind({'ctrl'}, 'u', pageDirection(Up))
+    :bind({'ctrl'}, 'b', pageDirection(Up))
     :bind({'shift'}, 'o', function()
       hs.eventtap.keyStroke({'cmd'}, 'left', 0)
       hs.eventtap.keyStroke({}, 'return', 0)

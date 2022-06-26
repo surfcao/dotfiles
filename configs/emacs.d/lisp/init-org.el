@@ -664,6 +664,8 @@ TAG is chosen interactively from the global tags completion table."
     :config
    (global-set-key (kbd "C-x p i") 'org-cliplink))
 
+;; for citation
+(require 'oc-csl)
 
 (provide 'init-org)
 ;;; init-org.el ends here

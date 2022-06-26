@@ -1,4 +1,21 @@
 ;;; init-org-ref.el --- Set up Org-Ref
+
+; setup org-cite
+(use-package citeproc
+    :ensure t)
+(require 'oc)
+(require 'oc-basic)
+(require 'oc-csl)
+(require 'oc-natbib)
+(require 'oc-biblatex)
+
+(setq org-cite-global-bibliography
+ '("~/GDrive/bib/library.bib"))
+(setq org-cite-csl-styles-dir "~/Zotero/styles")
+(setq org-cite-export-processors
+ '((latex biblatex)
+   (t csl "apa.csl")))
+
 (use-package helm-bibtex
   :after (helm)
   :ensure t
@@ -6,10 +23,10 @@
   :config
   (setq bibtex-completion-bibliography 
         ;'("~/Dropbox/bib/library.bib"))
-        '("~/Google Drive/bib/library.bib"))
+        '("~/GDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
-        '("~/Google Drive/bib/library/"))
+        '("~/GDrive/bib/pdfs/"))
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file") 
  ; (setq bibtex-completion-cite-default-command "citep")
@@ -20,7 +37,7 @@
     (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
     (default       . bibtex-completion-format-citation-default)))
 
-  (setq bibtex-completion-notes-path "~/Google Drive/bib/notes.org"))
+  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org"))
 
 (use-package ivy-bibtex
   :ensure t
@@ -28,11 +45,11 @@
   :config
   (setq bibtex-completion-bibliography 
         ;'("~/Dropbox/bib/library.bib"))
-        '("~/Google Drive/bib/library.bib"))
+        '("~/GDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
-        '("~/Google Drive/bib/library/"))
-  (setq bibtex-completion-notes-path "~/Google Drive/bib/notes.org")
+        '("~/GDrive/bib/pdfs/"))
+  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org")
 
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file")
@@ -56,13 +73,13 @@
   :after (org helm-bibtex)
   :config
   ;(setq reftex-default-bibliography '("~/Dropbox/bib/library.bib"))
-  (setq org-ref-bibliography-notes "~/Google Drive/bib/notes.org"
-        org-ref-default-bibliography '("~/Google Drive/bib/library.bib")
-        org-ref-pdf-directory "~/Google Drive/bib/library/")
+  (setq org-ref-bibliography-notes "~/GDrive/bib/notes.org"
+        org-ref-default-bibliography '("~/GDrive/bib/library.bib")
+        org-ref-pdf-directory "~/GDrive/bib/pdfs/")
 
-  (setq bibtex-completion-library-path '("~/Google Drive/bib/library/"))
+  (setq bibtex-completion-library-path '("~/GDrive/bib/pdfs/"))
 
-  (setq bibtex-completion-notes-path "~/Google Drive/bib/notes.org")
+  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org")
   (setq org-ref-default-citation-link "citep")
 
 ;(setq helm-source-bibtex org-ref-helm-source-bibtex)
