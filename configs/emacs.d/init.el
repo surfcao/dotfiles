@@ -113,29 +113,34 @@
      :ensure t
      :commands (tiny-menu-run-item)
      :config
-  (setq tiny-menu-items
-        '(("org-things"   ("Org Things"
-                           ((?t "Tag"      org-tags-view)
-                            (?i "ID"       air-org-goto-custom-id)
-                            (?k "Keyword"  org-search-view)
-                            (?h "Headings" helm-org-agenda-files-headings))))
-          ("org-links"    ("Org Links"
-                           ((?c "Capture"   org-store-link)
-                            (?l "Insert"    org-insert-link)
-                            (?i "Custom ID" air-org-insert-custom-id-link))))
-          ("org-files"    ("Org Files"
-                           ((?t "TODO"  (lambda () (air-pop-to-org-todo nil)))
-                            (?n "Notes" (lambda () (air-pop-to-org-notes nil)))
-                            (?m "Meetings" (lambda () (air-pop-to-org-meetings nil)))
-                            (?i "Ideas" (lambda () (air-pop-to-org-ideas nil)))
-                            (?v "Vault" (lambda () (air-pop-to-org-vault nil))))))
-          ("org-captures" ("Org Captures"
-                           ((?t "TODO"  air-org-task-capture)
-                            (?n "Note"  (lambda () (interactive) (org-capture nil "n")))
-                            (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
-                            (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))
-                            (?j "Journal"  (lambda () (interactive) (org-capture nil "i")))
-                            (?k "Online"  (lambda () (interactive) (org-capture nil "i")))))))))
+     (setq tiny-menu-items
+           '(("org-things"   ("Org Things"
+                              ((?t "Tag"      org-tags-view)
+                               (?i "ID"       air-org-goto-custom-id)
+                               (?k "Keyword"  org-search-view)
+                               (?h "Headings" helm-org-agenda-files-headings))))
+             ("org-agendas"  ("Org Agenda Views"
+                              ((?a "All"      air-pop-to-org-agenda)
+                               (?c "Calendar" calendar)
+                               )))
+             ("org-links"    ("Org Links"
+                              ((?c "Capture"   org-store-link)
+                               (?l "Insert"    org-insert-link)
+                               (?i "Custom ID" air-org-insert-custom-id-link))))
+             ("org-files"    ("Org Files"
+                              ((?t "TODO"  (lambda () (air-pop-to-org-todo nil)))
+                               (?n "Notes" (lambda () (air-pop-to-org-notes nil)))
+                               (?m "Meetings" (lambda () (air-pop-to-org-meetings nil)))
+                               (?i "Ideas" (lambda () (air-pop-to-org-ideas nil)))
+                               (?d "Today" (lambda () (air-pop-to-org-today nil)))
+                               (?v "Vault" (lambda () (air-pop-to-org-vault nil))))))
+             ("org-captures" ("Org Captures"
+                              ((?t "TODO"  air-org-task-capture)
+                               (?n "Note"  (lambda () (interactive) (org-capture nil "n")))
+                               (?m "Meeting"  (lambda () (interactive) (org-capture nil "m")))
+                               (?i "Idea"  (lambda () (interactive) (org-capture nil "i")))
+                               (?j "Journal"  (lambda () (interactive) (org-capture nil "j")))
+                               (?k "Online"  (lambda () (interactive) (org-capture nil "k")))))))))
 
 (use-package diminish
   :ensure t)

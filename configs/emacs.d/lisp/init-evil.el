@@ -99,7 +99,7 @@
   (define-key evil-normal-state-map (kbd "C-]")     'gtags-find-tag-from-here)
   (define-key evil-normal-state-map (kbd "g/")      'occur-last-search)
   (define-key evil-normal-state-map (kbd "[i")      'show-first-occurrence)
-  (define-key evil-normal-state-map (kbd "S-SPC")   'air-pop-to-org-agenda)
+  ;(define-key evil-normal-state-map (kbd "S-SPC")   'air-pop-to-org-agenda)
   (define-key evil-insert-state-map (kbd "C-e")     'end-of-line) ;; I know...
   ; kill to the left; guofeng
   (define-key evil-insert-state-map (kbd "C-u")     (lambda () (interactive) (kill-line 0)))
@@ -119,6 +119,7 @@
 
   (evil-define-key 'normal global-map (kbd "\\ \\") 'tiny-menu)
   (evil-define-key 'normal global-map (kbd "\\ f") (tiny-menu-run-item "org-files"))
+  (evil-define-key 'normal global-map (kbd "\\ a") (tiny-menu-run-item "org-agendas"))
   (evil-define-key 'normal global-map (kbd "\\ t") (tiny-menu-run-item "org-things"))
   (evil-define-key 'normal global-map (kbd "\\ c") (tiny-menu-run-item "org-captures"))
   (evil-define-key 'normal global-map (kbd "\\ l") (tiny-menu-run-item "org-links"))

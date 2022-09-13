@@ -256,6 +256,12 @@ If VANILLA is non-nil, run the standard `org-capture'."
   (interactive "P")
   (air--pop-to-file "~/Dropbox/org/todo.org" split))
 
+(defun air-pop-to-org-today (split)
+  "Visit my main TODO list, in the current window or a SPLIT."
+  (interactive "P")
+  (air--pop-to-file (expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
+split)
+
 (defun air-pop-to-org-notes (split)
   "Visit my main notes file, in the current window or a SPLIT."
   (interactive "P")
