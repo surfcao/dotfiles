@@ -19,7 +19,7 @@
 	      ;(set-face-attribute 'default nil :font "Inconsolata LGC")
 	      (add-to-list 'default-frame-alist '(font . "iA Writer Mono V"))
 	      (set-face-attribute 'default nil :font "iA Writer Mono V")
-	      (sanityinc/set-frame-font-size 18)
+	      (sanityinc/set-frame-font-size 20)
 	      (define-key global-map (kbd "S-<return>") 'toggle-frame-fullscreen))
 
 	    (when (memq window-system '(x))
