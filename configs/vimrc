@@ -3,7 +3,7 @@ endif
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set mouse=a
+"set mouse=a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 """   Plug
@@ -332,8 +332,21 @@ set tags+=$HOME/GDrive/bib/tags
 
 autocmd InsertEnter,InsertLeave * set cul!
 
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+"let &t_SI = "\e[6 q"
+"let &t_EI = "\e[2 q"
+
+" Set up vertical vs block cursor for insert/normal mode
+if &term =~ "screen.*"
+    "let &t_ti.="\eP\e[1 q\e\\"
+    let &t_SI.="\eP\e[6 q\e\\"
+    let &t_EI.="\eP\e[2 q\e\\"
+    "let &t_te.="\eP\e[0 q\e\\"
+else
+    "let &t_ti.="\<Esc>[1 q"
+    let &t_SI.="\<Esc>[6 q"
+    let &t_EI.="\<Esc>[2 q"
+    "let &t_te.="\<Esc>[0 q"
+endif
 
 " Optionally reset the cursor on start:
 augroup myCmds
@@ -341,3 +354,7 @@ au!
 autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 set ttimeoutlen=0
+
+" enable italic
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"

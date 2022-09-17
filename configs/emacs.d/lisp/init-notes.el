@@ -1,5 +1,8 @@
 ;;; init-org-ref.el --- Set up notes systems
 
+
+;; Outdated, needs to update by Guofeng
+
 (setq
    org_notes "~/Dropbox/org/notes/"
    zot_bib "~/Dropbox/bib/library.bib"

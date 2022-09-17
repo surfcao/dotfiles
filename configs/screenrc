@@ -29,7 +29,7 @@ startup_message off
 attrcolor b ".I"
 
 #term rxvt-unicode-256color
-term xterm-256color
+term screen-256color-italic
 # tell screen how to set colors. AB = background, AF=foreground
 #termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # urxvt-unicode only

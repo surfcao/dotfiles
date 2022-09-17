@@ -116,8 +116,8 @@
   (setq bibtex-completion-pdf-field "file")
 
   ; for Mendeley
- ;(setq org-ref-get-pdf-filename-function 'org-ref-get-mendeley-filename)
- ;(setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-bibtex-completion)
+ ;(setq org-ref-get-pdf-filename-function 'org-ef-get-mendeley-filename)
+(setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-bibtex-completion)
 
   ;; Tell org-ref to let helm-bibtex find notes for it
 
@@ -138,16 +138,16 @@
   ;(helm-add-action-to-source "Edit notes" 'my/org-ref-notes-function helm-source-bibtex 9)
 
   ; open pdf with pdf-tools
-;(defun my/org-ref-open-pdf-at-point ()
-;"Open the pdf for bibtex key under point if it exists."
-;(interactive)
-;(let* ((results (org-ref-get-bibtex-key-and-file))
-;       (key (car results))
-;       (pdf-file (funcall org-ref-get-pdf-filename-function key)))
-;  (if (file-exists-p pdf-file)
-;      (find-file pdf-file)
-;    (message "No PDF found for key %s" key))))
-; (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
+(defun my/org-ref-open-pdf-at-point ()
+"Open the pdf for bibtex key under point if it exists."
+(interactive)
+(let* ((results (org-ref-get-bibtex-key-and-file))
+       (key (car results))
+       (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+  (if (file-exists-p pdf-file)
+      (find-file pdf-file)
+    (message "No PDF found for key %s" key))))
+ (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
 
 (setq bibtex-completion-pdf-symbol "⌘")
 (setq bibtex-completion-notes-symbol "✎")
