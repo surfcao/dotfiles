@@ -37,4 +37,5 @@ term screen-256color-italic
 # erase background with current bg color
 defbce "on" 
 
+maptimeout 0
 shell -/bin/bash
