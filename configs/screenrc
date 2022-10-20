@@ -37,4 +37,5 @@ attrcolor b ".I"
 # erase background with current bg color
 defbce "on" 
 
+maptimeout 0
 shell -/bin/bash

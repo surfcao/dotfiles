@@ -818,22 +818,22 @@ The IGNORED argument is... Ignored."
   
   (global-set-key (kbd "C-c b i") 'my-insert-file-name)
 
-(use-package org-journal
-  :ensure t
-  :defer t
-  :config
-  (setq org-journal-dir "~/Dropbox/org/notes/journal/"
-        org-journal-file-format "%Y%m%d.org"
-        org-journal-date-format "%A, %d %B %Y")
-
-  (defun org-journal-save-entry-and-exit()
-  "Simple convenience function.
-  Saves the buffer of the current day's entry and kills the window
-  Similar to org-capture like behavior"
-  (interactive)
-  (save-buffer)
-  (kill-buffer-and-window))
-  (define-key org-journal-mode-map (kbd "C-x C-s") 'org-journal-save-entry-and-exit))
+;;(use-package org-journal
+;;  :ensure t
+;;  :defer t
+;;  :config
+;;  (setq org-journal-dir "~/Dropbox/org/notes/journal/"
+;;        org-journal-file-format "%Y%m%d.org"
+;;        org-journal-date-format "%A, %d %B %Y")
+;;
+;;  (defun org-journal-save-entry-and-exit()
+;;  "Simple convenience function.
+;;  Saves the buffer of the current day's entry and kills the window
+;;  Similar to org-capture like behavior"
+;;  (interactive)
+;;  (save-buffer)
+;;  (kill-buffer-and-window))
+;;  (define-key org-journal-mode-map (kbd "C-x C-s") 'org-journal-save-entry-and-exit))
 
 (use-package deft
   :after org
