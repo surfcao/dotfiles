@@ -359,5 +359,5 @@ augroup END
 set ttimeoutlen=0
 
 " enable italic
-"let &t_ZH="\e[3m"
-"let &t_ZR="\e[23m"
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
