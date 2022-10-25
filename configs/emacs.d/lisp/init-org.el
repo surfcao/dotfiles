@@ -418,9 +418,12 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-directory "~/Dropbox/org/")
   (setq org-journal-dir "~/Dropbox/org/journal/")
 
+;;The special marker ‘,’ inside of the argument to backquote indicates
+;;a value that isn’t constant. The Emacs Lisp evaluator evaluates the
+;;argument of ‘,’, and puts the value in the list structure:
+
   (add-to-list 'org-capture-templates
-           `("j" "A journal entry" entry 
-	    (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
+           `("j" "A journal entry" entry (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
                            "* %<%H:%M:%S> %? \n" :tree-type week))
 
   ;; Logging of state changes
