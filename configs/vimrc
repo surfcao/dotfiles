@@ -84,10 +84,10 @@ let g:vimtex_compiler_latexmk = {'build_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 else
-	"let g:vimtex_view_method='skim' 
-	let g:vimtex_view_method='sioyek' 
-        let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
-
+	let g:vimtex_view_method='skim' 
+	"let g:vimtex_view_method='sioyek' 
+        "let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+	
 endif 
 Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
 " put pandoc using hard wrapping, default is soft wrapping
