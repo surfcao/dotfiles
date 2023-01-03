@@ -1,4 +1,4 @@
-;;; init-org.el --- Set up Org Mode
+;; init-org.el --- Set up Org Mode
 ;;; Commentary:
 
 ;; Basic Org Mode configuration, assuming presence of Evil & Evil Leader.
@@ -673,9 +673,6 @@ TAG is chosen interactively from the global tags completion table."
      :ensure t
     :config
    (global-set-key (kbd "C-x p i") 'org-cliplink))
-
-;; for citation
-(require 'oc-csl)
 
 (provide 'init-org)
 ;;; init-org.el ends here
