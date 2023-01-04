@@ -254,7 +254,7 @@ If VANILLA is non-nil, run the standard `org-capture'."
 (defun air-pop-to-org-todo (split)
   "Visit my main TODO list, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file "~/Dropbox/org/todo.org" split))
+  (air--pop-to-file org-default-notes-file2 split))
 
 (defun air-pop-to-org-today (split)
   "Visit my main TODO list, in the current window or a SPLIT."
@@ -392,7 +392,7 @@ TAG is chosen interactively from the global tags completion table."
 
   (setq org-capture-templates
         '(("t" "My TODO task format." entry
-           (file "todo.org")
+           (file org-default-notes-file2)
            "* ☛ TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
 	    :empty-lines 1)
 
@@ -414,7 +414,9 @@ TAG is chosen interactively from the global tags completion table."
 	  ("k" "Cliplink capture task" entry (file "inbox.org")
       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
-  (setq org-default-notes-file "~/Dropbox/org/todo.org")
+  ;; use this as default for emacs, and org-default-notes-file for random
+  ;; notes 
+  (setq org-default-notes-file2 "~/Dropbox/org/todo-work.org")
   (setq org-directory "~/Dropbox/org/")
   (setq org-journal-dir "~/Dropbox/org/journal/")
 
@@ -426,6 +428,10 @@ TAG is chosen interactively from the global tags completion table."
            `("j" "A journal entry" entry (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
                            "* %<%H:%M:%S> %? \n" :tree-type week))
 
+;;(add-to-list  'org-capture-templates 
+;;	      `("y" "Journal entry" entry (file+olp+datetree ,(function org-journal-find-location))
+;;                               "* %(format-time-string org-journal-time-format) %? \n%i" :tree-type week))
+;;
   ;; Logging of state changes
   (setq org-log-done (quote time))
   (setq org-log-redeadline (quote time))
@@ -648,7 +654,7 @@ TAG is chosen interactively from the global tags completion table."
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-bullets-bullet-list '("⋄" "•" "◦")))
+  (setq org-bullets-bullet-list '("◉" "◎" "☉" "○" )))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -673,6 +679,27 @@ TAG is chosen interactively from the global tags completion table."
      :ensure t
     :config
    (global-set-key (kbd "C-x p i") 'org-cliplink))
+
+
+;;(use-package org-journal
+;;  :ensure t
+;;  :init
+;;  ;; Change default prefix key; needs to be set before loading org-journal
+;;  (setq org-journal-prefix-key "C-c j")
+;;  :config
+;;  (setq org-journal-file-type 'weekly)
+;;  (setq org-journal-dir "~/Dropbox/org/journal/2023")
+;;  (setq org-journal-file-format "W%W-%Y.org")
+;;  (setq org-journal-date-format "%Y-%m-%d")
+;;  (setq org-journal-skip-carryover-drawers (list "LOGBOOK")))
+;;
+;;(defun org-journal-find-location ()
+;;    ;; Open today's journal, but specify a non-nil prefix argument in order to
+;;    ;; inhibit inserting the heading; org-capture will insert the heading.
+;;    (org-journal-new-entry t)
+;;    (unless (eq org-journal-file-type 'daily)
+;;      (org-narrow-to-subtree))
+;;    (goto-char (point-max)))
 
 (provide 'init-org)
 ;;; init-org.el ends here
