@@ -1,4 +1,6 @@
 (require 'org-ref-ivy)
+(require 'oc-csl)
+
 (use-package org-ref
   ;:after (org helm-bibtex)
   :config

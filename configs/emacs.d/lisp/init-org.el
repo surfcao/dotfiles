@@ -1,4 +1,4 @@
-;;; init-org.el --- Set up Org Mode
+;; init-org.el --- Set up Org Mode
 ;;; Commentary:
 
 ;; Basic Org Mode configuration, assuming presence of Evil & Evil Leader.
@@ -446,7 +446,8 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-agenda-text-search-extra-files '(agenda-archives))
   (setq org-agenda-files '("~/Dropbox/org/"))
   ;(setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq my-note-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 2) (my-note-files :maxlevel . 2)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-outline-path-complete-in-steps nil)
@@ -672,9 +673,6 @@ TAG is chosen interactively from the global tags completion table."
      :ensure t
     :config
    (global-set-key (kbd "C-x p i") 'org-cliplink))
-
-;; for citation
-(require 'oc-csl)
 
 (provide 'init-org)
 ;;; init-org.el ends here
