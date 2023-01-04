@@ -418,7 +418,8 @@ TAG is chosen interactively from the global tags completion table."
   ;; notes 
   (setq org-default-notes-file2 "~/Dropbox/org/todo-work.org")
   (setq org-directory "~/Dropbox/org/")
-  (setq org-journal-dir "~/Dropbox/org/journal/")
+  ;(setq org-journal-dir "~/Dropbox/org/journal/2023")
+  (setq org-journal-dir (concat org-directory "/journal/" (format-time-string "%Y")))
 
 ;;The special marker ‘,’ inside of the argument to backquote indicates
 ;;a value that isn’t constant. The Emacs Lisp evaluator evaluates the
