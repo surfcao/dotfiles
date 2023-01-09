@@ -425,13 +425,17 @@ TAG is chosen interactively from the global tags completion table."
 ;;a value that isn’t constant. The Emacs Lisp evaluator evaluates the
 ;;argument of ‘,’, and puts the value in the list structure:
 
+;;  (add-to-list 'org-capture-templates
+;;           `("j" "A journal entry" entry (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir))
+;;                           "* %<%H:%M:%S> %? \n" :tree-type week))
+
   (add-to-list 'org-capture-templates
-           `("j" "A journal entry" entry (file+olp+datetree ,(expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
+           '("j" "A journal entry" entry (file+olp+datetree (lambda () (expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir)))
                            "* %<%H:%M:%S> %? \n" :tree-type week))
 
 ;;(add-to-list  'org-capture-templates 
-;;	      `("y" "Journal entry" entry (file+olp+datetree ,(function org-journal-find-location))
-;;                               "* %(format-time-string org-journal-time-format) %? \n%i" :tree-type week))
+;;	      '("y" "Journal entry" entry (file+olp+datetree (lambda() (org-journal-find-location)))
+;;                               "* %<%H:%M:%S> %? \n" :tree-type week))
 ;;
   ;; Logging of state changes
   (setq org-log-done (quote time))
