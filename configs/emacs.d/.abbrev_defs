@@ -159,6 +159,7 @@
     ("technoical" "technical" nil :count 0)
     ("transferrable" "transferable" nil :count 0)
     ("tricyrides" "traceries" nil :count 0)
+    ("tset" "test" nil :count 0)
     ("ubiquitious" "ubiquitous" nil :count 0)
     ("undergrate" "underrate" nil :count 0)
     ("univeristy" "University" nil :count 0)
