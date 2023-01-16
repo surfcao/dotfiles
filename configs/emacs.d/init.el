@@ -128,7 +128,8 @@
                                (?l "Insert"    org-insert-link)
                                (?i "Custom ID" air-org-insert-custom-id-link))))
              ("org-files"    ("Org Files"
-                              ((?t "TODO"  (lambda () (air-pop-to-org-todo nil)))
+                              ((?t "TODO-Work"  (lambda () (air-pop-to-org-todo-work nil)))
+                              (?f "TODO-Life"  (lambda () (air-pop-to-org-todo-life nil)))
                                (?n "Notes" (lambda () (air-pop-to-org-notes nil)))
                                (?m "Meetings" (lambda () (air-pop-to-org-meetings nil)))
                                (?i "Ideas" (lambda () (air-pop-to-org-ideas nil)))

@@ -251,10 +251,15 @@ If VANILLA is non-nil, run the standard `org-capture'."
         (and (search-forward "SCHEDULED:" search-limit t)
              (replace-match "DEADLINE:"))))))
 
-(defun air-pop-to-org-todo (split)
+(defun air-pop-to-org-todo-life (split)
   "Visit my main TODO list, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file org-default-notes-file2 split))
+  (air--pop-to-file org-default-notes-file-life split))
+
+(defun air-pop-to-org-todo-work (split)
+  "Visit my main TODO list, in the current window or a SPLIT."
+  (interactive "P")
+  (air--pop-to-file org-default-notes-file-work split))
 
 (defun air-pop-to-org-today (split)
   "Visit my main TODO list, in the current window or a SPLIT."
@@ -392,7 +397,7 @@ TAG is chosen interactively from the global tags completion table."
 
   (setq org-capture-templates
         '(("t" "My TODO task format." entry
-           (file org-default-notes-file2)
+           (file org-default-notes-file-work)
            "* ☛ TODO %?\n :PROPERTIES:\n :CREATED:  %u\n :END:\n\n %i"
 	    :empty-lines 1)
 
@@ -416,7 +421,8 @@ TAG is chosen interactively from the global tags completion table."
 
   ;; use this as default for emacs, and org-default-notes-file for random
   ;; notes 
-  (setq org-default-notes-file2 "~/Dropbox/org/todo-work.org")
+  (setq org-default-notes-file-life "~/Dropbox/org/todo-life.org")
+  (setq org-default-notes-file-work "~/Dropbox/org/todo-work.org")
   (setq org-directory "~/Dropbox/org/")
   ;(setq org-journal-dir "~/Dropbox/org/journal/2023")
   (setq org-journal-dir (concat org-directory "/journal/" (format-time-string "%Y")))
