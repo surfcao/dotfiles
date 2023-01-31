@@ -1,5 +1,5 @@
-if has('python3')
-endif
+"if has('python3')
+"endif
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -106,8 +106,11 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
-set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
+"set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
+"set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+"set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
+"set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+
 
 " path to search files
 "set path+=$HOME/GDrive/bib/
