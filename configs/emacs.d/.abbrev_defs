@@ -33,6 +33,11 @@
     ("`va" "\\value" nil :count 0)
    ))
 
+(define-abbrev-table 'markdown-mode-abbrev-table
+  '(
+    ("acknowledgements" "Acknowledgments" nil :count 0)
+   ))
+
 (define-abbrev-table 'org-mode-abbrev-table
   '(
     ("acpabilities" "capabilities" nil :count 0)
@@ -54,7 +59,7 @@
     ("atmosperhic" "atmospheric" nil :count 0)
     ("autmatic" "automatic" nil :count 0)
     ("autocorerlation" "correlation" nil :count 0)
-    ("avaiable" "available" nil :count 0)
+    ("avaiable" "available" nil :count 1)
     ("avaialble" "available" nil :count 0)
     ("avaible" "affable" nil :count 0)
     ("availalle" "available" nil :count 0)
@@ -63,6 +68,7 @@
     ("cargographic" "Cartographic" nil :count 0)
     ("comercial" "commercial" nil :count 0)
     ("communites" "communities" nil :count 1)
+    ("comparision" "comparison" nil :count 0)
     ("compleents" "completeness" nil :count 0)
     ("continure" "Continue" nil :count 0)
     ("coperation" "cooperation" nil :count 0)
@@ -89,10 +95,11 @@
     ("esri" "ESR" nil :count 2)
     ("estabilish" "Establish" nil :count 0)
     ("expertises" "expertise's" nil :count 0)
+    ("familar" "familiar" nil :count 0)
     ("fragementation" "fragmentation" nil :count 0)
     ("genearted" "generated" nil :count 0)
     ("generalizable" "generalize" nil :count 0)
-    ("generlized" "generalized" nil :count 0)
+    ("generlized" "generalized" nil :count 1)
     ("geortia" "Georgia" nil :count 0)
     ("graduat" "graduate" nil :count 0)
     ("hetergeneous" "heterogeneous" nil :count 1)
