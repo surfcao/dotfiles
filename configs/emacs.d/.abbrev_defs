@@ -87,6 +87,7 @@
     ("disssmination" "Dissemination" nil :count 0)
     ("disucssion" "discussion" nil :count 0)
     ("divices" "devices" nil :count 0)
+    ("emergenece" "emergence" nil :count 0)
     ("emmpahsized" "emphasized" nil :count 0)
     ("environemtnal" "Environmental" nil :count 0)
     ("envrionemntal" "environmental" nil :count 0)
