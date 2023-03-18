@@ -16,9 +16,9 @@
          ("\\.Rnw\\'" . Rnw-mode)
          ("\\.Rmd\\'" . poly-mode))
 :init 
-(require 'popup)
+;(require 'popup)
 ;(require 'ess-R-object-popup)
-(require 'ess-site)
+;(require 'ess-site)
 ;; No history, no saving!
 ;(setq inferior-ess-same-window nil)
 ;(setq inferior-ess-same-window t)
