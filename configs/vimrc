@@ -19,6 +19,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'black'
+let g:limelight_default_coefficient = 0.9
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -27,7 +30,8 @@ Plug 'reedes/vim-pencil'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
 Plug 'arcticicestudio/nord-vim'
-"Plug 'morhetz/gruvbox'
+Plug 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
@@ -245,8 +249,8 @@ inoremap <c-w> <c-g>u<c-w>
 """""""""""""""""""""""""""""""
 """  Solarized color theme  
 """""""""""""""""""""""""""""""
-"set background=dark 
-set background=light 
+set background=dark 
+"set background=light 
 set t_Co=256
 " option name default optional
 "let g:solarized_termcolors= 256
@@ -263,10 +267,11 @@ let g:solarized_italic = 1 | 0
 let g:solarized_contrast = "high"| "normal" or "low" 
 let g:solarized_visibility= "high"| "normal" or "low"
 "colorscheme solarized
-colorscheme nord
+"colorscheme nord
+colorscheme iceberg
 "colorscheme gruvbox
 highlight LineNr ctermbg=NONE
-
+highlight Normal ctermbg=NONE 
 """""""""""""""""""
 """   Markdown  
 """""""""""""""""""
