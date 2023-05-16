@@ -1,20 +1,17 @@
 ;;; conda environment management 
 (use-package conda
      :ensure t
-     :config
-     ;; if you want interactive shell support, include:
-     (conda-env-initialize-interactive-shells)
-     ;; if you want eshell support, include:
-     (conda-env-initialize-eshell)
-     ;; if you want auto-activation (see below for details), include:
-     ;;(conda-env-autoactivate-mode t)
-     ;;(setq conda-anaconda-home (expand-file-name "~/miniconda3"))
+     :init
      (setq conda-anaconda-home (expand-file-name "~/miniconda3"))
-     (setq conda-env-home-directory (expand-file-name "~/miniconda3/") ;; as in previous example; not required
-  	;; conda-env-subdirectory "envs"
-	)
-     ;; if you want to automatically activate a conda environment on the opening of a file:
-     ;;(add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path) (conda-env-activate-for-buffer))))
+     (setq conda-env-home-directory (expand-file-name "~/miniconda3/"))
+
+     ;;:config
+     ;;;; if you want interactive shell support, include:
+     ;;(conda-env-initialize-interactive-shells)
+     ;;;; if you want eshell support, include:
+     ;;(conda-env-initialize-eshell)
+     ;;;; if you want auto-activation (see below for details), include:
+     ;;;;(conda-env-autoactivate-mode t)
      )
 
 (add-hook 'python-mode-hook
