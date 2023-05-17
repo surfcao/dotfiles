@@ -8,11 +8,11 @@
   ;(setq org-ref-bibliography-notes "~/GDrive/bib/notes.org"
   ;      org-ref-default-bibliography '("~/GDrive/bib/library.bib")
   ;      org-ref-pdf-directory "~/GDrive/bib/pdfs/")
-  (setq bibtex-completion-bibliography '("~/GDrive/bib/library.bib"))
+  (setq bibtex-completion-bibliography '("~/OneDrive/bib/library.bib"))
   ;(setq	bibtex-completion-notes-template-one-file "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n")
   (setq bibtex-completion-notes-template-one-file "\n* ${author-or-editor} (${year}): ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :END:\n\n  See [[cite:&${=key=}]]\n")
-  (setq bibtex-completion-library-path '("~/GDrive/bib/pdfs/"))
-  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org")
+  (setq bibtex-completion-library-path '("~/OneDrive/bib/pdfs/"))
+  (setq bibtex-completion-notes-path "~/OneDrive/bib/notes.org")
   ;(setq org-ref-default-citation-link "citep")
   ;(setq helm-source-bibtex org-ref-helm-source-bibtex)
 
