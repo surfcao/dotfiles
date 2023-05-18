@@ -724,14 +724,7 @@ The IGNORED argument is... Ignored."
 
 (use-package nord-theme
 	     :ensure t)
-;(load-theme solarized-light)
 (load-theme 'nord t)
-;(use-package iceberg-theme
-;	     :ensure t
-;	     :config
-; (iceberg-theme-create-theme-file)
-;(load-theme 'solarized-iceberg-dark t))
-
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 
 			;;; on mouse: print value
