@@ -726,6 +726,11 @@ The IGNORED argument is... Ignored."
 	     :ensure t)
 ;(load-theme solarized-light)
 (load-theme 'nord t)
+;(use-package iceberg-theme
+;	     :ensure t
+;	     :config
+; (iceberg-theme-create-theme-file)
+;(load-theme 'solarized-iceberg-dark t))
 
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 
