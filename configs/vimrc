@@ -4,6 +4,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set mouse=a
+set relativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 """   Plug

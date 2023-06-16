@@ -311,7 +311,7 @@
 	    (writeroom-mode)
             (abbrev-mode)
 	    (setq header-line-format " ")
-	    (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
+	   (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
 
   (dolist (hook '(matlab-mode-hook))
   (add-hook hook 
@@ -516,11 +516,23 @@
 ;  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-cl)
 ;  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-php))
 
+(use-package iceberg-theme :ensure t)
+(use-package nordic-night-theme :ensure t)
+(use-package nord-theme :ensure t)
 (use-package sublime-themes :ensure t :defer t)
 (use-package zenburn-theme :ensure t :defer t)
 (use-package gruvbox-theme :ensure t :defer t)
 (use-package solarized-theme :ensure t :defer t)
 (use-package color-theme-sanityinc-tomorrow :ensure t :defer t)
+(load-theme 'nord t)
+;(load-theme 'nordic-night t)
+
+;(load-theme 'solarized-iceberg-dark t)
+;(use-package iceberg-theme
+;  :ensure t
+;  :config
+;  (iceberg-theme-create-theme-file)
+;  )
 
 (use-package undo-tree
   :ensure t
@@ -722,17 +734,6 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-left>") 'buf-move-left)
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
-(use-package nord-theme
-	     :ensure t)
-(load-theme 'nord t)
-;(use-package nordic-night-theme
-;	     :ensure t)
-;(load-theme 'nordic-night t)
-;(use-package iceberg-theme
-;  :ensure t
-;  :config
-;  (iceberg-theme-create-theme-file)
-;  (load-theme 'solarized-iceberg-dark t))
 
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 
