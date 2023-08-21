@@ -389,7 +389,7 @@ TAG is chosen interactively from the global tags completion table."
   :config
   (setq org-hide-emphasis-markers t)
   (setq org-modules
-        '(org-bbdb org-bibtex org-docview org-habit org-info org-w3m))
+        '(ol-bbdb ol-bibtex ol-docview org-habit ol-info ol-w3m))
   (setq org-todo-keywords
         '((sequence "☛ TODO" "⚑ WAITING" "SOMEDAY" "|" "✓ DONE(!)" "✗ CANCELED") (sequence "IDEA")))
   (setq org-blank-before-new-entry '((heading . auto)
