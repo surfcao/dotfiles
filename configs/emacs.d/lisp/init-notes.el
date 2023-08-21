@@ -24,14 +24,14 @@
 	  ; Everything is relative to the main notes file
 	  org-noter-notes-search-path (list (concat org_notes "/readings/"))))
 
-(use-package org-pdftools
-  :hook (org-load . org-pdftools-setup-link))
-
-(use-package org-noter-pdftools
-  :after org-noter
-  :config
-  (with-eval-after-load 'pdf-annot
-    (add-hook 'pdf-annot-activate-handler-functions#'org-noter-pdftools-jump-to-note)))
+;(use-package org-pdftools
+;  :hook (org-load . org-pdftools-setup-link))
+;
+;(use-package org-noter-pdftools
+;  :after org-noter
+;  :config
+;  (with-eval-after-load 'pdf-annot
+;    (add-hook 'pdf-annot-activate-handler-functions#'org-noter-pdftools-jump-to-note)))
 
 
 ;; org-roam
