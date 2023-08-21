@@ -525,7 +525,15 @@
 (use-package solarized-theme :ensure t :defer t)
 (use-package color-theme-sanityinc-tomorrow :ensure t :defer t)
 (load-theme 'nord t)
-;(load-theme 'nordic-night t)
+;(load-theme 'iceberg t)
+
+;(use-package nordic-night-theme
+;  :ensure t
+;  :config
+;  ;; Use this for the darker version
+;  ;; (load-theme 'nordic-midnight t)
+;  (load-theme 'nordic-night t))
+
 
 ;(load-theme 'solarized-iceberg-dark t)
 ;(use-package iceberg-theme
@@ -734,9 +742,9 @@ The IGNORED argument is... Ignored."
   (bind-key (kbd "<C-S-left>") 'buf-move-left)
   (bind-key (kbd "<C-S-right>") 'buf-move-right))
 
-(use-package nord-theme
-	     :ensure t)
-(load-theme 'nord t)
+;(use-package nord-theme
+;	     :ensure t)
+;(load-theme 'nord t)
 ;;; GDB settings
 (add-hook 'gud-mode-hook '(lambda () 
 			;;; on mouse: print value
