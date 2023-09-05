@@ -527,6 +527,36 @@
 (load-theme 'nord t)
 ;(load-theme 'iceberg t)
 
+;(use-package modus-themes
+;	     :ensure
+;	     :init
+;	     ;; Configure the Modus Themes' appearance
+;	     (setq modus-themes-mode-line '(accented borderless)
+;		   modus-themes-bold-constructs t
+;		   modus-themes-italic-constructs t
+;		   modus-themes-variable-pitch-ui t
+;		   modus-themes-mixed-fonts t
+;		   modus-themes-fringes 'subtle
+;		   modus-themes-to-toggle '(modus-vivendi-tinted modus-vivendi-deuteranopia)
+;		   modus-themes-tabs-accented t
+;		   modus-themes-paren-match '(bold intense)
+;		   modus-themes-prompts '(bold intense)
+;		   ;; Make the fringe invisible
+;		   modus-themes-common-palette-overrides
+;		   '((fringe unspecified))
+;		   modus-themes-org-blocks 'tinted-background
+;		   modus-themes-scale-headings t
+;		   modus-themes-region '(bg-only)
+;		   modus-themes-headings
+;		   '((1 . (rainbow 1.3))
+;		     (2 . (rainbow 1.2))
+;		     (3 . (rainbow bold 1.1))
+;		     (4 . (rainbow bold 1.0))
+;		     (t . (semilight 1.0)))))
+;(load-theme 'modus-vivendi t)
+
+
+
 ;(use-package nordic-night-theme
 ;  :ensure t
 ;  :config
