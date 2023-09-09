@@ -666,7 +666,7 @@ TAG is chosen interactively from the global tags completion table."
   :config
   (setq org-hide-leading-stars t)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-bullets-bullet-list '("◉" "◎" "☉" "○" )))
+  (setq org-bullets-bullet-list '("○" "◉" "◎" "☉" )))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
