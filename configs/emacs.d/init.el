@@ -185,9 +185,9 @@
 ;; Org Mode
 (require 'init-org)
 (require 'init-org-ref)
-;(require 'init-org-cite)
+(require 'init-org-cite)
 (require 'init-pdf)
-(require 'init-notes)
+;(require 'init-notes)
 
 ;(use-package rainbow-mode
 ;  :ensure t

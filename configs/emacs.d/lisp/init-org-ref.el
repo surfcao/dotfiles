@@ -2,7 +2,7 @@
 (require 'oc-csl)
 
 (use-package org-ref
-  ;:after (org helm-bibtex)
+  :after org
   :config
   ;(setq reftex-default-bibliography '("~/Dropbox/bib/library.bib"))
   ;(setq org-ref-bibliography-notes "~/GDrive/bib/notes.org"
@@ -21,6 +21,11 @@
   ; for Mendeley
  ;(setq org-ref-get-pdf-filename-function 'org-ef-get-mendeley-filename)
 (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-bibtex-completion)
+
+;; sync with org-cite
+(setq org-ref-insert-cite-function
+      (lambda ()
+	(org-cite-insert nil)))
 
  ;; Tell org-ref to let helm-bibtex find notes for it
  (setq org-ref-notes-function
@@ -66,6 +71,7 @@
 
 ;; prefer use latex label
 (setq org-latex-prefer-user-labels t)
+
 
 (provide 'init-org-ref)
 ;;; init-org.el ends here

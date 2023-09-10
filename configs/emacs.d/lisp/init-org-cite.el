@@ -10,7 +10,7 @@
 (require 'oc-biblatex)
 
 (setq org-cite-global-bibliography
- '("~/GDrive/bib/library.bib"))
+ '("~/OneDrive/bib/library.bib"))
 (setq org-cite-csl-styles-dir "~/Zotero/styles")
 (setq org-cite-export-processors
  '((latex biblatex)
@@ -23,7 +23,7 @@
   :config
   (setq bibtex-completion-bibliography 
         ;'("~/Dropbox/bib/library.bib"))
-        '("~/GDrive/bib/library.bib"))
+        '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
         '("~/GDrive/bib/pdfs/"))
@@ -37,7 +37,7 @@
     (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
     (default       . bibtex-completion-format-citation-default)))
 
-  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org"))
+  (setq bibtex-completion-notes-path "~/OneDrive/bib/notes.org"))
 
 (use-package ivy-bibtex
   :ensure t
@@ -45,11 +45,11 @@
   :config
   (setq bibtex-completion-bibliography 
         ;'("~/Dropbox/bib/library.bib"))
-        '("~/GDrive/bib/library.bib"))
+        '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
         '("~/GDrive/bib/pdfs/"))
-  (setq bibtex-completion-notes-path "~/GDrive/bib/notes.org")
+  (setq bibtex-completion-notes-path "~/OneDrive/bib/notes.org")
 
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file")

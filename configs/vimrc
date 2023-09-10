@@ -5,6 +5,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set mouse=a
 set relativenumber
+set number
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 """   Plug
@@ -39,8 +40,8 @@ let g:SuperTabCrMapping = 0
 let g:SuperTabClosePreviewOnPopupClose = 1
 
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
-Plug 'SirVer/ultisnips', {'for': ['r','tex']}
-Plug 'honza/vim-snippets', {'for': ['r','tex']}
+Plug 'SirVer/ultisnips', {'for': ['r','py']}
+Plug 'honza/vim-snippets', {'for': ['r','py']}
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
@@ -89,9 +90,9 @@ let g:vimtex_compiler_latexmk = {'out_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 else
-	let g:vimtex_view_method='skim' 
-	"let g:vimtex_view_method='sioyek' 
-        "let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+	"let g:vimtex_view_method='skim' 
+	let g:vimtex_view_method='sioyek' 
+        let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 endif 
 
 Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
