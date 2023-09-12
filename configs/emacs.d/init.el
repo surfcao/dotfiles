@@ -297,7 +297,8 @@
   :defer 1
   :ensure nil
   :custom
-  (abbrev-file-name (expand-file-name ".abbrev_defs" user-emacs-directory))
+  ;(abbrev-file-name (expand-file-name ".abbrev_defs" user-emacs-directory))
+  (abbrev-file-name "~/Dropbox/emacs/abbrev_defs")
   :config
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file)))

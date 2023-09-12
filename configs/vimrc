@@ -175,7 +175,7 @@ autocmd FileType tex syntax spell toplevel
 " syntax spell toplevel
 set dictionary+=/usr/share/dict/words
 set complete+=kspell
-set thesaurus+=$HOME/Dropbox/.vim/thesaurus/mthesaur.txt
+set thesaurus+=$HOME/Dropbox/vim/thesaurus/mthesaur.txt
 
 " Ctrl-l automatically fix the typos
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
