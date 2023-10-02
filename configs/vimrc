@@ -71,13 +71,14 @@ let g:UltiSnipsEditSplit="vertical"
 
 "Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'text']}
 "Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'text']}
-Plug 'vim-syntastic/syntastic', {'for': ['tex', 'markdown', 'text']}
-let g:syntastic_mode_map = { 'mode': 'passive'}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_tex_checkers = ["lacheck", "proselint", "text/language_check"]
-let g:syntastic_text_checkers = ["proselint", "language_check"]
-let g:syntastic_text_language_check_args = "--language=en-US  --disable=MORFOLOGIK_RULE_EN_US" 
+"
+"Plug 'vim-syntastic/syntastic', {'for': ['tex', 'markdown', 'text']}
+"let g:syntastic_mode_map = { 'mode': 'passive'}
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_tex_checkers = ["lacheck", "proselint", "text/"language_check"]
+"let g:syntastic_text_checkers = ["proselint", "language_check"]
+"let g:syntastic_text_language_check_args = "--language=en-US  --"disable=MORFOLOGIK_RULE_EN_US" 
 
 Plug 'surfcao/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -167,15 +168,17 @@ set backspace=indent,eol,start
 
 
 set spell spelllang=en_us
-set spellfile=$HOME/Dropbox/.vim/spell/en.utf-8.add
+set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 hi SpellBad ctermbg=22
 set spell
 " Under latex, this is a workaround only works for non-comments
 autocmd FileType tex syntax spell toplevel
 " syntax spell toplevel
 set dictionary+=/usr/share/dict/words
-set complete+=kspell
 set thesaurus+=$HOME/Dropbox/vim/thesaurus/mthesaur.txt
+" not search included file for completion
+set complete-=i
+set complete+=kspell
 
 " Ctrl-l automatically fix the typos
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
@@ -188,8 +191,7 @@ set title "change the terminal's title
 set showmatch
 set hidden
 set noruler "hide the status line
-set number
-set nonumber " No line numbering
+"set nonumber " No line numbering
 set display=lastline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -274,6 +276,7 @@ colorscheme iceberg
 "colorscheme gruvbox
 highlight LineNr ctermbg=NONE
 highlight Normal ctermbg=NONE 
+
 """""""""""""""""""
 """   Markdown  
 """""""""""""""""""
@@ -335,10 +338,10 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " write a file with root 
 cmap w!! w !sudo tee % >/dev/null
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R . &&pushd $HOME/GDrive/bib && ctags library.bib &&popd
+command! MakeTags !ctags -R . &&pushd $HOME/OneDrive/bib && ctags library.bib &&popd
 
 " add the tags to the path
-set tags+=$HOME/GDrive/bib/tags
+set tags+=$HOME/OneDrive/bib/tags
 
 " change cursor types in insert mode
 "
