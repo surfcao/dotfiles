@@ -85,15 +85,16 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'rickhowe/diffchar.vim'
 "let g:vimtex_latexmk_continuous=1
+let g:vimtex_complete_bib = { 'simple': 1 }
 let g:vimtex_format_enabled=1
 let g:vimtex_syntax_conceal_disable=1 
 let g:vimtex_compiler_latexmk = {'out_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
 	let g:vimtex_view_method='zathura' 
 else
-	"let g:vimtex_view_method='skim' 
-	let g:vimtex_view_method='sioyek' 
-        let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
+	let g:vimtex_view_method='skim' 
+	"let g:vimtex_view_method='sioyek' 
+        "let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 endif 
 
 Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
@@ -132,6 +133,7 @@ set wildmenu
 "set wildmode=list:full
 set wildmode=list:longest,list:full
 set showcmd
+
 
 " put the backup, swp and undo file into the same place
 set backupdir=$HOME/.vim/.backup//,/tmp

@@ -189,6 +189,14 @@
 (require 'init-pdf)
 ;(require 'init-notes)
 
+(use-package org-pomodoro
+    :ensure t
+    :config
+    (setq org-pomodoro-length 90)
+    (setq org-pomodoro-short-break-length 5)
+    (setq org-pomodoro-long-break-frequency 1)
+    (setq org-pomodoro-long-break-length 10))
+
 ;(use-package rainbow-mode
 ;  :ensure t
 ;  :commands rainbow-mode)
@@ -812,6 +820,8 @@ The IGNORED argument is... Ignored."
   (setq writeroom-extra-line-spacing 0.5)
   (setq writeroom-restore-window-config t
         writeroom-width 80)
+
+  (setq writeroom-mode-line-toggle-position 'mode-line-format)
   (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
   (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
   (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
