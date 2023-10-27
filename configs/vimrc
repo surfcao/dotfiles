@@ -134,6 +134,7 @@ set wildmenu
 set wildmode=list:longest,list:full
 set showcmd
 
+
 " put the backup, swp and undo file into the same place
 set backupdir=$HOME/.vim/.backup//,/tmp
 set directory=$HOME/.vim/.swp//,/tmp
