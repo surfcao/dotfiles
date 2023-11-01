@@ -193,9 +193,9 @@
     :ensure t
     :config
     (setq org-pomodoro-length 90)
-    (setq org-pomodoro-short-break-length 5)
+    (setq org-pomodoro-short-break-length 0)
     (setq org-pomodoro-long-break-frequency 1)
-    (setq org-pomodoro-long-break-length 10))
+    (setq org-pomodoro-long-break-length 0))
 
 ;(use-package rainbow-mode
 ;  :ensure t

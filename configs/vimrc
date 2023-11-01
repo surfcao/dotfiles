@@ -40,8 +40,8 @@ let g:SuperTabCrMapping = 0
 let g:SuperTabClosePreviewOnPopupClose = 1
 
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
-Plug 'SirVer/ultisnips', {'for': ['r','py']}
-Plug 'honza/vim-snippets', {'for': ['r','py']}
+Plug 'SirVer/ultisnips', {'for': ['r','py', 'tex']}
+Plug 'honza/vim-snippets', {'for': ['r','py', 'tex']}
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
