@@ -192,6 +192,11 @@
 (use-package org-pomodoro
     :ensure t
     :config
+    (add-hook 'org-pomodoro-started-hook 
+	      (lambda()
+		(setq mode-line-format (default-value 'mode-line-format))
+		(setq writeroom--mode-line-showing t))
+	        (force-mode-line-update))
     (setq org-pomodoro-length 90)
     (setq org-pomodoro-short-break-length 0)
     (setq org-pomodoro-long-break-frequency 1)
