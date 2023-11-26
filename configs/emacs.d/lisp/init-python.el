@@ -27,8 +27,8 @@
 
 ;; `python.el' provides `python-mode' which is the builtin major-mode for the
 ;; Python language.
-
-(use-package python
+;; python.el vs python-mode.el
+(use-package python-mode
   :defer t
 ;  :mode ("\\.py\\'" . python-ts-mode)
   :mode ("\\.py\\'" . python-mode)
