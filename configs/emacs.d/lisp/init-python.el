@@ -28,15 +28,17 @@
 ;; `python.el' provides `python-mode' which is the builtin major-mode for the
 ;; Python language.
 
-(use-package python-mode
+(use-package python
   :defer t
-  :mode ("\\.py\\'" . python-ts-mode)
+;  :mode ("\\.py\\'" . python-ts-mode)
   :mode ("\\.py\\'" . python-mode)
   :config 
    ; remove the warning by Guofeng per: https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
   (setq python-shell-completion-native-enable nil)
   ;; Remove guess indent python message
   (setq python-indent-guess-indent-offset-verbose nil))
+
+(setq major-mode-remap-alist '((python-mode . python-ts-mode)))
 
 ;; Hide the modeline for inferior python processes.  This is not a necessary
 ;; package but it's helpful to make better use of the screen real-estate at our

@@ -163,6 +163,7 @@
 ;;; <EGLOT> configuration, pick this or the LSP configuration but not both.
 ;; Using Eglot with Pyright, a language server for Python.
 ;; See: https://github.com/joaotavora/eglot.
+;default for pyright
 (use-package eglot
   :ensure t
   :defer t
@@ -171,18 +172,27 @@
               ("C-c C-e" . eglot-rename)
               ("C-c C-o" . python-sort-imports)
               ("C-c C-f" . eglot-format-buffer))
-  :hook ((python-mode . eglot-ensure)
-	 (python-ts-mode . eglot-ensure)
+ :hook ((python-mode . eglot-ensure)
+	(python-ts-mode . eglot-ensure)
+         (python-ts-mode . flyspell-prog-mode)
          (python-ts-mode . superword-mode)
          (python-ts-mode . hs-minor-mode)
-         (python-ts-mode . (lambda () (set-fill-column 88)))))
+         (python-ts-mode . (lambda () (set-fill-column 88))))
+ :config 
+(add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
+(add-to-list 'eglot-server-programs '(python-ts-mode .  ("pyright-langserver" "--stdio")))
+(setq-default eglot-workspace-configuration
+      	   (list (cons ':python (list ':venvPath conda-env-current-path ':pythonPath (concat conda-env-current-path "/bin/python"))))))
 
+
+; disable flymake-mode, use flycheck
 (add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
-
 ;; glues eglot and flycheck
 (use-package flycheck-eglot
   :ensure t
-  :after (flycheck eglot))
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
 
 ;(require 'markdown-preview-mode)
 ;(add-hook 'markdown-preview-mode-hook
