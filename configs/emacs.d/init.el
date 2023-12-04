@@ -218,8 +218,8 @@
 
 ;; Org Mode
 (require 'init-org)
+;(require 'init-org-cite)
 (require 'init-org-ref)
-(require 'init-org-cite)
 (require 'init-pdf)
 ;(require 'init-notes)
 
@@ -298,6 +298,8 @@
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-autoresize-mode t)
   (setq helm-buffer-max-length 40)
+  ; cycling across multiple sources
+  (setq helm-move-to-line-cycle-in-source nil)
   (define-key helm-map (kbd "S-SPC") 'helm-toggle-visible-mark)
   (define-key helm-find-files-map (kbd "C-k") 'helm-find-files-up-one-level)
   (setq helm-semantic-fuzzy-match t

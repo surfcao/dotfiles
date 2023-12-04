@@ -23,9 +23,9 @@
 (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-bibtex-completion)
 
 ;; sync with org-cite
-(setq org-ref-insert-cite-function
-      (lambda ()
-	(org-cite-insert nil)))
+;(setq org-ref-insert-cite-function
+;      (lambda ()
+;	(org-cite-insert nil)))
 
  ;; Tell org-ref to let helm-bibtex find notes for it
  (setq org-ref-notes-function
@@ -44,17 +44,23 @@
   ;; Note that 7 is a magic number of the index where you want to insert the   command. You may need to change yours.
   ;(helm-add-action-to-source "Edit notes" 'my/org-ref-notes-function helm-source-bibtex 9)
 
-  ; open pdf with pdf-tools
-(defun my/org-ref-open-pdf-at-point ()
-"Open the pdf for bibtex key under point if it exists."
-(interactive)
-(let* ((results (org-ref-get-bibtex-key-and-file))
-       (key (car results))
-       (pdf-file (funcall org-ref-get-pdf-filename-function key)))
-  (if (file-exists-p pdf-file)
-      (find-file pdf-file)
-    (message "No PDF found for key %s" key))))
- (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
+; ; open pdf with pdf-tools
+; (defun my/org-ref-open-pdf-at-point ()
+; "Open the pdf for bibtex key under point if it exists."
+; (interactive)
+; (let* ((results (org-ref-get-bibtex-key-and-file))
+;        (key (car results))
+;        (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+;   (if (file-exists-p pdf-file)
+;       (find-file pdf-file)
+;     (message "No PDF found for key %s" key))))
+;  (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
+
+(setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+      org-ref-insert-cite-function 'org-ref-cite-insert-ivy
+      org-ref-insert-label-function 'org-ref-insert-label-link
+      org-ref-insert-ref-function 'org-ref-insert-ref-link
+      org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
 
 (setq bibtex-completion-pdf-symbol "⌘")
 (setq bibtex-completion-notes-symbol "✎")
@@ -71,7 +77,6 @@
 
 ;; prefer use latex label
 (setq org-latex-prefer-user-labels t)
-
 
 (provide 'init-org-ref)
 ;;; init-org.el ends here

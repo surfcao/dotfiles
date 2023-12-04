@@ -22,10 +22,8 @@
   :bind ("C-c h h" . helm-bibtex)
   :config
   (setq bibtex-completion-bibliography 
-        ;'("~/Dropbox/bib/library.bib"))
         '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
-        ;'("~/Dropbox/bib/pdfs/"))
         '("~/OneDrive/bib/pdfs/"))
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file") 
@@ -44,10 +42,8 @@
   :bind ("C-c b b" . ivy-bibtex)
   :config
   (setq bibtex-completion-bibliography 
-        ;'("~/Dropbox/bib/library.bib"))
         '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
-        ;'("~/Dropbox/bib/pdfs/"))
         '("~/OneDrive/bib/pdfs/"))
   (setq bibtex-completion-notes-path "~/OneDrive/bib/notes.org")
 
