@@ -26,7 +26,7 @@
         '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
-        '("~/GDrive/bib/pdfs/"))
+        '("~/OneDrive/bib/pdfs/"))
   ;; using bibtex path reference to pdf file
   (setq bibtex-completion-pdf-field "file") 
  ; (setq bibtex-completion-cite-default-command "citep")
@@ -48,7 +48,7 @@
         '("~/OneDrive/bib/library.bib"))
   (setq bibtex-completion-library-path 
         ;'("~/Dropbox/bib/pdfs/"))
-        '("~/GDrive/bib/pdfs/"))
+        '("~/OneDrive/bib/pdfs/"))
   (setq bibtex-completion-notes-path "~/OneDrive/bib/notes.org")
 
   ;; using bibtex path reference to pdf file
