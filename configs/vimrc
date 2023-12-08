@@ -195,6 +195,7 @@ set hidden
 set noruler "hide the status line
 "set nonumber " No line numbering
 set display=lastline
+set nojoinspaces " no extra spaces when joining
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Key Mappings
