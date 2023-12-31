@@ -158,9 +158,9 @@ used, but this function ignores them."
       t))
 
   (advice-add 'evil-visual-line :before-while #'evil-visual-line--mark-org-element-when-heading)
-
   ;; My own Ex commands.
-  (evil-ex-define-cmd "om" 'octopress-status))
+  ;(evil-ex-define-cmd "om" 'octopress-status)
+  )
 
 (defun air--apply-evil-other-package-configs ()
   "Apply evil-dependent settings specific to other packages."

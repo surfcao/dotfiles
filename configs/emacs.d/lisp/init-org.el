@@ -604,6 +604,8 @@ TAG is chosen interactively from the global tags completion table."
 							 (interactive) (air-org-agenda-toggle-date t)))
 	      (define-key org-mode-map (kbd "C-c ,")   'org-time-stamp-inactive)
 	      (define-key org-mode-map (kbd "C-|")     'air-org-insert-scheduled-heading)
+	      ;; unset the keybindings 'C-\\' in global-map
+	      (local-unset-key (kbd "C-\\"))
 	      (define-key org-mode-map (kbd "C-\\")    'air-org-insert-heading)
 	      (define-key org-mode-map (kbd "C-c C-\\")    (lambda()
 							     (interactive) (air-org-insert-heading t)))
