@@ -3,15 +3,16 @@
 ;(when (memq window-system '(x))
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))
 
-(when (memq window-system '(mac ns))
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/ess/"))
+;(when (memq window-system '(mac ns))
+;  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/ess/"))
 
 (use-package ess
-:load-path (lambda ()
-            (when (memq window-system '(mac ns))
-	      "/usr/local/share/emacs/site-lisp/ess/")
-            (when (memq window-system '(x))
-	      "/usr/local/share/emacs/site-lisp/ess/"))
+	     :ensure t
+;:load-path (lambda ()
+;            (when (memq window-system '(mac ns))
+;	      "/usr/local/share/emacs/site-lisp/ess/")
+;            (when (memq window-system '(x))
+;	      "/usr/local/share/emacs/site-lisp/ess/"))
 :mode (("\\.[rR]\\'" . R-mode)
          ("\\.Rnw\\'" . Rnw-mode)
          ("\\.Rmd\\'" . poly-mode))
@@ -21,7 +22,7 @@
 ;(require 'ess-site)
 ;; No history, no saving!
 ;(setq inferior-ess-same-window nil)
-;(setq inferior-ess-same-window t)
+(setq inferior-ess-same-window t)
 ;(setq inferior-ess-own-frame nil)
 (setq-default inferior-R-args "--no-restore-history --no-save ")
 (setq inferior-ess-program "R")
@@ -29,18 +30,20 @@
 :defer t
 :commands R
 :config 
-(add-hook 'ess-mode-hook
+(require 'ess-r-mode)
+(add-hook 'ess-r-mode-hook
           (lambda ()
             (setq ess-use-auto-complete t)
             (setq ess-set-style 'RStudio)
             (setq ess-R-argument-suffix "=")
            ; (ess-disable-smart-S-assign nil)
            ; (ess-disable-smart-underscore nil)
-            (ess-toggle-S-assign nil)
-            (ess-toggle-underscore nil)))
+          ;  (ess-toggle-S-assign nil)
+          ; (ess-toggle-underscore nil)
+	   ))
 
 ;;; inferior ESS execution mode
-(define-key inferior-ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
+(define-key inferior-ess-r-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
 
 ;; Comint related stuff
 ;(define-key inferior-ess-mode-map (kbd "C-e 0") 'comint-bol)
@@ -49,10 +52,10 @@
 ;(define-key inferior-ess-mode-map (kbd "C-e J") 'comint-next-prompt)
 ;(define-key inferior-ess-mode-map (kbd "C-e K") 'comint-previous-prompt)
 ;(define-key inferior-ess-mode-map (kbd "C-e ?") 'comint-history-isearch-backward-regexp)
-(define-key inferior-ess-mode-map (kbd "C-j") 'comint-next-matching-input-from-input)
-(define-key inferior-ess-mode-map (kbd "C-k") 'comint-previous-matching-input-from-input)
-(define-key inferior-ess-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key inferior-ess-mode-map (kbd "<down>") 'comint-next-input)
+(define-key inferior-ess-r-mode-map (kbd "C-j") 'comint-next-matching-input-from-input)
+(define-key inferior-ess-r-mode-map (kbd "C-k") 'comint-previous-matching-input-from-input)
+(define-key inferior-ess-r-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key inferior-ess-r-mode-map (kbd "<down>") 'comint-next-input)
 ;(define-key inferior-ess-mode-map (kbd "<up>") 'comint-next-matching-input-from-input)
 ;(define-key inferior-ess-mode-map (kbd "<down>") 'comint-previous-matching-input-from-input)
 
@@ -120,25 +123,25 @@
 ;(evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-line)
 ;(evil-leader/set-key-for-mode 'ess-mode "n" 'ess-eval-region-or-line-and-step)
 ;(evil-leader/set-key-for-mode 'ess-mode "g" 'ess-eval-line-and-go)
-(evil-leader/set-key-for-mode 'ess-mode "r" 'ess-eval-region-or-function-or-paragraph-and-step)
-(evil-leader/set-key-for-mode 'ess-mode "l" 'ess-eval-region-or-line-and-step)
+(evil-leader/set-key-for-mode 'ess-r-mode "r" 'ess-eval-region-or-function-or-paragraph-and-step)
+(evil-leader/set-key-for-mode 'ess-r-mode "l" 'ess-eval-region-or-line-and-step)
 ;(define-key ess-mode-map [(control return)] nil)
 ;(define-key ess-mode-map (kbd "<s-return>") 'ess-eval-region-or-line-and-step)
 ;(evil-leader/set-key-for-mode 'ess-mode "bb" 'ess-eval-buffer)
 ;(evil-leader/set-key-for-mode 'ess-mode "x" 'ess-eval-buffer-from-beg-to-here)
 ;(evil-leader/set-key-for-mode 'ess-mode "X" 'ess-eval-buffer-from-here-to-end)
 
-(evil-leader/set-key-for-mode 'ess-mode "Q" 'ess-quit)
-(evil-leader/set-key-for-mode 'ess-mode "f" 'ess-load-file)
-(evil-leader/set-key-for-mode 'ess-mode "dd" 'ess-use-this-dir)
-(evil-leader/set-key-for-mode 'ess-mode "D" 'ess-set-working-directory)
-(evil-leader/set-key-for-mode 'ess-mode "p" 'ess-install-library)
-(evil-leader/set-key-for-mode 'ess-mode "P" 'ess-display-package-index)
-(evil-leader/set-key-for-mode 'ess-mode "h" 'ess-display-help-on-object)
-(evil-leader/set-key-for-mode 'ess-mode "H" 'ess-describe-object-at-point)
-(evil-leader/set-key-for-mode 'ess-mode "t" 'ess-show-traceback)
-(evil-leader/set-key-for-mode 'ess-mode "T" 'ess-show-call-stack)
-(evil-leader/set-key-for-mode 'ess-mode "o" 'ess-switch-to-inferior-or-script-buffer)
+(evil-leader/set-key-for-mode 'ess-r-mode "Q" 'ess-quit)
+(evil-leader/set-key-for-mode 'ess-r-mode "f" 'ess-load-file)
+(evil-leader/set-key-for-mode 'ess-r-mode "dd" 'ess-use-this-dir)
+(evil-leader/set-key-for-mode 'ess-r-mode "D" 'ess-set-working-directory)
+(evil-leader/set-key-for-mode 'ess-r-mode "p" 'ess-install-library)
+(evil-leader/set-key-for-mode 'ess-r-mode "P" 'ess-display-package-index)
+(evil-leader/set-key-for-mode 'ess-r-mode "h" 'ess-display-help-on-object)
+(evil-leader/set-key-for-mode 'ess-r-mode "H" 'ess-describe-object-at-point)
+(evil-leader/set-key-for-mode 'ess-r-mode "t" 'ess-show-traceback)
+(evil-leader/set-key-for-mode 'ess-r-mode "T" 'ess-show-call-stack)
+(evil-leader/set-key-for-mode 'ess-r-mode "o" 'ess-switch-to-inferior-or-script-buffer)
 ;(define-key ess-mode-map (kbd "C-o") 'ess-switch-to-inferior-or-script-buffer )
 
 ;;; Show a popup by executing arbitrary commands on object at point.

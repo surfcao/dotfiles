@@ -352,10 +352,10 @@
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file)))
 
-  (dolist (hook '(markdown-mode-hook
-		 latex-mode-hook
-		 org-mode-hook
-		 text-mode-hook))
+  (dolist (hook '( latex-mode-hook
+		 ;;markdown-mode-hook
+		;; text-mode-hook
+		 org-mode-hook))
   (add-hook hook 
 	    (lambda ()
 	    (writeroom-mode)
@@ -403,7 +403,7 @@
 				  (yas-minor-mode t)
 				  (set-fill-column 75)
 				  (turn-on-auto-fill)
-				  ;(writeroom-mode)
+				  ;;(writeroom-mode)
 				  ; hide the header line to increase top margin
 				  ;(setq header-line-format " ")
 				  ;(set-face-attribute 'header-line nil :background "white")
@@ -857,10 +857,10 @@ The IGNORED argument is... Ignored."
   :config
   (global-writeroom-mode 1)
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
-  (add-to-list 'writeroom-major-modes 'latex-mode)
-  (add-to-list 'writeroom-major-modes 'markdown-mode)
-  (add-to-list 'writeroom-major-modes 'org-mode)
-  (add-to-list 'writeroom-major-modes 'text-mode)
+  ;(add-to-list 'writeroom-major-modes 'latex-mode)
+  ;(add-to-list 'writeroom-major-modes 'markdown-mode)
+  ;(add-to-list 'writeroom-major-modes 'org-mode)
+  ;(add-to-list 'writeroom-major-modes 'text-mode)
 
  ; (setq header-line-format " ")
   (setq writeroom-extra-line-spacing 0.5)
