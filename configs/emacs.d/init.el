@@ -855,7 +855,7 @@ The IGNORED argument is... Ignored."
   :ensure t
   :commands (writeroom-mode)
   :config
-  (global-writeroom-mode 1)
+  ;(global-writeroom-mode 1)
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
   ;(add-to-list 'writeroom-major-modes 'latex-mode)
   ;(add-to-list 'writeroom-major-modes 'markdown-mode)
