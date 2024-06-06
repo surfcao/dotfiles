@@ -74,8 +74,7 @@ else
         "let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 endif 
 
-Plug 'Konfekt/vim-sentence-chopper'
-
+"Plug 'Konfekt/vim-sentence-chopper'
 Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
 " put pandoc using hard wrapping, default is soft wrapping
 let g:pandoc#formatting#mode = "h"
