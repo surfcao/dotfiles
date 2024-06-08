@@ -1,6 +1,3 @@
-"if has('python3')
-"endif
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set mouse=a
@@ -21,9 +18,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
-Plug 'junegunn/limelight.vim'
-let g:limelight_conceal_ctermfg = 'black'
-let g:limelight_default_coefficient = 0.9
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -43,32 +37,11 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'SirVer/ultisnips', {'for': ['r','py', 'tex']}
 Plug 'honza/vim-snippets', {'for': ['r','py', 'tex']}
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-"Plug 'Valloric/YouCompleteMe'
-""" make YCM compatible with UltiSnips (using supertab)
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"if !exists('g:ycm_semantic_triggers')
-"    let g:ycm_semantic_triggers = {}
-"endif
-"let g:ycm_semantic_triggers.tex = [
-"        \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-"        \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-"        \ 're!\\hyperref\[[^]]*',
-"        \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-"        \ 're!\\(include(only)?|input){[^}]*',
-"        \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-"        \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-"        \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-"        \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
-"        \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
-"\ ]
 
 "Plug 'vim-scripts/LanguageTool', {'for': ['tex', 'markdown', 'text']}
 "Plug 'rhysd/vim-grammarous', {'for': ['tex', 'markdown', 'text']}
@@ -81,6 +54,9 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:syntastic_text_checkers = ["proselint", "language_check"]
 "let g:syntastic_text_language_check_args = "--language=en-US  --"disable=MORFOLOGIK_RULE_EN_US" 
 
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'black'
+let g:limelight_default_coefficient = 0.9
 Plug 'surfcao/vim-autocorrect', {'for': ['tex', 'markdown', 'text']}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -98,6 +74,7 @@ else
         "let g:vimtex_view_sioyek_exe = '/Applications/sioyek.app/Contents/MacOS/sioyek'
 endif 
 
+"Plug 'Konfekt/vim-sentence-chopper'
 Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc']}
 " put pandoc using hard wrapping, default is soft wrapping
 let g:pandoc#formatting#mode = "h"
@@ -115,11 +92,6 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-"set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
-"set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-"set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
-"set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-
 
 " path to search files
 "set path+=$HOME/GDrive/bib/
@@ -152,9 +124,12 @@ set tabstop=8
 set shiftwidth=8
 set keywordprg=:help
 
-set tw=75
+" soft or hard wrap
+"set tw=75
+set tw=0
+set columns=75
 "set formatoptions+=nt
-set formatoptions+=j
+"set formatoptions+=j
 "default formatoptions=tcq
 " set formatoptions+=n
 "autocmd FileType tex,markdown set formatoptions+=a
@@ -165,6 +140,7 @@ set formatprg=par\ -w75
 set incsearch
 set wrap
 set linebreak
+set breakindent
 
 "for macvim
 set backspace=indent,eol,start
@@ -238,8 +214,12 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>o <C-w>o
 
 " Hardwrap, softwrap
-map j gj
-map k gk
+"map j gj
+"map k gk
+" support line jump with softwrap source: https://stackoverflow.com/questions/20975928/moving-the-cursor-through-long-soft-wrapped-lines-in-vim
+noremap <expr> j v:count ? 'j' : 'gj'
+noremap <expr> k v:count ? 'k' : 'gk'
+
 " Make Y consistent with D
 nnoremap Y y$
 " Visually select the text that are recently edited
@@ -384,8 +364,3 @@ set ttimeoutlen=0
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
-if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color GNU screen.
-  set t_ut=
-endif

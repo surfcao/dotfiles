@@ -38,7 +38,11 @@
   ;; Remove guess indent python message
   (setq python-indent-guess-indent-offset-verbose nil))
 
+
 (setq major-mode-remap-alist '((python-mode . python-ts-mode)))
+
+(evil-leader/set-key-for-mode 'python-mode "F" 'python-shell-send-file)
+(evil-leader/set-key-for-mode 'python-mode "r" 'python-shell-send-region)
 
 ;; Hide the modeline for inferior python processes.  This is not a necessary
 ;; package but it's helpful to make better use of the screen real-estate at our
