@@ -329,12 +329,10 @@ set tags+=$HOME/OneDrive/bib/tags
 
 " change cursor types in insert mode
 "
-
 autocmd InsertEnter,InsertLeave * set cul!
 
 "let &t_SI = "\e[6 q"
 "let &t_EI = "\e[2 q"
-
 
 " source: https://stackoverflow.com/questions/6488683/how-to-change-the-cursor-between-normal-and-insert-modes-in-vim/42118416#42118416
 " https://vi.stackexchange.com/questions/19748/vimenter-autocmd-to-change-cursor-shape-sometimes-outputs-escape-sequences
@@ -352,15 +350,16 @@ else
     let &t_te.="\<Esc>[0 q"
 endif
 
-" Optionally reset the cursor on start:
-augroup myCmds
-au!
-"autocmd VimEnter * silent !echo -ne "\e[2 q"
-autocmd VimEnter * startinsert | stopinsert
-augroup END
+"" Optionally reset the cursor on start:
+"augroup myCmds
+"au!
+""autocmd VimEnter * silent !echo -ne "\e[2 q"
+"autocmd VimEnter * startinsert | stopinsert
+"augroup END
+
 set ttimeoutlen=0
 
 " enable italic
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
+"let &t_ZH="\e[3m"
+"let &t_ZR="\e[23m"
 
