@@ -63,7 +63,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'rickhowe/diffchar.vim'
 "let g:vimtex_latexmk_continuous=1
 let g:vimtex_complete_bib = { 'simple': 1 }
-let g:vimtex_format_enabled=0
+let g:vimtex_format_enabled=1
 let g:vimtex_syntax_conceal_disable=1 
 let g:vimtex_compiler_latexmk = {'out_dir' : 'output', 'callback' : 0}
 if has('mac') == 0
@@ -227,15 +227,12 @@ nnoremap Q gwap
 " One sentence per line. source:
 " https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
 "
-function! SentenceChopper(start, end)
-	silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+function! SentenceChopper() range
+	silent execute a:firstline.','.a:lastline.'s/[.!?]\zs /\r/g'
 endfunction 
-set formatexpr=SentenceChopper(v:lnum,v:lnum+v:count-1)
-
-vnoremap K gq
-nnoremap K gqap
-
-
+"set formatexpr=SentenceChopper(v:lnum,v:lnum+v:count-1)
+vmap <Leader>s :call SentenceChopper() <CR>
+nmap <Leader>s vap :call SentenceChopper() <CR>
 
 " The vanilla c-u and c-w will are undoable, the following map add them to
 " the undolist, so it can be undo by 'u'
