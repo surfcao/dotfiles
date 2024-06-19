@@ -23,9 +23,9 @@
 (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-bibtex-completion)
 
 ;; sync with org-cite
-;(setq org-ref-insert-cite-function
-;      (lambda ()
-;	(org-cite-insert nil)))
+(setq org-ref-insert-cite-function
+      (lambda ()
+	(org-cite-insert nil)))
 
  ;; Tell org-ref to let helm-bibtex find notes for it
  (setq org-ref-notes-function

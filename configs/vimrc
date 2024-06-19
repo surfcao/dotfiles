@@ -22,8 +22,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
-Plug 'reedes/vim-pencil'
-let g:pencil#textwidth = 75
+"Plug 'reedes/vim-pencil'
+"let g:pencil#textwidth = 75
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/Solarized'
 Plug 'arcticicestudio/nord-vim'
@@ -119,19 +119,14 @@ endif
 set ignorecase
 set smartcase
 set hlsearch
-set lbr
 set tabstop=8
 set shiftwidth=8
 set keywordprg=:help
 
-" soft or hard wrap
-"set tw=75
-set tw=0
-set columns=75
-"set formatoptions+=nt
-"set formatoptions+=j
-"default formatoptions=tcq
-" set formatoptions+=n
+set tw=75
+" not automatically reformatting, soft wrap
+set formatoptions-=t
+set formatoptions+=j
 "autocmd FileType tex,markdown set formatoptions+=a
 set wrapmargin=0
 
@@ -228,6 +223,16 @@ nmap gV `[v`]
 " Use Q for formatting the current paragraph (or selection)
 vnoremap Q gw
 nnoremap Q gwap
+
+" One sentence per line. source:
+" https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
+"
+function! SentenceChopper() range
+	silent execute a:firstline.','.a:lastline.'s/[.!?]\zs /\r/g'
+endfunction 
+"set formatexpr=SentenceChopper(v:lnum,v:lnum+v:count-1)
+vmap <Leader>s :call SentenceChopper() <CR>
+nmap <Leader>s vap :call SentenceChopper() <CR>
 
 " The vanilla c-u and c-w will are undoable, the following map add them to
 " the undolist, so it can be undo by 'u'
@@ -362,4 +367,3 @@ set ttimeoutlen=0
 " enable italic
 "let &t_ZH="\e[3m"
 "let &t_ZR="\e[23m"
-

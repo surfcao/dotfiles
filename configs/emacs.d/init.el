@@ -218,7 +218,7 @@
 
 ;; Org Mode
 (require 'init-org)
-;(require 'init-org-cite)
+;;(require 'init-org-cite)
 (require 'init-org-ref)
 (require 'init-pdf)
 ;(require 'init-notes)
