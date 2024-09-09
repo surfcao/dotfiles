@@ -21,12 +21,18 @@
               (evil-define-key 'normal flyspell-mode-map (kbd "]s") 'evil-next-flyspell-error)
               (evil-define-key 'normal flyspell-mode-map (kbd "[s") 'evil-prev-flyspell-error))))
 
-(use-package flyspell-correct-popup
+(use-package flyspell-correct
   :after flyspell
-  :bind (:map flyspell-mode-map
-        ("C-;" . flyspell-correct-wrapper))
-  :custom (flyspell-correct-interface 'flyspell-correct-popup))
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
+(use-package flyspell-correct-popup
+  :after flyspell-correct)
+
+; (use-package flyspell-correct-popup
+;   :after flyspell
+;   :bind (:map flyspell-mode-map
+;         ("C-;" . flyspell-correct-wrapper))
+;   :custom (flyspell-correct-interface 'flyspell-correct-popup))
 
 (use-package flycheck
   :ensure t
