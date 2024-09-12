@@ -308,7 +308,7 @@
 (defun my-text-mode-company-setup ()
   "Add company-ispell and company-dabbrev to company-backends for text-mode."
   (set (make-local-variable 'company-backends)
-       (append '((company-ispell company-dabbrev company-yasnippet)) company-backends)))
+       (append '((company-yasnippet company-ispell)) company-backends)))
 
 (add-hook 'text-mode-hook 'my-text-mode-company-setup)
 
