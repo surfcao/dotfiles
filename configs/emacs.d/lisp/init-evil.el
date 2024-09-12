@@ -234,6 +234,9 @@ is not used."
   (use-package evil-indent-textobject
     :ensure t)
 
+  ; source:  https://github.com/company-mode/company-mode/issues/383
+  (evil-declare-change-repeat 'company-complete)
+
   (evil-mode 1)
   (air--apply-evil-other-package-configs))
 
@@ -242,6 +245,7 @@ is not used."
 ; :ensure t
 ; :config
 ; (evil-collection-init '(pdf)))
+
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

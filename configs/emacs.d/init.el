@@ -305,6 +305,13 @@
   (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t))
 
+(defun my-text-mode-company-setup ()
+  "Add company-ispell and company-dabbrev to company-backends for text-mode."
+  (set (make-local-variable 'company-backends)
+       (append '((company-ispell company-dabbrev company-yasnippet)) company-backends)))
+
+(add-hook 'text-mode-hook 'my-text-mode-company-setup)
+
 ;(use-package s :ensure t)
 (use-package company
   :ensure t
@@ -746,7 +753,7 @@ The IGNORED argument is... Ignored."
         ("css" . (ac-source-css-property ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))))
 
 (add-hook 'web-mode-before-auto-complete-hooks
-          '(lambda ()
+          #'(lambda ()
              (let ((web-mode-cur-language (web-mode-language-at-pos)))
                (if (string= web-mode-cur-language "php")
                    (yas-activate-extra-mode 'php-mode)
@@ -831,7 +838,7 @@ The IGNORED argument is... Ignored."
 ;	     :ensure t)
 ;(load-theme 'nord t)
 ;;; GDB settings
-(add-hook 'gud-mode-hook '(lambda () 
+(add-hook 'gud-mode-hook #'(lambda () 
 			;;; on mouse: print value
 			    (gud-tooltip-mode t)
 			;;; buffers

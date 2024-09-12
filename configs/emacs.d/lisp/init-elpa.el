@@ -61,15 +61,12 @@ locate PACKAGE."
      (message "Couldn't install package `%s': %S" package err)
      nil)))
 
-
 ;; Don't do this, because we already did it (in init.el)
 (setq package-enable-at-startup nil)
 
-
 (require-package 'fullframe)
 (fullframe list-packages quit-window)
 
-
 (require-package 'cl-lib)
 (require 'cl-lib)
 
