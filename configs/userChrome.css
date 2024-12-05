@@ -1,52 +1,43 @@
+/* based on https://github.com/MrOtherGuy/firefox-csshacks */
+
+/* Import your desired components first */
+
+@import url(firefox-csshacks/chrome/tab_close_button_always_on_hover.css);
+/*@import url(firefox-csshacks/chrome/tab_loading_progress_throbber.css);*/
+/*@import url(firefox-csshacks/chrome/button_effect_scale_onclick.css);*/
+/*@import url(firefox-csshacks/chrome/blank_page_background.css);*/
+@import url(firefox-csshacks/chrome/autohide_menubar.css);
+/*@import url(firefox-csshacks/chrome/hide_toolbox_top_bottom_borders.css);
+/*@import url(firefox-csshacks/chrome/vertical_context_navigation.css);*/
+/*@import url(firefox-csshacks/chrome/minimal_popup_scrollbars.css);*/
+/*@import url(firefox-csshacks/chrome/button_effect_icon_glow.css);*/
+/*@import url(firefox-csshacks/chrome/dark_context_menus.css);*/
+/*@import url(firefox-csshacks/chrome/dark_additional_windows.css);*/
+/*@import url(firefox-csshacks/chrome/dark_checkboxes_and_radios.css);*/
+/*@import url(firefox-csshacks/chrome/minimal_text_fields.css);*/
+/*@import url(firefox-csshacks/chrome/minimal_toolbarbuttons.css);*/
+@import url(firefox-csshacks/chrome/urlbar_centered_text.css);
+@import url(firefox-csshacks/chrome/autohide_main_toolbar.css);
+/*@import url(firefox-csshacks/chrome/autohide_sidebar.css); */
+@import url(firefox-csshacks/chrome/drag_window_from_urlbar.css); 
+/*@import url(firefox-csshacks/chrome/hide_tabs_toolbar_v2.css); */
+
+/* Apply your custom modifications after imports */
+
 /*
- * Auto-hide the URL-bar show on hover or focus
- * as seen in https://www.reddit.com/r/FirefoxCSS/comments/boetx7/annoying_page_jump_with_address_bar_autohide/engne27/
- * by https://www.reddit.com/user/SkyrimForTheDragons/
- *
- * slightly modified for more responsiveness
- * 
- * Note that this version DOES NOT hide the bookmarks toolbar!
- */
-#nav-bar:not([customizing="true"]):not([inFullscreen]) {
-	min-height: 1px !important;
-	max-height: 0px !important;
-	margin-top: 1px !important;
-	margin-bottom: -1px !important;
-	transition: all 50ms linear 0s !important;
-	z-index: -5 !important;
+:root{
+  --toolbar-bgcolor: rgb(36,44,59) !important;
+  --uc-menu-bkgnd: var(--toolbar-bgcolor);
+  --arrowpanel-background: var(--toolbar-bgcolor) !important;
+  --autocomplete-popup-background: var(--toolbar-bgcolor) !important;
+  --uc-menu-disabled: rgb(90,90,90) !important;
+  --lwt-toolbar-field-focus: rgb(36,44,59) !important;
 }
 
-#navigator-toolbox:hover:not([inFullscreen]) :-moz-any(#nav-bar),
-#navigator-toolbox:focus-within :-moz-any(#nav-bar) {
-	min-height: 32px !important;
-	max-height: 32px !important;
-	margin-top: 1px !important;
-	margin-bottom: -32px !important;
-	transition: all 50ms linear 0s !important;
-	z-index: 5 !important;
-}
+#sidebar-box{ --sidebar-background-color: var(--toolbar-bgcolor) !important; }
+window.sidebar-panel{ --lwt-sidebar-background-color: rgb(36,44,59) !important; } */
 
-/* Needed for for FF 75 megabar */
-#urlbar {
-	--urlbar-toolbar-height: 32px !important;
-}
-
-#nav-bar[inFullscreen] {
-	min-height: 1px !important;
-	max-height: 0px !important;
-	margin-top: 1px !important;
-	margin-bottom: -1px !important;
-	transition: all 50ms linear 0s !important;
-	z-index: -5 !important;
-}
-
-#navigator-toolbox[inFullscreen]:hover :-moz-any(#nav-bar),
-#navigator-toolbox[inFullscreen]:focus-within :-moz-any(#nav-bar) {
-	min-height: 32px !important;
-	max-height: 32px !important;
-	margin-top: 1px !important;
-	margin-bottom: -32px !important;
-	transition: all 50ms linear 0s !important;
-	z-index: 5 !important;
+:root { /* Main Toolbar - autohide_main_toolbar.css References */
+ --uc-autohide-toolbar-delay: 0.0s;
 }
 
