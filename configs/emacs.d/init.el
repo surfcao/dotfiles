@@ -98,6 +98,22 @@
 (require 'init-platform)
 (require 'init-global-functions)
 
+;; password
+(use-package auth-source-pass
+  :ensure t
+  :config
+  (auth-source-pass-enable)
+  (setq auth-sources '(password-store))
+  (cl-defun
+      auth-get-passwd
+      (&rest spec &allow-other-keys)
+    "Helper to get the password given the SPEC from authsource."
+    (let ((founds (apply 'auth-source-pass-search spec)))
+      (when founds
+        (funcall (plist-get (nth 0 founds) :secret))))))
+
+
+
 (use-package popup
 	     :ensure t)
 
@@ -159,6 +175,7 @@
 ;(require 'init-powerline)
 (require 'init-flycheck)
 ;(require 'init-tmux)
+(require 'init-llm)
 
 ;;; <EGLOT> configuration, pick this or the LSP configuration but not both.
 ;; Using Eglot with Pyright, a language server for Python.
@@ -964,21 +981,6 @@ The IGNORED argument is... Ignored."
   (deft-extensions '("md" "txt" "org"))
   (deft-default-extension "org")
   (deft-directory (expand-file-name "~/Dropbox/org/")))
-
-
-;; deepseek inteface
-
-(use-package gptel
-:config
-;; OPTIONAL configuration
-(setq
- gptel-model 'mistral:latest ;'deepseek-r1:8b
- gptel-backend (gptel-make-ollama "Ollama"
-                 :host "localhost:11434"
-                 :stream t
-                 :models '(mistral:latest)))
-	     )
-
 
 (provide 'init)
 ;;; init.el ends here

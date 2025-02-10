@@ -8,6 +8,7 @@
     ","  'other-window
     "."  'mode-line-other-buffer
     ":"  'eval-expression
+    "i"  'gptel-send
     "aa" 'align-regexp
     "a=" 'my-align-single-equals
     "b"  'helm-mini             ;; Switch to another buffer
