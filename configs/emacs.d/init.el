@@ -965,5 +965,20 @@ The IGNORED argument is... Ignored."
   (deft-default-extension "org")
   (deft-directory (expand-file-name "~/Dropbox/org/")))
 
+
+;; deepseek inteface
+
+(use-package gptel
+:config
+;; OPTIONAL configuration
+(setq
+ gptel-model 'mistral:latest ;'deepseek-r1:8b
+ gptel-backend (gptel-make-ollama "Ollama"
+                 :host "localhost:11434"
+                 :stream t
+                 :models '(mistral:latest)))
+	     )
+
+
 (provide 'init)
 ;;; init.el ends here
