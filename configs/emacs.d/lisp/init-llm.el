@@ -6,7 +6,7 @@
 (gptel-make-ollama "Ollama"             ;Any name of your choosing
   :host "localhost:11434"               ;Where it's running
   :stream t                             ;Stream responses
-  :models '("mistral:latest" "deepseek-r1:8b"))          ;List of models
+  :models '("mistral:latest" "deepseek-r1:8b" "deepseek-r1:32b"))          ;List of models
 
 ;; OPTIONAL configuration
 (setq gptel-model 'gpt-4o
