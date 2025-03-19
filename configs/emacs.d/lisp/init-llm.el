@@ -1,7 +1,11 @@
 ;;; set up llm and copilot 
 (use-package gptel
 :config
-(setq gptel-api-key (auth-get-passwd :host "github.com" :max 1))
+;(setq gptel-api-key (auth-get-passwd :host "github.com" :max 1))
+
+(gptel-make-gemini "Gemini" 
+		   :key (auth-get-passwd :host "Gemini" :max 1) 
+		   :stream t)
 
 (gptel-make-ollama "Ollama"             ;Any name of your choosing
   :host "localhost:11434"               ;Where it's running
@@ -9,9 +13,9 @@
   :models '("mistral:latest" "deepseek-r1:8b" "deepseek-r1:32b"))          ;List of models
 
 ;; OPTIONAL configuration
-(setq gptel-model 'gpt-4o
-      gptel-backend
-(gptel-make-openai "Github Models" ;Any name you want
+(setq 
+  gptel-model 'gpt-4o
+  gptel-backend (gptel-make-openai "Github Models" ;Any name you want
     :host "models.inference.ai.azure.com"
     :endpoint "/chat/completions"
     :stream t
