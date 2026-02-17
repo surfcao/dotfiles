@@ -66,13 +66,16 @@
 ; to use pdfview with auctex
 ;(setq TeX-view-program-selection '((output-pdf "pdf-tools"))
 ;       TeX-source-correlate-start-server t)
-; to use skim with auctex
-(setq TeX-view-program-selection '((output-pdf "Skim"))
-       TeX-source-correlate-start-server t)
 )
 
 ;(setq TeX-view-program-list '("Skim" ("open -a Skim.app --unique output/%o" (mode-io-correlate "#src:%n%a"))))
-(setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+(setq TeX-view-program-list
+      '(("Skim" "open -a Skim.app %o")
+        ("pdf-tools" "TeX-pdf-tools-sync-view")))
+(setq TeX-view-program-selection
+      (if (eq system-type 'darwin)
+          '((output-pdf "Skim"))
+        '((output-pdf "pdf-tools"))))
 
 (use-package reftex
   :ensure t

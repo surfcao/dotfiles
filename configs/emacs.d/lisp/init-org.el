@@ -2,6 +2,22 @@
 ;;; Commentary:
 
 ;; Basic Org Mode configuration, assuming presence of Evil & Evil Leader.
+(require 'cl-lib)
+
+(defvar my-note-files nil
+  "Cached recursive list of Org note files used for refiling.")
+
+(defun air-org-refresh-note-files (&optional force)
+  "Refresh the cached list of note files.
+
+When FORCE is non-nil, rebuild the cache unconditionally."
+  (when (or force (null my-note-files))
+    (setq my-note-files
+          (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))))
+
+(defun air-org-refresh-note-files-maybe (&rest _)
+  "Ensure note-file cache is ready before refile commands run."
+  (air-org-refresh-note-files))
 
 ;; Helper functions
 (defun air-org-bulk-copy-headlines (&optional strip-tags)
@@ -29,8 +45,8 @@ the headlines."
                                  line-end)
                              "" entry)))
             (setq entries (concat entries entry "\n"))))))
-    (if (length entries)
-        (kill-new entries)))
+    (when (> (length entries) 0)
+      (kill-new entries)))
   (message "Acted on %s entries%s"
            (length org-agenda-bulk-marked-entries)
            (if org-agenda-persistent-marks
@@ -96,7 +112,7 @@ Do not make the new window current unless FOCUS is set."
 
 Skip the current entry unless SUBTREE is not nil, in which case skip
 the entire subtree."
-  (let ((end (if subtree (subtree-end (save-excursion (org-end-of-subtree t)))
+  (let ((end (if subtree (save-excursion (org-end-of-subtree t))
                (save-excursion (progn (outline-next-heading) (1- (point))))))
         (today-prefix (format-time-string "%Y-%m-%d")))
     (if (save-excursion
@@ -110,7 +126,7 @@ the entire subtree."
 
 Skip the current entry unless SUBTREE is not nil, in which case skip
 the entire subtree."
-  (let ((end (if subtree (subtree-end (save-excursion (org-end-of-subtree t)))
+  (let ((end (if subtree (save-excursion (org-end-of-subtree t))
                 (save-excursion (progn (outline-next-heading) (1- (point)))))))
     (if (string= (org-entry-get nil "STYLE") "habit")
         end
@@ -122,7 +138,7 @@ the entire subtree."
 PRIORITY may be one of the characters ?A, ?B, or ?C.
 
 Skips the current entry unless SUBTREE is not nil."
-  (let ((end (if subtree (subtree-end (save-excursion (org-end-of-subtree t)))
+  (let ((end (if subtree (save-excursion (org-end-of-subtree t))
                 (save-excursion (progn (outline-next-heading) (1- (point))))))
         (pri-value (* 1000 (- org-lowest-priority priority)))
         (pri-current (org-get-priority (thing-at-point 'line t))))
@@ -245,7 +261,7 @@ If VANILLA is non-nil, run the standard `org-capture'."
                           (point-max))))
 
       (if current-line (beginning-of-line)
-        (beginning-of-buffer))
+        (goto-char (point-min)))
       (if (search-forward "DEADLINE:" search-limit t)
           (replace-match "SCHEDULED:")
         (and (search-forward "SCHEDULED:" search-limit t)
@@ -264,8 +280,9 @@ If VANILLA is non-nil, run the standard `org-capture'."
 (defun air-pop-to-org-today (split)
   "Visit my main TODO list, in the current window or a SPLIT."
   (interactive "P")
-  (air--pop-to-file (expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir) )
-split)
+  (air--pop-to-file
+   (expand-file-name (format-time-string "W%W-%Y.org") org-journal-dir)
+   split))
 
 (defun air-pop-to-org-notes (split)
   "Visit my main notes file, in the current window or a SPLIT."
@@ -462,7 +479,8 @@ TAG is chosen interactively from the global tags completion table."
   (setq org-agenda-text-search-extra-files '(agenda-archives))
   (setq org-agenda-files '("~/Dropbox/org/"))
   ;(setq org-agenda-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
-  (setq my-note-files (directory-files-recursively "~/Dropbox/org/notes/" "\\.org$"))
+  (run-with-idle-timer 3 nil #'air-org-refresh-note-files)
+  (advice-add 'org-refile :before #'air-org-refresh-note-files-maybe)
   (setq org-refile-targets '((org-agenda-files :maxlevel . 2) (my-note-files :maxlevel . 2)))
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
@@ -501,8 +519,8 @@ TAG is chosen interactively from the global tags completion table."
 	    ((org-before-first-heading-p) (user-error "Not in a subtree"))
 	    (t (outline-previous-visible-heading 1))))
 
-    (decf count)
-    (when count (while (and (> count 0) (org-up-heading-safe)) (decf count)))
+    (cl-decf count)
+    (when count (while (and (> count 0) (org-up-heading-safe)) (cl-decf count)))
 
     ;; extract the beginning and end of the tree
     (let* ((element (org-element-at-point))
@@ -523,7 +541,7 @@ TAG is chosen interactively from the global tags completion table."
 				(outer-end (car outer-points))
 				(begin (save-excursion
 					 (goto-char outer-begin)
-					 (next-line)
+					 (forward-line 1)
 					 (while (and (< (point) outer-end)
 						     (string-match-p "^\\s-*$"
 								     (buffer-substring (line-beginning-position)
@@ -542,8 +560,12 @@ TAG is chosen interactively from the global tags completion table."
 				       (point))))
 			   (list end begin)))
 
-(define-key evil-outer-text-objects-map "*" 'evil-org-outer-element)
-(define-key evil-inner-text-objects-map "*" 'evil-org-inner-element)
+(when (and (boundp 'evil-outer-text-objects-map)
+           (boundp 'evil-inner-text-objects-map)
+           (fboundp 'evil-org-outer-element)
+           (fboundp 'evil-org-inner-element))
+  (define-key evil-outer-text-objects-map "*" #'evil-org-outer-element)
+  (define-key evil-inner-text-objects-map "*" #'evil-org-inner-element))
   (evil-leader/set-key-for-mode 'org-mode
     "$"  'org-archive-subtree
     "a"  'org-agenda
@@ -683,7 +705,7 @@ TAG is chosen interactively from the global tags completion table."
    ;(org-download-method 'directory)
    ;(org-download-heading-lvl nil)
    ;(org-image-actual-width 300)
-   (setq-default org-download-image-dir "./images")
+   (setq org-download-image-dir "./images")
    ;(org-download-screenshot-method "/usr/local/bin/pngpaste %s")
    :bind
    ("C-M-y" . org-download-clipboard))

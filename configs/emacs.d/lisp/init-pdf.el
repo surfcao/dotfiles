@@ -1,9 +1,10 @@
 ;;; init-pdf.el -- My Emacs configuration
 (use-package pdf-tools
  :defer t
+ :ensure t
  :mode (("\\.pdf\\'" . pdf-view-mode))
  :bind ("C-c C-g" . pdf-sync-forward-search)
- :pin manual ;; manually update
+; :pin manual ;; manually update
  :config
  (custom-set-variables
     '(pdf-tools-handle-upgrades nil)) ; Use brew upgrade pdf-tools instead.
@@ -11,10 +12,7 @@
  ;; initialise
  (pdf-tools-install)
  ;; open pdfs scaled to fit page
- (setq-default pdf-view-display-size 'fit-page)
-;; auto revert
- (auto-revert-mode)
- (setq auto-revert-interval 0.5) 
+ (setq pdf-view-display-size 'fit-page)
  ;; automatically annotate highlights
  (setq pdf-annot-activate-created-annotations t)
  ;; turn off cua so copy works
@@ -52,25 +50,27 @@
 ; (define-key pdf-view-mode-map (kbd "o") 'pdf-outline)
 ; (define-key pdf-view-mode-map (kbd "M-s o") 'pdf-occur)
 
- (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
+ (define-key pdf-view-mode-map (kbd "H") 'pdf-annot-add-highlight-markup-annotation)
  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
  (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete)
- ; disable the blink
+ ; enable buffer-local auto-revert and disable blink in PDFs
  (add-hook 'pdf-view-mode-hook 
 	  (lambda ()
+	   (auto-revert-mode 1)
+	   (setq-local auto-revert-interval 2)
 	   (blink-cursor-mode -1))))
 
-;; PDF links for org-mode
-(with-eval-after-load 'pdf-tools
-  (use-package org-pdftools
-    :config
-    ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00169.html
-    ;; Before adding, remove it (to avoid clogging)
-    (delete '("\\.pdf\\'" . default) org-file-apps)
-    ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
-    (add-to-list 'org-file-apps
-		 '("\\.pdf\\'" . (lambda (file link)
-				   (org-pdftools-open link))))))
+; ;; PDF links for org-mode
+; (with-eval-after-load 'pdf-tools
+;   (use-package org-pdftools
+;     :config
+;     ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00169.html
+;     ;; Before adding, remove it (to avoid clogging)
+;     (delete '("\\.pdf\\'" . default) org-file-apps)
+;     ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
+;     (add-to-list 'org-file-apps
+; 		 '("\\.pdf\\'" . (lambda (file link)
+; 				   (org-pdftools-open link))))))
 
 ;(use-package pdf-tools
 ;  :ensure t

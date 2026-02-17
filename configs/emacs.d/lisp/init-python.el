@@ -1,5 +1,7 @@
 
-(setq python-shell-interpreter "/Users/guofeng/miniconda3/bin/python")
+(setq python-shell-interpreter
+      (or (executable-find "python3")
+          (expand-file-name "~/miniconda3/bin/python")))
 ;;; conda environment management 
 (use-package conda
      :ensure t
@@ -8,7 +10,8 @@
      (setq conda-env-home-directory (expand-file-name "~/miniconda3/"))
      (setq conda-env-subdirectory "envs")
      :config
-     (conda-env-activate (getenv "CONDA_DEFAULT_ENV"))
+     ;; comment out for now
+     ;(conda-env-activate (getenv "CONDA_DEFAULT_ENV"))
      (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name)))
      ;; if you want interactive shell support, include:
      (conda-env-initialize-interactive-shells)
@@ -39,7 +42,7 @@
   (setq python-indent-guess-indent-offset-verbose nil))
 
 
-(setq major-mode-remap-alist '((python-mode . python-ts-mode)))
+(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
 
 (evil-leader/set-key-for-mode 'python-mode "F" 'python-shell-send-file)
 (evil-leader/set-key-for-mode 'python-mode "r" 'python-shell-send-region)

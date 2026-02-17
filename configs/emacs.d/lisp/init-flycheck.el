@@ -5,10 +5,16 @@
   :ensure t)
 
 (use-package flyspell
-  :defer 1
+  ;:defer 1
   :after evil-leader
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
+  :init 
+  (setq ispell-program-name
+        (or (executable-find "aspell")
+            (executable-find "hunspell")
+            (and (boundp 'ispell-program-name) ispell-program-name)
+            "aspell"))
   :custom
   (flyspell-abbrev-p t)
   (flyspell-issue-message-flag nil)
@@ -16,7 +22,6 @@
  ; (flyspell-mode 1)
   :config
   (add-hook 'flyspell-mode-hook
-            'flyspell-buffer
             (lambda ()
               (evil-define-key 'normal flyspell-mode-map (kbd "]s") 'evil-next-flyspell-error)
               (evil-define-key 'normal flyspell-mode-map (kbd "[s") 'evil-prev-flyspell-error))))
@@ -42,10 +47,10 @@
   ;; Flycheck mode:
   (add-hook 'flycheck-mode-hook
             (lambda ()
-              (when (maybe-require-package 'evil)
+              (when (featurep 'evil)
                 (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
                 (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error))
-              (when (maybe-require-package 'evil-leader)
+              (when (featurep 'evil-leader)
                 (evil-leader/set-key (kbd "e") 'flycheck-list-errors))))
 
   ;; Override default flycheck triggers

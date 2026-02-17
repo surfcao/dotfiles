@@ -1,6 +1,9 @@
 ;;; init-global-functions.el --- Global functions mostly used by mappings.
 ;;; Commentary:
 ;;; Code:
+
+
+
 (defun air--pop-to-file (file &optional split)
   "Visit a FILE, either in the current window or a SPLIT."
   (if split
@@ -26,11 +29,12 @@
       (write-region (point-min) (point-max) temp-file-name))
     (browse-url (concat "file://" temp-file-name))))
 
-(defadvice load-theme (after restore-line-numbering)
-  "Re-set linum-format after loading themes, which frequently overwrite it."
+(defun air--restore-linum-format-after-theme (&rest _)
+  "Restore line numbering format after loading a theme."
   (defvar linum-format)
   (setq linum-format 'my-linum-relative-line-numbers))
-(ad-activate 'load-theme)
+
+(advice-add 'load-theme :after #'air--restore-linum-format-after-theme)
 
 (defun chrome-reload (&optional focus)
   "Use osascript to tell Google Chrome to reload.
@@ -50,7 +54,7 @@ If optional argument FOCUS is non-nil, give Chrome the focus as well."
     (completing-read "Load custom theme: "
                              (mapcar 'symbol-name
                                      (custom-available-themes)))))
-  (mapcar #'disable-theme custom-enabled-themes)
+  (mapc #'disable-theme custom-enabled-themes)
   (load-theme (intern theme) nil nil)
   (when (fboundp 'powerline-reset)
     (powerline-reset)))
@@ -214,7 +218,7 @@ Attempts to follow the Do What I Mean philosophy."
          (args (concat "http://dox.wayfair.com/source/xref/php/" file-path "#" line-num)))
     (call-process "open" nil nil nil args)))
 
-;;; From http://beatofthegeek.com/2014/02/my-setup-for-using-emacs-as-web-browser.html
+;;; From https://beatofthegeek.com/2014/02/my-setup-for-using-emacs-as-web-browser.html
 (defun wikipedia-search (search-term)
   "Search for SEARCH-TERM on wikipedia"
   (interactive
@@ -223,7 +227,7 @@ Attempts to follow the Do What I Mean philosophy."
                  (word-at-point))))
      (list (read-string (format "Wikipedia (%s): " term) nil nil term))))
   (w3m-browse-url (concat
-               "http://en.m.wikipedia.org/w/index.php?search="
+               "https://en.m.wikipedia.org/w/index.php?search="
                search-term)))
 
 (provide 'init-global-functions)

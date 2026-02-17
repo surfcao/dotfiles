@@ -1,8 +1,20 @@
-(require 'org-ref-ivy)
 (require 'oc-csl)
+
+(use-package ivy-bibtex :ensure t)
+
+; (use-package org-ref-ivy
+;   :after org-ref
+;   :ensure t
+;   :config
+;   (setq org-ref-default-bibliography '("~/OneDrive/bib/library.bib"))
+;   (setq org-ref-pdf-directory "~/OneDrive/bib/pdfs/")
+;   (setq org-ref-bibliography-notes "~/OneDrive/bib/notes.org")
+;   (setq org-ref-completion-library 'org-ref-ivy-cite)
+;   (setq org-ref-cite-onclick-function 'org-ref-citation-hydra/body))
 
 (use-package org-ref
   :after org
+  :ensure t
   :config
   ;(setq reftex-default-bibliography '("~/Dropbox/bib/library.bib"))
   ;(setq org-ref-bibliography-notes "~/GDrive/bib/notes.org"

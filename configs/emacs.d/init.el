@@ -10,6 +10,9 @@
 ;; Leave this here, or package.el will just add it again.
 (package-initialize)
 
+;; Prefer source over stale bytecode during startup.
+(setq load-prefer-newer t)
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -41,6 +44,9 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Keep early keybindings safe even when LLM config loads lazily.
+(autoload 'gptel-send "gptel" nil t)
+
 ;; Essential settings.
 (setq inhibit-splash-screen t
       inhibit-startup-message t
@@ -61,7 +67,7 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 ;(setq split-window-preferred-function nil)
-(setq custom-safe-themes t)
+(setq custom-safe-themes nil)
 (put 'narrow-to-region 'disabled nil)
 ; default maximize frame size
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -103,7 +109,7 @@
   :ensure t
   :config
   (auth-source-pass-enable)
-  (setq auth-sources '(password-store))
+  (setq auth-sources '("~/.password-store/"))
   (cl-defun
       auth-get-passwd
       (&rest spec &allow-other-keys)
@@ -113,16 +119,8 @@
         (funcall (plist-get (nth 0 founds) :secret))))))
 
 
-
 (use-package popup
 	     :ensure t)
-
-(use-package ggtags
-	     :ensure t
-	     :diminish ggtags-mode
-	     :config
-	     (add-hook 'prog-mode-hook 'ggtags-mode) 
-	     (add-hook 'matlab-mode-hook 'ggtags-mode))
 
 ;;; tiny-menu configuration
 (use-package tiny-menu
@@ -168,14 +166,18 @@
 (require 'init-maps)
 (require 'init-python)
 (require 'init-ess)
-(require 'init-matlab)
+;(require 'init-matlab)
 ;(require 'init-twitter)
-(require 'init-w3m)
 ;(require 'init-php)
 ;(require 'init-powerline)
 (require 'init-flycheck)
 ;(require 'init-tmux)
-(require 'init-llm)
+
+;; Defer non-critical modules so startup reaches an interactive state faster.
+(run-with-idle-timer 1 nil (lambda () (require 'init-w3m)))
+(run-with-idle-timer 2 nil (lambda () (require 'init-pdf)))
+(run-with-idle-timer 3 nil (lambda () (require 'init-org-ref)))
+(run-with-idle-timer 4 nil (lambda () (require 'init-llm)))
 
 ;;; <EGLOT> configuration, pick this or the LSP configuration but not both.
 ;; Using Eglot with Pyright, a language server for Python.
@@ -236,8 +238,6 @@
 ;; Org Mode
 (require 'init-org)
 ;;(require 'init-org-cite)
-(require 'init-org-ref)
-(require 'init-pdf)
 ;(require 'init-notes)
 
 (use-package org-pomodoro
@@ -267,15 +267,14 @@
   :ensure t
   :config
   (setq wgrep-auto-save-buffer t)
-  (defadvice wgrep-change-to-wgrep-mode (after wgrep-set-normal-state)
-    (if (fboundp 'evil-normal-state)
-        (evil-normal-state)))
-  (ad-activate 'wgrep-change-to-wgrep-mode)
-
-  (defadvice wgrep-finish-edit (after wgrep-set-motion-state)
-    (if (fboundp 'evil-motion-state)
-        (evil-motion-state)))
-  (ad-activate 'wgrep-finish-edit))
+  (defun air--wgrep-set-normal-state (&rest _)
+    (when (fboundp 'evil-normal-state)
+      (evil-normal-state)))
+  (defun air--wgrep-set-motion-state (&rest _)
+    (when (fboundp 'evil-motion-state)
+      (evil-motion-state)))
+  (advice-add 'wgrep-change-to-wgrep-mode :after #'air--wgrep-set-normal-state)
+  (advice-add 'wgrep-finish-edit :after #'air--wgrep-set-motion-state))
 
 (use-package wgrep-ag
   :ensure t
@@ -334,8 +333,8 @@
   :ensure t
   ;:defer t
   :init
-  (global-company-mode)
   :config
+  (global-company-mode)
   ;(setq company-tooltip-common-selection ((t (:inherit company-tooltip-selection :background "yellow2" :foreground "#c82829"))))
   ;(setq company-tooltip-selection ((t (:background "yellow2"))))
   (setq company-idle-delay 0.2)
@@ -349,6 +348,7 @@
  ; (global-set-key (kbd "C-y") 'company-yasnippet)
   (global-set-key (kbd "s-f") 'company-files))
 
+(use-package ivy :ensure t) 
 (use-package counsel :ensure t)
 (use-package swiper
   :ensure t
@@ -407,7 +407,7 @@
 (use-package helm-projectile
   :commands (helm-projectile helm-projectile-switch-project)
   :ensure t
-  :init
+  :config
   (helm-projectile-on)
     (setq projectile-switch-project-action 'helm-projectile)
       (defvar helm-source-file-not-found
@@ -432,7 +432,7 @@
 				  ;(setq header-line-format " ")
 				  ;(set-face-attribute 'header-line nil :background "white")
 				  ;(set-face-attribute 'header-line nil :background (face-attribute 'default :background))
-				  (setq-default line-spacing 5)
+				  (setq-local line-spacing 5)
 				  (flyspell-mode)))
   (setq markdown-command "pandoc --from markdown_github-hard_line_breaks --to html")
   (define-key markdown-mode-map (kbd "C-\\")  'markdown-insert-list-item)
@@ -509,7 +509,7 @@
 
 (use-package yasnippet
   :ensure t
-  :defer t
+  ;:defer t
   :config
   (yas-reload-all)
   ;; Bind `SPC' to `yas-expand' when snippet expansion available (it
@@ -707,14 +707,14 @@ The IGNORED argument is... Ignored."
                  :test 'string=))
     (sorted t)))
 
-(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
-  "Kill term buffer when term is ended."
-  (if (memq (process-status proc) '(signal exit))
-      (let ((buffer (process-buffer proc)))
-        ad-do-it
-        (kill-buffer buffer))
-    ad-do-it))
-(ad-activate 'term-sentinel)
+(defun air--kill-term-buffer-on-exit (proc _msg)
+  "Kill the term buffer when PROC exits."
+  (when (memq (process-status proc) '(signal exit))
+    (let ((buffer (process-buffer proc)))
+      (when (buffer-live-p buffer)
+        (kill-buffer buffer)))))
+
+(advice-add 'term-sentinel :after #'air--kill-term-buffer-on-exit)
 
 ;; Eshell things
 (defun air--eshell-clear ()
@@ -784,7 +784,7 @@ The IGNORED argument is... Ignored."
           (lambda ()
             (yas-minor-mode t)
             (eldoc-mode)
-            (highlight-symbol-mode)
+            ;(highlight-symbol-mode)
             (define-key emacs-lisp-mode-map (kbd "M-<return>") 'eval-last-sexp)))
 
 ;;; SH mode:

@@ -111,7 +111,7 @@
 
   (evil-define-key 'normal global-map (kbd "C-p")   'helm-projectile)
   (evil-define-key 'normal global-map (kbd "C-S-p") 'helm-projectile-switch-project)
-  (evil-define-key 'insert global-map (kbd "s-d")   ''other-windoweval-last-sexp)
+  (evil-define-key 'insert global-map (kbd "s-d")   'eval-last-sexp)
   (evil-define-key 'normal global-map (kbd "s-d")   'eval-defun)
   (evil-define-key 'normal global-map (kbd "C-t")   'air-open-eshell)
 

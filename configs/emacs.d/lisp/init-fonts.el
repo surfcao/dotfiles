@@ -13,7 +13,7 @@
 
 ;;; Changing font sizes
 
-(require 'cl)
+(require 'cl-lib)
 
 (defun sanityinc/font-name-replace-size (font-name new-size)
   (let ((parts (split-string font-name "-")))

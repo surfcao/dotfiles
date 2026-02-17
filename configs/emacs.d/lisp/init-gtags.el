@@ -6,6 +6,8 @@
 ;;;; ggtags
   ;; https://github.com/leoliu/ggtags
   (use-package ggtags
+    :ensure t
+    :diminish ggtags-mode
     :config
     (progn
       (setq ggtags-sort-by-nearness nil) ; Enabling nearness requires global 6.5+
@@ -19,8 +21,10 @@
             (when (derived-mode-p 'c-mode 'c++-mode 'matlab-mode)
               (ggtags-mode 1))))
 
-(when (and (maybe-require-package 'gtags)
-           (maybe-require-package 'bpr))
+(when (and (package-installed-p 'gtags)
+           (package-installed-p 'bpr))
+  (require 'gtags)
+  (require 'bpr)
   ;; Bind some useful keys in the gtags select buffer that evil overrides.
   (add-hook 'gtags-select-mode-hook
             (lambda ()
