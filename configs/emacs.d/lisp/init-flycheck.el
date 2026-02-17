@@ -9,12 +9,12 @@
   :after evil-leader
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
-  :init 
+  :init
   (setq ispell-program-name
         (or (executable-find "aspell")
             (executable-find "hunspell")
-            (and (boundp 'ispell-program-name) ispell-program-name)
-            "aspell"))
+            (and (file-executable-p "/opt/homebrew/bin/aspell") "/opt/homebrew/bin/aspell")
+            (and (file-executable-p "/usr/local/bin/aspell") "/usr/local/bin/aspell")))
   :custom
   (flyspell-abbrev-p t)
   (flyspell-issue-message-flag nil)

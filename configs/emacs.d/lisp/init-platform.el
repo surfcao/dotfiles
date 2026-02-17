@@ -9,11 +9,11 @@
 ;(add-hook 'emacs-setup-hook
           (lambda ()
             (when (memq window-system '(mac ns x))
-	      (use-package exec-path-from-shell
-			   :ensure t
-			   :config
-			   (setq exec-path-from-shell-variables '("PATH" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
-			   (exec-path-from-shell-initialize))
+		      (use-package exec-path-from-shell
+				   :ensure t
+				   :config
+				   (setq exec-path-from-shell-variables '("PATH" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
+				   (exec-path-from-shell-initialize))
 
 	      ;(add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))
 	      ;(set-face-attribute 'default nil :font "Inconsolata LGC")

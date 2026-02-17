@@ -14,9 +14,9 @@
      ;(conda-env-activate (getenv "CONDA_DEFAULT_ENV"))
      (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name)))
      ;; if you want interactive shell support, include:
-     (conda-env-initialize-interactive-shells)
+     ;;(conda-env-initialize-interactive-shells)
      ;; if you want eshell support, include:
-     (conda-env-initialize-eshell)
+     ;;(conda-env-initialize-eshell)
      ;; if you want auto-activation (see below for details), include:
      ;;(conda-env-autoactivate-mode t)
      )
