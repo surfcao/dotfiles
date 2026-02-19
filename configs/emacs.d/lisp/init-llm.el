@@ -1,7 +1,7 @@
 ;;; set up llm and copilot 
 (defun my-gptel-key-github-models ()
   "Return GitHub Models API key from auth-source-pass."
-  (auth-get-passwd :host "github.com" :max 1))
+  (auth-get-passwd :host "Github" :max 1))
 
 (defun my-gptel-key-gemini ()
   "Return Gemini API key from auth-source-pass."
@@ -12,25 +12,25 @@
 	     :config
 	     ;(setq gptel-debug t)
 	     ;; OPTIONAL configuration
-	     (setq gptel-model 'gpt-4o
-		   gptel-backend (gptel-make-openai "Github Models" ;Any name you want
-						    :host "models.inference.ai.azure.com"
-						    :endpoint "/chat/completions?api-version=2024-05-01-preview"
-						    :stream t
-						    :key #'my-gptel-key-github-models
-						    :models '("gpt-4o")))
+	;;     (setq gptel-model 'gpt-4o
+	;;	   gptel-backend (gptel-make-openai "Github Models" ;Any name you want
+	;;					    :host "models.inference.ai.azure.com"
+	;;					    :endpoint "/chat/completions?api-version=2024-05-01-preview"
+	;;					    :stream t
+	;;					    :key #'my-gptel-key-github-models
+	;;					    :models '("gpt-4o")))
 
-	     (gptel-make-gemini "gemini" 
+	     (setq gptel-model 'gemini-3-flash-preview)
+	     (setq gptel-backend (gptel-make-gemini "gemini" 
 				:key #'my-gptel-key-gemini
 				:stream t
-				:models '("gemini-2.5-pro" "gemini-2.5-flash"))
+				:models '("gemini-3-flash-preview" "gemini-2.5-pro" "gemini-2.5-flash")))
+
 
 	     (gptel-make-ollama "Ollama"             ;Any name of your choosing
 				:host "localhost:11434"               ;Where it's running
 				:stream t                             ;Stream responses
-				:models '("mistral:latest" "deepseek-r1:8b" "deepseek-r1:32b"))          ;List of models
-
-	     )
+				:models '("mistral:latest" "deepseek-r1:8b" "deepseek-r1:32b")))
 
 (use-package copilot
   :ensure t 
