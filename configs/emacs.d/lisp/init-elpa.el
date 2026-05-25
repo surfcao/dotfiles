@@ -13,8 +13,11 @@
 
 ;;; Standard package repositories
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+(add-to-list 'package-unsigned-archives "org")
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-unsigned-archives "melpa")
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-unsigned-archives "melpa-stable")
 ;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;(add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 
