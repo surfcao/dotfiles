@@ -12,7 +12,7 @@
 		      (use-package exec-path-from-shell
 				   :ensure t
 				   :config
-				   (setq exec-path-from-shell-variables '("PATH" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
+				   (setq exec-path-from-shell-variables '("PATH" "NVM_DIR" "BIBINPUTS" "BSTINPUTS" "TEXINPUTS"))
 				   (exec-path-from-shell-initialize))
 
 	      ;(add-to-list 'default-frame-alist '(font . "Inconsolata LGC"))

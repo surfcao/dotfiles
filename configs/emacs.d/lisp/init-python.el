@@ -2,6 +2,17 @@
 (setq python-shell-interpreter
       (or (executable-find "python3")
           (expand-file-name "~/miniconda3/bin/python")))
+
+(setq python-shell-completion-native-enable nil
+      python-indent-guess-indent-offset nil
+      python-indent-guess-indent-offset-verbose nil)
+
+(defun my-python-use-treesit-p ()
+  "Return non-nil when Python tree-sitter support is available."
+  (and (fboundp 'treesit-available-p)
+       (treesit-available-p)
+       (fboundp 'treesit-language-available-p)
+       (treesit-language-available-p 'python)))
 ;;; conda environment management 
 (use-package conda
      :ensure t
@@ -34,15 +45,11 @@
 (use-package python-mode
   :defer t
 ;  :mode ("\\.py\\'" . python-ts-mode)
-  :mode ("\\.py\\'" . python-mode)
-  :config 
-   ; remove the warning by Guofeng per: https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
-  (setq python-shell-completion-native-enable nil)
-  ;; Remove guess indent python message
-  (setq python-indent-guess-indent-offset-verbose nil))
+  :mode ("\\.py\\'" . python-mode))
 
 
-(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+(when (my-python-use-treesit-p)
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
 
 (evil-leader/set-key-for-mode 'python-mode "F" 'python-shell-send-file)
 (evil-leader/set-key-for-mode 'python-mode "r" 'python-shell-send-region)
@@ -75,7 +82,8 @@
   :custom
   (blacken-allow-py36 t)
   (blacken-skip-string-normalization t)
-  :hook (python-mode-hook . blacken-mode))
+  :hook ((python-mode . blacken-mode)
+         (python-ts-mode . blacken-mode)))
 
 ;; <OPTIONAL> Numpy style docstring for Python.  See:
 ;; https://github.com/douglasdavis/numpydoc.el.  There are other packages

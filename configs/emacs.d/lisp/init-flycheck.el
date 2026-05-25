@@ -8,7 +8,13 @@
   ;:defer 1
   :after evil-leader
   :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
+         (markdown-mode . flyspell-mode)
+         (org-mode . flyspell-mode)
+         (latex-mode . flyspell-mode)
+         (LaTeX-mode . flyspell-mode)
+         (python-mode . flyspell-prog-mode)
+         (python-ts-mode . flyspell-prog-mode)
+         (emacs-lisp-mode . flyspell-prog-mode))
   :init
   (setq ispell-program-name
         (or (executable-find "aspell")

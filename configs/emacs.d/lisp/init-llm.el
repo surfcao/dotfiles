@@ -46,8 +46,12 @@
      (unless (copilot-installed-version)
        (copilot-install-server))))
 
-  (add-hook 'prog-mode-hook #'copilot-mode)
-  (add-hook 'text-mode-hook #'copilot-mode)
+  (dolist (hook '(python-mode-hook
+                  python-ts-mode-hook
+                  emacs-lisp-mode-hook
+                  ess-r-mode-hook
+                  sh-mode-hook))
+    (add-hook hook #'copilot-mode))
 
   :bind
   (:map copilot-completion-map

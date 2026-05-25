@@ -183,6 +183,16 @@
 ;; Using Eglot with Pyright, a language server for Python.
 ;; See: https://github.com/joaotavora/eglot.
 ;default for pyright
+(defvar my-python-eglot-missing-pyright-warned nil)
+
+(defun my-python-eglot-ensure ()
+  "Start Eglot for Python when Pyright is available."
+  (if (executable-find "pyright-langserver")
+      (eglot-ensure)
+    (unless my-python-eglot-missing-pyright-warned
+      (setq my-python-eglot-missing-pyright-warned t)
+      (message "Skipping Eglot: pyright-langserver not found"))))
+
 (use-package eglot
   :ensure t
   :defer t
@@ -191,17 +201,23 @@
               ("C-c C-e" . eglot-rename)
               ("C-c C-o" . python-sort-imports)
               ("C-c C-f" . eglot-format-buffer))
- :hook ((python-mode . eglot-ensure)
-	(python-ts-mode . eglot-ensure)
-         (python-ts-mode . flyspell-prog-mode)
+ :hook ((python-mode . my-python-eglot-ensure)
+	(python-mode . superword-mode)
+         (python-mode . hs-minor-mode)
+         (python-mode . (lambda () (set-fill-column 88)))
+	(python-ts-mode . my-python-eglot-ensure)
          (python-ts-mode . superword-mode)
          (python-ts-mode . hs-minor-mode)
          (python-ts-mode . (lambda () (set-fill-column 88))))
- :config 
-(add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
-(add-to-list 'eglot-server-programs '(python-ts-mode .  ("pyright-langserver" "--stdio")))
-(setq-default eglot-workspace-configuration
-      	   (list (cons ':python (list ':venvPath conda-env-current-path ':pythonPath (concat conda-env-current-path "/bin/python"))))))
+ :config
+ (add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
+ (add-to-list 'eglot-server-programs '(python-ts-mode .  ("pyright-langserver" "--stdio")))
+ (when (and (boundp 'conda-env-current-path)
+            (stringp conda-env-current-path))
+   (setq-default eglot-workspace-configuration
+                 (list (cons ':python
+                             (list ':venvPath conda-env-current-path
+                                   ':pythonPath (concat conda-env-current-path "/bin/python")))))))
 
 
 ; disable flymake-mode, use flycheck
@@ -385,7 +401,9 @@
 	    (writeroom-mode)
             (abbrev-mode)
 	    (setq header-line-format " ")
-	   (set-face-attribute 'header-line nil :background (face-attribute 'default :background)))))
+	   (set-face-attribute 'header-line nil :background
+                               (or (face-attribute 'default :background nil t)
+                                   'unspecified)))))
 
   (dolist (hook '(matlab-mode-hook))
   (add-hook hook 
@@ -436,7 +454,8 @@
 				  (flyspell-mode)))
   (setq markdown-command "pandoc --from markdown_github-hard_line_breaks --to html")
   (define-key markdown-mode-map (kbd "C-\\")  'markdown-insert-list-item)
-  (define-key markdown-mode-map (kbd "C-c '") 'fence-edit-code-at-point)
+  (when (fboundp 'fence-edit-code-at-point)
+    (define-key markdown-mode-map (kbd "C-c '") 'fence-edit-code-at-point))
   (define-key markdown-mode-map (kbd "C-c 1") 'markdown-insert-header-atx-1)
   (define-key markdown-mode-map (kbd "C-c 2") 'markdown-insert-header-atx-2)
   (define-key markdown-mode-map (kbd "C-c 3") 'markdown-insert-header-atx-3)
@@ -737,8 +756,9 @@ The IGNORED argument is... Ignored."
 ;; disable company mode in remote terminal
   (if (file-remote-p default-directory)
        (company-mode -1)
-       (set (make-local-variable 'company-backends)
-             '((company-shell company-eshell-history)))))
+    (let ((backends (delq nil (list (and (require 'company-shell nil t) 'company-shell)
+                                    'company-eshell-history))))
+      (set (make-local-variable 'company-backends) (list backends)))))
 
 (add-hook 'eshell-mode-hook 'air--eshell-mode-hook)
 
@@ -761,7 +781,8 @@ The IGNORED argument is... Ignored."
           (lambda ()
             (setq web-mode-style-padding 2)
             (yas-minor-mode t)
-            (emmet-mode)
+            (when (fboundp 'emmet-mode)
+              (emmet-mode))
             (flycheck-add-mode 'html-tidy 'web-mode)
             (flycheck-mode)))
 
