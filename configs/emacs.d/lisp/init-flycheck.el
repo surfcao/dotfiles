@@ -50,6 +50,33 @@
   :config
   (add-hook 'after-init-hook 'global-flycheck-mode)
 
+  (defun my-flycheck-org-lint-start (checker callback)
+    "Run Org lint and normalize string line numbers for Flycheck."
+    (condition-case err
+        (let ((errors
+               (delq nil
+                     (mapcar
+                      (lambda (e)
+                        (pcase e
+                          (`(,_n [,line ,_trust ,desc ,_checker])
+                           (flycheck-error-new-at
+                            (if (stringp line) (string-to-number line) line)
+                            nil 'info desc
+                            :checker checker))
+                          (_
+                           (flycheck-error-new-at
+                            1 nil 'warning
+                            (format "Unexpected org-lint format: %S" e)
+                            :checker checker))))
+                      (org-lint)))))
+          (funcall callback 'finished errors))
+      (error (funcall callback 'errored
+                      (error-message-string err)))))
+
+  ;; Flycheck 20260320 passes Org's line value through unchanged, but recent
+  ;; Org can return it as a string (for example "179").
+  (put 'org-lint 'flycheck-start #'my-flycheck-org-lint-start)
+
   ;; Flycheck mode:
   (add-hook 'flycheck-mode-hook
             (lambda ()
