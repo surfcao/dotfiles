@@ -1,4 +1,4 @@
-;; init-org.el --- Set up Org Mode
+;;; init-org.el --- Set up Org Mode -*- lexical-binding: nil -*-
 ;;; Commentary:
 
 ;; Basic Org Mode configuration, assuming presence of Evil & Evil Leader.

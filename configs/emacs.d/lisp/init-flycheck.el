@@ -1,4 +1,4 @@
-;;; init-flycheck.el --- Initialize Flycheck
+;;; init-flycheck.el --- Initialize Flycheck -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 (use-package let-alist
@@ -8,10 +8,6 @@
   ;:defer 1
   :after evil-leader
   :hook ((text-mode . flyspell-mode)
-         (markdown-mode . flyspell-mode)
-         (org-mode . flyspell-mode)
-         (latex-mode . flyspell-mode)
-         (LaTeX-mode . flyspell-mode)
          (python-mode . flyspell-prog-mode)
          (python-ts-mode . flyspell-prog-mode)
          (emacs-lisp-mode . flyspell-prog-mode))

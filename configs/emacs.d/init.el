@@ -1,5 +1,4 @@
-;;; init.el -- My Emacs configuration
-;-*-Emacs-Lisp-*-
+;;; init.el -- My Emacs configuration -*- lexical-binding: nil -*-
 ;;; Based on Aaron Beiber's Emacs configuration
 ;;; Commentary:
 ;;
@@ -7,14 +6,18 @@
 ;;
 ;;; Code:
 
-;; Leave this here, or package.el will just add it again.
-(package-initialize)
-
 ;; Prefer source over stale bytecode during startup.
 (setq load-prefer-newer t)
 
 (require 'package)
+(require 'warnings)
 (setq package-enable-at-startup nil)
+;; Emacs 31 warns about third-party/generated files without lexical-binding
+;; cookies. Keep real file warnings visible, but silence this migration hint.
+(add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
+(add-to-list 'warning-suppress-log-types '(files missing-lexbind-cookie))
+;; Leave this here, or package.el will just add it again.
+(package-initialize)
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Also add all directories within "lisp"
@@ -44,8 +47,11 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Keep early keybindings safe even when LLM config loads lazily.
-(autoload 'gptel-send "gptel" nil t)
+(defun my-gptel-send ()
+  "Load my gptel backend setup before calling `gptel-send'."
+  (interactive)
+  (require 'init-llm)
+  (call-interactively #'gptel-send))
 
 ;; Essential settings.
 (setq inhibit-splash-screen t
@@ -748,7 +754,7 @@ The IGNORED argument is... Ignored."
   (define-key eshell-mode-map (kbd "C-u") 'eshell-kill-input)
   (define-key eshell-mode-map (kbd "C-l") 'air--eshell-clear)
   (define-key eshell-mode-map (kbd "C-d") (lambda () (interactive)
-                                            (kill-this-buffer)
+                                            (kill-current-buffer)
                                             (if (not (one-window-p))
                                                 (delete-window))))
   (set (make-local-variable 'pcomplete-ignore-case) t)
@@ -785,20 +791,6 @@ The IGNORED argument is... Ignored."
               (emmet-mode))
             (flycheck-add-mode 'html-tidy 'web-mode)
             (flycheck-mode)))
-
-(setq web-mode-ac-sources-alist
-      '(("php" . (ac-source-php-extras ac-source-yasnippet ac-source-gtags ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-        ("css" . (ac-source-css-property ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))))
-
-(add-hook 'web-mode-before-auto-complete-hooks
-          #'(lambda ()
-             (let ((web-mode-cur-language (web-mode-language-at-pos)))
-               (if (string= web-mode-cur-language "php")
-                   (yas-activate-extra-mode 'php-mode)
-                 (yas-deactivate-extra-mode 'php-mode))
-               (if (string= web-mode-cur-language "css")
-                   (setq emmet-use-css-transform t)
-                 (setq emmet-use-css-transform nil)))))
 
 ;;; Emacs Lisp mode:
 (add-hook 'emacs-lisp-mode-hook

@@ -1,4 +1,4 @@
-;;; init-gtags.el -- Configuration for GNU Global
+;;; init-gtags.el --- Configuration for GNU Global -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 ;(require 'ggtags)

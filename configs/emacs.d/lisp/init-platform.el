@@ -1,4 +1,4 @@
-;; init-platform --- Platform-specific settings
+;;; init-platform.el --- Platform-specific settings -*- lexical-binding: nil -*-
 ;;; Commentary:
 
 ;;; Code:

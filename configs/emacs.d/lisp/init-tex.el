@@ -1,3 +1,5 @@
+;;; init-tex.el --- TeX configuration -*- lexical-binding: nil -*-
+
 ;(use-package company-auctex
 ;	     :ensure t
 ;	     :config

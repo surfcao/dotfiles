@@ -1,4 +1,4 @@
-;;; init-evil.el -- My evil mode configuration.
+;;; init-evil.el --- My evil mode configuration -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 (defun air--config-evil-leader ()
@@ -8,13 +8,13 @@
     ","  'other-window
     "."  'mode-line-other-buffer
     ":"  'eval-expression
-    "i"  'gptel-send
+    "i"  'my-gptel-send
     "aa" 'align-regexp
     "a=" 'my-align-single-equals
     "b"  'helm-mini             ;; Switch to another buffer
     "B"  'magit-blame-toggle
     "c"  'comment-dwim
-    "d"  'kill-this-buffer
+    "d"  'kill-current-buffer
     "D"  'open-current-line-in-codebase-search
     "f"  'helm-imenu            ;; Jump to function in buffer
     "g"  'magit-status

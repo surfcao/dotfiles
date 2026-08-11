@@ -1,11 +1,14 @@
-;;; set up llm and copilot 
+;;; init-llm.el --- Set up LLM and Copilot -*- lexical-binding: nil -*-
 (defun my-gptel-key-github-models ()
   "Return GitHub Models API key from auth-source-pass."
-  (auth-get-passwd :host "Github" :max 1))
+  (or (auth-get-passwd :host "Github" :max 1)
+      (auth-get-passwd :host "github.com" :max 1)
+      (user-error "No GitHub Models API key found in auth-source-pass")))
 
 (defun my-gptel-key-gemini ()
   "Return Gemini API key from auth-source-pass."
-  (auth-get-passwd :host "Gemini" :max 1))
+  (or (auth-get-passwd :host "Gemini" :max 1)
+      (user-error "No Gemini API key found in auth-source-pass")))
 
 (use-package gptel
 	     :ensure t

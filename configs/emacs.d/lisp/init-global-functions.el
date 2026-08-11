@@ -1,4 +1,4 @@
-;;; init-global-functions.el --- Global functions mostly used by mappings.
+;;; init-global-functions.el --- Global functions mostly used by mappings -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 

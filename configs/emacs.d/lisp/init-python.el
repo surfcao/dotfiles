@@ -1,3 +1,4 @@
+;;; init-python.el --- Python configuration -*- lexical-binding: nil -*-
 
 (setq python-shell-interpreter
       (or (executable-find "python3")

@@ -1,4 +1,4 @@
-;;; init-maps.el -- Provide global key maps
+;;; init-maps.el --- Provide global key maps -*- lexical-binding: nil -*-
 
 ;;; Commentary:
 ;;; Provide global maps that aren't specific to any mode or package.

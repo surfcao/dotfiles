@@ -1,4 +1,4 @@
-;;; Character sets
+;;; init-fonts.el --- Character sets -*- lexical-binding: nil -*-
 
 (defcustom sanityinc/force-default-font-for-symbols nil
   "When non-nil, force Emacs to use your default font for symbols."

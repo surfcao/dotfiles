@@ -1,4 +1,4 @@
-;;; Character sets
+;;; init-ess.el --- ESS configuration -*- lexical-binding: nil -*-
 
 ;(when (memq window-system '(x))
 ;  (add-to-list 'load-path "/usr/local/Cellar/ess/15.09-2/share/emacs/site-lisp/ess/"))

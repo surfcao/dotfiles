@@ -1,4 +1,4 @@
-;;; init-w3m.el -- For all of your web browsing needs.
+;;; init-w3m.el --- For all of your web browsing needs -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 

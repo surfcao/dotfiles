@@ -1,4 +1,4 @@
-;;; init-pdf.el -- My Emacs configuration
+;;; init-pdf.el --- PDF configuration -*- lexical-binding: nil -*-
 (use-package pdf-tools
  :defer t
  :ensure t
@@ -37,8 +37,8 @@
  (define-key pdf-view-mode-map (kbd "q") 'quit-window)
  (define-key pdf-view-mode-map (kbd "Q") 
 	     (lambda ()
-	       (kill-this-buffer)
-	       (quit-window)))
+	       (interactive)
+	       (quit-window t)))
  (define-key pdf-view-mode-map (kbd "'") 'pdf-view-jump-to-register)
  (define-key pdf-view-mode-map (kbd "m") 'pdf-view-position-to-register)
  (define-key pdf-view-mode-map (kbd "r") 'revert-buffer)

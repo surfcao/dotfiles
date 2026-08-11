@@ -1,3 +1,7 @@
+;;; init-org-ref.el --- Org Ref configuration -*- lexical-binding: nil -*-
+;;; Commentary:
+;;; Code:
+
 (require 'oc-csl)
 
 (use-package ivy-bibtex :ensure t)

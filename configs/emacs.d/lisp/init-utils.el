@@ -1,4 +1,4 @@
-;;; init-utils.el --- Utilities borrowed from Steve Purcell
+;;; init-utils.el --- Utilities borrowed from Steve Purcell -*- lexical-binding: nil -*-
 ;;; Commentary:
 ;;; Code:
 (defun after-load (feature &rest body)
@@ -53,7 +53,7 @@
   (when (yes-or-no-p (format "Really delete '%s'?"
                              (file-name-nondirectory buffer-file-name)))
     (delete-file (buffer-file-name))
-    (kill-this-buffer)))
+    (kill-current-buffer)))
 
 
 ;;----------------------------------------------------------------------------
