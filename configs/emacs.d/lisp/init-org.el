@@ -676,6 +676,10 @@ TAG is chosen interactively from the global tags completion table."
 
 (use-package org-evil
   :ensure t
+  :init
+  ;; This module omits its macro dependency, breaking native compilation.
+  (require 'org-evil-core)
+  (load (locate-library "org-evil-motion.el") nil t t)
   :config  
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "T" 'org-set-tags-command)
   (evil-define-minor-mode-key 'normal 'org-evil-heading-mode "t" 'org-todo)
